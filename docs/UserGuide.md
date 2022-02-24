@@ -73,25 +73,33 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a customer: `addp`
 
-Adds a person to the address book.
+Adds a customer to ReadyBakey’s contact list   
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `addp n/NAME p/PHONE_NUM a/ADDRESS`  
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addp n/John Doe p/87654321 a/21 Kent Ridge Drive`
 
-### Listing all persons : `list`
+### Delete a customer: `deletep`
+Removes a customer from ReadyBakey’s contact list  
+Format: `deletep INDEX`   
+* Deletes the person at the specified INDEX  
+* The index refers to the index number shown in the displayed person list.  
+* The index must be a positive integer 1, 2, 3, …​  
 
-Shows a list of all persons in the address book.
+Examples:
+* `deletep 2`
 
-Format: `list`
+
+### Listing all customers: `listp`
+Shows a list of all customers in ReadyBakey’s contact list  
+Format: `listp`  
+
+Examples:
+* `listp`
+
 
 ### Editing a person : `edit`
 
@@ -128,19 +136,6 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
