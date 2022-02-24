@@ -48,11 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Darshan P Daryanani Dave
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/darshan152.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/darshan152)]
+
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
