@@ -135,7 +135,7 @@ Examples:
 
 ### Adding an order : `addo`
 
-Adds a customer to ReadyBakey’s contact list
+Adds an order to ReadyBakey’s contact list
 
 Format: `addo d/DATE_ORDERED s/DATE_TO_SEND c/CUST_PHONE_NUM i/ITEM_ORDERED`
 
