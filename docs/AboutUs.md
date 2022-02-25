@@ -19,41 +19,44 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Hui Min
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/huimin.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/punnyhuimin)]
+[[portfolio](team/huimin.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Designer
+* Responsibilities: UI/ UX
 
-### Johnny Doe
+### Chua Yi Fang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/onefangg.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/onefangg)]
+[[portfolio](team/onefangg.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Declan Lee Ler
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/declanleeler.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/declanleeler)]
+[[portfolio](team/declanleeler.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
 
-<img src="images/johndoe.png" width="200px">
+### Darshan P Daryanani Dave
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/darshan152.png" width="200px">
+
+[[github](http://github.com/darshan152)]
+
+[[portfolio](team/darshan152.md)]
 
 * Role: Developer
 * Responsibilities: UI

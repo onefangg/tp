@@ -73,48 +73,53 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a customer: `addp`
 
-Adds a person to the address book.
+Adds a customer to ReadyBakey’s contact list   
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `addp n/NAME p/PHONE_NUM a/ADDRESS`  
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addp n/John Doe p/87654321 a/21 Kent Ridge Drive`
 
-### Listing all persons : `list`
+### Delete a customer: `deletep`
+Removes a customer from ReadyBakey’s contact list  
+Format: `deletep INDEX`   
+* Deletes the person at the specified INDEX  
+* The index refers to the index number shown in the displayed person list.  
+* The index must be a positive integer 1, 2, 3, …​  
 
-Shows a list of all persons in the address book.
+Examples:
+* `deletep 2`
 
-Format: `list`
 
-### Editing a person : `edit`
+### Listing all customers: `listp`
+Shows a list of all customers in ReadyBakey’s contact list  
+Format: `listp`  
 
-Edits an existing person in the address book.
+Examples:
+* `listp`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+
+### Editing a customer's information : `editp`
+
+Edits an existing customer in ReadyBakey's contact list.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] `
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
-### Locating persons by name: `find`
+### Locating customers by name: `findp`
 
-Finds persons whose names contain any of the given keywords.
+Finds customer(s) whose name(s) contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `findp KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -124,27 +129,47 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `findp John` returns `john` and `John Doe`
+* `findp alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Adding an order : `addo`
 
-Deletes the specified person from the address book.
+Adds an order to ReadyBakey’s order list
 
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format: `addo d/DATE_ORDERED s/DATE_TO_SEND c/CUST_PHONE_NUM i/ITEM_ORDERED`
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `addo addo d/10-10-2022 s/20-10-2022 c/87654321 i/Chocolate Cake`
+
+
+### Delete an order: `deleteo`
+
+Removes an order from ReadyBakey
+
+Format: `deleteo INDEX`
+
+* Deletes the order at the specified INDEX
+* The index refers to the index number shown in the displayed orders list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `deleteo 2`
+
+
+### Delete an order: `listo`
+
+Shows a list of all orders in ReadyBakey
+
+Format: `listo`
+
+Examples:
+* `listo`
+
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Removes all customers stored in ReadyBakey.
 
 Format: `clear`
 
