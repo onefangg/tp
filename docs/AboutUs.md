@@ -29,11 +29,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Designer
 * Responsibilities: UI/ UX
 
-### Johnny Doe
+### Chua Yi Fang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/onefangg.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/onefangg)]
+[[portfolio](team/onefangg.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -47,6 +48,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
+
 
 ### Darshan P Daryanani Dave
 
