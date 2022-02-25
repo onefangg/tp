@@ -133,6 +133,39 @@ Examples:
 * `findp alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Adding an order : `addo`
+
+Adds a customer to ReadyBakey’s contact list
+
+Format: `addo d/DATE_ORDERED s/DATE_TO_SEND c/CUST_PHONE_NUM i/ITEM_ORDERED`
+
+Examples:
+* `addo addo d/10-10-2022 s/20-10-2022 c/87654321 i/Chocolate Cake`
+
+
+### Delete an order: `deleteo`
+
+Removes an order from ReadyBakey
+
+Format: `deleteo INDEX`
+
+* Deletes the order at the specified INDEX
+* The index refers to the index number shown in the displayed orders list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `deleteo 2`
+
+
+### Delete an order: `listo`
+
+Shows a list of all orders in ReadyBakey
+
+Format: `listo`
+
+Examples:
+* `listo`
+
 
 ### Clearing all entries : `clear`
 
