@@ -11,10 +11,10 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link]()
 * **Enhancements implemented**: (TBD)
-    * What it does: 
-    * Justification: 
-    * Highlights: 
-    * Credits: 
+    * What it does:
+    * Justification:
+    * Highlights:
+    * Credits:
 
 * **Contributions to the UG**: (TBD)
 
@@ -27,4 +27,4 @@ Given below are my contributions to the project.
     * (TBD)
 
 * **Contributions beyond the project team**:
-    * (TBD)  
+    * (TBD)
