@@ -5,7 +5,7 @@ title: User Guide
 
 ReadyBakey is a **desktop app that manages orders and customer contact information, optimized for use via a Command Line Interface**(CLI) while still having the benefits of a Graphical User Interface (GUI). It assists small bakeries by consolidating all the necessary requirements and information for successful order management.
 
-#Table of Contents
+# Table of Contents
 1. [Quick Start](#quick-start)
 2. [Features](#features)
 3. [FAQ](#faq)
