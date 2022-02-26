@@ -203,6 +203,7 @@ Examples:
 * `unmarko 1`
 
 ### Clearing all orders : `clearo`
+[Feature Coming Soon]
 
 Removes all orders stored in ReadyBakey.
 
