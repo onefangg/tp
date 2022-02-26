@@ -19,14 +19,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Hui Min
+### Pun Hui Min
 
-<img src="images/huimin.png" width="200px">
+<img src="images/punnyhuimin.png" width="200px">
 
 [[github](https://github.com/punnyhuimin)]
-[[portfolio](team/huimin.md)]
+[[portfolio](team/punnyhuimin.md)]
 
-* Role: Designer
+* Role: Developer
 * Responsibilities: UI/ UX
 
 ### Chua Yi Fang
