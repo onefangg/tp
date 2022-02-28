@@ -3,14 +3,17 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ReadyBakey is a **desktop app that manages orders and customer contact information, optimized for use via a Command Line Interface**(CLI) while still having the benefits of a Graphical User Interface (GUI). It assists small bakeries by consolidating all the necessary requirements and information for successful order management.
 
-* Table of Contents
-{:toc}
+# Table of Contents
+1. [Quick Start](#quick-start)
+2. [Features](#features)
+3. [FAQ](#faq)
+4. [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick start <a name="quick-start"></a>
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -24,13 +27,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`listo`** : Lists all orders.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`addp`**`n/John Doe p/87654321 a/21 Kent Ridge Drive` : Adds a customer named `John Doe` to ReadyBakey’s contact list.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`deletep`**`3` : Deletes the 3rd customer from ReadyBakey’s contact list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clearp`** : clears all customers.
 
    * **`exit`** : Exits the app.
 
@@ -38,7 +41,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Features <a name="features"></a>
 
 <div markdown="block" class="alert alert-info">
 
@@ -59,7 +62,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `listo`, `exit` and `clearo`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -71,7 +74,6 @@ Shows a message explaning how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Adding a customer: `addp`
 
@@ -131,7 +133,15 @@ Format: `findp KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findp John` returns `john` and `John Doe`
 * `findp alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Clearing all Customers: `clearp`
+
+Removes all customers stored in ReadyBakey
+
+Format: `clearp`
+
+Examples:
+* `clearp`
 
 ### Adding an order : `addo`
 
@@ -156,8 +166,7 @@ Format: `deleteo INDEX`
 Examples:
 * `deleteo 2`
 
-
-### Delete an order: `listo`
+### Listing all orders: `listo`
 
 Shows a list of all orders in ReadyBakey
 
@@ -166,12 +175,41 @@ Format: `listo`
 Examples:
 * `listo`
 
+### Mark orders as Complete: `marko`
 
-### Clearing all entries : `clear`
+Marks an order as complete in ReadyBakey
 
-Removes all customers stored in ReadyBakey.
+Format: `marko INDEX`
 
-Format: `clear`
+* Marks the order at the specified INDEX
+* The index refers to the index number shown in the displayed orders list.
+* The index must be a positive integer 1, 2, 3, ...
+
+Examples:
+* `marko 1`
+
+### Unmark orders as incomplete: `unmarko`
+
+Unmarks an order as incomplete in ReadyBakey
+
+* Unmarks the order at the specified INDEX
+* The index refers to the index number shown in the displayed orders list.
+* The index must be a positive integer 1, 2, 3, ….
+
+Format: `unmarko INDEX`
+
+Examples:
+* `unmarko 1`
+
+### Clearing all orders : `clearo`
+[Feature Coming Soon]
+
+Removes all orders stored in ReadyBakey.
+
+Format: `clearo`
+
+Examples:
+* `clearo`
 
 ### Exiting the program : `exit`
 
@@ -179,13 +217,16 @@ Exits the program.
 
 Format: `exit`
 
+Examples:
+* `exit`
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ReadyBakey data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ReadyBakey data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
@@ -197,21 +238,27 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## FAQ <a name="faq"></a>
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: Is an order tied to a specific customer in the customer list?<br>
+**A**: Yes, an order is tied to the specific customer as per the customers’ phone number.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command summary <a name="command-summary"></a>
+| Action      |     | Format                                                                     | Example                                                          |
+|-------------|-----|----------------------------------------------------------------------------|------------------------------------------------------------------|
+| **addp**    |     | `addp n/NAME p/PHONE\_NUM a/ADDRESS`                                       | `addp n/John Doe p/87654321 a/21 Kent Ridge Drive`               |
+| **deletep** |     | `deletep INDEX`                                                            | `deletep 2`                                                      |
+| **listp**   |     | `listp`                                                                    | `listp`                                                          |
+| **editp**   |     | `editp INDEX \[n/NAME\] \[p/PHONE\_NUM\] \[a/ADDRESS\]`                    | `editp 1 p/12345678 n/John Doey a/NUS`                           |
+| **findp**   |     | `findp KEYWORD`                                                            | `findp John`                                                     |
+| **clearp**  |     | `clearp`                                                                   | `clearp`                                                         |
+| **addo**    |     | `addo d/DATE\_ORDERED s/DATE\_TO\_SEND c/CUST\_PHONE\_NUM i/ITEM\_ORDERED` | `addo d/10\-10\-2022 s/20\-10\-2022 c/87654321 i/Chocolate Cake` |
+| **deleteo** |     | `deleteo INDEX`                                                            | `deleteo 2`                                                      |
+| **listo**   |     | `listo`                                                                    | `listo`                                                          |
+| **marko**   |     | `marko INDEX`                                                              | `marko 1`                                                        |
+| **unmarko** |     | `unmarko INDEX`                                                            | `unmarko 1`                                                      |
+| **clearc**  |     | `clearc`                                                                   | `clearc`                                                         |
+| **exit**    |     | `exit`                                                                     | `exit`                                                           |
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
