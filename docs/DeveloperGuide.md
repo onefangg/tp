@@ -270,20 +270,22 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| Priority | As a …​                                    | I want to …​                    | So that I can…​                                            |
+|----------|--------------------------------------------| ------------------------------ | ------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App              |
+| `* * *`  | user                                       | add a new person               |                                                                     |
+| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident             |
+| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                              |
+| `* * *`  | home baker with multiple orders            | mark the orders as complete or incomplete  | know which orders i have fulfilled or not                |
+| `* * *`  | home baker that has multiple customers     | clear all my customers          | I can quickly remove demo info or restart my bakery data            |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ReadyBakey` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
@@ -298,7 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list is empty. 
 
   Use case ends.
 
@@ -307,6 +309,82 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Mark an order as complete**
+
+**MSS**
+
+1.  User requests to list orders
+2.  ReadyBakey shows a list of orders
+3.  User requests to mark a specific order in the list as complete
+4.  ReadyBakey marks the order as complete
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ReadyBakey shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The specified order is already marked as complete
+
+    * 3b1. ReadyBakey informs that the order has already been marked complete
+
+      Use case resumes at step 2.
+
+**Use case: Mark an order as incomplete**
+
+**MSS**
+
+1.  User requests to list orders
+2.  ReadyBakey shows a list of orders
+3.  User requests to mark a specific order in the list as incomplete
+4.  ReadyBakey marks the order as incomplete
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ReadyBakey shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The specified order is already marked as incomplete
+
+    * 3b1. ReadyBakey informs that the order has already been marked incomplete
+
+      Use case resumes at step 2.
+    
+**Use case: Clears all saved customers**
+
+**MSS**
+
+1.  User requests to list orders
+2.  ReadyBakey shows a list of orders
+3.  User requests to clear all saved customers
+4.  ReadyBakey clears all customers
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
 
 *{More to be added}*
 
