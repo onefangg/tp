@@ -133,7 +133,6 @@ Format: `findp KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findp John` returns `john` and `John Doe`
 * `findp alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Clearing all Customers: `clearp`
 
