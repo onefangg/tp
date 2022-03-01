@@ -10,7 +10,7 @@ ReadyBakey is a desktop app for small bakers.  The user interacts with it using 
 Given below are my contributions to the project.
 
 * **New Feature**: To be added soon
- 
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=darshan152&breakdown=true)
 
 * **Project management**:

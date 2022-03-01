@@ -77,27 +77,27 @@ Format: `help`
 
 ### Adding a customer: `addp`
 
-Adds a customer to ReadyBakey’s contact list   
+Adds a customer to ReadyBakey’s contact list
 
-Format: `addp n/NAME p/PHONE_NUM a/ADDRESS`  
+Format: `addp n/NAME p/PHONE_NUM a/ADDRESS`
 
 Examples:
 * `addp n/John Doe p/87654321 a/21 Kent Ridge Drive`
 
 ### Delete a customer: `deletep`
-Removes a customer from ReadyBakey’s contact list  
-Format: `deletep INDEX`   
-* Deletes the person at the specified INDEX  
-* The index refers to the index number shown in the displayed person list.  
-* The index must be a positive integer 1, 2, 3, …​  
+Removes a customer from ReadyBakey’s contact list
+Format: `deletep INDEX`
+* Deletes the person at the specified INDEX
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
 
 Examples:
 * `deletep 2`
 
 
 ### Listing all customers: `listp`
-Shows a list of all customers in ReadyBakey’s contact list  
-Format: `listp`  
+Shows a list of all customers in ReadyBakey’s contact list
+Format: `listp`
 
 Examples:
 * `listp`
