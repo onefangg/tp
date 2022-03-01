@@ -281,7 +281,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user with many persons in the address book | sort persons by name                      | locate a person easily                                                                        |
 | `* * *`  | home baker with multiple orders            | mark the orders as complete or incomplete | know which orders i have fulfilled or not                                                     |
 | `* * *`  | home baker that has multiple customers     | clear all my customers                    | I can quickly remove demo info or restart my bakery data                                      |
-| `* * *`  | home baker that has multiple customers     | edit my customers                         | i can edit their details if there are any changes to their address, phone number, email, name |               |
+| `* * *`  | home baker that has multiple customers     | edit my customers                         | I can edit their details if there are any changes to their address, phone number, email, name |               |
+| `* * *`  | home baker that has multiple customers     | look at all my customers                  | I can access the information for different customers                                          |
+
 *{More to be added}*
 
 ### Use cases
@@ -489,6 +491,22 @@ Use case ends.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
   
       Use case resumes at step 2.
+
+**Use case: List all Customers**
+
+**MSS**
+1. User requests to list all customers
+2. ReadyBakey shows a list of customers
+
+    Use case ends
+
+**Use case: List all Orders**
+
+**MSS**
+1. User requests to list all orders
+2. ReadyBakey shows a list of orders
+
+    Use case ends
 
 
 *{More to be added}*
