@@ -270,20 +270,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                              | So that I can…​                                                                               |
-|----------|--------------------------------------------|-------------------------------------------|-----------------------------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions                    | refer to instructions when I forget how to use the App                                        |
-| `* * *`  | user                                       | add a new person                          |                                                                                               |
-| `* * *`  | user                                       | delete a person                           | remove entries that I no longer need                                                          |
-| `* * *`  | user                                       | find a person by name                     | locate details of persons without having to go through the entire list                        |
-| `* * *`  | user                                       | exit the application                      | use my laptop without the program running in the background                                   |                                                   |
-| `* *`    | user                                       | hide private contact details              | minimize chance of someone else seeing them by accident                                       |
-| `*`      | user with many persons in the address book | sort persons by name                      | locate a person easily                                                                        |
-| `* * *`  | home baker with multiple orders            | mark the orders as complete or incomplete | know which orders i have fulfilled or not                                                     |
-| `* * *`  | home baker that has multiple customers     | clear all my customers                    | I can quickly remove demo info or restart my bakery data                                      |
-| `* * *`  | home baker that has multiple customers     | edit my customers                         | I can edit their details if there are any changes to their address, phone number, email, name |               |
-| `* * *`  | home baker that has multiple customers     | look at all my customers                  | I can access the information for different customers                                          |
-
+| Priority  | As a …​                                     | I want to …​                              | So that I can…​                                                                         |
+|-----------|---------------------------------------------|-------------------------------------------|-----------------------------------------------------------------------------------------|
+| `* * *`   | new user                                    | see usage instructions                    | refer to instructions when I forget how to use the App                                  |
+| `* * *`   | user                                        | add a new person                          |                                                                                         |
+| `* * *`   | user                                        | delete a person                           | remove entries that I no longer need                                                    |
+| `* * *`   | user                                        | find a person by name                     | locate details of persons without having to go through the entire list                  |
+| `* * *`   | user                                        | exit the application                      | use my laptop without the program running in the background                             |
+| `* *`     | user                                        | hide private contact details              | minimize chance of someone else seeing them by accident                                 |
+| `*`       | user with many customer in the address book | sort customer by name                     | locate a <br/><br/>person easily                                                        |
+| `* * *`   | home baker that has multiple customers      | clear all my customers                    | quickly remove demo info or restart my bakery data                                      |
+| `* * *`   | home baker that has multiple customers      | edit my customers                         | edit their details if there are any changes to their address, phone number, email, name |
+| `* * *`   | home baker that has multiple customers      | look at all my customers                  | access the information for different customers                                          |
+| `* * *`   | home baker that has multiple orders         | look at my orders                         | access the attributes for different orders and see when it is due                       |
+| `* * *`   | home baker that has multiple orders         | mark the orders as complete or incomplete | know which orders I have fulfilled or not                                               |
 *{More to be added}*
 
 ### Use cases
@@ -412,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. ReadyBakey detects no customers that match the user's request.
-  * 1a1. ReadyBakey requests for the correct customer name.
+  * 1a1. ReadyBakey returns no results and queries user if the correct customer name has been entered.
   * 1a2. User enters the correct customer name.
   * Steps 1a1-1a2 are repeated until the data entered are correct.
 
@@ -430,8 +430,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. ReadyBakey detects no customers that match the user's request.
-    * 1a1. ReadyBakey requests for the correct customer name.
-    * 1a2. User enters the correct customer name.
+    * 1a1. ReadyBakey requests for the correct customer index.
+    * 1a2. User enters the correct customer index.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
 
       Use case resumes at step 2.
@@ -449,8 +449,8 @@ Use case ends.
 **Extensions**
 
 * 1a. ReadyBakey detects no customers that match the user's request.
-    * 1a1. ReadyBakey requests for the correct customer name.
-    * 1a2. User enters the correct customer name.
+    * 1a1. ReadyBakey requests for the correct customer index.
+    * 1a2. User enters the correct customer index.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
 
       Use case resumes at step 2.
@@ -468,8 +468,8 @@ Use case ends.
 **Extensions**
 
 * 1a. ReadyBakey detects no customers that match the user's request.
-    * 1a1. ReadyBakey requests for the correct customer name.
-    * 1a2. User enters the correct customer name.
+    * 1a1. ReadyBakey requests for the correct customer index.
+    * 1a2. User enters the correct customer index.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
 
        Use case resumes at step 2.
@@ -486,8 +486,8 @@ Use case ends.
 **Extensions**
 
 * 1a. ReadyBakey detects no customers that match the user's request.
-    * 1a1. ReadyBakey requests for the correct customer name.
-    * 1a2. User enters the correct customer name.
+    * 1a1. ReadyBakey requests for the correct customer index.
+    * 1a2. User enters the correct customer index.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
   
       Use case resumes at step 2.
