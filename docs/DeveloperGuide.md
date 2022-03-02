@@ -291,14 +291,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `ReadyBakey` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a customer**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list customers
+2.  ReadyBakey shows a list of customers
+3.  User requests to delete a specific customer in the list
+4.  ReadyBakey deletes the customer
 
     Use case ends.
 
@@ -310,7 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ReadyBakey shows an error message.
 
       Use case resumes at step 2.
 
@@ -404,6 +404,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. ReadyBakey shows a list of orders
 
     Use case ends
+
+**Use case: Delete an Order**
+
+**MSS**
+
+1.  User requests to list orders
+2.  ReadyBakey shows a list of orders
+3.  User requests to delete a specific order in the list
+4.  ReadyBakey deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ReadyBakey shows an error message.
+
+      Use case resumes at step 2.
 
 
 *{More to be added}*
