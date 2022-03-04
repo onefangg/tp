@@ -290,6 +290,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `ReadyBakey` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Add a customer**
+
+**MSS**
+
+1. User requests to list customers
+2. ReadyBakey shows a list of customers
+3. User requests to add a customer into the list
+4. ReadyBakey adds the customer into the list
+
+   Use case ends.
+
+**Extensions**
+
+* 3a.  Invalid parameters are passed into input
+
+    * 3a1. ReadyBakey alerts user about invalid parameters.
+
+    * 3a2. User inputs new data.
+
+    * Steps 3a1-3a2 are repeated until data entered is correct.
+    
+    Use case resumes from step 4.
+
+
 **Use case: Delete a customer**
 
 **MSS**
@@ -508,6 +532,29 @@ Use case ends.
 
     Use case ends
 
+**Use case: Add an Order**
+
+**MSS**
+
+1.  User requests to list orders
+2.  ReadyBakey shows a list of orders
+3.  User requests to add a new order in the list
+4.  ReadyBakey adds the order
+
+    Use case ends.
+
+**Extensions**
+* 3a.  Invalid parameters are passed into input
+
+    * 3a1. ReadyBakey alerts user about invalid parameters.
+
+    * 3a2. User inputs new data.
+
+    * Steps 3a1-3a2 are repeated until data entered is correct.
+
+  Use case resumes from step 4.
+
+
 **Use case: Delete an Order**
 
 **MSS**
@@ -515,7 +562,7 @@ Use case ends.
 1.  User requests to list orders
 2.  ReadyBakey shows a list of orders
 3.  User requests to delete a specific order in the list
-4.  ReadyBakey deletes the person
+4.  ReadyBakey deletes the order
 
     Use case ends.
 
