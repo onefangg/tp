@@ -1,6 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ModelStub;
@@ -8,14 +18,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.order.Order;
 import seedu.address.testutil.OrderBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 public class AddOrderCommandTest {
     @Test
@@ -25,12 +27,14 @@ public class AddOrderCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        AddOrderCommandTest.ModelStubAcceptingOrderAdded modelStub = new AddOrderCommandTest.ModelStubAcceptingOrderAdded();
+        AddOrderCommandTest.ModelStubAcceptingOrderAdded modelStub = new AddOrderCommandTest
+                .ModelStubAcceptingOrderAdded();
         Order validOrder = new OrderBuilder().build();
 
         CommandResult commandResult = new AddOrderCommand(validOrder).execute(modelStub);
 
-        assertEquals(String.format(AddOrderCommand.MESSAGE_ORDER_SUCCESS, validOrder), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddOrderCommand.MESSAGE_ORDER_SUCCESS, validOrder),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validOrder), modelStub.ordersAdded);
     }
 
@@ -40,7 +44,8 @@ public class AddOrderCommandTest {
         AddOrderCommand addOrderCommand = new AddOrderCommand(validOrder);
         ModelStub modelStub = new AddOrderCommandTest.ModelStubWithOrder(validOrder);
 
-        assertThrows(CommandException.class, AddOrderCommand.MESSAGE_DUPLICATE_ORDER, () -> addOrderCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddOrderCommand.MESSAGE_DUPLICATE_ORDER, () -> addOrderCommand.execute(modelStub));
     }
 
     @Test

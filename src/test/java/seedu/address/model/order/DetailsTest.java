@@ -1,11 +1,10 @@
 package seedu.address.model.order;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Name;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class DetailsTest {
 
@@ -36,6 +35,7 @@ public class DetailsTest {
         assertTrue(Details.isValidDetails("1xchocolatecake")); // alphanumeric characters
         assertTrue(Details.isValidDetails("1xChocolateCake")); // with capital letters
         assertTrue(Details.isValidDetails(
-                "chocolate cake with spinkles on top"));// long word with whitespaces in-between
+                "chocolate cake with spinkles on top")); // long word with whitespaces in-between
     }
+
 }

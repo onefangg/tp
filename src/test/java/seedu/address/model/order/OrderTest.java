@@ -1,9 +1,5 @@
 package seedu.address.model.order;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.address.testutil.OrderBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -12,6 +8,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.TypicalOrders.EMILY;
 import static seedu.address.testutil.TypicalOrders.SIMON;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.OrderBuilder;
 
 public class OrderTest {
 
