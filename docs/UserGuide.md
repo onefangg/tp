@@ -17,7 +17,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `readybakey.jar` from [here](https://github.com/AY2122S2-CS2103-F09-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -69,7 +69,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -109,13 +109,13 @@ Edits an existing customer in ReadyBakey's contact list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] `
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+*  `edit 1 p/83456789 e/declan@example.com` Edits the phone number and email address of the 1st customer to be `83456789` and `declan@example.com` respectively.
+*  `edit 2 n/Declan` Edits the name of the 2nd customer to be `Declan`.
 
 ### Locating customers by name: `findp`
 
@@ -123,12 +123,12 @@ Finds customer(s) whose name(s) contain any of the given keywords.
 
 Format: `findp KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `gerald` will match `Gerald`
+* The order of the keywords does not matter. e.g. `Gerald Tan` will match `Tan Gerald`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Gerald` will not match `Geralds`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Gerald Tan` will return `Gerald Lim`, `Gerald Lee`
 
 Examples:
 * `findp John` returns `john` and `John Doe`
@@ -229,7 +229,7 @@ ReadyBakey data are saved in the hard disk automatically after any command that 
 ReadyBakey data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, ReadyBakey will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
