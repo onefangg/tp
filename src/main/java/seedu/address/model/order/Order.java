@@ -21,18 +21,16 @@ public class Order {
     // Data fields
     private final Address address;
     private final Details details;
-    private final CompleteStatus completeStatus;
 
     /**
      * Every field must be present and not null.
      */
-    public Order(Name name, Phone phone, Address address, Details details, CompleteStatus completeStatus) {
-        requireAllNonNull(name, phone, address, details, completeStatus);
+    public Order(Name name, Phone phone, Address address, Details details) {
+        requireAllNonNull(name, phone, address, details);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.details = details;
-        this.completeStatus = completeStatus;
     }
 
     public Name getName() {
@@ -49,10 +47,6 @@ public class Order {
 
     public Address getAddress() {
         return address;
-    }
-
-    public CompleteStatus getCompleteStatus() {
-        return completeStatus;
     }
 
     /**
@@ -86,14 +80,13 @@ public class Order {
         return otherOrder.getName().equals(getName())
                 && otherOrder.getPhone().equals(getPhone())
                 && otherOrder.getAddress().equals(getAddress())
-                && otherOrder.getDetails().equals(getDetails())
-                && otherOrder.getCompleteStatus() == getCompleteStatus();
+                && otherOrder.getDetails().equals(getDetails());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, details, completeStatus);
+        return Objects.hash(name, phone, address, details);
     }
 
     @Override
@@ -105,9 +98,7 @@ public class Order {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Details: ")
-                .append(getDetails())
-                .append("; Order Status: ")
-                .append(getCompleteStatus());
+                .append(getDetails());
 
         return builder.toString();
     }

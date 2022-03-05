@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.order.CompleteStatus;
-import seedu.address.model.order.CompleteStatusType;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
@@ -23,20 +21,17 @@ class JsonAdaptedOrder {
     private final String phone;
     private final String address;
     private final String details;
-    private final String completeStatus;
 
     /**
      * Constructs a {@code JsonAdaptedOrder} with the given order details.
      */
     @JsonCreator
     public JsonAdaptedOrder(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("address") String address, @JsonProperty("details") String details,
-                             @JsonProperty("completeStatus") String completeStatus) {
+                             @JsonProperty("address") String address, @JsonProperty("details") String details) {
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.details = details;
-        this.completeStatus = completeStatus;
     }
 
     /**
@@ -47,7 +42,6 @@ class JsonAdaptedOrder {
         phone = source.getPhone().value;
         address = source.getAddress().value;
         details = source.getDetails().value;
-        completeStatus = source.getCompleteStatus().value;
 
     }
 
@@ -89,13 +83,7 @@ class JsonAdaptedOrder {
         }
         final Details modelDetails = new Details(details);
 
-        if (!CompleteStatus.isValidCompleteStatus(completeStatus)) {
-            throw new IllegalValueException(CompleteStatus.MESSAGE_CONSTRAINTS);
-        }
-        final CompleteStatus modelCompleteStatus =
-                new CompleteStatus(CompleteStatusType.convertStringToStatusType(completeStatus));
-
-        return new Order(modelName, modelPhone, modelAddress, modelDetails, modelCompleteStatus);
+        return new Order(modelName, modelPhone, modelAddress, modelDetails);
     }
 
 }
