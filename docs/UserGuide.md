@@ -19,7 +19,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
 1. Download the latest `readybakey.jar` from [here](https://github.com/AY2122S2-CS2103-F09-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your ReadyBakey.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -33,7 +33,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
    * **`deletep`**`3` : Deletes the 3rd customer from ReadyBakey’s contact list.
 
-   * **`clearp`** : clears all customers.
+   * **`clearp`** : Clears all customers.
 
    * **`exit`** : Exits the app.
 
