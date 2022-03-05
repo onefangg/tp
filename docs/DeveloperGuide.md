@@ -257,13 +257,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* tech-savvy small bakery or home bakery owners
+* needs to track their customers and orders in a central application
+* needs to track details of the cake orders (e.g. Delivery or pickup, cakes ordered)
+* prefer CLI desktop apps over other types
+* enjoys typing instead of mouse interaction
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+Handling multiple orders and inventory leads to a time sink. Having a central system management process allows bakers to
+focus on what's important -- _baking_. 
+* The application organises cake orders for its fulfilment. 
+* It also acts as a centralised and structured schedule manager, tracking an individuals' baking inventory needs.
 
 
 ### User stories
