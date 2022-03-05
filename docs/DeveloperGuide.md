@@ -257,48 +257,83 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* tech-savvy small bakery or home bakery owners
+* needs to track their customers and orders in a central application
+* needs to track details of the cake orders (e.g. Delivery or pickup, cakes ordered)
+* prefer CLI desktop apps over other types
+* enjoys typing instead of mouse interaction
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+Handling multiple orders and inventory leads to a time sink. Having a central system management process allows bakers to
+focus on what's important -- _baking_. 
+* The application organises cake orders for its fulfilment. 
+* It also acts as a centralised and structured schedule manager, tracking an individuals' baking inventory needs.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                   | I want to …​              | So that I can…​                                                         |
-|----------|-------------------------------------------| ------------------------- |-------------------------------------------------------------------------|
-| `* * *`  | new user                                  | see usage instructions    | refer to instructions when I forget how to use the App                  |
-| `* * *`  | user                                      | add a new person          |                                                                         |
-| `* * *`  | user                                      | delete a person           | remove entries that I no longer need                                    |
-| `* * *`  | user                                      | find a person by name     | locate details of persons without having to go through the entire list  |
-| `* *`    | user                                      | hide private contact details | minimize chance of someone else seeing them by accident                 |
-| `*`      | user with many persons in the address book | sort persons by name      | locate a person easily                                                  |
-| `* * *`  | home baker with multiple orders           | mark the orders as complete or incomplete | know which orders i have fulfilled or not                               |
-| `* * *`  | home baker that has multiple customers    | clear all my customers    | I can quickly remove demo info or restart my bakery data                |
-| `* * *`  | home baker that has multiple orders	     | look at my orders | I can access the attributes for different orders and see when it is due |
-| `* * *`   | home baker that has multiple customers    |  look at all my customers | I can access the information for different customers                    |
-
-
-
+| Priority | As a …​                                     | I want to …​                                    | So that I can…​                                                                         |
+|----------|---------------------------------------------|-------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `* * *`  | new user                                    | see usage instructions                          | refer to instructions when I forget how to use the App                                  |
+| `* *`    | new user unfamiliar with the interface      | get a list of commands available                | know what commands are available                                                        |
+| `* * *`  | user                                        | add a new person                                |                                                                                         |
+| `* * *`  | user                                        | delete a person                                 | remove entries that I no longer need                                                    |
+| `* * *`  | user                                        | find a person by name                           | locate details of persons without having to go through the entire list                  |
+| `* * *`  | user                                        | exit the application                            | use my laptop without the program running in the background                             |
+| `* * *`  | user                                        | delete orders                                   | remove orders in case a customer cancels their order                                    |
+| `* *`    | user                                        | hide private contact details                    | minimize chance of someone else seeing them by accident                                 |
+| `*`      | user with many customer in the address book | sort customer by name                           | locate a <br/><br/>person easily                                                        |
+| `* * *`  | home baker that has multiple customers      | clear all my customers                          | quickly remove demo info or restart my bakery data                                      |
+| `* *`    | home baker that has multiple orders         | clear all my orders                             | quickly remove demo info or restart my bakery data                                      |
+| `* * *`  | home baker that has multiple customers      | edit my customers                               | edit their details if there are any changes to their address, phone number, email, name |
+| `* *`    | home baker that has multiple orders         | edit my orders                                  | edit their details if there are any changes to their order                              |
+| `* * *`  | home baker that has multiple customers      | look at all my customers                        | access the information for different customers                                          |
+| `* * *`  | home baker that has multiple orders         | look at my orders                               | access the attributes for different orders and see when it is due                       |
+| `* * *`  | home baker that has multiple orders         | mark the orders as complete or incomplete       | know which orders I have fulfilled or not                                               |
+| `* *`    | home baker that has multiple orders         | get a view of unfinished orders for current day | see urgent orders at a glance                                                           |
+| `* *`    | home baker that has multiple orders         | generate a weekly report                        | track the progress of my business                                                       |
+| `*`      | home baker that has multiple orders         | get a calender view of the upcoming deadlines   | have a visual plan for the orders in the upcoming period                                |
 *{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is `ReadyBakey` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a customer**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to list customers
+2. ReadyBakey shows a list of customers
+3. User requests to add a customer into the list
+4. ReadyBakey adds the customer into the list
+
+   Use case ends.
+
+**Extensions**
+
+* 3a.  Invalid parameters are passed into input
+
+    * 3a1. ReadyBakey alerts user about invalid parameters.
+
+    * 3a2. User inputs new data.
+
+    * Steps 3a1-3a2 are repeated until data entered is correct.
+    
+    Use case resumes from step 4.
+
+
+**Use case: Delete a customer**
+
+**MSS**
+
+1.  User requests to list customers
+2.  ReadyBakey shows a list of customers
+3.  User requests to delete a specific customer in the list
+4.  ReadyBakey deletes the customer
 
     Use case ends.
 
@@ -310,7 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ReadyBakey shows an error message.
 
       Use case resumes at step 2.
 
@@ -376,18 +411,122 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list orders
-2.  ReadyBakey shows a list of orders
-3.  User requests to clear all saved customers
-4.  ReadyBakey clears all customers
+1. User requests to list orders
+2. ReadyBakey shows a list of orders
+3. User requests to clear all saved customers
+4. ReadyBakey clears all customers
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
 
-  Use case ends.
+**Use case: Exits the ReadyBakey program**
+
+**MSS**
+
+1. User requests to exit the program.
+2. ReadyBakey says bye and closes the application.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User closes the program without using CLI.
+    * 1a1. ReadyBakey closes the application.
+
+**Use case: Locate customer by their name**
+
+**MSS**
+
+1. User requests to find the customer by name in ReadyBakey.
+2. ReadyBakey finds the customers whose names match the requested customer.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ReadyBakey detects no customers that match the user's request.
+  * 1a1. ReadyBakey returns no results and queries user if the correct customer name has been entered.
+  * 1a2. User enters the correct customer name.
+  * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+    Use case resumes at step 2.
+
+**Use case: Editing customer's address**
+
+**MSS**
+
+1. User requests to edit specific customer's address.
+2. ReadyBakey edits the specified customer's address.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ReadyBakey detects no customers that match the user's request.
+    * 1a1. ReadyBakey requests for the correct customer index.
+    * 1a2. User enters the correct customer index.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 2.
+
+
+**Use case: Editing customer's email address**
+
+**MSS**
+
+1. User requests to edit specific customer's email address.
+2. ReadyBakey edits the specified customer's email address.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. ReadyBakey detects no customers that match the user's request.
+    * 1a1. ReadyBakey requests for the correct customer index.
+    * 1a2. User enters the correct customer index.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 2.
+
+
+**Use case: Editing customer's name**
+
+**MSS**
+
+1. User requests to edit specific customer's name.
+2. ReadyBakey edits the specified customer's name.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. ReadyBakey detects no customers that match the user's request.
+    * 1a1. ReadyBakey requests for the correct customer index.
+    * 1a2. User enters the correct customer index.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+       Use case resumes at step 2.
+
+**Use case: Editing customer's phone number**
+
+**MSS**
+
+1. User requests to edit specific customer's phone number.
+2. ReadyBakey edits the specified customer's phone number.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. ReadyBakey detects no customers that match the user's request.
+    * 1a1. ReadyBakey requests for the correct customer index.
+    * 1a2. User enters the correct customer index.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+  
+      Use case resumes at step 2.
 
 **Use case: List all Customers**
 
@@ -405,6 +544,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends
 
+**Use case: Add an Order**
+
+**MSS**
+
+1.  User requests to list orders
+2.  ReadyBakey shows a list of orders
+3.  User requests to add a new order in the list
+4.  ReadyBakey adds the order
+
+    Use case ends.
+
+**Extensions**
+* 3a.  Invalid parameters are passed into input
+
+    * 3a1. ReadyBakey alerts user about invalid parameters.
+
+    * 3a2. User inputs new data.
+
+    * Steps 3a1-3a2 are repeated until data entered is correct.
+
+  Use case resumes from step 4.
+
+
+**Use case: Delete an Order**
+
+**MSS**
+
+1.  User requests to list orders
+2.  ReadyBakey shows a list of orders
+3.  User requests to delete a specific order in the list
+4.  ReadyBakey deletes the order
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ReadyBakey shows an error message.
+
+      Use case resumes at step 2.
+
 
 *{More to be added}*
 
@@ -413,7 +598,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 500 customers without a noticeable sluggishness in performance for typical usage.
 3. Should be able to hold up to 500 orders without a noticeable sluggishness in performance for typical usage.
-4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+   able to accomplish most of the tasks faster using commands than using the mouse.
 5. The system should be usable by a novice who has never used an order management system before.
 6. The system should respond within five seconds.
 7. The product is not required to handle the contacting of customers.
