@@ -270,20 +270,27 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a …​                                     | I want to …​                              | So that I can…​                                                                         |
-|-----------|---------------------------------------------|-------------------------------------------|-----------------------------------------------------------------------------------------|
-| `* * *`   | new user                                    | see usage instructions                    | refer to instructions when I forget how to use the App                                  |
-| `* * *`   | user                                        | add a new person                          |                                                                                         |
-| `* * *`   | user                                        | delete a person                           | remove entries that I no longer need                                                    |
-| `* * *`   | user                                        | find a person by name                     | locate details of persons without having to go through the entire list                  |
-| `* * *`   | user                                        | exit the application                      | use my laptop without the program running in the background                             |
-| `* *`     | user                                        | hide private contact details              | minimize chance of someone else seeing them by accident                                 |
-| `*`       | user with many customer in the address book | sort customer by name                     | locate a <br/><br/>person easily                                                        |
-| `* * *`   | home baker that has multiple customers      | clear all my customers                    | quickly remove demo info or restart my bakery data                                      |
-| `* * *`   | home baker that has multiple customers      | edit my customers                         | edit their details if there are any changes to their address, phone number, email, name |
-| `* * *`   | home baker that has multiple customers      | look at all my customers                  | access the information for different customers                                          |
-| `* * *`   | home baker that has multiple orders         | look at my orders                         | access the attributes for different orders and see when it is due                       |
-| `* * *`   | home baker that has multiple orders         | mark the orders as complete or incomplete | know which orders I have fulfilled or not                                               |
+| Priority | As a …​                                     | I want to …​                                    | So that I can…​                                                                         |
+|----------|---------------------------------------------|-------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `* * *`  | new user                                    | see usage instructions                          | refer to instructions when I forget how to use the App                                  |
+| `* *`    | new user unfamiliar with the interface      | get a list of commands available                | know what commands are available                                                        |
+| `* * *`  | user                                        | add a new person                                |                                                                                         |
+| `* * *`  | user                                        | delete a person                                 | remove entries that I no longer need                                                    |
+| `* * *`  | user                                        | find a person by name                           | locate details of persons without having to go through the entire list                  |
+| `* * *`  | user                                        | exit the application                            | use my laptop without the program running in the background                             |
+| `* * *`  | user                                        | delete orders                                   | remove orders in case a customer cancels their order                                    |
+| `* *`    | user                                        | hide private contact details                    | minimize chance of someone else seeing them by accident                                 |
+| `*`      | user with many customer in the address book | sort customer by name                           | locate a <br/><br/>person easily                                                        |
+| `* * *`  | home baker that has multiple customers      | clear all my customers                          | quickly remove demo info or restart my bakery data                                      |
+| `* *`    | home baker that has multiple orders         | clear all my orders                             | quickly remove demo info or restart my bakery data                                      |
+| `* * *`  | home baker that has multiple customers      | edit my customers                               | edit their details if there are any changes to their address, phone number, email, name |
+| `* *`    | home baker that has multiple orders         | edit my orders                                  | edit their details if there are any changes to their order                              |
+| `* * *`  | home baker that has multiple customers      | look at all my customers                        | access the information for different customers                                          |
+| `* * *`  | home baker that has multiple orders         | look at my orders                               | access the attributes for different orders and see when it is due                       |
+| `* * *`  | home baker that has multiple orders         | mark the orders as complete or incomplete       | know which orders I have fulfilled or not                                               |
+| `* *`    | home baker that has multiple orders         | get a view of unfinished orders for current day | see urgent orders at a glance                                                           |
+| `* *`    | home baker that has multiple orders         | generate a weekly report                        | track the progress of my business                                                       |
+| `*`      | home baker that has multiple orders         | get a calender view of the upcoming deadlines   | have a visual plan for the orders in the upcoming period                                |
 *{More to be added}*
 
 ### Use cases
