@@ -58,8 +58,7 @@ public class Order {
             return true;
         }
 
-        return otherOrder != null
-                && otherOrder.getPhone().equals(getPhone());
+        return otherOrder != null;
     }
 
     /**

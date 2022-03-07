@@ -22,17 +22,14 @@ public class OrderTest {
 
         // null -> returns false
         assertFalse(EMILY.isSameOrder(null));
-        assertFalse(EMILY.isSameOrder(SIMON));
 
-        // same phone number, all other attributes different -> returns true
+        // All other attributes different, but same pointer -> returns true
         Order editedEmily = new OrderBuilder(EMILY).withName(VALID_NAME_BOB)
                 .withAddress(VALID_ADDRESS_BOB)
-                .withDetails(VALID_DETAILS_BOB).build();
+                .withDetails(VALID_DETAILS_BOB)
+                .withPhone(VALID_PHONE_BOB).build();;
         assertTrue(EMILY.isSameOrder(editedEmily));
 
-        // different phone number, all other attributes same -> returns false
-        editedEmily = new OrderBuilder(EMILY).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(EMILY.isSameOrder(editedEmily));
     }
 
     @Test

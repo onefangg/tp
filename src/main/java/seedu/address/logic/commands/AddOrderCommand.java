@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.order.Order;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Changes the remark of an existing person in ReadyBakey.
  */
 public class AddOrderCommand extends Command {
 
