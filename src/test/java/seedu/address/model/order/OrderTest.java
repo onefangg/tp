@@ -16,23 +16,6 @@ import seedu.address.testutil.OrderBuilder;
 public class OrderTest {
 
     @Test
-    public void isSameOrder() {
-        // same object -> returns true
-        assertTrue(EMILY.isSameOrder(EMILY));
-
-        // null -> returns false
-        assertFalse(EMILY.isSameOrder(null));
-
-        // All other attributes different, but same pointer -> returns true
-        Order editedEmily = new OrderBuilder(EMILY).withName(VALID_NAME_BOB)
-                .withAddress(VALID_ADDRESS_BOB)
-                .withDetails(VALID_DETAILS_BOB)
-                .withPhone(VALID_PHONE_BOB).build();;
-        assertTrue(EMILY.isSameOrder(editedEmily));
-
-    }
-
-    @Test
     public void equals() {
         // same values -> returns true
         Order emilyCopy = new OrderBuilder(EMILY).build();

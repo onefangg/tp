@@ -50,18 +50,6 @@ public class Order {
     }
 
     /**
-     * Returns true if both orders have the same phone number.
-     * This defines a weaker notion of equality between two orders.
-     */
-    public boolean isSameOrder(Order otherOrder) {
-        if (otherOrder == this) {
-            return true;
-        }
-
-        return otherOrder != null;
-    }
-
-    /**
      * Returns true if both orders have the same identity and data fields.
      * This defines a stronger notion of equality between two orders.
      */
