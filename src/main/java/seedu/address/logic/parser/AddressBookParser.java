@@ -68,8 +68,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case seedu.address.logic.commands.ListPersonCommand.COMMAND_WORD:
+            return new seedu.address.logic.commands.ListPersonCommand();
 
         case ListOrderCommand.COMMAND_WORD:
             return new ListOrderCommand();
