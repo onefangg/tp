@@ -21,6 +21,7 @@ public class Order {
     // Data fields
     private final Address address;
     private final Details details;
+    private final Complete complete;
 
     /**
      * Every field must be present and not null.
@@ -31,6 +32,19 @@ public class Order {
         this.phone = phone;
         this.address = address;
         this.details = details;
+        this.complete = new Complete(false);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Order(Name name, Phone phone, Address address, Details details, Complete complete) {
+        requireAllNonNull(name, phone, address, details, complete);
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.details = details;
+        this.complete = complete;
     }
 
     public Name getName() {
@@ -47,6 +61,10 @@ public class Order {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Complete getComplete() {
+        return complete;
     }
 
     /**
@@ -85,7 +103,9 @@ public class Order {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Details: ")
-                .append(getDetails());
+                .append(getDetails())
+                .append("; Complete: ")
+                .append(getComplete());
 
         return builder.toString();
     }
