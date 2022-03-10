@@ -39,7 +39,7 @@ public class AddOrderCommand extends Command {
     private final Order toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Order}
+     * Creates an AddOrderCommand to add the specified {@code Order}
      */
     public AddOrderCommand(Order order) {
         requireAllNonNull(order);
