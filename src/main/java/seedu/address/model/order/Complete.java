@@ -18,6 +18,28 @@ public class Complete {
         this.value = value;
     }
 
+    /**
+     * Constructs a {@code Complete}.
+     *
+     * @param value A valid string of a boolean.
+     */
+    public Complete(String value) {
+        requireNonNull(value);
+        if (value.equals(Boolean.TRUE.toString())) {
+            this.value = true;
+        } else {
+            this.value = false;
+        }
+    }
+
+    /**
+     * Returns true if a given string is a valid complete value.
+     */
+    public static boolean isValidDetails(String details) {
+        return details.equals(Boolean.FALSE.toString())
+                || details.equals(Boolean.TRUE.toString());
+    }
+
 
     @Override
     public String toString() {
