@@ -11,6 +11,8 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.CompleteStatus;
+import seedu.address.model.order.CompleteStatusType;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
@@ -37,8 +39,9 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Details details = ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS).get());
+        CompleteStatus completeStatus = new CompleteStatus(CompleteStatusType.INCOMPLETE); // default: Incompleted
 
-        Order order = new Order(name, phone, address, details);
+        Order order = new Order(name, phone, address, details, completeStatus);
 
         return new AddOrderCommand(order);
     }
