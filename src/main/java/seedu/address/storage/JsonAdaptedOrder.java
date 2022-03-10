@@ -98,7 +98,7 @@ class JsonAdaptedOrder {
         }
         final Complete modelComplete = new Complete(complete);
 
-        return new Order(modelName, modelPhone, modelAddress, modelDetails,modelComplete);
+        return new Order(modelName, modelPhone, modelAddress, modelDetails, modelComplete);
     }
 
 }
