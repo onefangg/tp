@@ -21,7 +21,7 @@ public class Complete {
 
     @Override
     public String toString() {
-        return value.toString();
+        return (value) ? "Complete" : "Incomplete";
     }
 
     @Override
