@@ -31,7 +31,7 @@ public class Details {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid detail.
      */
     public static boolean isValidDetails(String test) {
         return test.matches(VALIDATION_REGEX);

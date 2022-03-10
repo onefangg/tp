@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.order.Complete;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
@@ -21,17 +22,20 @@ class JsonAdaptedOrder {
     private final String phone;
     private final String address;
     private final String details;
+    private final String complete;
 
     /**
      * Constructs a {@code JsonAdaptedOrder} with the given order details.
      */
     @JsonCreator
     public JsonAdaptedOrder(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("address") String address, @JsonProperty("details") String details) {
+                             @JsonProperty("address") String address, @JsonProperty("details") String details,
+                             @JsonProperty("complete") String complete) {
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.details = details;
+        this.complete = complete;
     }
 
     /**
@@ -42,6 +46,7 @@ class JsonAdaptedOrder {
         phone = source.getPhone().value;
         address = source.getAddress().value;
         details = source.getDetails().value;
+        complete = source.getComplete().value.toString();
 
     }
 
@@ -83,7 +88,17 @@ class JsonAdaptedOrder {
         }
         final Details modelDetails = new Details(details);
 
-        return new Order(modelName, modelPhone, modelAddress, modelDetails);
+        if (complete == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Complete.class.getSimpleName())
+            );
+        }
+        if (!Complete.isValidDetails(complete)) {
+            throw new IllegalValueException(Complete.MESSAGE_CONSTRAINTS);
+        }
+        final Complete modelComplete = new Complete(complete);
+
+        return new Order(modelName, modelPhone, modelAddress, modelDetails, modelComplete);
     }
 
 }

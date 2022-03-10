@@ -35,9 +35,11 @@ public class OrderCard extends UiPart<Region> {
     private Label address;
     @FXML
     private Label details;
+    @FXML
+    private Label complete;
 
     /**
-     * Creates a {@code OrderCode} with the given {@code Order} and index to display.
+     * Creates a {@code OrderCard} with the given {@code Order} and index to display.
      */
     public OrderCard(Order order, int displayedIndex) {
         super(FXML);
@@ -47,6 +49,7 @@ public class OrderCard extends UiPart<Region> {
         phone.setText(order.getPhone().value);
         address.setText(order.getAddress().value);
         details.setText(order.getDetails().value);
+        complete.setText(order.getComplete().toString());
     }
 
     @Override

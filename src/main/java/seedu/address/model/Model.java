@@ -87,15 +87,22 @@ public interface Model {
 
     /**
      * Adds the given order.
-     * {@code person} must not already exist in the ReadyBakey.
+     * {@code order} must not already exist in the ReadyBakey.
      */
     void addOrder(Order order);
 
     /**
      * Deletes the given order.
-     * The order must exist in the ReadyBakey.
+     * The {@code order} must exist in the ReadyBakey.
      */
     void deleteOrder(Order target);
+
+    /**
+     * Replaces the given order {@code target} with {@code editedOrder}.
+     * {@code target} must exist in the ReadyBakey.
+     * The order identity of {@code editedOrder} must not be the same as another existing order in the ReadyBakey.
+     */
+    void setOrder(Order target, Order editedOrder);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

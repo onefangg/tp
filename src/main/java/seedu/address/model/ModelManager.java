@@ -134,6 +134,13 @@ public class ModelManager implements Model {
         updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
     }
 
+    @Override
+    public void setOrder(Order target, Order editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        addressBook.setOrder(target, editedPerson);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
