@@ -12,7 +12,7 @@ public class OrderBuilder {
     public static final String DEFAULT_PHONE = "11111111";
     public static final String DEFAULT_ADDRESS = "Jerry’s House 111111";
     public static final String DEFAULT_DETAILS = "1xchocholatecake";
-    public static final Boolean DEFAULT_COMPLETE = true;
+    public static final Boolean DEFAULT_COMPLETE = false;
 
     private Name name;
     private Phone phone;
