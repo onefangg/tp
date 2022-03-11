@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
 
 import java.util.List;
 
@@ -25,8 +25,6 @@ public class MarkOrderCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in ReadyBakey.";
-
     public static final String MESSAGE_MARK_ORDER_SUCCESS = "Completed Order: %1$s";
 
     private final Index targetIndex;
@@ -41,14 +39,14 @@ public class MarkOrderCommand extends Command {
         List<Order> lastShownList = model.getFilteredOrderList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
         }
 
         Order orderToMark = lastShownList.get(targetIndex.getZeroBased());
         Order editedOrder = createMarkedOrder(orderToMark);
 
         model.setOrder(orderToMark, editedOrder);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
         return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, editedOrder));
     }
 
@@ -60,8 +58,6 @@ public class MarkOrderCommand extends Command {
         Address updatedAddress = orderToMark.getAddress();
         Details updatedDetails = orderToMark.getDetails();
         Complete updatedComplete = new Complete(true);
-
-
 
         return new Order(updatedName, updatedPhone, updatedAddress, updatedDetails, updatedComplete);
 
