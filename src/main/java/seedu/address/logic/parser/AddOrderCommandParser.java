@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddOrderCommand;
-import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
