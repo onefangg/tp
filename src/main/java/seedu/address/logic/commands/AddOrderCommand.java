@@ -23,15 +23,12 @@ public class AddOrderCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_DETAILS + "DETAILS "
+            + PREFIX_DETAILS + "DETAILS \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Tom "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_ADDRESS + "Tom and Jerry's House CA94114, San Francisco, 3650 21st St "
             + PREFIX_DETAILS + "1x Jerry Favourite Cheese Cake";
-
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "add order command not implemented yet";
 
     public static final String MESSAGE_ORDER_SUCCESS = "New order added: %1$s";
     public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the address book";

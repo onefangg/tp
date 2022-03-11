@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.model.order.Complete;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
@@ -11,11 +12,13 @@ public class OrderBuilder {
     public static final String DEFAULT_PHONE = "11111111";
     public static final String DEFAULT_ADDRESS = "Jerry’s House 111111";
     public static final String DEFAULT_DETAILS = "1xchocholatecake";
+    public static final Boolean DEFAULT_COMPLETE = false;
 
     private Name name;
     private Phone phone;
     private Address address;
     private Details details;
+    private Complete complete;
 
     /**
      * Creates a {@code OrderBuilder} with the default details.
@@ -25,6 +28,7 @@ public class OrderBuilder {
         phone = new Phone(DEFAULT_PHONE);
         address = new Address(DEFAULT_ADDRESS);
         details = new Details(DEFAULT_DETAILS);
+        complete = new Complete(DEFAULT_COMPLETE);
     }
 
     /**
@@ -35,6 +39,7 @@ public class OrderBuilder {
         phone = orderToCopy.getPhone();
         address = orderToCopy.getAddress();
         details = orderToCopy.getDetails();
+        complete = orderToCopy.getComplete();
     }
 
     /**
@@ -69,7 +74,15 @@ public class OrderBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Complete} of the {@code Order} that we are building.
+     */
+    public OrderBuilder withComplete(Boolean complete) {
+        this.complete = new Complete(complete);
+        return this;
+    }
+
     public Order build() {
-        return new Order(name, phone, address, details);
+        return new Order(name, phone, address, details, complete);
     }
 }
