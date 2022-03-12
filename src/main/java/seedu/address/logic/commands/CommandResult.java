@@ -40,7 +40,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, boolean isOrderCommand, boolean isPersonCommand) {
-        this(feedbackToUser, isOrderCommand, isPersonCommand,false, false);
+        this(feedbackToUser, isOrderCommand, isPersonCommand, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -55,9 +55,9 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isOrderCommand() {return isOrderCommand; }
+    public boolean isOrderCommand() { return isOrderCommand; }
 
-    public boolean isPersonCommand() {return isPersonCommand; }
+    public boolean isPersonCommand() { return isPersonCommand; }
 
     @Override
     public boolean equals(Object other) {
