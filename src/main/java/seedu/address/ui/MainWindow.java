@@ -167,7 +167,10 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
-        primaryStage.hide();
+        commandBoxPlaceholder.setDisable(true);
+        javafx.animation.PauseTransition delay = new javafx.animation.PauseTransition(javafx.util.Duration.seconds(2));
+        delay.setOnFinished(event -> javafx.application.Platform.exit());
+        delay.play();
     }
 
     public PersonListPanel getPersonListPanel() {
