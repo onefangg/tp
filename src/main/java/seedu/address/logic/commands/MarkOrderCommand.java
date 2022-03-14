@@ -15,6 +15,7 @@ import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 public class MarkOrderCommand extends Command {
 
@@ -56,10 +57,11 @@ public class MarkOrderCommand extends Command {
         Name updatedName = orderToMark.getName();
         Phone updatedPhone = orderToMark.getPhone();
         Address updatedAddress = orderToMark.getAddress();
+        Remark updatedRemark = orderToMark.getRemark();
         Details updatedDetails = orderToMark.getDetails();
         Complete updatedComplete = new Complete(true);
 
-        return new Order(updatedName, updatedPhone, updatedAddress, updatedDetails, updatedComplete);
+        return new Order(updatedName, updatedPhone, updatedAddress, updatedRemark, updatedDetails, updatedComplete);
 
     }
 

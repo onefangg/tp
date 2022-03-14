@@ -2,10 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -23,11 +20,13 @@ public class AddOrderCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_REMARK + "REMARK "
             + PREFIX_DETAILS + "DETAILS \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Tom "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_ADDRESS + "Tom and Jerry's House CA94114, San Francisco, 3650 21st St "
+            + PREFIX_REMARK + "Add Cheese "
             + PREFIX_DETAILS + "1x Jerry Favourite Cheese Cake";
 
     public static final String MESSAGE_ORDER_SUCCESS = "New order added: %1$s";

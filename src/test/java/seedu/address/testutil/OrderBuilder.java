@@ -6,17 +6,20 @@ import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 public class OrderBuilder {
     public static final String DEFAULT_NAME = "Tom";
     public static final String DEFAULT_PHONE = "11111111";
     public static final String DEFAULT_ADDRESS = "Jerry’s House 111111";
     public static final String DEFAULT_DETAILS = "1xchocholatecake";
+    public static final String DEFAULT_REMARK = "Add more chocolate";
     public static final Boolean DEFAULT_COMPLETE = false;
 
     private Name name;
     private Phone phone;
     private Address address;
+    private Remark remark;
     private Details details;
     private Complete complete;
 
@@ -27,6 +30,7 @@ public class OrderBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         address = new Address(DEFAULT_ADDRESS);
+        remark = new Remark(DEFAULT_REMARK);
         details = new Details(DEFAULT_DETAILS);
         complete = new Complete(DEFAULT_COMPLETE);
     }
@@ -38,6 +42,7 @@ public class OrderBuilder {
         name = orderToCopy.getName();
         phone = orderToCopy.getPhone();
         address = orderToCopy.getAddress();
+        remark = orderToCopy.getRemark();
         details = orderToCopy.getDetails();
         complete = orderToCopy.getComplete();
     }
@@ -67,6 +72,14 @@ public class OrderBuilder {
     }
 
     /**
+     * Sets the {@code Remark} of the {@code Order} that we are building.
+     */
+    public OrderBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
+    /**
      * Sets the {@code Details} of the {@code Order} that we are building.
      */
     public OrderBuilder withDetails(String details) {
@@ -83,6 +96,6 @@ public class OrderBuilder {
     }
 
     public Order build() {
-        return new Order(name, phone, address, details, complete);
+        return new Order(name, phone, address, remark, details, complete);
     }
 }

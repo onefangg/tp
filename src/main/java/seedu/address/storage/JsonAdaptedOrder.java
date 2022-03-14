@@ -10,6 +10,7 @@ import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 /**
  * Jackson-friendly version of {@link Order}.
@@ -21,6 +22,7 @@ class JsonAdaptedOrder {
     private final String name;
     private final String phone;
     private final String address;
+    private final String remark;
     private final String details;
     private final String complete;
 
@@ -29,11 +31,13 @@ class JsonAdaptedOrder {
      */
     @JsonCreator
     public JsonAdaptedOrder(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("address") String address, @JsonProperty("details") String details,
+                             @JsonProperty("address") String address, @JsonProperty("remark") String remark,
+                            @JsonProperty("details") String details,
                              @JsonProperty("complete") String complete) {
         this.name = name;
         this.phone = phone;
         this.address = address;
+        this.remark = remark;
         this.details = details;
         this.complete = complete;
     }
@@ -45,6 +49,7 @@ class JsonAdaptedOrder {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         address = source.getAddress().value;
+        remark = source.getRemark().value;
         details = source.getDetails().value;
         complete = source.getComplete().value.toString();
 
@@ -80,6 +85,8 @@ class JsonAdaptedOrder {
         }
         final Address modelAddress = new Address(address);
 
+        final Remark modelRemark = new Remark(remark);
+
         if (details == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Details.class.getSimpleName()));
         }
@@ -98,7 +105,7 @@ class JsonAdaptedOrder {
         }
         final Complete modelComplete = new Complete(complete);
 
-        return new Order(modelName, modelPhone, modelAddress, modelDetails, modelComplete);
+        return new Order(modelName, modelPhone, modelAddress, modelRemark, modelDetails, modelComplete);
     }
 
 }

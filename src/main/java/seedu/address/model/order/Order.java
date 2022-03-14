@@ -7,6 +7,7 @@ import java.util.Objects;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 /**
  * Represents an Order in the ReadyBakey.
@@ -20,17 +21,19 @@ public class Order {
 
     // Data fields
     private final Address address;
+    private final Remark remark;
     private final Details details;
     private final Complete complete;
 
     /**
      * Every field must be present and not null.
      */
-    public Order(Name name, Phone phone, Address address, Details details) {
-        requireAllNonNull(name, phone, address, details);
+    public Order(Name name, Phone phone, Address address, Remark remark, Details details) {
+        requireAllNonNull(name, phone, address, remark, details);
         this.name = name;
         this.phone = phone;
         this.address = address;
+        this.remark = remark;
         this.details = details;
         this.complete = new Complete(false);
     }
@@ -38,11 +41,12 @@ public class Order {
     /**
      * Every field must be present and not null.
      */
-    public Order(Name name, Phone phone, Address address, Details details, Complete complete) {
-        requireAllNonNull(name, phone, address, details, complete);
+    public Order(Name name, Phone phone, Address address, Remark remark, Details details, Complete complete) {
+        requireAllNonNull(name, phone, address, remark, details, complete);
         this.name = name;
         this.phone = phone;
         this.address = address;
+        this.remark = remark;
         this.details = details;
         this.complete = complete;
     }
@@ -61,6 +65,10 @@ public class Order {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     public Complete getComplete() {
@@ -85,13 +93,14 @@ public class Order {
         return otherOrder.getName().equals(getName())
                 && otherOrder.getPhone().equals(getPhone())
                 && otherOrder.getAddress().equals(getAddress())
+                && otherOrder.getRemark().equals(getRemark())
                 && otherOrder.getDetails().equals(getDetails());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, details);
+        return Objects.hash(name, phone, address, remark, details);
     }
 
     @Override
@@ -102,6 +111,8 @@ public class Order {
                 .append(getPhone())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Remark: ")
+                .append(getRemark())
                 .append("; Details: ")
                 .append(getDetails())
                 .append("; Complete: ")
