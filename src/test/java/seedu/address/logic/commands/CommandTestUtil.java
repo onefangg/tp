@@ -78,8 +78,8 @@ public class CommandTestUtil {
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+    public static void assertCommandSuccess(Command command, Model actualModel,
+                                                  CommandResult expectedCommandResult, Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -93,9 +93,19 @@ public class CommandTestUtil {
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+    public static void assertPersonCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                                  Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, true);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * that takes a string {@code expectedMessage}.
+     */
+    public static void assertOrderCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                                  Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, true, false);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
@@ -115,6 +125,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.

@@ -47,7 +47,7 @@ public class UnmarkOrderCommand extends Command {
 
         model.setOrder(orderToUnmark, editedOrder);
         model.updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
-        return new CommandResult(String.format(MESSAGE_UNMARK_ORDER_SUCCESS, editedOrder));
+        return new CommandResult(String.format(MESSAGE_UNMARK_ORDER_SUCCESS, editedOrder), true, false);
     }
 
     /**

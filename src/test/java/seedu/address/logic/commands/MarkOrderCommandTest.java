@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertPersonCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showOrderAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
@@ -43,7 +43,7 @@ public class MarkOrderCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setOrder(lastOrder, editedMarkedOrder);
 
-        assertCommandSuccess(markOrderCommand, model, expectedMessage, expectedModel);
+        assertPersonCommandSuccess(markOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class MarkOrderCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setOrder(model.getFilteredOrderList().get(0), editedMarkedOrder);
 
-        assertCommandSuccess(markOrderCommand, model, expectedMessage, expectedModel);
+        assertPersonCommandSuccess(markOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

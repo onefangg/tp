@@ -47,7 +47,7 @@ public class MarkOrderCommand extends Command {
 
         model.setOrder(orderToMark, editedOrder);
         model.updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
-        return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, editedOrder));
+        return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, editedOrder), true, false);
     }
 
     private Order createMarkedOrder(Order orderToMark) {

@@ -52,7 +52,7 @@ public class AddOrderCommand extends Command {
         }
 
         model.addOrder(toAdd);
-        return new CommandResult(String.format(MESSAGE_ORDER_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_ORDER_SUCCESS, toAdd), true, false);
     }
 
     @Override
