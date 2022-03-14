@@ -21,6 +21,6 @@ public class RemarkTest {
         assertTrue(Remark.isValidRemark("In love with sky diving"));
         assertTrue(Remark.isValidRemark("-")); // one character
         assertTrue(Remark.isValidRemark("")); // empty remark
-        assertTrue(Remark.isValidRemark("Waterfall Enthusiast")); // long remark
+        assertTrue(Remark.isValidRemark("Waterfall Enthusiast who also loves to play water sports, board games, watch movies and loves gambling")); // long remark
     }
 }
