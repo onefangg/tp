@@ -107,15 +107,31 @@ Examples:
 
 Edits an existing customer in ReadyBakey's contact list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] `
+Format: `editp INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] `
 
 * Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/83456789 e/declan@example.com` Edits the phone number and email address of the 1st customer to be `83456789` and `declan@example.com` respectively.
-*  `edit 2 n/Declan` Edits the name of the 2nd customer to be `Declan`.
+*  `editp 1 p/83456789 e/declan@example.com` Edits the phone number and email address of the 1st customer to be `83456789` and `declan@example.com` respectively.
+*  `editp 2 n/Declan` Edits the name of the 2nd customer to be `Declan`.
+
+
+### Editing an order's information : `edito`
+
+Edits an existing customer in ReadyBakey's contact list.
+
+Format: `edito INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [d/DETAILS]`
+
+* Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edito 1 p/83456789 d/1xblackforestcake` Edits the phone number and email address of the 1st customer to be `83456789` and `1xblackforestcake` respectively.
+*  `edito 2 n/Declan` Edits the name of the 2nd customer to be `Declan`.
+
 
 ### Locating customers by name: `findp`
 
@@ -246,7 +262,7 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary <a name="command-summary"></a>
-| Action      |     | Format                                                              | Example                                                          |
+| Action      | Format                                                                    | Example                                                          |
 |-------------|---------------------------------------------------------------------------|------------------------------------------------------------------|
 | **addp**    |`addp n/NAME p/PHONE\_NUM a/ADDRESS`                                       | `addp n/John Doe p/87654321 a/21 Kent Ridge Drive`               |
 | **deletep** |`deletep INDEX`                                                            | `deletep 2`                                                      |
@@ -261,4 +277,4 @@ _Details coming soon ..._
 | **unmarko** |`unmarko INDEX`                                                            | `unmarko 1`                                                      |
 | **clearc**  |`clearc`                                                                   | `clearc`                                                         |
 | **exit**    |`exit`                                                                     | `exit`                                                           |
-
+| **edito**   |`edito INDEX`                                                              | `edito 1 p/12345678 n/John Doey a/NUS`                           |
