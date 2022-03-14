@@ -74,7 +74,7 @@ public class EditOrderCommand extends Command {
 
         model.setOrder(orderToEdit, editedOrder);
         model.updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
-        return new CommandResult(String.format(MESSAGE_EDIT_ORDER_SUCCESS, editedOrder));
+        return new CommandResult(String.format(MESSAGE_EDIT_ORDER_SUCCESS, editedOrder), true, false);
     }
 
     /**
