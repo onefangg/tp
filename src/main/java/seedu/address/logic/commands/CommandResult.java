@@ -17,11 +17,20 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The command is related to orders */
+    private final boolean isOrderCommand;
+
+    /** The command is related to persons */
+    private final boolean isPersonCommand;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean isOrderCommand, boolean isPersonCommand, boolean showHelp,
+                         boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.isOrderCommand = isOrderCommand;
+        this.isPersonCommand = isPersonCommand;
         this.showHelp = showHelp;
         this.exit = exit;
     }
@@ -30,8 +39,8 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+    public CommandResult(String feedbackToUser, boolean isOrderCommand, boolean isPersonCommand) {
+        this(feedbackToUser, isOrderCommand, isPersonCommand, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -45,6 +54,10 @@ public class CommandResult {
     public boolean isExit() {
         return exit;
     }
+
+    public boolean isOrderCommand() { return isOrderCommand; }
+
+    public boolean isPersonCommand() { return isPersonCommand; }
 
     @Override
     public boolean equals(Object other) {
