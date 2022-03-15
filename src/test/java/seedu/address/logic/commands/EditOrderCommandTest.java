@@ -37,7 +37,7 @@ public class EditOrderCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setOrder(model.getFilteredOrderList().get(0), editedOrder);
 
-        assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
+        assertOrderCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class EditOrderCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setOrder(lastOrder, editedOrder);
 
-        assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
+        assertOrderCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class EditOrderCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
+        assertOrderCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -88,7 +88,7 @@ public class EditOrderCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setOrder(model.getFilteredOrderList().get(0), editedOrder);
 
-        assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
+        assertOrderCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
