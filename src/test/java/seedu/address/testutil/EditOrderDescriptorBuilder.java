@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditOrderCommand.EditOrderDescriptor;
+import seedu.address.model.order.Details;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
-import seedu.address.model.order.Order;
 import seedu.address.model.person.Phone;
-import seedu.address.model.order.Details;
 
 /**
  * A utility class to help with building EditOrderDescriptor objects.

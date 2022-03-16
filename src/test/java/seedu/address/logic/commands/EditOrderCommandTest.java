@@ -2,9 +2,17 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalIndexes.*;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY_ORDER;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB_ORDER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertOrderCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showOrderAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
+import static seedu.address.testutil.TypicalOrders.getTypicalAddressBookOrders;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +32,7 @@ import seedu.address.testutil.OrderBuilder;
  */
 public class EditOrderCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
+    private Model model = new ModelManager(getTypicalAddressBookOrders(), new UserPrefs());
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Order editedOrder = new OrderBuilder().build(); // Creates the order in orderbuilder
