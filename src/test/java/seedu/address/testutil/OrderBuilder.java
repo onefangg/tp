@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.order.Complete;
+import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
@@ -14,6 +15,7 @@ public class OrderBuilder {
     public static final String DEFAULT_ADDRESS = "Jerry’s House 111111";
     public static final String DEFAULT_DETAILS = "1xchocholatecake";
     public static final String DEFAULT_REMARK = "Add more chocolate";
+    public static final String DEFAULT_DELIVERYDATETIME = "10-12-2022 17:00";
     public static final Boolean DEFAULT_COMPLETE = false;
 
     private Name name;
@@ -21,6 +23,7 @@ public class OrderBuilder {
     private Address address;
     private Remark remark;
     private Details details;
+    private DeliveryDateTime deliveryDateTime;
     private Complete complete;
 
     /**
@@ -32,6 +35,7 @@ public class OrderBuilder {
         address = new Address(DEFAULT_ADDRESS);
         remark = new Remark(DEFAULT_REMARK);
         details = new Details(DEFAULT_DETAILS);
+        deliveryDateTime = new DeliveryDateTime(DEFAULT_DELIVERYDATETIME);
         complete = new Complete(DEFAULT_COMPLETE);
     }
 
@@ -44,6 +48,7 @@ public class OrderBuilder {
         address = orderToCopy.getAddress();
         remark = orderToCopy.getRemark();
         details = orderToCopy.getDetails();
+        deliveryDateTime = orderToCopy.getDeliveryDateTime();
         complete = orderToCopy.getComplete();
     }
 
@@ -88,6 +93,14 @@ public class OrderBuilder {
     }
 
     /**
+     * Sets the {@code deliveryDateTime} of the {@code Order} that we are building.
+     */
+    public OrderBuilder withDeliveryDateTime(String deliveryDateTime) {
+        this.deliveryDateTime = new DeliveryDateTime(deliveryDateTime);
+        return this;
+    }
+
+    /**
      * Sets the {@code Complete} of the {@code Order} that we are building.
      */
     public OrderBuilder withComplete(Boolean complete) {
@@ -96,6 +109,6 @@ public class OrderBuilder {
     }
 
     public Order build() {
-        return new Order(name, phone, address, remark, details, complete);
+        return new Order(name, phone, address, remark, details, deliveryDateTime, complete);
     }
 }

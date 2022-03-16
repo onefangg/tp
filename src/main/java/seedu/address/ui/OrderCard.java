@@ -38,6 +38,8 @@ public class OrderCard extends UiPart<Region> {
     @FXML
     private Label details;
     @FXML
+    private Label deliveryDateTime;
+    @FXML
     private Label complete;
 
     /**
@@ -52,6 +54,7 @@ public class OrderCard extends UiPart<Region> {
         address.setText(order.getAddress().value);
         remark.setText(order.getRemark().value);
         details.setText(order.getDetails().value);
+        deliveryDateTime.setText(order.getDeliveryDateTime().toString());
         complete.setText(order.getComplete().toString());
     }
 

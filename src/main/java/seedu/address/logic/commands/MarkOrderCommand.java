@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.Complete;
+import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
@@ -59,9 +60,10 @@ public class MarkOrderCommand extends Command {
         Address updatedAddress = orderToMark.getAddress();
         Remark updatedRemark = orderToMark.getRemark();
         Details updatedDetails = orderToMark.getDetails();
+        DeliveryDateTime updatedDeliveryDateTime = orderToMark.getDeliveryDateTime();
         Complete updatedComplete = new Complete(true);
 
-        return new Order(updatedName, updatedPhone, updatedAddress, updatedRemark, updatedDetails, updatedComplete);
+        return new Order(updatedName, updatedPhone, updatedAddress, updatedRemark, updatedDetails, updatedDeliveryDateTime, updatedComplete);
 
     }
 

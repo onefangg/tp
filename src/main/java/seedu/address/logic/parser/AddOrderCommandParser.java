@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
@@ -23,9 +24,9 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
      */
     public AddOrderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_REMARK, PREFIX_DETAILS);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_REMARK, PREFIX_DETAILS, PREFIX_DELIVERYDATETIME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_DETAILS)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_DETAILS, PREFIX_DELIVERYDATETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddOrderCommand.MESSAGE_USAGE));
         }
@@ -35,8 +36,9 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         Details details = ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS).get());
+        DeliveryDateTime deliveryDateTime = ParserUtil.parseDeliveryDateTime(argMultimap.getValue(PREFIX_DELIVERYDATETIME).get());
 
-        Order order = new Order(name, phone, address, remark, details);
+        Order order = new Order(name, phone, address, remark, details, deliveryDateTime);
 
         return new AddOrderCommand(order);
     }

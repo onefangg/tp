@@ -42,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_EMPTY = "";
     public static final String VALID_DETAILS_AMY = "1xchocolatemuffin";
     public static final String VALID_DETAILS_BOB = "1xraspberrycake";
+    public static final String VALID_DELIVERYDATETIME_AMY = "11-11-2022 15:30";
+    public static final String VALID_DELIVERYDATETIME_BOB = "12-12-2022 13:00";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 

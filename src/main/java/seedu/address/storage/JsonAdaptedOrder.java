@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.order.Complete;
+import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
@@ -24,6 +25,7 @@ class JsonAdaptedOrder {
     private final String address;
     private final String remark;
     private final String details;
+    private final String deliveryDateTime;
     private final String complete;
 
     /**
@@ -32,13 +34,14 @@ class JsonAdaptedOrder {
     @JsonCreator
     public JsonAdaptedOrder(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("address") String address, @JsonProperty("remark") String remark,
-                            @JsonProperty("details") String details,
-                             @JsonProperty("complete") String complete) {
+                            @JsonProperty("details") String details, @JsonProperty("deliveryDateTime") String deliveryDateTime,
+                            @JsonProperty("complete") String complete) {
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.remark = remark;
         this.details = details;
+        this.deliveryDateTime = deliveryDateTime;
         this.complete = complete;
     }
 
@@ -51,6 +54,7 @@ class JsonAdaptedOrder {
         address = source.getAddress().value;
         remark = source.getRemark().value;
         details = source.getDetails().value;
+        deliveryDateTime = source.getDeliveryDateTime().toJsonSavedString();
         complete = source.getComplete().value.toString();
 
     }
@@ -95,6 +99,14 @@ class JsonAdaptedOrder {
         }
         final Details modelDetails = new Details(details);
 
+        if (deliveryDateTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryDateTime.class.getSimpleName()));
+        }
+        if (!DeliveryDateTime.isValidDeliveryDateTime(deliveryDateTime)) {
+            throw new IllegalValueException(DeliveryDateTime.MESSAGE_CONSTRAINTS);
+        }
+        final DeliveryDateTime modelDeliveryDateTime = new DeliveryDateTime(deliveryDateTime);
+
         if (complete == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Complete.class.getSimpleName())
@@ -105,7 +117,7 @@ class JsonAdaptedOrder {
         }
         final Complete modelComplete = new Complete(complete);
 
-        return new Order(modelName, modelPhone, modelAddress, modelRemark, modelDetails, modelComplete);
+        return new Order(modelName, modelPhone, modelAddress, modelRemark, modelDetails, modelDeliveryDateTime, modelComplete);
     }
 
 }

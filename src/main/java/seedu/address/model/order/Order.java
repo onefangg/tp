@@ -23,31 +23,34 @@ public class Order {
     private final Address address;
     private final Remark remark;
     private final Details details;
+    private final DeliveryDateTime deliveryDateTime;
     private final Complete complete;
 
     /**
      * Every field must be present and not null.
      */
-    public Order(Name name, Phone phone, Address address, Remark remark, Details details) {
-        requireAllNonNull(name, phone, address, remark, details);
+    public Order(Name name, Phone phone, Address address, Remark remark, Details details, DeliveryDateTime deliveryDateTime) {
+        requireAllNonNull(name, phone, address, remark, details, deliveryDateTime);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.remark = remark;
         this.details = details;
         this.complete = new Complete(false);
+        this.deliveryDateTime = deliveryDateTime;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Order(Name name, Phone phone, Address address, Remark remark, Details details, Complete complete) {
-        requireAllNonNull(name, phone, address, remark, details, complete);
+    public Order(Name name, Phone phone, Address address, Remark remark, Details details, DeliveryDateTime deliveryDateTime, Complete complete) {
+        requireAllNonNull(name, phone, address, remark, details, deliveryDateTime, complete);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.remark = remark;
         this.details = details;
+        this.deliveryDateTime = deliveryDateTime;
         this.complete = complete;
     }
 
@@ -70,6 +73,8 @@ public class Order {
     public Remark getRemark() {
         return remark;
     }
+
+    public DeliveryDateTime getDeliveryDateTime() { return deliveryDateTime; }
 
     public Complete getComplete() {
         return complete;
@@ -94,13 +99,15 @@ public class Order {
                 && otherOrder.getPhone().equals(getPhone())
                 && otherOrder.getAddress().equals(getAddress())
                 && otherOrder.getRemark().equals(getRemark())
-                && otherOrder.getDetails().equals(getDetails());
+                && otherOrder.getDetails().equals(getDetails())
+                && otherOrder.getDeliveryDateTime().equals(getDeliveryDateTime())
+                ;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, remark, details);
+        return Objects.hash(name, phone, address, remark, details, deliveryDateTime);
     }
 
     @Override
@@ -115,6 +122,8 @@ public class Order {
                 .append(getRemark())
                 .append("; Details: ")
                 .append(getDetails())
+                .append("; Delivery Date: ")
+                .append(getDeliveryDateTime())
                 .append("; Complete: ")
                 .append(getComplete());
 
