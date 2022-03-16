@@ -35,7 +35,7 @@ public class Complete {
     /**
      * Returns true if a given string is a valid complete value.
      */
-    public static boolean isValidDetails(String details) {
+    public static boolean isValidComplete(String details) {
         return details.equals(Boolean.FALSE.toString())
                 || details.equals(Boolean.TRUE.toString());
     }
