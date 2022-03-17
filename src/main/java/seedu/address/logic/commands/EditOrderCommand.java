@@ -15,11 +15,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 /**
  * Edits the information of an existing order in the ReadyBakey.
@@ -88,8 +90,10 @@ public class EditOrderCommand extends Command {
         Phone updatedPhone = editOrderDescriptor.getPhone().orElse(orderToEdit.getPhone());
         Address updatedAddress = editOrderDescriptor.getAddress().orElse(orderToEdit.getAddress());
         Details updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
+        Remark updatedRemarks = editOrderDescriptor.getRemark().orElse(orderToEdit.getRemark());
+        DeliveryDateTime updatedDeliveryDateTime = editOrderDescriptor.getDeliveryDateTime().orElse(orderToEdit.getDeliveryDateTime());
 
-        return new Order(updatedName, updatedPhone, updatedAddress, updatedDetails);
+        return new Order(updatedName, updatedPhone, updatedAddress, updatedRemarks, updatedDetails, updatedDeliveryDateTime);
     }
 
     @Override
@@ -119,6 +123,8 @@ public class EditOrderCommand extends Command {
         private Phone phone;
         private Address address;
         private Details details;
+        private Remark remark;
+        private DeliveryDateTime deliveryDateTime;
 
         public EditOrderDescriptor() {}
 
@@ -131,13 +137,15 @@ public class EditOrderCommand extends Command {
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
             setDetails(toCopy.details);
+            setRemark(toCopy.remark);
+            setDeliveryDateTime(toCopy.deliveryDateTime);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address, details);
+            return CollectionUtil.isAnyNonNull(name, phone, address, details, remark, deliveryDateTime);
         }
 
         public void setName(Name name) {
@@ -172,6 +180,23 @@ public class EditOrderCommand extends Command {
             return Optional.ofNullable(details);
         }
 
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
+        public void setDeliveryDateTime(DeliveryDateTime deliveryDateTime) {
+            this.deliveryDateTime = deliveryDateTime;
+        }
+
+        public Optional<DeliveryDateTime> getDeliveryDateTime() {
+            return Optional.ofNullable(deliveryDateTime);
+        }
+
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -190,7 +215,9 @@ public class EditOrderCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getAddress().equals(e.getAddress())
-                    && getDetails().equals(e.getDetails());
+                    && getDetails().equals(e.getDetails())
+                    && getRemark().equals(e.getRemark())
+                    && getDeliveryDateTime().equals(e.getDeliveryDateTime());
         }
     }
 }

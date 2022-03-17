@@ -2,10 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditOrderCommand;
@@ -25,7 +22,7 @@ public class EditOrderCommandParser implements Parser<EditOrderCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS,
-                        PREFIX_DETAILS);
+                        PREFIX_DETAILS, PREFIX_REMARK, PREFIX_DELIVERYDATETIME);
 
         Index index;
 
@@ -50,6 +47,12 @@ public class EditOrderCommandParser implements Parser<EditOrderCommand> {
         }
         if (argMultimap.getValue(PREFIX_DETAILS).isPresent()) {
             editOrderDescriptor.setDetails(ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS).get()));
+        }
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            editOrderDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DELIVERYDATETIME).isPresent()) {
+            editOrderDescriptor.setDeliveryDateTime(ParserUtil.parseDeliveryDateTime(argMultimap.getValue(PREFIX_DELIVERYDATETIME).get()));
         }
 
         if (!editOrderDescriptor.isAnyFieldEdited()) {
