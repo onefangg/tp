@@ -36,4 +36,11 @@ public class FindOrderCommand extends Command {
                 String.format(Messages.MESSAGE_ORDERS_LISTED_OVERVIEW, model.getFilteredOrderList().size()),
                 true, false);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindOrderCommand // instanceof handles nulls
+                && predicate.equals(((FindOrderCommand) other).predicate)); // state check
+    }
 }
