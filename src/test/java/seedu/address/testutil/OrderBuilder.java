@@ -10,10 +10,11 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 
 public class OrderBuilder {
-    public static final String DEFAULT_NAME = "Tom";
-    public static final String DEFAULT_PHONE = "11111111";
-    public static final String DEFAULT_ADDRESS = "Jerry’s House 111111";
-    public static final String DEFAULT_DETAILS = "1xchocholatecake";
+
+    public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_DETAILS = "1xchocolatemuffin";
     public static final String DEFAULT_REMARK = "Add more chocolate";
     public static final String DEFAULT_DELIVERYDATETIME = "10-12-2022 17:00";
     public static final Boolean DEFAULT_COMPLETE = false;

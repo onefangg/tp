@@ -129,8 +129,9 @@ Format: `edito INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [d/DETAILS]`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edito 1 p/83456789 d/1xblackforestcake` Edits the phone number and email address of the 1st customer to be `83456789` and `1xblackforestcake` respectively.
-*  `edito 2 n/Declan` Edits the name of the 2nd customer to be `Declan`.
+*  `edito 1 p/83456789 d/1 x blackforestcake` Edits the phone number and email address of the 1st order to be 
+   `83456789` and `1xblackforestcake` respectively.
+*  `edito 2 n/Declan` Edits the customer's name of the 2nd order to be `Declan`.
 
 
 ### Locating customers by name: `findp`
@@ -257,24 +258,23 @@ _Details coming soon ..._
 ## FAQ <a name="faq"></a>
 
 **Q**: Is an order tied to a specific customer in the customer list?<br>
-**A**: Yes, an order is tied to the specific customer as per the customers’ phone number.
+**A**: Yes, an order is tied to the specific customer as per the customers’ ID.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary <a name="command-summary"></a>
-| Action      | Format                                                                    | Example                                                          |
-|-------------|---------------------------------------------------------------------------|------------------------------------------------------------------|
-| **addp**    |`addp n/NAME p/PHONE\_NUM a/ADDRESS`                                       | `addp n/John Doe p/87654321 a/21 Kent Ridge Drive`               |
-| **deletep** |`deletep INDEX`                                                            | `deletep 2`                                                      |
-| **listp**   |`listp`                                                                    | `listp`                                                          |
-| **editp**   |`editp INDEX \[n/NAME\] \[p/PHONE\_NUM\] \[a/ADDRESS\]`                    | `editp 1 p/12345678 n/John Doey a/NUS`                           |
-| **findp**   |`findp KEYWORD`                                                            | `findp John`                                                     |
-| **clearp**  |`clearp`                                                                   | `clearp`                                                         |
-| **addo**    |`addo d/DATE\_ORDERED s/DATE\_TO\_SEND c/CUST\_PHONE\_NUM i/ITEM\_ORDERED` | `addo d/10\-10\-2022 s/20\-10\-2022 c/87654321 i/Chocolate Cake` |
-| **deleteo** |`deleteo INDEX`                                                            | `deleteo 2`                                                      |
-| **listo**   |`listo`                                                                    | `listo`                                                          |
-| **marko**   |`marko INDEX`                                                              | `marko 1`                                                        |
-| **unmarko** |`unmarko INDEX`                                                            | `unmarko 1`                                                      |
-| **clearc**  |`clearc`                                                                   | `clearc`                                                         |
-| **exit**    |`exit`                                                                     | `exit`                                                           |
-| **edito**   |`edito INDEX`                                                              | `edito 1 p/12345678 n/John Doey a/NUS`                           |
+| Action      | Format                                                                     | Example                                                      |
+|-------------|----------------------------------------------------------------------------|--------------------------------------------------------------|
+| **addp**    | `addp n/NAME p/PHONE\_NUM a/ADDRESS`                                       | `addp n/John Doe p/87654321 a/21 Kent Ridge Drive`           |
+| **deletep** | `deletep INDEX`                                                            | `deletep 2`                                                  |
+| **listp**   | `listp`                                                                    | `listp`                                                      |
+| **editp**   | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                                | `editp 1 p/12345678 n/John Doey a/NUS`                       |
+| **findp**   | `findp KEYWORD`                                                            | `findp John`                                                 |
+| **clearp**  | `clearp`                                                                   | `clearp`                                                     |
+| **addo**    | `addo d/DATE\_ORDERED s/DATE\_TO\_SEND c/CUST\_PHONE\_NUM i/ITEM\_ORDERED` | `addo d/10-10-2022 s/20-10-2022 c/87654321 i/Chocolate Cake` |
+| **deleteo** | `deleteo INDEX`                                                            | `deleteo 2`                                                  |
+| **listo**   | `listo`                                                                    | `listo`                                                      |
+| **marko**   | `marko INDEX`                                                              | `marko 1`                                                    |
+| **unmarko** | `unmarko INDEX`                                                            | `unmarko 1`                                                  |
+| **exit**    | `exit`                                                                     | `exit`                                                       |
+| **edito**   | `edito INDEX n/NAME p/PHONE\_NUM a/ADDRESS d/DETAILS`                      | `edito 1 p/12345678 n/John Doey a/NUS d/1 x Cheesecake`      |

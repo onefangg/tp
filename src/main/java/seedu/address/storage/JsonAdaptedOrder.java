@@ -112,7 +112,7 @@ class JsonAdaptedOrder {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Complete.class.getSimpleName())
             );
         }
-        if (!Complete.isValidDetails(complete)) {
+        if (!Complete.isValidComplete(complete)) {
             throw new IllegalValueException(Complete.MESSAGE_CONSTRAINTS);
         }
         final Complete modelComplete = new Complete(complete);
