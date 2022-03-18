@@ -55,9 +55,13 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isOrderCommand() { return isOrderCommand; }
+    public boolean isOrderCommand() {
+        return isOrderCommand;
+    }
 
-    public boolean isPersonCommand() { return isPersonCommand; }
+    public boolean isPersonCommand() {
+        return isPersonCommand;
+    }
 
     @Override
     public boolean equals(Object other) {
