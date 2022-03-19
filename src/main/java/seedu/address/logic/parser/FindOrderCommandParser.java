@@ -10,10 +10,13 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindOrderCommand;
+import seedu.address.logic.commands.FindOrderNameCommand;
+import seedu.address.logic.commands.FindOrderPhoneCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderContainsKeywordsPredicate;
 import seedu.address.model.order.OrderPhoneContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * Parses input arguments and creates a new FindOrderCommand object
@@ -31,20 +34,20 @@ public class FindOrderCommandParser implements Parser<FindOrderCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindOrderCommand.MESSAGE_USAGE));
         }
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE);
+                ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_NAME);
 
         Prefix findOrderPrefix;
         Predicate<Order> findOrderPredicate;
         if (isOnlyOnePrefixPresent(argMultimap, PREFIX_NAME)) {
             findOrderPrefix = PREFIX_NAME;
             String[] nameKeywords = argMultimap.getValue(findOrderPrefix).get().trim().split("\\s+");
-            findOrderPredicate = new OrderContainsKeywordsPredicate(Arrays.asList(nameKeywords));
-            return new FindOrderCommand(findOrderPredicate);
+            Predicate<Person> findPersonPredicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
+            return new FindOrderNameCommand(findPersonPredicate);
         } else if (isOnlyOnePrefixPresent(argMultimap, PREFIX_PHONE)) {
             findOrderPrefix = PREFIX_PHONE;
             String[] phoneKeywords = argMultimap.getValue(findOrderPrefix).get().trim().split("\\s+");
             findOrderPredicate = new OrderPhoneContainsKeywordsPredicate(Arrays.asList(phoneKeywords));
-            return new FindOrderCommand(findOrderPredicate);
+            return new FindOrderPhoneCommand(findOrderPredicate);
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindOrderCommand.MESSAGE_USAGE));

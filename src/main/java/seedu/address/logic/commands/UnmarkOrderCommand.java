@@ -12,8 +12,6 @@ import seedu.address.model.Model;
 import seedu.address.model.order.Complete;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
 public class UnmarkOrderCommand extends Command {
@@ -59,13 +57,11 @@ public class UnmarkOrderCommand extends Command {
     private Order createUnmarkedOrder(Order orderToUnmark) {
         assert orderToUnmark != null;
 
-        Name updatedName = orderToUnmark.getName();
         Phone updatedPhone = orderToUnmark.getPhone();
-        Address updatedAddress = orderToUnmark.getAddress();
         Details updatedDetails = orderToUnmark.getDetails();
         Complete updatedComplete = new Complete(false);
 
-        return new Order(updatedName, updatedPhone, updatedAddress, updatedDetails, updatedComplete);
+        return new Order(updatedPhone, updatedDetails, updatedComplete);
 
     }
 

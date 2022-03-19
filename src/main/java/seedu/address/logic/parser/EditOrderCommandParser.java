@@ -39,14 +39,9 @@ public class EditOrderCommandParser implements Parser<EditOrderCommand> {
         }
 
         EditOrderDescriptor editOrderDescriptor = new EditOrderDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editOrderDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
+
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editOrderDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editOrderDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_DETAILS).isPresent()) {
             editOrderDescriptor.setDetails(ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS).get()));

@@ -18,7 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderContainsKeywordsPredicate;
+import seedu.address.model.order.OrderPhoneContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditOrderDescriptorBuilder;
@@ -77,11 +77,11 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        DESC_AMY_ORDER = new EditOrderDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY)
+        DESC_AMY_ORDER = new EditOrderDescriptorBuilder()
+                .withPhone(VALID_PHONE_AMY)
                 .withDetails(VALID_DETAILS_AMY).build();
-        DESC_BOB_ORDER = new EditOrderDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
+        DESC_BOB_ORDER = new EditOrderDescriptorBuilder()
+                .withPhone(VALID_PHONE_BOB)
                 .withDetails(VALID_DETAILS_BOB).build();
     }
 
@@ -160,8 +160,8 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredOrderList().size());
 
         Order order = model.getFilteredOrderList().get(targetIndex.getZeroBased());
-        final String[] splitName = order.getName().fullName.split("\\s+");
-        model.updateFilteredOrderList(new OrderContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        final String[] splitName = order.getPhone().value.split("\\s+");
+        model.updateFilteredOrderList(new OrderPhoneContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredOrderList().size());
     }

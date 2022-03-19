@@ -40,7 +40,7 @@ public class OrderCard extends UiPart<Region> {
     private Label complete;
 
     /**
-     * Creates a {@code OrderCard} with the given {@code Order} and index to display.
+     * Creates a {@code OrderCard} with the given {@code Order}, {@code Person} and index to display.
      */
     public OrderCard(Order order, int displayedIndex, Person person) {
         super(FXML);
@@ -53,13 +53,16 @@ public class OrderCard extends UiPart<Region> {
         complete.setText(order.getComplete().toString());
     }
 
+    /**
+     * Creates a {@code OrderCard} with the given {@code Order} and index to display.
+     */
     public OrderCard(Order order, int displayedIndex) {
         super(FXML);
         this.order = order;
         id.setText(displayedIndex + ". ");
-        name.setText(order.getName().fullName);
+        name.setText("Null");
         phone.setText(order.getPhone().value);
-        address.setText(order.getAddress().value);
+        address.setText("Null");
         details.setText(order.getDetails().value);
         complete.setText(order.getComplete().toString());
     }

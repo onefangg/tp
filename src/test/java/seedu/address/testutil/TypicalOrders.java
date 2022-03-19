@@ -8,20 +8,17 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.order.Order;
 
 public class TypicalOrders {
-    public static final Order EMILY = new OrderBuilder().withName("Emily Lee")
-            .withAddress("BLK 123 Ang Mo Kio Ave 4, #05-12")
+    public static final Order EMILY = new OrderBuilder()
             .withPhone("94231333")
             .withDetails("1xvanillacake")
             .withComplete(false).build();
 
-    public static final Order SIMON = new OrderBuilder().withName("Simon Loo")
-            .withAddress("55 Serangoon Avenue 3")
+    public static final Order SIMON = new OrderBuilder()
             .withPhone("94241423")
             .withDetails("1xchocolatecake")
             .withComplete(false).build();
 
-    public static final Order JERRY = new OrderBuilder().withName("Jerry Mouse")
-            .withAddress("55 Ang Mo Kio Avenue 38")
+    public static final Order JERRY = new OrderBuilder()
             .withPhone("91029382")
             .withDetails("1xjerryfavouritecheesecake")
             .withComplete(false).build();

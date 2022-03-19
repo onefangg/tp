@@ -12,8 +12,6 @@ import seedu.address.model.Model;
 import seedu.address.model.order.Complete;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
 public class MarkOrderCommand extends Command {
@@ -53,13 +51,11 @@ public class MarkOrderCommand extends Command {
     private Order createMarkedOrder(Order orderToMark) {
         assert orderToMark != null;
 
-        Name updatedName = orderToMark.getName();
         Phone updatedPhone = orderToMark.getPhone();
-        Address updatedAddress = orderToMark.getAddress();
         Details updatedDetails = orderToMark.getDetails();
         Complete updatedComplete = new Complete(true);
 
-        return new Order(updatedName, updatedPhone, updatedAddress, updatedDetails, updatedComplete);
+        return new Order(updatedPhone, updatedDetails, updatedComplete);
 
     }
 

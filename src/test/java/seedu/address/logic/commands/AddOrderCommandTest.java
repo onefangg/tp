@@ -50,8 +50,8 @@ public class AddOrderCommandTest {
 
     @Test
     public void equals() {
-        Order alice = new OrderBuilder().withName("Alice").build();
-        Order bob = new OrderBuilder().withName("Bob").build();
+        Order alice = new OrderBuilder().withPhone("12345").build();
+        Order bob = new OrderBuilder().withPhone("54321").build();
         AddOrderCommand addAliceOrderCommand = new AddOrderCommand(alice);
         AddOrderCommand addBobOrderCommand = new AddOrderCommand(bob);
 

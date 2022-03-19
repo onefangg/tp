@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
 
@@ -17,8 +15,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
 /**
@@ -32,14 +28,10 @@ public class EditOrderCommand extends Command {
             + "by the index number used in the displayed order list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_DETAILS + "DETAILS "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Tom "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_ADDRESS + "Tom and Jerry's House CA94114, San Francisco, 3650 21st St "
             + PREFIX_DETAILS + "1x Jerry Favourite Cheese Cake";
 
     public static final String MESSAGE_EDIT_ORDER_SUCCESS = "Edited Order: %1$s";
@@ -84,12 +76,10 @@ public class EditOrderCommand extends Command {
     private static Order createEditedOrder(Order orderToEdit, EditOrderDescriptor editOrderDescriptor) {
         assert orderToEdit != null;
 
-        Name updatedName = editOrderDescriptor.getName().orElse(orderToEdit.getName());
         Phone updatedPhone = editOrderDescriptor.getPhone().orElse(orderToEdit.getPhone());
-        Address updatedAddress = editOrderDescriptor.getAddress().orElse(orderToEdit.getAddress());
         Details updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
 
-        return new Order(updatedName, updatedPhone, updatedAddress, updatedDetails);
+        return new Order(updatedPhone, updatedDetails);
     }
 
     @Override
@@ -115,9 +105,7 @@ public class EditOrderCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditOrderDescriptor {
-        private Name name;
         private Phone phone;
-        private Address address;
         private Details details;
 
         public EditOrderDescriptor() {}
@@ -127,9 +115,7 @@ public class EditOrderCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditOrderDescriptor(EditOrderDescriptor toCopy) {
-            setName(toCopy.name);
             setPhone(toCopy.phone);
-            setAddress(toCopy.address);
             setDetails(toCopy.details);
         }
 
@@ -137,15 +123,7 @@ public class EditOrderCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address, details);
-        }
-
-        public void setName(Name name) {
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+            return CollectionUtil.isAnyNonNull(phone, details);
         }
 
         public void setPhone(Phone phone) {
@@ -154,14 +132,6 @@ public class EditOrderCommand extends Command {
 
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         public void setDetails(Details details) {
@@ -187,9 +157,7 @@ public class EditOrderCommand extends Command {
             // state check
             EditOrderDescriptor e = (EditOrderDescriptor) other;
 
-            return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getAddress().equals(e.getAddress())
+            return getPhone().equals(e.getPhone())
                     && getDetails().equals(e.getDetails());
         }
     }
