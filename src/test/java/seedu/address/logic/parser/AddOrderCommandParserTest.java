@@ -1,21 +1,9 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.AddOrderCommand;
-import seedu.address.model.order.Details;
-import seedu.address.model.order.Order;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.testutil.OrderBuilder;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DETAILS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -26,8 +14,6 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -35,6 +21,16 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalOrders.AMY;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.AddOrderCommand;
+import seedu.address.model.order.Order;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.testutil.OrderBuilder;
+
 
 public class AddOrderCommandParserTest {
     private AddOrderCommandParser parser = new AddOrderCommandParser();
@@ -44,20 +40,20 @@ public class AddOrderCommandParserTest {
         Order expectedOrder = new OrderBuilder(AMY).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY +
-                        ADDRESS_DESC_AMY + DETAILS_DESC_AMY, new AddOrderCommand(expectedOrder));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY
+                + ADDRESS_DESC_AMY + DETAILS_DESC_AMY, new AddOrderCommand(expectedOrder));
 
         // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + NAME_DESC_AMY + PHONE_DESC_AMY +
-                ADDRESS_DESC_AMY + DETAILS_DESC_AMY, new AddOrderCommand(expectedOrder));
+        assertParseSuccess(parser, NAME_DESC_BOB + NAME_DESC_AMY + PHONE_DESC_AMY
+                + ADDRESS_DESC_AMY + DETAILS_DESC_AMY, new AddOrderCommand(expectedOrder));
 
         // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_BOB + PHONE_DESC_AMY +
-                ADDRESS_DESC_AMY + DETAILS_DESC_AMY, new AddOrderCommand(expectedOrder));
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_BOB + PHONE_DESC_AMY
+                + ADDRESS_DESC_AMY + DETAILS_DESC_AMY, new AddOrderCommand(expectedOrder));
 
         // multiple addresses - last address accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_BOB +
-                ADDRESS_DESC_AMY + DETAILS_DESC_AMY, new AddOrderCommand(expectedOrder));
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_BOB
+                + ADDRESS_DESC_AMY + DETAILS_DESC_AMY, new AddOrderCommand(expectedOrder));
     }
 
     @Test
@@ -88,24 +84,20 @@ public class AddOrderCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_AMY  + ADDRESS_DESC_AMY
-                + DETAILS_DESC_AMY , Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_AMY + ADDRESS_DESC_AMY
+                + DETAILS_DESC_AMY, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
-        assertParseFailure(parser, NAME_DESC_AMY + INVALID_PHONE_DESC  + ADDRESS_DESC_AMY
-                + DETAILS_DESC_AMY , Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_AMY + INVALID_PHONE_DESC + ADDRESS_DESC_AMY
+                + DETAILS_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid address
-        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY  + INVALID_ADDRESS_DESC
-                + DETAILS_DESC_AMY , Address.MESSAGE_CONSTRAINTS);
-
-        // invalid details
-        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY  + ADDRESS_DESC_AMY
-                + INVALID_DETAILS_DESC , Details.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_ADDRESS_DESC
+                + DETAILS_DESC_AMY, Address.MESSAGE_CONSTRAINTS);
 
         // two invalid values - only first invalid value
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_AMY  + ADDRESS_DESC_AMY
-                + INVALID_DETAILS_DESC , Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_AMY + ADDRESS_DESC_AMY
+                + INVALID_DETAILS_DESC, Name.MESSAGE_CONSTRAINTS);
 
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_AMY + PHONE_DESC_AMY
             + DETAILS_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddOrderCommand.MESSAGE_USAGE));
