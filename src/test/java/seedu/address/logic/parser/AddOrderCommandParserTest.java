@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DETAILS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -96,8 +95,8 @@ public class AddOrderCommandParserTest {
                 + DETAILS_DESC_AMY, Address.MESSAGE_CONSTRAINTS);
 
         // two invalid values - only first invalid value
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_AMY + ADDRESS_DESC_AMY
-                + INVALID_DETAILS_DESC, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + INVALID_PHONE_DESC + ADDRESS_DESC_AMY
+                + DETAILS_DESC_AMY, Name.MESSAGE_CONSTRAINTS);
 
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_AMY + PHONE_DESC_AMY
             + DETAILS_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddOrderCommand.MESSAGE_USAGE));
