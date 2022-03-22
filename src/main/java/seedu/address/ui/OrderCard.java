@@ -47,7 +47,7 @@ public class OrderCard extends UiPart<Region> {
         this.order = order;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(order.getPhone().value);
+        phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         details.setText(order.getDetails().value);
         complete.setText(order.getComplete().toString());
@@ -61,7 +61,7 @@ public class OrderCard extends UiPart<Region> {
         this.order = order;
         id.setText(displayedIndex + ". ");
         name.setText("Null");
-        phone.setText(order.getPhone().value);
+        phone.setText("Null");
         address.setText("Null");
         details.setText(order.getDetails().value);
         complete.setText(order.getComplete().toString());

@@ -11,10 +11,9 @@ import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.UuidContainsKeywordsPredicate;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -52,7 +51,7 @@ public class AddOrderCommand extends Command {
         requireNonNull(model);
         ArrayList<String> phoneKeywords = new ArrayList<String>();
         phoneKeywords.add(phone.value);
-        Person p = model.getFilteredPersonList().filtered(new PhoneContainsKeywordsPredicate(phoneKeywords)).get(0);
+        Person p = model.getFilteredPersonList().filtered(new UuidContainsKeywordsPredicate(phoneKeywords)).get(0);
         UUID uuid = p.getUuid();
         Order toAdd = new Order(phone,details,uuid);
 

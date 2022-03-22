@@ -12,7 +12,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.UuidContainsKeywordsPredicate;
 
 /**
  * Panel containing the list of orders.
@@ -52,8 +52,8 @@ public class OrderListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 ArrayList<String> list = new ArrayList<>(1);
-                list.add(order.getPhone().value);
-                List<Person> singlePersonList = personList.filtered(new PhoneContainsKeywordsPredicate(list));
+                list.add(order.getUuid().toString());
+                List<Person> singlePersonList = personList.filtered(new UuidContainsKeywordsPredicate(list));
                 if (!singlePersonList.isEmpty()) {
                     Person person = singlePersonList.get(0);
                     setGraphic(new OrderCard(order, getIndex() + 1, person).getRoot());
