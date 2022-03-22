@@ -105,7 +105,6 @@ public class EditOrderCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditOrderDescriptor {
-        private Phone phone;
         private Details details;
 
         public EditOrderDescriptor() {}
@@ -115,7 +114,6 @@ public class EditOrderCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditOrderDescriptor(EditOrderDescriptor toCopy) {
-            setPhone(toCopy.phone);
             setDetails(toCopy.details);
         }
 
@@ -123,15 +121,7 @@ public class EditOrderCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(phone, details);
-        }
-
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+            return CollectionUtil.isAnyNonNull(details);
         }
 
         public void setDetails(Details details) {
@@ -157,8 +147,7 @@ public class EditOrderCommand extends Command {
             // state check
             EditOrderDescriptor e = (EditOrderDescriptor) other;
 
-            return getPhone().equals(e.getPhone())
-                    && getDetails().equals(e.getDetails());
+            return getDetails().equals(e.getDetails());
         }
     }
 }

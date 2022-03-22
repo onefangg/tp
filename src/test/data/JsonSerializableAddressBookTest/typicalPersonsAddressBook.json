@@ -26,7 +26,8 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "uuid" : "c1fe7f58-13a1-49ba-a948-1827bac66dcb"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
