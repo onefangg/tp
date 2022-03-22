@@ -9,8 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.order.Order;
 
 /**
- *  Finds and lists all orders in ReadyBakey whose predicate (attribute) contains any of the argument keywords.
- *  Search orders based on attributes is only current supported by {@code name} and {@code phone}.
+ *  Finds and lists all orders in ReadyBakey whose predicate (phone) contains any of the argument keywords.
  *  Keyword matching is case insensitive.
  */
 public class FindOrderPhoneCommand extends FindOrderCommand {

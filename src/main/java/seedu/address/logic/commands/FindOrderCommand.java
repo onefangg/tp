@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 /**
  *  Finds and lists all orders in ReadyBakey whose predicate (attribute) contains any of the argument keywords.
  *  Search orders based on attributes is only current supported by {@code name} and {@code phone}.
- *  Keyword matching is case insensitive.
  */
 public abstract class FindOrderCommand extends Command {
     public static final String COMMAND_WORD = "findo";
