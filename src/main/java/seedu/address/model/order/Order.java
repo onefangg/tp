@@ -79,7 +79,7 @@ public class Order {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("; Details: ")
+        builder.append("Details: ")
                 .append(getDetails())
                 .append("; Complete: ")
                 .append(getComplete());

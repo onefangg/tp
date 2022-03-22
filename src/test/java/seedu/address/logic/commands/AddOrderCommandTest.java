@@ -11,15 +11,19 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ModelStub;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.OrderBuilder;
-
+import seedu.address.testutil.PersonBuilder;
 
 public class AddOrderCommandTest {
     @Test
@@ -38,14 +42,14 @@ public class AddOrderCommandTest {
 
         assertEquals(String.format(AddOrderCommand.MESSAGE_ORDER_SUCCESS, validOrder),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validOrder), modelStub.ordersAdded);
+        assertEquals(Arrays.asList(validOrder).toString(), modelStub.ordersAdded.toString());
     }
 
     @Test
     public void execute_duplicateOrder_throwsCommandException() {
-        Order validOrder = new OrderBuilder().build();
+        Order validOrder = new OrderBuilder().withUuid(PersonBuilder.DEFAULT_UUID).build();
         AddOrderCommand addOrderCommand = new AddOrderCommand(new Details(OrderBuilder.DEFAULT_DETAILS),
-                new Phone(OrderBuilder.DEFAULT_PHONE));
+                new Phone(PersonBuilder.DEFAULT_PHONE));
 
         ModelStub modelStub = new AddOrderCommandTest.ModelStubWithOrder(validOrder);
 
@@ -94,6 +98,14 @@ public class AddOrderCommandTest {
             requireNonNull(order);
             return this.order.equals(order);
         }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            ObservableList<Person> list = FXCollections.observableArrayList();
+            list.add(new PersonBuilder().build());
+            FilteredList<Person> filteredPersons = new FilteredList<Person>(list);
+            return filteredPersons;
+        }
     }
 
     /**
@@ -117,6 +129,14 @@ public class AddOrderCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            ObservableList<Person> list = FXCollections.observableArrayList();
+            list.add(new PersonBuilder().build());
+            FilteredList<Person> filteredPersons = new FilteredList<Person>(list);
+            return filteredPersons;
         }
     }
 

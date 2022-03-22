@@ -35,7 +35,7 @@ public class AddOrderCommand extends Command {
 
     public static final String MESSAGE_ORDER_SUCCESS = "New order added: %1$s";
     public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the address book";
-    private static final String MESSAGE_NO_PERSON_FOUND = "No person found with the same phone number, "
+    public static final String MESSAGE_NO_PERSON_FOUND = "No person found with the same phone number, "
             + "please enter a valid phone number.";
 
     private final Details details;
