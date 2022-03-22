@@ -28,8 +28,8 @@ public class FindOrderNameCommand extends FindOrderCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         List<Person> filteredList = model.getFilteredPersonList().filtered(predicate);
-        String[] nameKeywords = filteredList.stream().map(person->person.getPhone().value).toArray(String[]::new);
-        model.updateFilteredOrderList(new OrderPhoneContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        String[] phoneKeywords = filteredList.stream().map(person->person.getPhone().value).toArray(String[]::new);
+        model.updateFilteredOrderList(new OrderPhoneContainsKeywordsPredicate(Arrays.asList(phoneKeywords)));
         return new CommandResult(
                 String.format(Messages.MESSAGE_ORDERS_LISTED_OVERVIEW, model.getFilteredOrderList().size()),
                 true, false);
