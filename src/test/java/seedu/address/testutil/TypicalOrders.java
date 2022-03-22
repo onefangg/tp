@@ -1,13 +1,7 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,12 +28,8 @@ public class TypicalOrders {
 
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Order AMY = new OrderBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withDetails(VALID_DETAILS_AMY).withAddress(VALID_ADDRESS_AMY)
-            .build();
-    public static final Order BOB = new OrderBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withDetails(VALID_DETAILS_BOB).withAddress(VALID_ADDRESS_BOB)
-            .build();
+    public static final Order AMY = new OrderBuilder().withDetails(VALID_DETAILS_AMY).build();
+    public static final Order BOB = new OrderBuilder().withDetails(VALID_DETAILS_BOB).build();
 
     private TypicalOrders() {} // prevents instantiation
 
