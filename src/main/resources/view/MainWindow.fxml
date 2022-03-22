@@ -32,7 +32,7 @@
           </Menu>
         </MenuBar>
 
-        <VBox fx:id="resultList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <VBox fx:id="resultList" minWidth="340" prefWidth="340" styleClass="result-list-pane-with-border" VBox.vgrow="NEVER">
         </VBox>
 
         <StackPane fx:id="responseDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100"
