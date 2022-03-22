@@ -1,11 +1,10 @@
 package seedu.address.testutil;
 
+import java.util.UUID;
+
 import seedu.address.model.order.Complete;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Phone;
-
-import java.util.UUID;
 
 public class OrderBuilder {
 

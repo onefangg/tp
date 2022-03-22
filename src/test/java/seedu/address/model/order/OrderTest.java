@@ -3,7 +3,6 @@ package seedu.address.model.order;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_BOB;
 import static seedu.address.testutil.TypicalOrders.EMILY;
 import static seedu.address.testutil.TypicalOrders.SIMON;

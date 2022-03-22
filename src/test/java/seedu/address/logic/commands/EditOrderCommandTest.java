@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY_ORDER;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB_ORDER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertOrderCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showOrderAtIndex;

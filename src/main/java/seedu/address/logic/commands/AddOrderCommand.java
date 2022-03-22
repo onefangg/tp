@@ -5,6 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -13,10 +16,7 @@ import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.UuidContainsKeywordsPredicate;
 
-import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * Changes the remark of an existing person in ReadyBakey.
@@ -35,8 +35,8 @@ public class AddOrderCommand extends Command {
 
     public static final String MESSAGE_ORDER_SUCCESS = "New order added: %1$s";
     public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the address book";
-    private static final String MESSAGE_NO_PERSON_FOUND = "No person found with the same phone number, " +
-            "please enter a valid phone number.";
+    private static final String MESSAGE_NO_PERSON_FOUND = "No person found with the same phone number, "
+            + "please enter a valid phone number.";
 
     private final Details details;
     private final Phone phone;
@@ -45,7 +45,7 @@ public class AddOrderCommand extends Command {
      * Creates an AddOrderCommand to add the specified {@code Order}
      */
     public AddOrderCommand(Details details, Phone phone) {
-        requireAllNonNull(details,phone);
+        requireAllNonNull(details, phone);
         this.details = details;
         this.phone = phone;
     }
@@ -73,7 +73,7 @@ public class AddOrderCommand extends Command {
         }
         Person p = filteredPersons.get(0);
         UUID uuid = p.getUuid();
-        Order toAdd = new Order(details,uuid);
+        Order toAdd = new Order(details, uuid);
         return toAdd;
     }
 

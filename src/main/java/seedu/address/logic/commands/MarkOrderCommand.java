@@ -13,7 +13,6 @@ import seedu.address.model.Model;
 import seedu.address.model.order.Complete;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Phone;
 
 public class MarkOrderCommand extends Command {
 

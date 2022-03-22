@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.order.Complete;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -25,6 +24,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String UUID_MESSAGE_CONSTRAINTS = "UUID must contain a valid UUID.";
 
     private final String name;
     private final String phone;
@@ -32,7 +32,6 @@ class JsonAdaptedPerson {
     private final String address;
     private final String uuid;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    public final static String UUID_MESSAGE_CONSTRAINTS = "UUID must contain a valid UUID.";
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.

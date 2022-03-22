@@ -24,7 +24,7 @@ import seedu.address.testutil.OrderBuilder;
 public class AddOrderCommandTest {
     @Test
     public void constructor_nullOrder_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddOrderCommand(null,null));
+        assertThrows(NullPointerException.class, () -> new AddOrderCommand(null, null));
     }
 
     @Test

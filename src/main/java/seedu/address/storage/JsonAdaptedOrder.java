@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,9 +9,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.order.Complete;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Phone;
-
-import java.util.UUID;
 
 /**
  * Jackson-friendly version of {@link Order}.
@@ -70,8 +69,9 @@ class JsonAdaptedOrder {
 
         final UUID modelUuid;
         try {
-           modelUuid = UUID.fromString(uuid);
-        } catch (IllegalArgumentException e) {           throw new IllegalValueException(Complete.MESSAGE_CONSTRAINTS);
+            modelUuid = UUID.fromString(uuid);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(Complete.MESSAGE_CONSTRAINTS);
         }
 
         return new Order(modelDetails, modelComplete, modelUuid);

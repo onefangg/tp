@@ -39,8 +39,11 @@ public class Person {
         this.uuid = UUID.randomUUID();
     }
 
+    /**
+     * Every field must be present and not null.
+     */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, UUID uuid) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, tags, uuid);
         this.name = name;
         this.phone = phone;
         this.email = email;
