@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
@@ -91,9 +92,13 @@ public class EditOrderCommand extends Command {
         Address updatedAddress = editOrderDescriptor.getAddress().orElse(orderToEdit.getAddress());
         Details updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
         Remark updatedRemarks = editOrderDescriptor.getRemark().orElse(orderToEdit.getRemark());
-        DeliveryDateTime updatedDeliveryDateTime = editOrderDescriptor.getDeliveryDateTime().orElse(orderToEdit.getDeliveryDateTime());
+        DeliveryDateTime updatedDeliveryDateTime = editOrderDescriptor.getDeliveryDateTime()
+                .orElse(orderToEdit.getDeliveryDateTime());
+        CollectionType updatedCollectionType = editOrderDescriptor.getCollectionType()
+                .orElse(orderToEdit.getCollectionType());
 
-        return new Order(updatedName, updatedPhone, updatedAddress, updatedRemarks, updatedDetails, updatedDeliveryDateTime);
+        return new Order(updatedName, updatedPhone, updatedAddress, updatedRemarks, updatedDetails,
+                updatedDeliveryDateTime, updatedCollectionType);
     }
 
     @Override
@@ -125,6 +130,7 @@ public class EditOrderCommand extends Command {
         private Details details;
         private Remark remark;
         private DeliveryDateTime deliveryDateTime;
+        private CollectionType collectionType;
 
         public EditOrderDescriptor() {}
 
@@ -139,13 +145,14 @@ public class EditOrderCommand extends Command {
             setDetails(toCopy.details);
             setRemark(toCopy.remark);
             setDeliveryDateTime(toCopy.deliveryDateTime);
+            setCollectionType(toCopy.collectionType);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address, details, remark, deliveryDateTime);
+            return CollectionUtil.isAnyNonNull(name, phone, address, details, remark, deliveryDateTime, collectionType);
         }
 
         public void setName(Name name) {
@@ -196,6 +203,13 @@ public class EditOrderCommand extends Command {
             return Optional.ofNullable(deliveryDateTime);
         }
 
+        public void setCollectionType(CollectionType collectionType) {
+            this.collectionType = collectionType;
+        }
+
+        public Optional<CollectionType> getCollectionType() {
+            return Optional.ofNullable(collectionType);
+        }
 
         @Override
         public boolean equals(Object other) {
@@ -217,7 +231,8 @@ public class EditOrderCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getDetails().equals(e.getDetails())
                     && getRemark().equals(e.getRemark())
-                    && getDeliveryDateTime().equals(e.getDeliveryDateTime());
+                    && getDeliveryDateTime().equals(e.getDeliveryDateTime())
+                    && getCollectionType().equals(e.getCollectionType());
         }
     }
 }

@@ -2,7 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COLLECTION_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERYDATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -21,13 +27,17 @@ public class AddOrderCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_REMARK + "REMARK "
-            + PREFIX_DETAILS + "DETAILS \n"
+            + PREFIX_DETAILS + "DETAILS "
+            + PREFIX_DELIVERYDATETIME + "DELIVERYDATETIME "
+            + PREFIX_COLLECTION_TYPE + "COLLECTION_TYPE \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Tom "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_ADDRESS + "Tom and Jerry's House CA94114, San Francisco, 3650 21st St "
             + PREFIX_REMARK + "Add Cheese "
-            + PREFIX_DETAILS + "1x Jerry Favourite Cheese Cake";
+            + PREFIX_DETAILS + "1x Jerry Favourite Cheese Cake"
+            + PREFIX_DELIVERYDATETIME + "25-12-2022 15:30"
+            + PREFIX_COLLECTION_TYPE + "Delivery";
 
     public static final String MESSAGE_ORDER_SUCCESS = "New order added: %1$s";
     public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the address book";

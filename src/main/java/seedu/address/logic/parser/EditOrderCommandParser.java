@@ -2,7 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COLLECTION_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERYDATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditOrderCommand;
@@ -22,7 +28,7 @@ public class EditOrderCommandParser implements Parser<EditOrderCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS,
-                        PREFIX_DETAILS, PREFIX_REMARK, PREFIX_DELIVERYDATETIME);
+                        PREFIX_DETAILS, PREFIX_REMARK, PREFIX_DELIVERYDATETIME, PREFIX_COLLECTION_TYPE);
 
         Index index;
 
@@ -52,7 +58,12 @@ public class EditOrderCommandParser implements Parser<EditOrderCommand> {
             editOrderDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
         }
         if (argMultimap.getValue(PREFIX_DELIVERYDATETIME).isPresent()) {
-            editOrderDescriptor.setDeliveryDateTime(ParserUtil.parseDeliveryDateTime(argMultimap.getValue(PREFIX_DELIVERYDATETIME).get()));
+            editOrderDescriptor.setDeliveryDateTime(ParserUtil.parseDeliveryDateTime(
+                    argMultimap.getValue(PREFIX_DELIVERYDATETIME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_COLLECTION_TYPE).isPresent()) {
+            editOrderDescriptor.setCollectionType(ParserUtil.parseCollectionType(
+                    argMultimap.getValue(PREFIX_COLLECTION_TYPE).get()));
         }
 
         if (!editOrderDescriptor.isAnyFieldEdited()) {

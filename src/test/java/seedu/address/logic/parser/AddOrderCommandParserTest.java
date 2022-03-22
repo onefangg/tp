@@ -3,8 +3,15 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.COLLECTION_TYPE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.COLLECTION_TYPE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DELIVERYDATETIME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DELIVERYDATETIME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_COLLECTIONTYPE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERYDATETIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -13,7 +20,10 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COLLECTIONTYPE_AMY_STRING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERYDATETIME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -24,6 +34,8 @@ import static seedu.address.testutil.TypicalOrders.AMY;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddOrderCommand;
+import seedu.address.model.order.CollectionType;
+import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
@@ -40,19 +52,39 @@ public class AddOrderCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY
-                + ADDRESS_DESC_AMY + DETAILS_DESC_AMY, new AddOrderCommand(expectedOrder));
+                + ADDRESS_DESC_AMY + DETAILS_DESC_AMY + REMARK_DESC_AMY
+                + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY, new AddOrderCommand(expectedOrder));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_BOB + NAME_DESC_AMY + PHONE_DESC_AMY
-                + ADDRESS_DESC_AMY + DETAILS_DESC_AMY, new AddOrderCommand(expectedOrder));
+                + ADDRESS_DESC_AMY + DETAILS_DESC_AMY + REMARK_DESC_AMY
+                + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY, new AddOrderCommand(expectedOrder));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_BOB + PHONE_DESC_AMY
-                + ADDRESS_DESC_AMY + DETAILS_DESC_AMY, new AddOrderCommand(expectedOrder));
+                + ADDRESS_DESC_AMY + DETAILS_DESC_AMY + REMARK_DESC_AMY
+                + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY, new AddOrderCommand(expectedOrder));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_BOB
-                + ADDRESS_DESC_AMY + DETAILS_DESC_AMY, new AddOrderCommand(expectedOrder));
+                + ADDRESS_DESC_AMY + DETAILS_DESC_AMY + REMARK_DESC_AMY
+                + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY, new AddOrderCommand(expectedOrder));
+
+        // multiple details - last detail accepted
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
+                + DETAILS_DESC_BOB + DETAILS_DESC_AMY + REMARK_DESC_AMY
+                + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY, new AddOrderCommand(expectedOrder));
+
+        // multiple deliveryDateTime - last deliveryDateTime accepted
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
+                + DETAILS_DESC_AMY + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_BOB
+                + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY, new AddOrderCommand(expectedOrder));
+
+        // multiple collectionType - last collectionType accepted
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
+                + DETAILS_DESC_AMY + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_AMY
+                + COLLECTION_TYPE_DESC_BOB + COLLECTION_TYPE_DESC_AMY, new AddOrderCommand(expectedOrder));
+
     }
 
     @Test
@@ -60,23 +92,38 @@ public class AddOrderCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddOrderCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + DETAILS_DESC_AMY,
+        assertParseFailure(parser, VALID_NAME_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + DETAILS_DESC_AMY
+                         + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY,
                 expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_AMY + VALID_PHONE_AMY + ADDRESS_DESC_AMY + DETAILS_DESC_AMY,
+        assertParseFailure(parser, NAME_DESC_AMY + VALID_PHONE_AMY + ADDRESS_DESC_AMY + DETAILS_DESC_AMY
+                         + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY,
                 expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + VALID_ADDRESS_AMY + DETAILS_DESC_AMY,
+        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + VALID_ADDRESS_AMY + DETAILS_DESC_AMY
+                         + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY,
                 expectedMessage);
 
         // missing details prefix
-        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + VALID_DETAILS_AMY,
+        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + VALID_DETAILS_AMY
+                         + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY,
+                expectedMessage);
+
+        // missing deliverydatetime prefix
+        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + DETAILS_DESC_AMY
+                         + VALID_DELIVERYDATETIME_AMY + COLLECTION_TYPE_DESC_AMY,
+                expectedMessage);
+
+        // missing collectionType prefix
+        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + DETAILS_DESC_AMY
+                         + DELIVERYDATETIME_DESC_AMY + VALID_COLLECTIONTYPE_AMY_STRING,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_AMY + VALID_PHONE_AMY + VALID_ADDRESS_AMY + VALID_DETAILS_AMY,
+        assertParseFailure(parser, VALID_NAME_AMY + VALID_PHONE_AMY + VALID_ADDRESS_AMY + VALID_DETAILS_AMY
+                        + VALID_DELIVERYDATETIME_AMY + VALID_COLLECTIONTYPE_AMY_STRING,
                 expectedMessage);
     }
 
@@ -84,19 +131,33 @@ public class AddOrderCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_AMY + ADDRESS_DESC_AMY
-                + DETAILS_DESC_AMY, Name.MESSAGE_CONSTRAINTS);
+                + DETAILS_DESC_AMY + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_AMY
+                + COLLECTION_TYPE_DESC_AMY, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_AMY + INVALID_PHONE_DESC + ADDRESS_DESC_AMY
-                + DETAILS_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+                + DETAILS_DESC_AMY + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_AMY
+                + COLLECTION_TYPE_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_ADDRESS_DESC
-                + DETAILS_DESC_AMY, Address.MESSAGE_CONSTRAINTS);
+                + DETAILS_DESC_AMY + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_AMY
+                + COLLECTION_TYPE_DESC_AMY, Address.MESSAGE_CONSTRAINTS);
+
+        // invalid deliveryDateTime
+        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
+                + DETAILS_DESC_AMY + REMARK_DESC_AMY + INVALID_DELIVERYDATETIME_DESC
+                + COLLECTION_TYPE_DESC_AMY, DeliveryDateTime.MESSAGE_CONSTRAINTS);
+
+        // invalid collectionType
+        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
+                + DETAILS_DESC_AMY + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_AMY
+                + INVALID_COLLECTIONTYPE_DESC, CollectionType.MESSAGE_CONSTRAINTS);
 
         // two invalid values - only first invalid value
         assertParseFailure(parser, INVALID_NAME_DESC + INVALID_PHONE_DESC + ADDRESS_DESC_AMY
-                + DETAILS_DESC_AMY, Name.MESSAGE_CONSTRAINTS);
+                + DETAILS_DESC_AMY + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_AMY
+                + COLLECTION_TYPE_DESC_AMY, Name.MESSAGE_CONSTRAINTS);
 
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_AMY + PHONE_DESC_AMY
             + DETAILS_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddOrderCommand.MESSAGE_USAGE));

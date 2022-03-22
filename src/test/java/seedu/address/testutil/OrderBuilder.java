@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.Complete;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
@@ -17,6 +18,7 @@ public class OrderBuilder {
     public static final String DEFAULT_DETAILS = "1xchocolatemuffin";
     public static final String DEFAULT_REMARK = "Add more chocolate";
     public static final String DEFAULT_DELIVERYDATETIME = "10-12-2022 17:00";
+    public static final CollectionType DEFAULT_COLLECTIONTYPE = CollectionType.DELIVERY;
     public static final Boolean DEFAULT_COMPLETE = false;
 
     private Name name;
@@ -25,6 +27,7 @@ public class OrderBuilder {
     private Remark remark;
     private Details details;
     private DeliveryDateTime deliveryDateTime;
+    private CollectionType collectionType;
     private Complete complete;
 
     /**
@@ -37,6 +40,7 @@ public class OrderBuilder {
         remark = new Remark(DEFAULT_REMARK);
         details = new Details(DEFAULT_DETAILS);
         deliveryDateTime = new DeliveryDateTime(DEFAULT_DELIVERYDATETIME);
+        collectionType = DEFAULT_COLLECTIONTYPE;
         complete = new Complete(DEFAULT_COMPLETE);
     }
 
@@ -50,6 +54,7 @@ public class OrderBuilder {
         remark = orderToCopy.getRemark();
         details = orderToCopy.getDetails();
         deliveryDateTime = orderToCopy.getDeliveryDateTime();
+        collectionType = orderToCopy.getCollectionType();
         complete = orderToCopy.getComplete();
     }
 
@@ -102,6 +107,14 @@ public class OrderBuilder {
     }
 
     /**
+     * Sets the {@code collectionType} of the {@code Order} that we are building.
+     */
+    public OrderBuilder withCollectionType(CollectionType collectionType) {
+        this.collectionType = collectionType;
+        return this;
+    }
+
+    /**
      * Sets the {@code Complete} of the {@code Order} that we are building.
      */
     public OrderBuilder withComplete(Boolean complete) {
@@ -110,6 +123,6 @@ public class OrderBuilder {
     }
 
     public Order build() {
-        return new Order(name, phone, address, remark, details, deliveryDateTime, complete);
+        return new Order(name, phone, address, remark, details, deliveryDateTime, collectionType, complete);
     }
 }

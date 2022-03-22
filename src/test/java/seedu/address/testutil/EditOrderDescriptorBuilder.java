@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditOrderCommand.EditOrderDescriptor;
+import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
@@ -34,6 +35,7 @@ public class EditOrderDescriptorBuilder {
         descriptor.setAddress(order.getAddress());
         descriptor.setDetails(order.getDetails());
         descriptor.setDeliveryDateTime(order.getDeliveryDateTime());
+        descriptor.setCollectionType(order.getCollectionType());
         descriptor.setRemark(order.getRemark());
     }
 
@@ -77,6 +79,13 @@ public class EditOrderDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code CollectionType} of the {@code EditOrderDescriptor} that we are building.
+     */
+    public EditOrderDescriptorBuilder withCollectionType(CollectionType collectionType) {
+        descriptor.setCollectionType(collectionType);
+        return this;
+    }
 
     /**
      * Sets the {@code Details} of the {@code EditOrderDescriptor} that we are building.

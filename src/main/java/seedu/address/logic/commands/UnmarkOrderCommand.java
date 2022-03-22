@@ -9,6 +9,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.Complete;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
@@ -67,9 +68,11 @@ public class UnmarkOrderCommand extends Command {
         Remark updatedRemark = orderToUnmark.getRemark();
         Details updatedDetails = orderToUnmark.getDetails();
         DeliveryDateTime updatedDeliveryDateTime = orderToUnmark.getDeliveryDateTime();
+        CollectionType updatedCollectionType = orderToUnmark.getCollectionType();
         Complete updatedComplete = new Complete(false);
 
-        return new Order(updatedName, updatedPhone, updatedAddress, updatedRemark, updatedDetails, updatedDeliveryDateTime, updatedComplete);
+        return new Order(updatedName, updatedPhone, updatedAddress, updatedRemark, updatedDetails,
+                updatedDeliveryDateTime, updatedCollectionType, updatedComplete);
 
     }
 

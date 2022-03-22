@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.person.Address;
@@ -143,6 +144,30 @@ public class ParserUtil {
             throw new ParseException(DeliveryDateTime.MESSAGE_CONSTRAINTS);
         }
         return new DeliveryDateTime(trimmedDeliveryDateTime);
+    }
+
+    /**
+     * Parses a {@code String collectionType} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code collectionType} is invalid.
+     *
+     */
+    public static CollectionType parseCollectionType(String collectionType) throws ParseException {
+        requireNonNull(collectionType);
+        String trimmedCollectionType = collectionType.trim();
+        String trimmedCollectionTypeCapital = trimmedCollectionType.substring(0, 1).toUpperCase()
+                + trimmedCollectionType.substring(1).toLowerCase(); // Make it Capitalised
+        if (!CollectionType.isValidCollectionTypeValue(trimmedCollectionTypeCapital)) {
+            throw new ParseException(CollectionType.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedCollectionTypeCapital.equals(CollectionType.DELIVERY.getValue())) {
+            return CollectionType.DELIVERY;
+        } else if (trimmedCollectionTypeCapital.equals(CollectionType.PICKUP.getValue())) {
+            return CollectionType.PICKUP;
+        } else {
+            throw new ParseException(CollectionType.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**

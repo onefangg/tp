@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.Complete;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
@@ -26,15 +27,20 @@ class JsonAdaptedOrder {
     private final String remark;
     private final String details;
     private final String deliveryDateTime;
+    private final String collectionType;
     private final String complete;
 
     /**
      * Constructs a {@code JsonAdaptedOrder} with the given order details.
      */
     @JsonCreator
-    public JsonAdaptedOrder(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("address") String address, @JsonProperty("remark") String remark,
-                            @JsonProperty("details") String details, @JsonProperty("deliveryDateTime") String deliveryDateTime,
+    public JsonAdaptedOrder(@JsonProperty("name") String name,
+                            @JsonProperty("phone") String phone,
+                             @JsonProperty("address") String address,
+                            @JsonProperty("remark") String remark,
+                            @JsonProperty("details") String details,
+                            @JsonProperty("deliveryDateTime") String deliveryDateTime,
+                            @JsonProperty("collectionType") String collectionType,
                             @JsonProperty("complete") String complete) {
         this.name = name;
         this.phone = phone;
@@ -42,6 +48,7 @@ class JsonAdaptedOrder {
         this.remark = remark;
         this.details = details;
         this.deliveryDateTime = deliveryDateTime;
+        this.collectionType = collectionType;
         this.complete = complete;
     }
 
@@ -55,6 +62,7 @@ class JsonAdaptedOrder {
         remark = source.getRemark().value;
         details = source.getDetails().value;
         deliveryDateTime = source.getDeliveryDateTime().toJsonSavedString();
+        collectionType = source.getCollectionType().value;
         complete = source.getComplete().value.toString();
 
     }
@@ -100,12 +108,30 @@ class JsonAdaptedOrder {
         final Details modelDetails = new Details(details);
 
         if (deliveryDateTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryDateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DeliveryDateTime.class.getSimpleName()));
         }
         if (!DeliveryDateTime.isValidDeliveryDateTime(deliveryDateTime)) {
             throw new IllegalValueException(DeliveryDateTime.MESSAGE_CONSTRAINTS);
         }
         final DeliveryDateTime modelDeliveryDateTime = new DeliveryDateTime(deliveryDateTime);
+
+        if (collectionType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    CollectionType.class.getSimpleName()));
+        }
+        if (!CollectionType.isValidCollectionTypeValue(collectionType)) {
+            throw new IllegalValueException(CollectionType.MESSAGE_CONSTRAINTS);
+        }
+
+        final CollectionType modelCollectionType;
+        if (collectionType.equals(CollectionType.DELIVERY.getValue())) {
+            modelCollectionType = CollectionType.DELIVERY;
+        } else if (collectionType.equals(CollectionType.PICKUP.getValue())) {
+            modelCollectionType = CollectionType.PICKUP;
+        } else {
+            throw new IllegalValueException(CollectionType.MESSAGE_CONSTRAINTS);
+        }
 
         if (complete == null) {
             throw new IllegalValueException(
@@ -117,7 +143,8 @@ class JsonAdaptedOrder {
         }
         final Complete modelComplete = new Complete(complete);
 
-        return new Order(modelName, modelPhone, modelAddress, modelRemark, modelDetails, modelDeliveryDateTime, modelComplete);
+        return new Order(modelName, modelPhone, modelAddress, modelRemark, modelDetails,
+                modelDeliveryDateTime, modelCollectionType, modelComplete);
     }
 
 }

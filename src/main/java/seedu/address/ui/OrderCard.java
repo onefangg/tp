@@ -40,6 +40,8 @@ public class OrderCard extends UiPart<Region> {
     @FXML
     private Label deliveryDateTime;
     @FXML
+    private Label collectionType;
+    @FXML
     private Label complete;
 
     /**
@@ -55,6 +57,7 @@ public class OrderCard extends UiPart<Region> {
         remark.setText(order.getRemark().value);
         details.setText(order.getDetails().value);
         deliveryDateTime.setText(order.getDeliveryDateTime().toString());
+        collectionType.setText(order.getCollectionType().getValue());
         complete.setText(order.getComplete().toString());
     }
 

@@ -25,12 +25,14 @@ public class Order {
     private final Details details;
     private final DeliveryDateTime deliveryDateTime;
     private final Complete complete;
+    private final CollectionType collectionType;
 
     /**
      * Every field must be present and not null.
      */
-    public Order(Name name, Phone phone, Address address, Remark remark, Details details, DeliveryDateTime deliveryDateTime) {
-        requireAllNonNull(name, phone, address, remark, details, deliveryDateTime);
+    public Order(Name name, Phone phone, Address address, Remark remark, Details details,
+                 DeliveryDateTime deliveryDateTime, CollectionType collectionType) {
+        requireAllNonNull(name, phone, address, remark, details, deliveryDateTime, collectionType);
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -38,19 +40,25 @@ public class Order {
         this.details = details;
         this.complete = new Complete(false);
         this.deliveryDateTime = deliveryDateTime;
+        this.collectionType = collectionType;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Order(Name name, Phone phone, Address address, Remark remark, Details details, DeliveryDateTime deliveryDateTime, Complete complete) {
-        requireAllNonNull(name, phone, address, remark, details, deliveryDateTime, complete);
+    public Order(Name name, Phone phone, Address address, Remark remark, Details details,
+                 DeliveryDateTime deliveryDateTime, CollectionType collectionType, Complete complete) {
+
+
+        requireAllNonNull(name, phone, address, remark, details, deliveryDateTime, collectionType, complete);
+
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.remark = remark;
         this.details = details;
         this.deliveryDateTime = deliveryDateTime;
+        this.collectionType = collectionType;
         this.complete = complete;
     }
 
@@ -80,6 +88,10 @@ public class Order {
         return complete;
     }
 
+    public CollectionType getCollectionType() {
+        return collectionType;
+    }
+
     /**
      * Returns true if both orders have the same identity and data fields.
      * This defines a stronger notion of equality between two orders.
@@ -101,13 +113,13 @@ public class Order {
                 && otherOrder.getRemark().equals(getRemark())
                 && otherOrder.getDetails().equals(getDetails())
                 && otherOrder.getDeliveryDateTime().equals(getDeliveryDateTime())
-                ;
+                && otherOrder.getCollectionType().equals(getCollectionType());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, remark, details, deliveryDateTime);
+        return Objects.hash(name, phone, address, remark, details, deliveryDateTime, collectionType);
     }
 
     @Override
@@ -124,6 +136,8 @@ public class Order {
                 .append(getDetails())
                 .append("; Delivery Date: ")
                 .append(getDeliveryDateTime())
+                .append("; Collection Type: ")
+                .append(getCollectionType())
                 .append("; Complete: ")
                 .append(getComplete());
 

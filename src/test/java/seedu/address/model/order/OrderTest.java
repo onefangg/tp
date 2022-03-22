@@ -2,7 +2,12 @@ package seedu.address.model.order;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERYDATETIME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.testutil.TypicalOrders.EMILY;
 import static seedu.address.testutil.TypicalOrders.SIMON;
 
@@ -54,6 +59,9 @@ public class OrderTest {
         editedEmily = new OrderBuilder(EMILY).withDetails(VALID_DELIVERYDATETIME_BOB).build();
         assertFalse(EMILY.equals(editedEmily));
 
+        // different collectionType -> returns false
+        editedEmily = new OrderBuilder(EMILY).withCollectionType(CollectionType.PICKUP).build();
+        assertFalse(EMILY.equals(editedEmily));
 
     }
 }
