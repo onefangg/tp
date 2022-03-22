@@ -16,4 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DELIVERYDATETIME = new Prefix("c/");
 
 
+    public static final Prefix PREFIX_BLANK = new Prefix("");
+
 }
