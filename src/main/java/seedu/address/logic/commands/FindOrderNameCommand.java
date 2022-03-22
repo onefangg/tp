@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.order.OrderPhoneContainsKeywordsPredicate;
+import seedu.address.model.order.OrderUuidContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -27,8 +27,8 @@ public class FindOrderNameCommand extends FindOrderCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         List<Person> filteredList = model.getFilteredPersonList().filtered(predicate);
-        String[] phoneKeywords = filteredList.stream().map(person->person.getPhone().value).toArray(String[]::new);
-        model.updateFilteredOrderList(new OrderPhoneContainsKeywordsPredicate(Arrays.asList(phoneKeywords)));
+        String[] uuidKeywords = filteredList.stream().map(person->person.getUuid().toString()).toArray(String[]::new);
+        model.updateFilteredOrderList(new OrderUuidContainsKeywordsPredicate(Arrays.asList(uuidKeywords)));
         return new CommandResult(
                 String.format(Messages.MESSAGE_ORDERS_LISTED_OVERVIEW, model.getFilteredOrderList().size()),
                 true, false);

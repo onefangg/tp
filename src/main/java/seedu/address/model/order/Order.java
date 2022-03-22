@@ -14,7 +14,6 @@ import seedu.address.model.person.Phone;
 public class Order {
 
     // Identity fields
-    private final Phone phone;
     private final UUID uuid;
 
     // Data fields
@@ -24,9 +23,8 @@ public class Order {
     /**
      * Every field must be present and not null.
      */
-    public Order(Phone phone, Details details, UUID uuid) {
-        requireAllNonNull(phone, details);
-        this.phone = phone;
+    public Order(Details details, UUID uuid) {
+        requireAllNonNull(uuid, details);
         this.details = details;
         this.complete = new Complete(false);
         this.uuid = uuid;
@@ -35,16 +33,11 @@ public class Order {
     /**
      * Every field must be present and not null.
      */
-    public Order(Phone phone, Details details, Complete complete, UUID uuid) {
-        requireAllNonNull(phone, details, complete);
-        this.phone = phone;
+    public Order(Details details, Complete complete, UUID uuid) {
+        requireAllNonNull(uuid, details, complete);
         this.details = details;
         this.complete = complete;
         this.uuid = uuid;
-    }
-
-    public Phone getPhone() {
-        return phone;
     }
 
     public Details getDetails() {
@@ -75,22 +68,20 @@ public class Order {
         }
 
         Order otherOrder = (Order) other;
-        return otherOrder.getPhone().equals(getPhone())
+        return otherOrder.getUuid().equals(getUuid())
                 && otherOrder.getDetails().equals(getDetails());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(phone, details, complete);
+        return Objects.hash(uuid, details, complete);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Phone: ")
-                .append(getPhone())
-                .append("; Details: ")
+        builder.append("; Details: ")
                 .append(getDetails())
                 .append("; Complete: ")
                 .append(getComplete());

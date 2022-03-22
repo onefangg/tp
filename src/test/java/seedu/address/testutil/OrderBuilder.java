@@ -5,40 +5,43 @@ import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Phone;
 
+import java.util.UUID;
+
 public class OrderBuilder {
 
-    public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_DETAILS = "1xchocolatemuffin";
     public static final String DEFAULT_COMPLETE = "false";
+    public static final String DEFAULT_UUID = "c6a8669e-ee95-4c42-9ef6-4a9b61380164";
+    public static final String DEFAULT_PHONE = "85355255";
 
-    private Phone phone;
     private Details details;
     private Complete complete;
+    private UUID uuid;
 
     /**
      * Creates a {@code OrderBuilder} with the default details.
      */
     public OrderBuilder() {
-        phone = new Phone(DEFAULT_PHONE);
         details = new Details(DEFAULT_DETAILS);
         complete = new Complete(DEFAULT_COMPLETE);
+        uuid = UUID.fromString(DEFAULT_UUID);
     }
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public OrderBuilder(Order orderToCopy) {
-        phone = orderToCopy.getPhone();
+        uuid = orderToCopy.getUuid();
         details = orderToCopy.getDetails();
         complete = orderToCopy.getComplete();
     }
 
 
     /**
-     * Sets the {@code Phone} of the {@code Order} that we are building.
+     * Sets the {@code UUID} of the {@code Order} that we are building.
      */
-    public OrderBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+    public OrderBuilder withUuid(String uuid) {
+        this.uuid = UUID.fromString(uuid);
         return this;
     }
 
@@ -59,6 +62,6 @@ public class OrderBuilder {
     }
 
     public Order build() {
-        return new Order(phone, details, complete);
+        return new Order(details, complete, uuid);
     }
 }

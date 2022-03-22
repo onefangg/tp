@@ -25,17 +25,9 @@ public class EditOrderDescriptorBuilder {
      */
     public EditOrderDescriptorBuilder(Order order) {
         descriptor = new EditOrderDescriptor();
-        descriptor.setPhone(order.getPhone());
         descriptor.setDetails(order.getDetails());
     }
 
-    /**
-     * Sets the {@code Phone} of the {@code EditOrderDescriptor} that we are building.
-     */
-    public EditOrderDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
-        return this;
-    }
 
     /**
      * Sets the {@code Details} of the {@code EditOrderDescriptor} that we are building.

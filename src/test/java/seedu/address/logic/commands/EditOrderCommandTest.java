@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY_ORDER;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB_ORDER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertOrderCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showOrderAtIndex;
@@ -52,11 +53,11 @@ public class EditOrderCommandTest {
         Order lastOrder = model.getFilteredOrderList().get(indexLastOrder.getZeroBased());
 
         OrderBuilder orderInList = new OrderBuilder(lastOrder);
-        Order editedOrder = orderInList.withPhone(VALID_PHONE_BOB)
+        Order editedOrder = orderInList
                 .withDetails(VALID_DETAILS_BOB).build();
 
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder()
-                .withPhone(VALID_PHONE_BOB).withDetails(VALID_DETAILS_BOB).build();
+                .withDetails(VALID_DETAILS_BOB).build();
 
         EditOrderCommand editOrderCommand = new EditOrderCommand(indexLastOrder, descriptor);
 

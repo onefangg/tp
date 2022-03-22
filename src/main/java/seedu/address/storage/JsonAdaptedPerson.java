@@ -32,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String uuid;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    public final static String UUID_MESSAGE_CONSTRAINTS = "UUID must contain a valid UUID.";
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -109,11 +110,14 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
+        if (uuid == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, UUID.class.getSimpleName()));
+        }
         final UUID modelUuid;
         try {
             modelUuid = UUID.fromString(uuid);
         } catch (IllegalArgumentException e) {
-            throw new IllegalValueException(Complete.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(UUID_MESSAGE_CONSTRAINTS);
         }
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelUuid);

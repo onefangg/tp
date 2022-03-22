@@ -31,7 +31,6 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Details details = ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS).get());
 
-        //Order order = new Order(phone, details);
 
         return new AddOrderCommand(details,phone);
     }

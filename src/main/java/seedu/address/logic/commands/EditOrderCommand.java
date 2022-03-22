@@ -30,10 +30,8 @@ public class EditOrderCommand extends Command {
             + "by the index number used in the displayed order list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_PHONE + "PHONE "
             + PREFIX_DETAILS + "DETAILS "
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "98765432 "
             + PREFIX_DETAILS + "1x Jerry Favourite Cheese Cake";
 
     public static final String MESSAGE_EDIT_ORDER_SUCCESS = "Edited Order: %1$s";
@@ -78,12 +76,11 @@ public class EditOrderCommand extends Command {
     private static Order createEditedOrder(Order orderToEdit, EditOrderDescriptor editOrderDescriptor) {
         assert orderToEdit != null;
 
-        Phone updatedPhone = editOrderDescriptor.getPhone().orElse(orderToEdit.getPhone());
         Details updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
         Complete complete = orderToEdit.getComplete();
         UUID uuid = orderToEdit.getUuid();
 
-        return new Order(updatedPhone, updatedDetails, complete, uuid);
+        return new Order(updatedDetails, complete, uuid);
     }
 
     @Override

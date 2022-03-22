@@ -5,12 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.UuidContainsKeywordsPredicate;
 
 import java.util.ArrayList;
@@ -33,6 +35,8 @@ public class AddOrderCommand extends Command {
 
     public static final String MESSAGE_ORDER_SUCCESS = "New order added: %1$s";
     public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the address book";
+    private static final String MESSAGE_NO_PERSON_FOUND = "No person found with the same phone number, " +
+            "please enter a valid phone number.";
 
     private final Details details;
     private final Phone phone;
@@ -49,11 +53,7 @@ public class AddOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ArrayList<String> phoneKeywords = new ArrayList<String>();
-        phoneKeywords.add(phone.value);
-        Person p = model.getFilteredPersonList().filtered(new UuidContainsKeywordsPredicate(phoneKeywords)).get(0);
-        UUID uuid = p.getUuid();
-        Order toAdd = new Order(phone,details,uuid);
+        Order toAdd = buildOrder(model);
 
         if (model.hasOrder(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ORDER);
@@ -61,6 +61,20 @@ public class AddOrderCommand extends Command {
 
         model.addOrder(toAdd);
         return new CommandResult(String.format(MESSAGE_ORDER_SUCCESS, toAdd), true, false);
+    }
+
+    private Order buildOrder(Model model) throws CommandException {
+        ArrayList<String> phoneKeywords = new ArrayList<String>();
+        phoneKeywords.add(phone.value);
+        FilteredList<Person> filteredPersons = model.getFilteredPersonList()
+                .filtered(new PhoneContainsKeywordsPredicate(phoneKeywords));
+        if (filteredPersons.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_PERSON_FOUND);
+        }
+        Person p = filteredPersons.get(0);
+        UUID uuid = p.getUuid();
+        Order toAdd = new Order(details,uuid);
+        return toAdd;
     }
 
     @Override

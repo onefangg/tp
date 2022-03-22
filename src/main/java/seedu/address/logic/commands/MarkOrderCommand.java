@@ -52,12 +52,11 @@ public class MarkOrderCommand extends Command {
     private Order createMarkedOrder(Order orderToMark) {
         assert orderToMark != null;
 
-        Phone updatedPhone = orderToMark.getPhone();
         Details updatedDetails = orderToMark.getDetails();
         Complete updatedComplete = new Complete(true);
         UUID uuid = orderToMark.getUuid();
 
-        return new Order(updatedPhone, updatedDetails, updatedComplete, uuid);
+        return new Order(updatedDetails, updatedComplete, uuid);
 
     }
 

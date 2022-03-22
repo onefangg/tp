@@ -58,12 +58,11 @@ public class UnmarkOrderCommand extends Command {
     private Order createUnmarkedOrder(Order orderToUnmark) {
         assert orderToUnmark != null;
 
-        Phone updatedPhone = orderToUnmark.getPhone();
         Details updatedDetails = orderToUnmark.getDetails();
         Complete updatedComplete = new Complete(false);
         UUID uuid = orderToUnmark.getUuid();
 
-        return new Order(updatedPhone, updatedDetails, updatedComplete, uuid);
+        return new Order(updatedDetails, updatedComplete, uuid);
 
     }
 

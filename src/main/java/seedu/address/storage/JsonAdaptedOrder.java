@@ -18,7 +18,6 @@ class JsonAdaptedOrder {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Order's %s field is missing!";
 
-    private final String phone;
     private final String details;
     private final String complete;
     private final String uuid;
@@ -27,11 +26,9 @@ class JsonAdaptedOrder {
      * Constructs a {@code JsonAdaptedOrder} with the given order details.
      */
     @JsonCreator
-    public JsonAdaptedOrder(@JsonProperty("phone") String phone,
-                             @JsonProperty("details") String details,
+    public JsonAdaptedOrder(@JsonProperty("details") String details,
                              @JsonProperty("complete") String complete,
                              @JsonProperty("uuid") String uuid) {
-        this.phone = phone;
         this.details = details;
         this.complete = complete;
         this.uuid = uuid;
@@ -41,7 +38,6 @@ class JsonAdaptedOrder {
      * Converts a given {@code Order} into this class for Jackson use.
      */
     public JsonAdaptedOrder(Order source) {
-        phone = source.getPhone().value;
         details = source.getDetails().value;
         complete = source.getComplete().value.toString();
         uuid = source.getUuid().toString();
@@ -54,14 +50,6 @@ class JsonAdaptedOrder {
      * @throws IllegalValueException if there were any data constraints violated in the adapted order.
      */
     public Order toModelType() throws IllegalValueException {
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
-
         if (details == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Details.class.getSimpleName()));
         }
@@ -83,11 +71,10 @@ class JsonAdaptedOrder {
         final UUID modelUuid;
         try {
            modelUuid = UUID.fromString(uuid);
-        } catch (IllegalArgumentException e) {
-           throw new IllegalValueException(Complete.MESSAGE_CONSTRAINTS);
+        } catch (IllegalArgumentException e) {           throw new IllegalValueException(Complete.MESSAGE_CONSTRAINTS);
         }
 
-        return new Order(modelPhone, modelDetails, modelUuid);
+        return new Order(modelDetails, modelComplete, modelUuid);
     }
 
 }

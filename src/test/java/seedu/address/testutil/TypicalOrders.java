@@ -9,17 +9,17 @@ import seedu.address.model.order.Order;
 
 public class TypicalOrders {
     public static final Order EMILY = new OrderBuilder()
-            .withPhone("94231333")
+            .withUuid("237e9877-e79b-12d4-a765-321741963000")
             .withDetails("1xvanillacake")
             .withComplete(false).build();
 
     public static final Order SIMON = new OrderBuilder()
-            .withPhone("94241423")
+            .withUuid("ea3cb232-f297-451c-80d8-c1800fef118f")
             .withDetails("1xchocolatecake")
             .withComplete(false).build();
 
     public static final Order JERRY = new OrderBuilder()
-            .withPhone("91029382")
+            .withUuid("15580af3-4d85-4948-ba35-628962989444")
             .withDetails("1xjerryfavouritecheesecake")
             .withComplete(false).build();
 
