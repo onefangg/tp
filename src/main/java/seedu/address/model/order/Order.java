@@ -3,6 +3,7 @@ package seedu.address.model.order;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.UUID;
 
 import seedu.address.model.person.Phone;
 
@@ -14,6 +15,7 @@ public class Order {
 
     // Identity fields
     private final Phone phone;
+    private final UUID uuid;
 
     // Data fields
     private final Details details;
@@ -22,21 +24,23 @@ public class Order {
     /**
      * Every field must be present and not null.
      */
-    public Order(Phone phone, Details details) {
+    public Order(Phone phone, Details details, UUID uuid) {
         requireAllNonNull(phone, details);
         this.phone = phone;
         this.details = details;
         this.complete = new Complete(false);
+        this.uuid = uuid;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Order(Phone phone, Details details, Complete complete) {
+    public Order(Phone phone, Details details, Complete complete, UUID uuid) {
         requireAllNonNull(phone, details, complete);
         this.phone = phone;
         this.details = details;
         this.complete = complete;
+        this.uuid = uuid;
     }
 
     public Phone getPhone() {
@@ -50,6 +54,11 @@ public class Order {
     public Complete getComplete() {
         return complete;
     }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
 
     /**
      * Returns true if both orders have the same identity and data fields.

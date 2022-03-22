@@ -7,12 +7,14 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.Complete;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Phone;
@@ -78,8 +80,10 @@ public class EditOrderCommand extends Command {
 
         Phone updatedPhone = editOrderDescriptor.getPhone().orElse(orderToEdit.getPhone());
         Details updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
+        Complete complete = orderToEdit.getComplete();
+        UUID uuid = orderToEdit.getUuid();
 
-        return new Order(updatedPhone, updatedDetails);
+        return new Order(updatedPhone, updatedDetails, complete, uuid);
     }
 
     @Override

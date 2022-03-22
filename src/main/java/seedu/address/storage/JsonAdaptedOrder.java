@@ -9,6 +9,8 @@ import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Phone;
 
+import java.util.UUID;
+
 /**
  * Jackson-friendly version of {@link Order}.
  */
@@ -19,6 +21,7 @@ class JsonAdaptedOrder {
     private final String phone;
     private final String details;
     private final String complete;
+    private final String uuid;
 
     /**
      * Constructs a {@code JsonAdaptedOrder} with the given order details.
@@ -26,10 +29,12 @@ class JsonAdaptedOrder {
     @JsonCreator
     public JsonAdaptedOrder(@JsonProperty("phone") String phone,
                              @JsonProperty("details") String details,
-                             @JsonProperty("complete") String complete) {
+                             @JsonProperty("complete") String complete,
+                             @JsonProperty("uuid") String uuid) {
         this.phone = phone;
         this.details = details;
         this.complete = complete;
+        this.uuid = uuid;
     }
 
     /**
@@ -39,6 +44,7 @@ class JsonAdaptedOrder {
         phone = source.getPhone().value;
         details = source.getDetails().value;
         complete = source.getComplete().value.toString();
+        uuid = source.getUuid().toString();
 
     }
 
@@ -74,7 +80,14 @@ class JsonAdaptedOrder {
         }
         final Complete modelComplete = new Complete(complete);
 
-        return new Order(modelPhone, modelDetails, modelComplete);
+        final UUID modelUuid;
+        try {
+           modelUuid = UUID.fromString(uuid);
+        } catch (IllegalArgumentException e) {
+           throw new IllegalValueException(Complete.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Order(modelPhone, modelDetails, modelUuid);
     }
 
 }

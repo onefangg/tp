@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
 
 import java.util.List;
+import java.util.UUID;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -54,8 +55,9 @@ public class MarkOrderCommand extends Command {
         Phone updatedPhone = orderToMark.getPhone();
         Details updatedDetails = orderToMark.getDetails();
         Complete updatedComplete = new Complete(true);
+        UUID uuid = orderToMark.getUuid();
 
-        return new Order(updatedPhone, updatedDetails, updatedComplete);
+        return new Order(updatedPhone, updatedDetails, updatedComplete, uuid);
 
     }
 
