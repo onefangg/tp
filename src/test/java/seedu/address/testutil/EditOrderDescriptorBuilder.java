@@ -1,11 +1,13 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditOrderCommand.EditOrderDescriptor;
+import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 /**
  * A utility class to help with building EditOrderDescriptor objects.
@@ -31,6 +33,8 @@ public class EditOrderDescriptorBuilder {
         descriptor.setPhone(order.getPhone());
         descriptor.setAddress(order.getAddress());
         descriptor.setDetails(order.getDetails());
+        descriptor.setDeliveryDateTime(order.getDeliveryDateTime());
+        descriptor.setRemark(order.getRemark());
     }
 
     /**
@@ -64,6 +68,24 @@ public class EditOrderDescriptorBuilder {
         descriptor.setDetails(new Details(details));
         return this;
     }
+
+    /**
+     * Sets the {@code DeliveryDateTime} of the {@code EditOrderDescriptor} that we are building.
+     */
+    public EditOrderDescriptorBuilder withDeliveryDateTime(String deliveryDateTime) {
+        descriptor.setDeliveryDateTime(new DeliveryDateTime(deliveryDateTime));
+        return this;
+    }
+
+
+    /**
+     * Sets the {@code Details} of the {@code EditOrderDescriptor} that we are building.
+     */
+    public EditOrderDescriptorBuilder withRemark(String remark) {
+        descriptor.setRemark(new Remark(remark));
+        return this;
+    }
+
 
     public EditOrderDescriptor build() {
         return descriptor;
