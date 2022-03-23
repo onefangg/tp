@@ -137,14 +137,14 @@
     -fx-background-color: #F5EDDA;
 }
 
-.result-display {
+.response-display {
     -fx-background-color: #F5EDDA;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: black;
 }
 
-.result-display .label {
+.response-display .label {
     -fx-text-fill: black !important;
 }
 
