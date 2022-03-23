@@ -5,10 +5,8 @@ import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+
 
 /**
  * A utility class to help with building EditOrderDescriptor objects.
@@ -30,38 +28,12 @@ public class EditOrderDescriptorBuilder {
      */
     public EditOrderDescriptorBuilder(Order order) {
         descriptor = new EditOrderDescriptor();
-        descriptor.setName(order.getName());
-        descriptor.setPhone(order.getPhone());
-        descriptor.setAddress(order.getAddress());
         descriptor.setDetails(order.getDetails());
         descriptor.setDeliveryDateTime(order.getDeliveryDateTime());
         descriptor.setCollectionType(order.getCollectionType());
         descriptor.setRemark(order.getRemark());
     }
 
-    /**
-     * Sets the {@code Name} of the {@code EditOrderDescriptor} that we are building.
-     */
-    public EditOrderDescriptorBuilder withName(String name) {
-        descriptor.setName(new Name(name));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Phone} of the {@code EditOrderDescriptor} that we are building.
-     */
-    public EditOrderDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code EditOrderDescriptor} that we are building.
-     */
-    public EditOrderDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
-        return this;
-    }
 
     /**
      * Sets the {@code Details} of the {@code EditOrderDescriptor} that we are building.

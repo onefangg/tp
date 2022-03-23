@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,10 +11,8 @@ import seedu.address.model.order.Complete;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+
 
 /**
  * Jackson-friendly version of {@link Order}.
@@ -21,49 +21,43 @@ class JsonAdaptedOrder {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Order's %s field is missing!";
 
-    private final String name;
-    private final String phone;
-    private final String address;
+
     private final String remark;
     private final String details;
     private final String deliveryDateTime;
     private final String collectionType;
     private final String complete;
+    private final String uuid;
 
     /**
      * Constructs a {@code JsonAdaptedOrder} with the given order details.
      */
     @JsonCreator
-    public JsonAdaptedOrder(@JsonProperty("name") String name,
-                            @JsonProperty("phone") String phone,
-                             @JsonProperty("address") String address,
-                            @JsonProperty("remark") String remark,
+    public JsonAdaptedOrder(@JsonProperty("remark") String remark,
                             @JsonProperty("details") String details,
                             @JsonProperty("deliveryDateTime") String deliveryDateTime,
                             @JsonProperty("collectionType") String collectionType,
-                            @JsonProperty("complete") String complete) {
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
+                            @JsonProperty("complete") String complete,
+                            @JsonProperty("uuid") String uuid) {
         this.remark = remark;
         this.details = details;
         this.deliveryDateTime = deliveryDateTime;
         this.collectionType = collectionType;
         this.complete = complete;
+        this.uuid = uuid;
     }
 
     /**
      * Converts a given {@code Order} into this class for Jackson use.
      */
     public JsonAdaptedOrder(Order source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        address = source.getAddress().value;
+
         remark = source.getRemark().value;
         details = source.getDetails().value;
         deliveryDateTime = source.getDeliveryDateTime().toJsonSavedString();
         collectionType = source.getCollectionType().value;
         complete = source.getComplete().value.toString();
+        uuid = source.getUuid().toString();
 
     }
 
@@ -73,29 +67,6 @@ class JsonAdaptedOrder {
      * @throws IllegalValueException if there were any data constraints violated in the adapted order.
      */
     public Order toModelType() throws IllegalValueException {
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
-
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
-
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
 
         final Remark modelRemark = new Remark(remark);
 
@@ -143,8 +114,15 @@ class JsonAdaptedOrder {
         }
         final Complete modelComplete = new Complete(complete);
 
-        return new Order(modelName, modelPhone, modelAddress, modelRemark, modelDetails,
-                modelDeliveryDateTime, modelCollectionType, modelComplete);
+        final UUID modelUuid;
+        try {
+            modelUuid = UUID.fromString(uuid);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(Complete.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Order(modelRemark, modelDetails, modelDeliveryDateTime,
+                modelCollectionType, modelComplete, modelUuid);
     }
 
 }

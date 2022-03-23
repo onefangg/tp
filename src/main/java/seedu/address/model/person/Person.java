@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.model.tag.Tag;
 
@@ -19,6 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final UUID uuid;
 
     // Data fields
     private final Address address;
@@ -36,6 +38,21 @@ public class Person {
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
+        this.uuid = UUID.randomUUID();
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags, UUID uuid) {
+        requireAllNonNull(name, phone, email, address, tags, uuid);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
+        this.tags.addAll(tags);
+        this.uuid = uuid;
     }
 
     public Name getName() {
@@ -52,6 +69,11 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+
+    public UUID getUuid() {
+        return uuid;
     }
 
     public Remark getRemark() {

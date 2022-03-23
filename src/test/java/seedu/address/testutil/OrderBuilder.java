@@ -1,56 +1,51 @@
 package seedu.address.testutil;
 
+import java.util.UUID;
+
 import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.Complete;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 
 public class OrderBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DETAILS = "1xchocolatemuffin";
+
+    public static final String DEFAULT_COMPLETE = "false";
+    public static final String DEFAULT_UUID = "c6a8669e-ee95-4c42-9ef6-4a9b61380164";
+    public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_REMARK = "Add more chocolate";
     public static final String DEFAULT_DELIVERYDATETIME = "10-12-2022 17:00";
     public static final CollectionType DEFAULT_COLLECTIONTYPE = CollectionType.DELIVERY;
-    public static final Boolean DEFAULT_COMPLETE = false;
 
-    private Name name;
-    private Phone phone;
-    private Address address;
+
     private Remark remark;
     private Details details;
     private DeliveryDateTime deliveryDateTime;
     private CollectionType collectionType;
     private Complete complete;
+    private UUID uuid;
 
     /**
      * Creates a {@code OrderBuilder} with the default details.
      */
     public OrderBuilder() {
-        name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
-        address = new Address(DEFAULT_ADDRESS);
+
         remark = new Remark(DEFAULT_REMARK);
         details = new Details(DEFAULT_DETAILS);
         deliveryDateTime = new DeliveryDateTime(DEFAULT_DELIVERYDATETIME);
         collectionType = DEFAULT_COLLECTIONTYPE;
         complete = new Complete(DEFAULT_COMPLETE);
+        uuid = UUID.fromString(DEFAULT_UUID);
     }
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public OrderBuilder(Order orderToCopy) {
-        name = orderToCopy.getName();
-        phone = orderToCopy.getPhone();
-        address = orderToCopy.getAddress();
+        uuid = orderToCopy.getUuid();
         remark = orderToCopy.getRemark();
         details = orderToCopy.getDetails();
         deliveryDateTime = orderToCopy.getDeliveryDateTime();
@@ -58,27 +53,12 @@ public class OrderBuilder {
         complete = orderToCopy.getComplete();
     }
 
-    /**
-     * Sets the {@code Name} of the {@code Order} that we are building.
-     */
-    public OrderBuilder withName(String name) {
-        this.name = new Name(name);
-        return this;
-    }
 
     /**
-     * Sets the {@code Phone} of the {@code Order} that we are building.
+     * Sets the {@code UUID} of the {@code Order} that we are building.
      */
-    public OrderBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code Order} that we are building.
-     */
-    public OrderBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public OrderBuilder withUuid(String uuid) {
+        this.uuid = UUID.fromString(uuid);
         return this;
     }
 
@@ -122,7 +102,11 @@ public class OrderBuilder {
         return this;
     }
 
+    /**
+     * Builds the {@code Order} according to the attributes given
+     */
     public Order build() {
-        return new Order(name, phone, address, remark, details, deliveryDateTime, collectionType, complete);
+        return new Order(remark, details, deliveryDateTime, collectionType, complete, uuid);
+
     }
 }

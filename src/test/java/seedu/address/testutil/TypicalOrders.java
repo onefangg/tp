@@ -1,15 +1,10 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERYDATETIME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERYDATETIME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,27 +16,24 @@ import seedu.address.model.order.Order;
 
 
 public class TypicalOrders {
-    public static final Order EMILY = new OrderBuilder().withName("Emily Lee")
-            .withAddress("BLK 123 Ang Mo Kio Ave 4, #05-12")
-            .withPhone("94231333")
+    public static final Order EMILY = new OrderBuilder()
+            .withUuid("237e9877-e79b-12d4-a765-321741963000")
             .withDetails("1xvanillacake")
             .withRemark("Allergic to Nuts")
             .withDeliveryDateTime("10-12-2022 09:30")
             .withCollectionType(CollectionType.DELIVERY)
             .withComplete(false).build();
 
-    public static final Order SIMON = new OrderBuilder().withName("Simon Loo")
-            .withAddress("55 Serangoon Avenue 3")
-            .withPhone("94241423")
+    public static final Order SIMON = new OrderBuilder()
+            .withUuid("ea3cb232-f297-451c-80d8-c1800fef118f")
             .withDetails("1xchocolatecake")
             .withRemark("Add Chocolate")
             .withDeliveryDateTime("11-12-2022 19:30")
             .withCollectionType(CollectionType.PICKUP)
             .withComplete(false).build();
 
-    public static final Order JERRY = new OrderBuilder().withName("Jerry Mouse")
-            .withAddress("55 Ang Mo Kio Avenue 38")
-            .withPhone("91029382")
+    public static final Order JERRY = new OrderBuilder()
+            .withUuid("15580af3-4d85-4948-ba35-628962989444")
             .withDetails("1xjerryfavouritecheesecake")
             .withRemark("Allergic to Cheese")
             .withDeliveryDateTime("15-12-2022 20:30")
@@ -50,14 +42,14 @@ public class TypicalOrders {
 
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Order AMY = new OrderBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withDetails(VALID_DETAILS_AMY).withAddress(VALID_ADDRESS_AMY)
+
+    public static final Order AMY = new OrderBuilder().withDetails(VALID_DETAILS_AMY)
             .withDeliveryDateTime(VALID_DELIVERYDATETIME_AMY).withCollectionType(CollectionType.DELIVERY)
             .build();
-    public static final Order BOB = new OrderBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withDetails(VALID_DETAILS_BOB).withAddress(VALID_ADDRESS_BOB)
+    public static final Order BOB = new OrderBuilder().withDetails(VALID_DETAILS_BOB)
             .withDeliveryDateTime(VALID_DELIVERYDATETIME_BOB).withCollectionType(CollectionType.PICKUP)
             .build();
+
 
     private TypicalOrders() {} // prevents instantiation
 

@@ -11,18 +11,28 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ModelStub;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.order.CollectionType;
+import seedu.address.model.order.DeliveryDateTime;
+import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.testutil.OrderBuilder;
-
+import seedu.address.testutil.PersonBuilder;
 
 public class AddOrderCommandTest {
     @Test
     public void constructor_nullOrder_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddOrderCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddOrderCommand(null, null,
+                null, null, null));
     }
 
     @Test
@@ -31,17 +41,23 @@ public class AddOrderCommandTest {
                 .ModelStubAcceptingOrderAdded();
         Order validOrder = new OrderBuilder().build();
 
-        CommandResult commandResult = new AddOrderCommand(validOrder).execute(modelStub);
+        CommandResult commandResult = new AddOrderCommand(new Phone(OrderBuilder.DEFAULT_PHONE),
+                new Remark(OrderBuilder.DEFAULT_REMARK), new Details(OrderBuilder.DEFAULT_DETAILS),
+                new DeliveryDateTime(OrderBuilder.DEFAULT_DELIVERYDATETIME), CollectionType.DELIVERY)
+                .execute(modelStub);
 
         assertEquals(String.format(AddOrderCommand.MESSAGE_ORDER_SUCCESS, validOrder),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validOrder), modelStub.ordersAdded);
+        assertEquals(Arrays.asList(validOrder).toString(), modelStub.ordersAdded.toString());
     }
 
     @Test
     public void execute_duplicateOrder_throwsCommandException() {
-        Order validOrder = new OrderBuilder().build();
-        AddOrderCommand addOrderCommand = new AddOrderCommand(validOrder);
+        Order validOrder = new OrderBuilder().withUuid(PersonBuilder.DEFAULT_UUID).build();
+        AddOrderCommand addOrderCommand = new AddOrderCommand((new Phone(OrderBuilder.DEFAULT_PHONE)),
+                new Remark(OrderBuilder.DEFAULT_REMARK), new Details(OrderBuilder.DEFAULT_DETAILS),
+                new DeliveryDateTime(OrderBuilder.DEFAULT_DELIVERYDATETIME), CollectionType.DELIVERY);
+
         ModelStub modelStub = new AddOrderCommandTest.ModelStubWithOrder(validOrder);
 
         assertThrows(CommandException.class,
@@ -50,16 +66,20 @@ public class AddOrderCommandTest {
 
     @Test
     public void equals() {
-        Order alice = new OrderBuilder().withName("Alice").build();
-        Order bob = new OrderBuilder().withName("Bob").build();
-        AddOrderCommand addAliceOrderCommand = new AddOrderCommand(alice);
-        AddOrderCommand addBobOrderCommand = new AddOrderCommand(bob);
+        AddOrderCommand addAliceOrderCommand = new AddOrderCommand((new Phone(OrderBuilder.DEFAULT_PHONE)),
+                new Remark(OrderBuilder.DEFAULT_REMARK), new Details(OrderBuilder.DEFAULT_DETAILS),
+                new DeliveryDateTime(OrderBuilder.DEFAULT_DELIVERYDATETIME), CollectionType.DELIVERY);
+        AddOrderCommand addBobOrderCommand = new AddOrderCommand((new Phone("12345")),
+                new Remark(OrderBuilder.DEFAULT_REMARK), new Details(OrderBuilder.DEFAULT_DETAILS),
+                new DeliveryDateTime(OrderBuilder.DEFAULT_DELIVERYDATETIME), CollectionType.DELIVERY);
 
         // same object -> returns true
         assertTrue(addAliceOrderCommand.equals(addAliceOrderCommand));
 
         // same values -> returns true
-        AddOrderCommand addAliceOrderCommandCopy = new AddOrderCommand(alice);
+        AddOrderCommand addAliceOrderCommandCopy = new AddOrderCommand((new Phone(OrderBuilder.DEFAULT_PHONE)),
+                new Remark(OrderBuilder.DEFAULT_REMARK), new Details(OrderBuilder.DEFAULT_DETAILS),
+                new DeliveryDateTime(OrderBuilder.DEFAULT_DELIVERYDATETIME), CollectionType.DELIVERY);
         assertTrue(addAliceOrderCommand.equals(addAliceOrderCommandCopy));
 
         // different types -> returns false
@@ -88,6 +108,14 @@ public class AddOrderCommandTest {
             requireNonNull(order);
             return this.order.equals(order);
         }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            ObservableList<Person> list = FXCollections.observableArrayList();
+            list.add(new PersonBuilder().build());
+            FilteredList<Person> filteredPersons = new FilteredList<Person>(list);
+            return filteredPersons;
+        }
     }
 
     /**
@@ -111,6 +139,14 @@ public class AddOrderCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            ObservableList<Person> list = FXCollections.observableArrayList();
+            list.add(new PersonBuilder().build());
+            FilteredList<Person> filteredPersons = new FilteredList<Person>(list);
+            return filteredPersons;
         }
     }
 
