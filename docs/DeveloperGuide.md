@@ -257,6 +257,20 @@ The following sequence diagram illustrates how the `MarkCommand` works:
 
 ![MarkOrderSequence](images/MarkSequenceDiagram.png)
 
+#### Design consideration
+1) `Complete` stores a boolean value.
+   * Boolean value was chosen to keep the implementation simple.
+   * Alternative: Store an Enum containing possible values of `Complete`
+     * Pros: More easily readable.
+     * Cons: Larger implementation.
+   * Boolean chosen due to simple implementation.
+   * Consideration also given to possible extensions, Completion status of an order can only
+ever take 2 values, thus there is no need for an Enum class.
+
+2) Order is still immutable
+   * Creating a marked order will duplicate the current order, while changing the `Complete` attribute
+   * Then, the current order will be replaced with the new order in order to maintain immutability.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
