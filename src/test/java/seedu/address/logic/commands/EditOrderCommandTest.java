@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY_ORDER;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB_ORDER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COLLECTIONTYPE_BOB_TYPE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERYDATETIME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertOrderCommandSuccess;
@@ -52,11 +54,17 @@ public class EditOrderCommandTest {
         Order lastOrder = model.getFilteredOrderList().get(indexLastOrder.getZeroBased());
 
         OrderBuilder orderInList = new OrderBuilder(lastOrder);
+
         Order editedOrder = orderInList
-                .withDetails(VALID_DETAILS_BOB).build();
+                .withDetails(VALID_DETAILS_BOB).withDeliveryDateTime(VALID_DELIVERYDATETIME_BOB)
+                .withCollectionType(VALID_COLLECTIONTYPE_BOB_TYPE).build();
 
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder()
-                .withDetails(VALID_DETAILS_BOB).build();
+                .withDetails(VALID_DETAILS_BOB)
+                .withDeliveryDateTime(VALID_DELIVERYDATETIME_BOB)
+                .withCollectionType(VALID_COLLECTIONTYPE_BOB_TYPE).build();
+
+
 
         EditOrderCommand editOrderCommand = new EditOrderCommand(indexLastOrder, descriptor);
 

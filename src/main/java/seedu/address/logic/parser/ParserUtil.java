@@ -9,11 +9,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.CollectionType;
+import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -82,6 +85,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String remark} into an {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -107,9 +125,49 @@ public class ParserUtil {
         requireNonNull(details);
         String trimmedDetails = details.trim();
         if (!Details.isValidDetails(trimmedDetails)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Details.MESSAGE_CONSTRAINTS);
         }
         return new Details(trimmedDetails);
+    }
+
+    /**
+     * Parses a {@code String deliveryDateTime} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deliveryDateTime} is invalid.
+     *
+     */
+    public static DeliveryDateTime parseDeliveryDateTime(String deliveryDateTime) throws ParseException {
+        requireNonNull(deliveryDateTime);
+        String trimmedDeliveryDateTime = deliveryDateTime.trim();
+        if (!DeliveryDateTime.isValidDeliveryDateTime(trimmedDeliveryDateTime)) {
+            throw new ParseException(DeliveryDateTime.MESSAGE_CONSTRAINTS);
+        }
+        return new DeliveryDateTime(trimmedDeliveryDateTime);
+    }
+
+    /**
+     * Parses a {@code String collectionType} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code collectionType} is invalid.
+     *
+     */
+    public static CollectionType parseCollectionType(String collectionType) throws ParseException {
+        requireNonNull(collectionType);
+        String trimmedCollectionType = collectionType.trim();
+        String trimmedCollectionTypeCapital = trimmedCollectionType.substring(0, 1).toUpperCase()
+                + trimmedCollectionType.substring(1).toLowerCase(); // Make it Capitalised
+        if (!CollectionType.isValidCollectionTypeValue(trimmedCollectionTypeCapital)) {
+            throw new ParseException(CollectionType.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedCollectionTypeCapital.equals(CollectionType.DELIVERY.getValue())) {
+            return CollectionType.DELIVERY;
+        } else if (trimmedCollectionTypeCapital.equals(CollectionType.PICKUP.getValue())) {
+            return CollectionType.PICKUP;
+        } else {
+            throw new ParseException(CollectionType.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**

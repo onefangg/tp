@@ -32,7 +32,7 @@ public class AddOrderCommandTest {
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_orderAcceptedByModel_addSuccessful() throws Exception {
         AddOrderCommandTest.ModelStubAcceptingOrderAdded modelStub = new AddOrderCommandTest
                 .ModelStubAcceptingOrderAdded();
         Order validOrder = new OrderBuilder().build();

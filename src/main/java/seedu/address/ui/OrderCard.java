@@ -35,7 +35,13 @@ public class OrderCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
+    private Label remark;
+    @FXML
     private Label details;
+    @FXML
+    private Label deliveryDateTime;
+    @FXML
+    private Label collectionType;
     @FXML
     private Label complete;
 
@@ -51,6 +57,9 @@ public class OrderCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         details.setText(order.getDetails().value);
         complete.setText(order.getComplete().toString());
+        remark.setText(order.getRemark().value);
+        deliveryDateTime.setText(order.getDeliveryDateTime().toString());
+        collectionType.setText(order.getCollectionType().getValue());
     }
 
     /**
@@ -63,7 +72,10 @@ public class OrderCard extends UiPart<Region> {
         name.setText("Null");
         phone.setText("Null");
         address.setText("Null");
+        remark.setText(order.getRemark().value);
         details.setText(order.getDetails().value);
+        deliveryDateTime.setText(order.getDeliveryDateTime().toString());
+        collectionType.setText(order.getCollectionType().getValue());
         complete.setText(order.getComplete().toString());
     }
 

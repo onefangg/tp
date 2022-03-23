@@ -10,9 +10,13 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.Complete;
+import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
+import seedu.address.model.person.Remark;
+
 
 public class MarkOrderCommand extends Command {
 
@@ -51,11 +55,16 @@ public class MarkOrderCommand extends Command {
     private Order createMarkedOrder(Order orderToMark) {
         assert orderToMark != null;
 
+
+        Remark updatedRemark = orderToMark.getRemark();
         Details updatedDetails = orderToMark.getDetails();
+        DeliveryDateTime updatedDeliveryDateTime = orderToMark.getDeliveryDateTime();
+        CollectionType updatedCollectionType = orderToMark.getCollectionType();
         Complete updatedComplete = new Complete(true);
         UUID uuid = orderToMark.getUuid();
 
-        return new Order(updatedDetails, updatedComplete, uuid);
+        return new Order(updatedRemark, updatedDetails,
+                updatedDeliveryDateTime, updatedCollectionType, updatedComplete, uuid);
 
     }
 

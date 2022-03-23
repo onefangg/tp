@@ -16,6 +16,14 @@ import seedu.address.model.Model;
 import seedu.address.model.order.Complete;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
+import seedu.address.model.order.CollectionType;
+import seedu.address.model.order.DeliveryDateTime;
+import seedu.address.model.order.Details;
+import seedu.address.model.order.Order;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 /**
  * Edits the information of an existing order in the ReadyBakey.
@@ -77,8 +85,14 @@ public class EditOrderCommand extends Command {
         Details updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
         Complete complete = orderToEdit.getComplete();
         UUID uuid = orderToEdit.getUuid();
+        Remark updatedRemarks = editOrderDescriptor.getRemark().orElse(orderToEdit.getRemark());
+        DeliveryDateTime updatedDeliveryDateTime = editOrderDescriptor.getDeliveryDateTime()
+                .orElse(orderToEdit.getDeliveryDateTime());
+        CollectionType updatedCollectionType = editOrderDescriptor.getCollectionType()
+                .orElse(orderToEdit.getCollectionType());
 
-        return new Order(updatedDetails, complete, uuid);
+        return new Order(updatedRemarks, updatedDetails,
+                updatedDeliveryDateTime, updatedCollectionType, complete, uuid);
     }
 
     @Override
@@ -105,6 +119,9 @@ public class EditOrderCommand extends Command {
      */
     public static class EditOrderDescriptor {
         private Details details;
+        private Remark remark;
+        private DeliveryDateTime deliveryDateTime;
+        private CollectionType collectionType;
 
         public EditOrderDescriptor() {}
 
@@ -114,13 +131,16 @@ public class EditOrderCommand extends Command {
          */
         public EditOrderDescriptor(EditOrderDescriptor toCopy) {
             setDetails(toCopy.details);
+            setRemark(toCopy.remark);
+            setDeliveryDateTime(toCopy.deliveryDateTime);
+            setCollectionType(toCopy.collectionType);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(details);
+            return CollectionUtil.isAnyNonNull(details, remark, deliveryDateTime, collectionType);
         }
 
         public void setDetails(Details details) {
@@ -129,6 +149,30 @@ public class EditOrderCommand extends Command {
 
         public Optional<Details> getDetails() {
             return Optional.ofNullable(details);
+        }
+
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
+        public void setDeliveryDateTime(DeliveryDateTime deliveryDateTime) {
+            this.deliveryDateTime = deliveryDateTime;
+        }
+
+        public Optional<DeliveryDateTime> getDeliveryDateTime() {
+            return Optional.ofNullable(deliveryDateTime);
+        }
+
+        public void setCollectionType(CollectionType collectionType) {
+            this.collectionType = collectionType;
+        }
+
+        public Optional<CollectionType> getCollectionType() {
+            return Optional.ofNullable(collectionType);
         }
 
         @Override
@@ -146,7 +190,11 @@ public class EditOrderCommand extends Command {
             // state check
             EditOrderDescriptor e = (EditOrderDescriptor) other;
 
-            return getDetails().equals(e.getDetails());
+
+            return getDetails().equals(e.getDetails())
+                    && getRemark().equals(e.getRemark())
+                    && getDeliveryDateTime().equals(e.getDeliveryDateTime())
+                    && getCollectionType().equals(e.getCollectionType());
         }
     }
 }

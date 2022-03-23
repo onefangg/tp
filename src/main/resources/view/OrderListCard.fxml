@@ -30,7 +30,10 @@
             <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
             <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
             <Label fx:id="details" styleClass="cell_small_label" text="\$details" />
+            <Label fx:id="deliveryDateTime" styleClass="cell_small_label" text="\$deliveryDateTime" />
+            <Label fx:id="collectionType" styleClass="cell_small_label" text="\$collectionType" />
             <Label fx:id="complete" styleClass="cell_small_label" text="\$complete" />
+            <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
         </VBox>
       <rowConstraints>
          <RowConstraints />
