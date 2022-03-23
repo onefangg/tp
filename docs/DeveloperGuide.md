@@ -238,6 +238,39 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Mark/Unmark Feature
+This feature allows users to mark the orders as complete/incomplete.
+#### Implementation
+The mark feature consists of three commands, `MarkCommand` and `UnmarkCommand`.
+Both of the commands extend `Command`. An `Index` parameter is needed to indicate the
+targeted order.
+
+When the commands are executed by calling `Command#execute(Model model)`, the Order
+that is indicated by the `Index`, will have its attribute `Complete` updated to have
+an appropriate boolean value. This is done by calling `model#setOrder(Order target, Order editedOrder)`
+to ensure that `Order` is immutable.
+
+When an invalid input is parsed, a `CommandException` will be thrown and the user will be shown a
+message on the proper usage of the command.
+
+The following sequence diagram illustrates how the `MarkCommand` works:
+
+![MarkOrderSequence](images/MarkSequenceDiagram.png)
+
+#### Design consideration
+1) `Complete` stores a boolean value.
+   * Boolean value was chosen to keep the implementation simple.
+   * Alternative: Store an Enum containing possible values of `Complete`
+     * Pros: More easily readable.
+     * Cons: Larger implementation.
+   * Boolean chosen due to simple implementation.
+   * Consideration also given to possible extensions, Completion status of an order can only
+ever take 2 values, thus there is no need for an Enum class.
+
+2) Order is still immutable
+   * Creating a marked order will duplicate the current order, while changing the `Complete` attribute
+   * Then, the current order will be replaced with the new order in order to maintain immutability.
+
 ### Dynamic Toggling Between Application's Data
 #### Implementation
 Users must be able to view the specific data that they need, without excess data, just by working with the command line. For example, if the user is requesting Order information, they should not be distracted by Person information as well - only Order information can be shown.
@@ -248,11 +281,11 @@ In `MainWindow#executeCommand(String commandText)`, the type of `CommandResult` 
 
 #### Design considerations:
 1. `CommandResult` requires boolean attributes that indicate what kind of command has been executed.
-   * isOrderCommand - boolean  indicating whether the command is related to orders
-   * isPersonCommand - boolean  indicating whether the command is related to persons
-   * isHelpCommand - boolean indicating whether the command is related to getting help
-   * isExitCommand - boolean indicating whether the command is to exit the application
-   
+    * isOrderCommand - boolean  indicating whether the command is related to orders
+    * isPersonCommand - boolean  indicating whether the command is related to persons
+    * isHelpCommand - boolean indicating whether the command is related to getting help
+    * isExitCommand - boolean indicating whether the command is to exit the application
+
 
 The following activity diagram summarizes what happens when a user executes the different types of commands:
 ![DataTogglingActivityDiagram](images/DataTogglingActivityDiagram.png)
