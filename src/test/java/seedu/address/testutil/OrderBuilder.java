@@ -42,7 +42,7 @@ public class OrderBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the OrderBuilder with the data of {@code personToCopy}.
      */
     public OrderBuilder(Order orderToCopy) {
         uuid = orderToCopy.getUuid();
