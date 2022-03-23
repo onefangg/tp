@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private OrderListPanel orderListPanel;
-    private ResultDisplay resultDisplay;
+    private ResultDisplay responseDisplay;
     private HelpWindow helpWindow;
 
     @FXML
@@ -115,8 +115,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         resultList.getChildren().add(personListPanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
-        responseDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        responseDisplay = new ResultDisplay();
+        responseDisplayPlaceholder.getChildren().add(responseDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -184,10 +184,6 @@ public class MainWindow extends UiPart<Stage> {
         delay.play();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -197,13 +193,13 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            responseDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            if (commandResult.isHelpCommand()) {
                 handleHelp();
             }
 
-            if (commandResult.isExit()) {
+            if (commandResult.isExitCommand()) {
                 handleExit();
             }
 
@@ -218,7 +214,7 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            responseDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }
