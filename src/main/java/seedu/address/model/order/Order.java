@@ -3,11 +3,10 @@ package seedu.address.model.order;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.UUID;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+
 
 /**
  * Represents an Order in the ReadyBakey.
@@ -16,11 +15,10 @@ import seedu.address.model.person.Remark;
 public class Order {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
+    private final UUID uuid;
 
     // Data fields
-    private final Address address;
+
     private final Remark remark;
     private final Details details;
     private final DeliveryDateTime deliveryDateTime;
@@ -30,62 +28,52 @@ public class Order {
     /**
      * Every field must be present and not null.
      */
-    public Order(Name name, Phone phone, Address address, Remark remark, Details details,
-                 DeliveryDateTime deliveryDateTime, CollectionType collectionType) {
-        requireAllNonNull(name, phone, address, remark, details, deliveryDateTime, collectionType);
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
+    public Order(Remark remark, Details details,
+                 DeliveryDateTime deliveryDateTime, CollectionType collectionType, UUID uuid) {
+        requireAllNonNull(remark, details, deliveryDateTime, collectionType, uuid);
+
         this.remark = remark;
         this.details = details;
         this.complete = new Complete(false);
         this.deliveryDateTime = deliveryDateTime;
         this.collectionType = collectionType;
+        this.uuid = uuid;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Order(Name name, Phone phone, Address address, Remark remark, Details details,
-                 DeliveryDateTime deliveryDateTime, CollectionType collectionType, Complete complete) {
+    public Order(Remark remark, Details details,
+                 DeliveryDateTime deliveryDateTime, CollectionType collectionType, Complete complete, UUID uuid) {
+        requireAllNonNull(remark, details, deliveryDateTime, collectionType, complete, uuid);
 
-
-        requireAllNonNull(name, phone, address, remark, details, deliveryDateTime, collectionType, complete);
-
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
         this.remark = remark;
         this.details = details;
         this.deliveryDateTime = deliveryDateTime;
         this.collectionType = collectionType;
         this.complete = complete;
-    }
-
-    public Name getName() {
-        return name;
-    }
-
-    public Phone getPhone() {
-        return phone;
+        this.uuid = uuid;
     }
 
     public Details getDetails() {
         return details;
     }
 
-    public Address getAddress() {
-        return address;
-    }
 
     public Remark getRemark() {
         return remark;
     }
 
-    public DeliveryDateTime getDeliveryDateTime() { return deliveryDateTime; }
+    public DeliveryDateTime getDeliveryDateTime() {
+        return deliveryDateTime;
+    }
 
     public Complete getComplete() {
         return complete;
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 
     public CollectionType getCollectionType() {
@@ -107,9 +95,8 @@ public class Order {
         }
 
         Order otherOrder = (Order) other;
-        return otherOrder.getName().equals(getName())
-                && otherOrder.getPhone().equals(getPhone())
-                && otherOrder.getAddress().equals(getAddress())
+
+        return otherOrder.getUuid().equals(getUuid())
                 && otherOrder.getRemark().equals(getRemark())
                 && otherOrder.getDetails().equals(getDetails())
                 && otherOrder.getDeliveryDateTime().equals(getDeliveryDateTime())
@@ -119,18 +106,14 @@ public class Order {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, remark, details, deliveryDateTime, collectionType);
+        return Objects.hash(remark, details, deliveryDateTime, collectionType, uuid);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Address: ")
-                .append(getAddress())
-                .append("; Remark: ")
+
+        builder.append("; Remark: ")
                 .append(getRemark())
                 .append("; Details: ")
                 .append(getDetails())

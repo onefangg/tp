@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -24,28 +25,34 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String UUID_MESSAGE_CONSTRAINTS = "UUID must contain a valid UUID.";
 
     private final String name;
     private final String phone;
     private final String email;
     private final String address;
+    private final String uuid;
     private final String remark;
+
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
+
     public JsonAdaptedPerson(@JsonProperty("name") String name,
                              @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
                              @JsonProperty("remark") String remark,
+                             @JsonProperty("uuid") String uuid,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.uuid = uuid;
         this.remark = remark;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -60,6 +67,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        uuid = source.getUuid().toString();
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -112,7 +120,18 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
+
+        if (uuid == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, UUID.class.getSimpleName()));
+        }
+        final UUID modelUuid;
+        try {
+            modelUuid = UUID.fromString(uuid);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(UUID_MESSAGE_CONSTRAINTS);
+        }
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags, modelUuid);
     }
 
 }

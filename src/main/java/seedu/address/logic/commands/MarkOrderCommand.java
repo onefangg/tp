@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
 
 import java.util.List;
+import java.util.UUID;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -14,10 +15,8 @@ import seedu.address.model.order.Complete;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+
 
 public class MarkOrderCommand extends Command {
 
@@ -56,17 +55,16 @@ public class MarkOrderCommand extends Command {
     private Order createMarkedOrder(Order orderToMark) {
         assert orderToMark != null;
 
-        Name updatedName = orderToMark.getName();
-        Phone updatedPhone = orderToMark.getPhone();
-        Address updatedAddress = orderToMark.getAddress();
+
         Remark updatedRemark = orderToMark.getRemark();
         Details updatedDetails = orderToMark.getDetails();
         DeliveryDateTime updatedDeliveryDateTime = orderToMark.getDeliveryDateTime();
         CollectionType updatedCollectionType = orderToMark.getCollectionType();
         Complete updatedComplete = new Complete(true);
+        UUID uuid = orderToMark.getUuid();
 
-        return new Order(updatedName, updatedPhone, updatedAddress, updatedRemark, updatedDetails,
-                updatedDeliveryDateTime, updatedCollectionType, updatedComplete);
+        return new Order(updatedRemark, updatedDetails,
+                updatedDeliveryDateTime, updatedCollectionType, updatedComplete, uuid);
 
     }
 

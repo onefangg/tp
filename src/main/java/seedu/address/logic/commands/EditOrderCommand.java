@@ -1,14 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -16,12 +14,10 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.CollectionType;
+import seedu.address.model.order.Complete;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 
 /**
@@ -34,15 +30,9 @@ public class EditOrderCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the information of the order identified "
             + "by the index number used in the displayed order list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DETAILS + "DETAILS "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Tom "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_ADDRESS + "Tom and Jerry's House CA94114, San Francisco, 3650 21st St "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DETAILS + "1x Jerry Favourite Cheese Cake";
 
     public static final String MESSAGE_EDIT_ORDER_SUCCESS = "Edited Order: %1$s";
@@ -87,18 +77,17 @@ public class EditOrderCommand extends Command {
     private static Order createEditedOrder(Order orderToEdit, EditOrderDescriptor editOrderDescriptor) {
         assert orderToEdit != null;
 
-        Name updatedName = editOrderDescriptor.getName().orElse(orderToEdit.getName());
-        Phone updatedPhone = editOrderDescriptor.getPhone().orElse(orderToEdit.getPhone());
-        Address updatedAddress = editOrderDescriptor.getAddress().orElse(orderToEdit.getAddress());
         Details updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
+        Complete complete = orderToEdit.getComplete();
+        UUID uuid = orderToEdit.getUuid();
         Remark updatedRemarks = editOrderDescriptor.getRemark().orElse(orderToEdit.getRemark());
         DeliveryDateTime updatedDeliveryDateTime = editOrderDescriptor.getDeliveryDateTime()
                 .orElse(orderToEdit.getDeliveryDateTime());
         CollectionType updatedCollectionType = editOrderDescriptor.getCollectionType()
                 .orElse(orderToEdit.getCollectionType());
 
-        return new Order(updatedName, updatedPhone, updatedAddress, updatedRemarks, updatedDetails,
-                updatedDeliveryDateTime, updatedCollectionType);
+        return new Order(updatedRemarks, updatedDetails,
+                updatedDeliveryDateTime, updatedCollectionType, complete, uuid);
     }
 
     @Override
@@ -124,9 +113,6 @@ public class EditOrderCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditOrderDescriptor {
-        private Name name;
-        private Phone phone;
-        private Address address;
         private Details details;
         private Remark remark;
         private DeliveryDateTime deliveryDateTime;
@@ -139,9 +125,6 @@ public class EditOrderCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditOrderDescriptor(EditOrderDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setAddress(toCopy.address);
             setDetails(toCopy.details);
             setRemark(toCopy.remark);
             setDeliveryDateTime(toCopy.deliveryDateTime);
@@ -152,31 +135,7 @@ public class EditOrderCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address, details, remark, deliveryDateTime, collectionType);
-        }
-
-        public void setName(Name name) {
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
-        }
-
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+            return CollectionUtil.isAnyNonNull(details, remark, deliveryDateTime, collectionType);
         }
 
         public void setDetails(Details details) {
@@ -226,10 +185,8 @@ public class EditOrderCommand extends Command {
             // state check
             EditOrderDescriptor e = (EditOrderDescriptor) other;
 
-            return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getAddress().equals(e.getAddress())
-                    && getDetails().equals(e.getDetails())
+
+            return getDetails().equals(e.getDetails())
                     && getRemark().equals(e.getRemark())
                     && getDeliveryDateTime().equals(e.getDeliveryDateTime())
                     && getCollectionType().equals(e.getCollectionType());
