@@ -1,15 +1,21 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COLLECTION_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERYDATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.CollectionType;
+import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 public class AddOrderCommandParser implements Parser<AddOrderCommand> {
 
@@ -20,18 +26,25 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
      */
     public AddOrderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_DETAILS);
+                ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_REMARK,
+                        PREFIX_DETAILS, PREFIX_DELIVERYDATETIME, PREFIX_COLLECTION_TYPE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_DETAILS)
+        if (!arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_DETAILS,
+                PREFIX_DELIVERYDATETIME, PREFIX_COLLECTION_TYPE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddOrderCommand.MESSAGE_USAGE));
         }
 
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         Details details = ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS).get());
+        DeliveryDateTime deliveryDateTime = ParserUtil.parseDeliveryDateTime(argMultimap
+                .getValue(PREFIX_DELIVERYDATETIME).get());
+        CollectionType collectionType = ParserUtil.parseCollectionType(
+                argMultimap.getValue(PREFIX_COLLECTION_TYPE).get());
 
 
-        return new AddOrderCommand(details, phone);
+        return new AddOrderCommand(phone, remark, details, deliveryDateTime, collectionType);
     }
 
     /**
