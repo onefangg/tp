@@ -3,7 +3,6 @@ package seedu.address.model.order;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
-
 import java.util.UUID;
 
 import seedu.address.model.person.Remark;
@@ -31,7 +30,7 @@ public class Order {
      */
     public Order(Remark remark, Details details,
                  DeliveryDateTime deliveryDateTime, CollectionType collectionType, UUID uuid) {
-        requireAllNonNull( remark, details, deliveryDateTime, collectionType, uuid);
+        requireAllNonNull(remark, details, deliveryDateTime, collectionType, uuid);
 
         this.remark = remark;
         this.details = details;
@@ -45,7 +44,7 @@ public class Order {
      * Every field must be present and not null.
      */
     public Order(Remark remark, Details details,
-                 DeliveryDateTime deliveryDateTime, CollectionType collectionType, Complete complete,  UUID uuid) {
+                 DeliveryDateTime deliveryDateTime, CollectionType collectionType, Complete complete, UUID uuid) {
         requireAllNonNull(remark, details, deliveryDateTime, collectionType, complete, uuid);
 
         this.remark = remark;
@@ -65,7 +64,9 @@ public class Order {
         return remark;
     }
 
-    public DeliveryDateTime getDeliveryDateTime() { return deliveryDateTime; }
+    public DeliveryDateTime getDeliveryDateTime() {
+        return deliveryDateTime;
+    }
 
     public Complete getComplete() {
         return complete;

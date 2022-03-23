@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COLLECTION_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERYDATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
@@ -61,7 +60,8 @@ public class AddOrderCommand extends Command {
     /**
      * Creates an AddOrderCommand to add the specified {@code Order}
      */
-    public AddOrderCommand(Phone phone, Remark remark, Details details, DeliveryDateTime deliveryDateTime, CollectionType collectionType) {
+    public AddOrderCommand(Phone phone, Remark remark, Details details, DeliveryDateTime deliveryDateTime,
+                           CollectionType collectionType) {
         requireAllNonNull(phone, remark, details, deliveryDateTime, collectionType);
         this.phone = phone;
         this.remark = remark;

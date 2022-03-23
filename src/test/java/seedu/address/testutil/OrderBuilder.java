@@ -7,7 +7,6 @@ import seedu.address.model.order.Complete;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
-
 import seedu.address.model.person.Remark;
 
 public class OrderBuilder {
@@ -103,6 +102,9 @@ public class OrderBuilder {
         return this;
     }
 
+    /**
+     * Builds the {@code Order} according to the attributes given
+     */
     public Order build() {
         return new Order(remark, details, deliveryDateTime, collectionType, complete, uuid);
 
