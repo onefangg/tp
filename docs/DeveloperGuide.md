@@ -238,6 +238,24 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Mark/Unmark Feature
+This feature allows users to mark the orders as complete/incomplete.
+#### Implementation
+The mark feature consists of three commands, `MarkCommand` and `UnmarkCommand`.
+Both of the commands extend `Command`. An `Index` parameter is needed to indicate the
+targeted order.
+
+When the commands are executed by calling `Command#execute(Model model)`, the Order
+that is indicated by the `Index`, will have its attribute `Complete` updated to have
+an appropriate boolean value. This is done by calling `model#setOrder(Order target, Order editedOrder)`
+to ensure that `Order` is immutable.
+
+When an invalid input is parsed, a `CommandException` will be thrown and the user will be shown a
+message on the proper usage of the command.
+
+The following sequence diagram illustrates how the `MarkCommand` works:
+
+![MarkOrderSequence](images/MarkSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
