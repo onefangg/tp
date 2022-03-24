@@ -347,7 +347,6 @@ These are the inputs that the edit order command will accept:
 
 | Prefix | Meaning                              | Example            | Format                                                                   | Compulsory |
 |--------|--------------------------------------|--------------------|--------------------------------------------------------------------------|------------|
-| p/     | Phone Number                         | p/90124322         | Must be a number longer than 3 digits                                    | No         |
 | c/     | Collection/ delivery time            | c/30-06-2022 15:30 | Must follow the format dd-MM-yyyy HH:mm                                  | No         |
 | g/     | Collection type (Pickup or Delivery) | g/delivery         | Must be either `delivery` or `pickup` with any capitalisation            | No         |
 | d/     | Order Details                        | d/1x Cheesecake    | \[To be implemented\] Must be in the form [NUM_ORDERS\] x \[ANY_STRING\] | No         |
@@ -384,7 +383,8 @@ The following sequence diagram illustrates how the `EditOrderCommand` will work:
       date and time format.
 2) Editing should not be allowed for the completion of the order. It should be done with the use of mark or unmark 
    orders instead.
-3) The person's details cannot be edited through this command. Only the phone number can be edited in here. 
+3) The person's details cannot be edited through this command as Order no longer stores the phone number, but the 
+   UUID of the person.  
 
 ### Dynamic Toggling Between Application's Data
 #### Implementation
