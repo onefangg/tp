@@ -345,10 +345,37 @@ In `MainWindow#executeCommand(String commandText)`, the type of `CommandResult` 
     * isPersonCommand - boolean  indicating whether the command is related to persons
     * isHelpCommand - boolean indicating whether the command is related to getting help
     * isExitCommand - boolean indicating whether the command is to exit the application
-
-
+    
 The following activity diagram summarizes what happens when a user executes the different types of commands:
 ![DataTogglingActivityDiagram](images/DataTogglingActivityDiagram.png)
+
+### Finding Orders Through Selected Attribute
+#### Implementation
+Users are able to find specific orders based on the attributes of the orders. For example, users can find orders that are made by a Person with name "Alex".
+
+Currently, only `name` and `phone` are supported for finding under the `findo` command. 
+
+#### Design considerations:
+
+The parsing of searchable attributes and as well as the keywords (to find for) is currently done with `ArgumentTokenizer.tokenize()` method. This is for congruency with parsing methods in `AddOrderCommandParser`, `EditOrderCommandParser` etc.
+
+The method will return a `HashMap<String, String>`. As `HashMap` is an unordered structure, filtering on multiple attributes in a single command potentially results in undeterministic results. 
+
+* **Alternative 1 (current choice):** `findo` will only support filter for one attribute in a single command 
+  * Filtering for multiple attributes in a single command will result in an error eg `findo n/Alex p/98742313`.
+  * Adding an attribute to search for, that is not supported, will simply be ignored. For example, adding `details` to search for `findo n/Alex d/chococake` will only return search results that is the same as `findo n/Alex`.
+* **Alternative 2:** Implement an alternative form of tokenization to return `LinkedHashMap<String, String>`, which is based on insertion order of attributes and keywords.
+  * Filtering for multiple attributes will be possible. For example
+  * However, this will require more manhours and testing to ensure consistent results, and hence is deprioritised. 
+
+1. Create `Predicate` for findable attribute.
+   * Find (filter) is based on whether the attribute for Order contains the given keyword (case-insensitive)
+2. `FindOrder<Attribute>Command` is then instantiated, which would then find for `Order` that matches the `Predicate`. 
+
+The following sequence diagram shows how the `findo` operation works:
+
+![FindOrderSequenceDiagram](images/FindOrderSequenceDiagram.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -408,6 +435,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | home baker that has multiple orders         | get a view of unfinished orders for current day                                         | see urgent orders at a glance                                                           |
 | `* *`    | home baker that has multiple orders         | generate a weekly report                                                                | track the progress of my business                                                       |
 | `*`      | home baker that has multiple orders         | get a calender view of the upcoming deadlines                                           | have a visual plan for the orders in the upcoming period                                |
+
 *{More to be added}*
 
 ### Use cases
