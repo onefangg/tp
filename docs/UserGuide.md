@@ -129,7 +129,7 @@ Format: `edito INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [d/DETAILS]`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edito 1 p/83456789 d/1 x blackforestcake` Edits the phone number and email address of the 1st order to be 
+*  `edito 1 p/83456789 d/1 x blackforestcake` Edits the phone number and email address of the 1st order to be
    `83456789` and `1xblackforestcake` respectively.
 *  `edito 2 n/Declan` Edits the customer's name of the 2nd order to be `Declan`.
 
@@ -162,13 +162,13 @@ Examples:
 
 ### Adding an order : `addo`
 
-Adds an order to ReadyBakey’s order list
+Adds an order to ReadyBakey’s order list.
+The specified phone number links an order to a person. A person with this phone number must exist in ReadyBakey.
 
-Format: `addo d/DATE_ORDERED s/DATE_TO_SEND c/CUST_PHONE_NUM i/ITEM_ORDERED`
+Format: `addo p/PHONE r/REMARK d/DETAILS c/DELIVERYDATETIME g/COLLECTION_TYPE`
 
 Examples:
-* `addo addo d/10-10-2022 s/20-10-2022 c/87654321 i/Chocolate Cake`
-
+* `addo p/98765432 r/Add Cheese d/1x Jerry Favourite Cheese Cake c/25-12-2022 15:30 g/Delivery`
 
 ### Delete an order: `deleteo`
 
