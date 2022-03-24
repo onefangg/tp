@@ -41,8 +41,8 @@ public class AddOrderCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_REMARK + "Add Cheese "
-            + PREFIX_DETAILS + "1x Jerry Favourite Cheese Cake"
-            + PREFIX_DELIVERYDATETIME + "25-12-2022 15:30"
+            + PREFIX_DETAILS + "1x Jerry Favourite Cheese Cake "
+            + PREFIX_DELIVERYDATETIME + "25-12-2022 15:30 "
             + PREFIX_COLLECTION_TYPE + "Delivery";
 
 

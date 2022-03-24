@@ -239,8 +239,11 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 ### Adding Orders Feature
+
 This feature allows users to add orders.
+
 #### Implementation
+
 The AddOrder feature uses the command `addo`. It extends the abstract class `Command`. 
 The AddOrder feature takes in 4 required parameter and 1 optional parameter. 
 
@@ -271,6 +274,7 @@ The following sequence diagram illustrates how the `AddOrderCommand` works:
 ![AddOrderSequence](images/AddOrderSequenceDiagram.png)
 
 #### Design Considerations
+
 1) Phone Number stores any number longer than 3 digits long
    * This format was chosen to be more flexible to accept different length of numbers
 2) Delivery Date and Time takes in user input in the format dd-MM-yyyy HH:mm.
@@ -285,14 +289,17 @@ The following sequence diagram illustrates how the `AddOrderCommand` works:
 4) Remark and Detail was left to be of open format to give the user flexibility in describing the orders
 
 #### Future Works
+
 1) Delivery Date and Time does not allow dates before the current date. This strictness of this condition 
 should be lowered to allow users to key in orders before the current date (for book keeping purposes) and instead give 
 users a warning.
 
-
 ### Mark/Unmark Feature
+
 This feature allows users to mark the orders as complete/incomplete.
+
 #### Implementation
+
 The mark feature consists of two commands, `MarkCommand` and `UnmarkCommand`.
 Both of the commands extend `Command`. An `Index` parameter is needed to indicate the
 targeted order.
@@ -310,6 +317,7 @@ The following sequence diagram illustrates how the `MarkCommand` works:
 ![MarkOrderSequence](images/MarkSequenceDiagram.png)
 
 #### Design consideration
+
 1) `Complete` stores a boolean value.
    * Boolean value was chosen to keep the implementation simple.
    * Alternative: Store an Enum containing possible values of `Complete`
