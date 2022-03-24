@@ -2,23 +2,23 @@ package seedu.address.model.order;
 
 import java.util.function.Predicate;
 
-public class OrderBeforeDeliveryDateTimePredicate implements Predicate<Order> {
+public class OrderIncompleteBeforeDeliveryDateTimePredicate implements Predicate<Order> {
     private final DeliveryDateTime deliveryDateTime;
 
-    public OrderBeforeDeliveryDateTimePredicate(DeliveryDateTime deliveryDateTime) {
+    public OrderIncompleteBeforeDeliveryDateTimePredicate(DeliveryDateTime deliveryDateTime) {
         this.deliveryDateTime = deliveryDateTime;
     }
 
     @Override
     public boolean test(Order order) {
-        return !order.getComplete().isComplete()
+        return !order.isComplete()
                 && order.getDeliveryDateTimeValue().isBefore(deliveryDateTime.getValue());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof OrderBeforeDeliveryDateTimePredicate // instanceof handles nulls
-                && deliveryDateTime.equals(((OrderBeforeDeliveryDateTimePredicate) other).deliveryDateTime));
+                || (other instanceof OrderIncompleteBeforeDeliveryDateTimePredicate // instanceof handles nulls
+                && deliveryDateTime.equals(((OrderIncompleteBeforeDeliveryDateTimePredicate) other).deliveryDateTime));
     }
 }

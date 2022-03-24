@@ -77,6 +77,10 @@ public class Order {
         return complete;
     }
 
+    public boolean isComplete() {
+        return complete.isComplete();
+    }
+
     public UUID getUuid() {
         return uuid;
     }

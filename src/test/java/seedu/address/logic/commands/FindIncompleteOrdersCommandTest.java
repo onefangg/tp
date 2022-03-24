@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.order.DeliveryDateTime;
-import seedu.address.model.order.OrderBeforeDeliveryDateTimePredicate;
+import seedu.address.model.order.OrderIncompleteBeforeDeliveryDateTimePredicate;
 
 public class FindIncompleteOrdersCommandTest {
 
@@ -28,10 +28,10 @@ public class FindIncompleteOrdersCommandTest {
 
     @Test
     public void equals() {
-        OrderBeforeDeliveryDateTimePredicate firstPredicate =
-                new OrderBeforeDeliveryDateTimePredicate(new DeliveryDateTime("30-12-2022 18:30"));
-        OrderBeforeDeliveryDateTimePredicate secondPredicate =
-                new OrderBeforeDeliveryDateTimePredicate(new DeliveryDateTime("30-12-2022 15:30"));
+        OrderIncompleteBeforeDeliveryDateTimePredicate firstPredicate =
+                new OrderIncompleteBeforeDeliveryDateTimePredicate(new DeliveryDateTime("30-12-2022 18:30"));
+        OrderIncompleteBeforeDeliveryDateTimePredicate secondPredicate =
+                new OrderIncompleteBeforeDeliveryDateTimePredicate(new DeliveryDateTime("30-12-2022 15:30"));
 
         FindIncompleteOrdersCommand findFirstCommand = new FindIncompleteOrdersCommand(firstPredicate);
         FindIncompleteOrdersCommand findSecondCommand = new FindIncompleteOrdersCommand(secondPredicate);
@@ -57,8 +57,8 @@ public class FindIncompleteOrdersCommandTest {
     public void execute_multipleIncomplete_multipleOrdersFound() {
         String expectedMessage = String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 3);
         DeliveryDateTime multipleDeliveriesDateTime = new DeliveryDateTime("30-12-2022 18:30");
-        OrderBeforeDeliveryDateTimePredicate predicate =
-                new OrderBeforeDeliveryDateTimePredicate(multipleDeliveriesDateTime);
+        OrderIncompleteBeforeDeliveryDateTimePredicate predicate =
+                new OrderIncompleteBeforeDeliveryDateTimePredicate(multipleDeliveriesDateTime);
         FindIncompleteOrdersCommand command = new FindIncompleteOrdersCommand(predicate);
         expectedModel.updateFilteredOrderList(predicate);
         assertOrderCommandSuccess(command, model, expectedMessage, expectedModel);
