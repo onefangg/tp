@@ -12,7 +12,7 @@ public class OrderBeforeDeliveryDateTimePredicate implements Predicate<Order> {
     @Override
     public boolean test(Order order) {
         return !order.getComplete().isComplete()
-                && order.getDeliveryDateTime().getValue().isBefore(deliveryDateTime.getValue());
+                && order.getDeliveryDateTimeValue().isBefore(deliveryDateTime.getValue());
     }
 
     @Override
