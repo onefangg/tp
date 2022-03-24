@@ -320,8 +320,7 @@ The following sequence diagram illustrates how the `EditOrderCommand` will work:
       date and time format.
 2) Editing should not be allowed for the completion of the order. It should be done with the use of mark or unmark 
    orders instead.
-3) The person's details cannot be edited through this command. Only the phone number can be edited in here as it is 
-   what links the order to the person. 
+3) The person's details cannot be edited through this command. Only the phone number can be edited in here. 
 
 
 ### \[Proposed\] Data archiving
