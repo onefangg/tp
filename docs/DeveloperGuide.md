@@ -244,8 +244,8 @@ This feature allows users to add orders.
 
 #### Implementation
 
-The AddOrder feature uses the command `addo`. It extends the abstract class `Command`. 
-The AddOrder feature takes in 4 required parameter and 1 optional parameter. 
+The AddOrder feature uses the command `addo`. It extends the abstract class `Command`.
+The AddOrder feature takes in 4 required parameter and 1 optional parameter.
 
 | Prefix | Meaning                | Example               | Format                                                        | Compulsory |
 |--------|------------------------|-----------------------|---------------------------------------------------------------|------------|
@@ -255,9 +255,9 @@ The AddOrder feature takes in 4 required parameter and 1 optional parameter.
 | /d     | Details of Order       | /d 1xChocolate Cake   | Can take in any detail of the order                           | Yes        |
 | /r     | Remark                 | /r Put more Chocolate | Can take in any remark of the order                           | No         |
 
-When the add order command is executed by calling `AddOrderCommand#execute`, the order is built with the 
-respective phone number, delivery date time, collection type, details and remarks specific to that order. This is 
-performed in the function `AddOrderCommand#buildOrder`. 
+When the add order command is executed by calling `AddOrderCommand#execute`, the order is built with the
+respective phone number, delivery date time, collection type, details and remarks specific to that order. This is
+performed in the function `AddOrderCommand#buildOrder`.
 
 All inputs by users go through an `AddOrderCommandParser` which extracts out the relevant details for each prefix in the
 method `AddOrderCommandParser#parse`. This method handles the checking of whether the input by the user is valid.
@@ -266,8 +266,8 @@ There are 2 main forms of invalid input by the user that is checked for:
 1. When any of the compulsory fields are not specified in the creation of an order
 2. Any field does not fulfil the provided format
 
-When an invalid input is parsed, a `ParseException` is thrown and the user will be shown a message on the proper usage of 
-the add order command.
+When an invalid input is parsed, a `ParseException` is thrown and the user will be shown a message on the proper
+usage of the add order command.
 
 The following sequence diagram illustrates how the `AddOrderCommand` works:
 
@@ -290,8 +290,8 @@ The following sequence diagram illustrates how the `AddOrderCommand` works:
 
 #### Future Works
 
-1) Delivery Date and Time does not allow dates before the current date. This strictness of this condition 
-should be lowered to allow users to key in orders before the current date (for book keeping purposes) and instead give 
+1) Delivery Date and Time does not allow dates before the current date. This strictness of this condition
+should be lowered to allow users to key in orders before the current date (for book keeping purposes) and instead give
 users a warning.
 
 ### Mark/Unmark Feature
