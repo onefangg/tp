@@ -54,7 +54,7 @@ deactivate MarkOrderCommand
 
 
 
-MarkOrderCommand -> Model : setPerson(orderToMark,editedOrder)
+MarkOrderCommand -> Model : setOrder(orderToMark,editedOrder)
 activate Model
 
 Model --> MarkOrderCommand
