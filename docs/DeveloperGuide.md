@@ -321,15 +321,69 @@ The following sequence diagram illustrates how the `MarkCommand` works:
 1) `Complete` stores a boolean value.
    * Boolean value was chosen to keep the implementation simple.
    * Alternative: Store an Enum containing possible values of `Complete`
-     * Pros: More easily readable.
-     * Cons: Larger implementation.
+       * Pros: More easily readable.
+       * Cons: Larger implementation.
    * Boolean chosen due to simple implementation.
-   * Consideration also given to possible extensions, Completion status of an order can only
-ever take 2 values, thus there is no need for an Enum class.
+   * Consideration also given to possible extensions, Completion status of an order can only ever take 2 values, thus
+     there is no need for an Enum class.
 
 2) Order is still immutable
-   * Creating a marked order will duplicate the current order, while changing the `Complete` attribute
-   * Then, the current order will be replaced with the new order in order to maintain immutability.
+    * Creating a marked order will duplicate the current order, while changing the `Complete` attribute
+    * Then, the current order will be replaced with the new order in order to maintain immutability.
+
+### \[In Progress\] Edit Order Feature
+
+This feature allows users to edit the details, collection/ delivery time, whether an order is for delivery or pickup,
+and remarks of the order that already exists in ReadyBakey. Currently, it can only edit the details of the order.
+
+### Implementation
+
+The edit orders feature consists of one command, `EditOrderCommand`. It extends `Command`.
+
+These are the inputs that the edit order command will accept:
+
+1) It takes in an `Index` parameter to indicate the order that is to be edited.
+2) It also takes in other optional inputs based on the prefixes specified:
+
+| Prefix | Meaning                              | Example            | Format                                                                   | Compulsory |
+|--------|--------------------------------------|--------------------|--------------------------------------------------------------------------|------------|
+| c/     | Collection/ delivery time            | c/30-06-2022 15:30 | Must follow the format dd-MM-yyyy HH:mm                                  | No         |
+| g/     | Collection type (Pickup or Delivery) | g/delivery         | Must be either `delivery` or `pickup` with any capitalisation            | No         |
+| d/     | Order Details                        | d/1x Cheesecake    | \[To be implemented\] Must be in the form [NUM_ORDERS\] x \[ANY_STRING\] | No         |
+| r/     | Order Remarks                        | r/Give me candles  | Can take in any remark for the order                                     | No         |
+
+At least one of the prefixes needs to be specified to be edited.
+
+When the edit order command is executed by calling the `Command#execute()`, the Order indicated by the `Index`, will
+have its order edited, depending on the prefixes that were specified. A new order with the respective details,
+collection/ delivery time, whether an order is for delivery or pickup, and remarks of the order, will be created. This
+is performed by the function `EditOrderCommand#createEditedOrder()`.
+
+All inputs are parsed through an EditOrderCommandParser, which parses each prefix and extracts the relevant information
+for each prefix. This is done in the method `EditOrderCommandParser#parse()`. It also does checks on the validity of the
+user input.
+
+There are two parts to the input that will be checked for validity:
+
+1) When an invalid index is provided, a `CommandException` is thrown and the user will be told that the order index they
+   have provided is invalid.
+2) When there are no prefixes provided, a `ParseException` is thrown and the user is shown a message to provide at 
+   least one field to edit.
+3) When an invalid input is parsed, a `ParseException` is thrown and the user is shown a message on the proper usage of
+   the edit order command.
+
+The following sequence diagram illustrates how the `EditOrderCommand` will work:
+![EditOrderSequence](images/EditOrderSequenceDiagram.png)
+
+#### Design considerations
+1) Delivery date and time being parsed in should allow the usage of natural dates such as `Thursday 3pm` or `Monday 
+   4pm` and ReadyBakey will know the date being parsed is the next nearest Thursday at 3pm. This is alongside the 
+   parsing of date and time in the format `dd-MM-yyyy HH:mm`.
+    - This provides bakers with better ability to key in dates without having to stick to only keying in the full 
+      date and time format.
+2) Editing should not be allowed for the completion of the order. It should be done with the use of mark or unmark 
+   orders instead.
+3) The person's details cannot be edited through this command.
 
 ### Dynamic Toggling Between Application's Data
 #### Implementation
@@ -413,6 +467,7 @@ focus on what's important -- _baking_.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
+
 | Priority | As a …​                                     | I want to …​                                                                            | So that I can…​                                                                         |
 |----------|---------------------------------------------|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
 | `* * *`  | new user                                    | see usage instructions                                                                  | refer to instructions when I forget how to use the App                                  |
@@ -423,7 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                        | exit the application                                                                    | use my laptop without the program running in the background                             |
 | `* * *`  | user with multiple orders                   | add orders with custom details such as order details, delivery date and collection type | keep track of all of my orders                                                          |
 | `* * *`  | user                                        | delete orders                                                                           | remove orders in case a customer cancels their order                                    |
-| `* *`    | user                                        | hide private contact details                                                            | minimize chance of someone else seeing them by accident                                 |
+| `* *`    | user                                        | hide private contact details                                                            | reduces chance of someone else seeing them by accident                                 |
 | `*`      | user with many customer in the address book | sort customer by name                                                                   | locate a <br/><br/>person easily                                                        |
 | `* * *`  | home baker that has multiple customers      | clear all my customers                                                                  | quickly remove demo info or restart my bakery data                                      |
 | `* *`    | home baker that has multiple orders         | clear all my orders                                                                     | quickly remove demo info or restart my bakery data                                      |
@@ -434,8 +489,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | home baker that has multiple orders         | mark the orders as complete or incomplete                                               | know which orders I have fulfilled or not                                               |
 | `* *`    | home baker that has multiple orders         | get a view of unfinished orders for current day                                         | see urgent orders at a glance                                                           |
 | `* *`    | home baker that has multiple orders         | generate a weekly report                                                                | track the progress of my business                                                       |
-| `*`      | home baker that has multiple orders         | get a calender view of the upcoming deadlines                                           | have a visual plan for the orders in the upcoming period                                |
-
+| `*`      | home baker that has multiple orders         | get a calendar view of the upcoming deadlines                                           | have a visual plan for the orders in the upcoming period                                |
 *{More to be added}*
 
 ### Use cases
