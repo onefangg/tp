@@ -285,7 +285,6 @@ In `MainWindow#executeCommand(String commandText)`, the type of `CommandResult` 
     * isPersonCommand - boolean  indicating whether the command is related to persons
     * isHelpCommand - boolean indicating whether the command is related to getting help
     * isExitCommand - boolean indicating whether the command is to exit the application
-
     
 The following activity diagram summarizes what happens when a user executes the different types of commands:
 ![DataTogglingActivityDiagram](images/DataTogglingActivityDiagram.png)
