@@ -238,10 +238,62 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Adding Orders Feature
+This feature allows users to add orders.
+#### Implementation
+The AddOrder feature uses the command `addo`. It extends the abstract class `Command`. 
+The AddOrder feature takes in 4 required parameter and 1 optional parameter. 
+
+| Prefix | Meaning                | Example               | Format                                                        | Compulsory |
+|--------|------------------------|-----------------------|---------------------------------------------------------------|------------|
+| /p     | Phone Number           | /p 90124322           | Must be a number longer than 3 digits                         | Yes        |
+| /c     | Delivery Date and Time | /c 30-06-2022 15:30   | Must follow the format dd-MM-yyyy HH:mm                       | Yes        |
+| /g     | Collection Type        | /g delivery           | Must be either `delivery` or `pickup` with any capitalisation | Yes        |
+| /d     | Details of Order       | /d 1xChocolate Cake   | Can take in any detail of the order                           | Yes        |
+| /r     | Remark                 | /r Put more Chocolate | Can take in any remark of the order                           | No         |
+
+When the add order command is executed by calling `AddOrderCommand#execute`, the order is built with the 
+respective phone number, delivery date time, collection type, details and remarks specific to that order. This is 
+performed in the function `AddOrderCommand#buildOrder`. 
+
+All inputs by users go through an `AddOrderCommandParser` which extracts out the relevant details for each prefix in the
+method `AddOrderCommandParser#parse`. This method handles the checking of whether the input by the user is valid.
+
+There are 2 main forms of invalid input by the user that is checked for:
+1. When any of the compulsory fields are not specified in the creation of an order
+2. Any field does not fulfil the provided format
+
+When an invalid input is parsed, a `ParseException` is thrown and the user will be shown a message on the proper usage of 
+the add order command.
+
+The following sequence diagram illustrates how the `AddOrderCommand` works:
+
+![AddOrderSequence](images/AddOrderSequenceDiagram.png)
+
+#### Design Considerations
+1) Phone Number stores any number longer than 3 digits long
+   * This format was chosen to be more flexible to accept different length of numbers
+2) Delivery Date and Time takes in user input in the format dd-MM-yyyy HH:mm.
+   * This user input format was chosen to be user-friendly
+   * This Date and Time is represented to the user in the format such as "Thursday, 30 Jun 2022, 03:30PM"
+     * This was chosen to be a very readible date and time format
+3) Collection Type is an enum with types `DELIVERY` or `PICKUP`
+   * Enum was chosen to keep this representation more flexible and easily readible.
+   * Alternative:
+     * Using a Boolean value to represent delivery vs pickup
+       * This was not chosen to increase the flexibility and extensibility of the code
+4) Remark and Detail was left to be of open format to give the user flexibility in describing the orders
+
+#### Future Works
+1) Delivery Date and Time does not allow dates before the current date. This strictness of this condition 
+should be lowered to allow users to key in orders before the current date (for book keeping purposes) and instead give 
+users a warning.
+
+
 ### Mark/Unmark Feature
 This feature allows users to mark the orders as complete/incomplete.
 #### Implementation
-The mark feature consists of three commands, `MarkCommand` and `UnmarkCommand`.
+The mark feature consists of two commands, `MarkCommand` and `UnmarkCommand`.
 Both of the commands extend `Command`. An `Index` parameter is needed to indicate the
 targeted order.
 
@@ -307,27 +359,28 @@ focus on what's important -- _baking_.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                                    | So that I can…​                                                                         |
-|----------|---------------------------------------------|-------------------------------------------------|-----------------------------------------------------------------------------------------|
-| `* * *`  | new user                                    | see usage instructions                          | refer to instructions when I forget how to use the App                                  |
-| `* *`    | new user unfamiliar with the interface      | get a list of commands available                | know what commands are available                                                        |
-| `* * *`  | user                                        | add a new person                                |                                                                                         |
-| `* * *`  | user                                        | delete a person                                 | remove entries that I no longer need                                                    |
-| `* * *`  | user                                        | find a person by name                           | locate details of persons without having to go through the entire list                  |
-| `* * *`  | user                                        | exit the application                            | use my laptop without the program running in the background                             |
-| `* * *`  | user                                        | delete orders                                   | remove orders in case a customer cancels their order                                    |
-| `* *`    | user                                        | hide private contact details                    | minimize chance of someone else seeing them by accident                                 |
-| `*`      | user with many customer in the address book | sort customer by name                           | locate a <br/><br/>person easily                                                        |
-| `* * *`  | home baker that has multiple customers      | clear all my customers                          | quickly remove demo info or restart my bakery data                                      |
-| `* *`    | home baker that has multiple orders         | clear all my orders                             | quickly remove demo info or restart my bakery data                                      |
-| `* * *`  | home baker that has multiple customers      | edit my customers                               | edit their details if there are any changes to their address, phone number, email, name |
-| `* *`    | home baker that has multiple orders         | edit my orders                                  | edit their details if there are any changes to their order                              |
-| `* * *`  | home baker that has multiple customers      | look at all my customers                        | access the information for different customers                                          |
-| `* * *`  | home baker that has multiple orders         | look at my orders                               | access the attributes for different orders and see when it is due                       |
-| `* * *`  | home baker that has multiple orders         | mark the orders as complete or incomplete       | know which orders I have fulfilled or not                                               |
-| `* *`    | home baker that has multiple orders         | get a view of unfinished orders for current day | see urgent orders at a glance                                                           |
-| `* *`    | home baker that has multiple orders         | generate a weekly report                        | track the progress of my business                                                       |
-| `*`      | home baker that has multiple orders         | get a calender view of the upcoming deadlines   | have a visual plan for the orders in the upcoming period                                |
+| Priority | As a …​                                     | I want to …​                                                                            | So that I can…​                                                                         |
+|----------|---------------------------------------------|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `* * *`  | new user                                    | see usage instructions                                                                  | refer to instructions when I forget how to use the App                                  |
+| `* *`    | new user unfamiliar with the interface      | get a list of commands available                                                        | know what commands are available                                                        |
+| `* * *`  | user                                        | add a new person                                                                        |                                                                                         |
+| `* * *`  | user                                        | delete a person                                                                         | remove entries that I no longer need                                                    |
+| `* * *`  | user                                        | find a person by name                                                                   | locate details of persons without having to go through the entire list                  |
+| `* * *`  | user                                        | exit the application                                                                    | use my laptop without the program running in the background                             |
+| `* * *`  | user with multiple orders                   | add orders with custom details such as order details, delivery date and collection type | keep track of all of my orders                                                          |
+| `* * *`  | user                                        | delete orders                                                                           | remove orders in case a customer cancels their order                                    |
+| `* *`    | user                                        | hide private contact details                                                            | minimize chance of someone else seeing them by accident                                 |
+| `*`      | user with many customer in the address book | sort customer by name                                                                   | locate a <br/><br/>person easily                                                        |
+| `* * *`  | home baker that has multiple customers      | clear all my customers                                                                  | quickly remove demo info or restart my bakery data                                      |
+| `* *`    | home baker that has multiple orders         | clear all my orders                                                                     | quickly remove demo info or restart my bakery data                                      |
+| `* * *`  | home baker that has multiple customers      | edit my customers                                                                       | edit their details if there are any changes to their address, phone number, email, name |
+| `* *`    | home baker that has multiple orders         | edit my orders                                                                          | edit their details if there are any changes to their order                              |
+| `* * *`  | home baker that has multiple customers      | look at all my customers                                                                | access the information for different customers                                          |
+| `* * *`  | home baker that has multiple orders         | look at my orders                                                                       | access the attributes for different orders and see when it is due                       |
+| `* * *`  | home baker that has multiple orders         | mark the orders as complete or incomplete                                               | know which orders I have fulfilled or not                                               |
+| `* *`    | home baker that has multiple orders         | get a view of unfinished orders for current day                                         | see urgent orders at a glance                                                           |
+| `* *`    | home baker that has multiple orders         | generate a weekly report                                                                | track the progress of my business                                                       |
+| `*`      | home baker that has multiple orders         | get a calender view of the upcoming deadlines                                           | have a visual plan for the orders in the upcoming period                                |
 *{More to be added}*
 
 ### Use cases
