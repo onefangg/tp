@@ -271,6 +271,25 @@ ever take 2 values, thus there is no need for an Enum class.
    * Creating a marked order will duplicate the current order, while changing the `Complete` attribute
    * Then, the current order will be replaced with the new order in order to maintain immutability.
 
+### Dynamic Toggling Between Application's Data
+#### Implementation
+Users must be able to view the specific data that they need, without excess data, just by working with the command line. For example, if the user is requesting Order information, they should not be distracted by Person information as well - only Order information can be shown.
+
+The ability to toggle through the application's data  is facilitated by `MainWindow` and `CommandResult`.
+
+In `MainWindow#executeCommand(String commandText)`, the type of `CommandResult` of the executed command is checked and the `MainWindow` then displays the appropriate information for the user.
+
+#### Design considerations:
+1. `CommandResult` requires boolean attributes that indicate what kind of command has been executed.
+    * isOrderCommand - boolean  indicating whether the command is related to orders
+    * isPersonCommand - boolean  indicating whether the command is related to persons
+    * isHelpCommand - boolean indicating whether the command is related to getting help
+    * isExitCommand - boolean indicating whether the command is to exit the application
+
+
+The following activity diagram summarizes what happens when a user executes the different types of commands:
+![DataTogglingActivityDiagram](images/DataTogglingActivityDiagram.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
