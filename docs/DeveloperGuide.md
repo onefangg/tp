@@ -345,7 +345,7 @@ In `MainWindow#executeCommand(String commandText)`, the type of `CommandResult` 
     * isPersonCommand - boolean  indicating whether the command is related to persons
     * isHelpCommand - boolean indicating whether the command is related to getting help
     * isExitCommand - boolean indicating whether the command is to exit the application
-    
+
 The following activity diagram summarizes what happens when a user executes the different types of commands:
 ![DataTogglingActivityDiagram](images/DataTogglingActivityDiagram.png)
 
@@ -353,13 +353,13 @@ The following activity diagram summarizes what happens when a user executes the 
 #### Implementation
 Users are able to find specific orders based on the attributes of the orders. For example, users can find orders that are made by a Person with name "Alex".
 
-Currently, only `name` and `phone` are supported for finding under the `findo` command. 
+Currently, only `name` and `phone` are supported for finding under the `findo` command.
 
 #### Design considerations:
 
 The parsing of searchable attributes and as well as the keywords (to find for) is currently done with `ArgumentTokenizer.tokenize()` method. This is for congruency with parsing methods in `AddOrderCommandParser`, `EditOrderCommandParser` etc.
 
-The method will return a `HashMap<String, String>`. As `HashMap` is an unordered structure, filtering on multiple attributes in a single command potentially results in undeterministic results. 
+The method will return a `HashMap<String, String>`. As `HashMap` is an unordered structure, filtering on multiple attributes in a single command potentially results in undeterministic results.
 
 * **Alternative 1 (current choice):** `findo` will only support filter for one attribute in a single command 
   * Filtering for multiple attributes in a single command will result in an error eg `findo n/Alex p/98742313`.
@@ -376,6 +376,59 @@ The following sequence diagram shows how the `findo` operation works:
 
 ![FindOrderSequenceDiagram](images/FindOrderSequenceDiagram.png)
 
+### \[In Progress\] Edit Order Feature
+
+This feature allows users to edit the details, collection/ delivery time, whether an order is for delivery or pickup,
+and remarks of the order that already exists in ReadyBakey. Currently, it can only edit the details of the order.
+
+### Implementation
+
+The edit orders feature consists of one command, `EditOrderCommand`. It extends `Command`.
+
+These are the inputs that the edit order command will accept:
+
+1) It takes in an `Index` parameter to indicate the order that is to be edited.
+2) It also takes in other optional inputs based on the prefixes specified:
+
+| Prefix | Meaning                              | Example            | Format                                                                   | Compulsory |
+|--------|--------------------------------------|--------------------|--------------------------------------------------------------------------|------------|
+| c/     | Collection/ delivery time            | c/30-06-2022 15:30 | Must follow the format dd-MM-yyyy HH:mm                                  | No         |
+| g/     | Collection type (Pickup or Delivery) | g/delivery         | Must be either `delivery` or `pickup` with any capitalisation            | No         |
+| d/     | Order Details                        | d/1x Cheesecake    | \[To be implemented\] Must be in the form [NUM_ORDERS\] x \[ANY_STRING\] | No         |
+| r/     | Order Remarks                        | r/Give me candles  | Can take in any remark for the order                                     | No         |
+
+At least one of the prefixes needs to be specified to be edited.
+
+When the edit order command is executed by calling the `Command#execute()`, the Order indicated by the `Index`, will
+have its order edited, depending on the prefixes that were specified. A new order with the respective details,
+collection/ delivery time, whether an order is for delivery or pickup, and remarks of the order, will be created. This
+is performed by the function `EditOrderCommand#createEditedOrder()`.
+
+All inputs are parsed through an EditOrderCommandParser, which parses each prefix and extracts the relevant information
+for each prefix. This is done in the method `EditOrderCommandParser#parse()`. It also does checks on the validity of the
+user input.
+
+There are two parts to the input that will be checked for validity:
+
+1) When an invalid index is provided, a `CommandException` is thrown and the user will be told that the order index they
+   have provided is invalid.
+2) When there are no prefixes provided, a `ParseException` is thrown and the user is shown a message to provide at
+   least one field to edit.
+3) When an invalid input is parsed, a `ParseException` is thrown and the user is shown a message on the proper usage of
+   the edit order command.
+
+The following sequence diagram illustrates how the `EditOrderCommand` will work:
+![EditOrderSequence](images/EditOrderSequenceDiagram.png)
+
+#### Design considerations
+1) Delivery date and time being parsed in should allow the usage of natural dates such as `Thursday 3pm` or `Monday
+   4pm` and ReadyBakey will know the date being parsed is the next nearest Thursday at 3pm. This is alongside the
+   parsing of date and time in the format `dd-MM-yyyy HH:mm`.
+    - This provides bakers with better ability to key in dates without having to stick to only keying in the full
+      date and time format.
+2) Editing should not be allowed for the completion of the order. It should be done with the use of mark or unmark
+   orders instead.
+3) The person's details cannot be edited through this command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -479,7 +532,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty. 
+* 2a. The list is empty.
 
   Use case ends.
 
@@ -546,7 +599,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. ReadyBakey informs that the order has already been marked incomplete
 
       Use case resumes at step 2.
-    
+
 **Use case: Clears all saved customers**
 
 **MSS**
@@ -665,7 +718,7 @@ Use case ends.
     * 1a1. ReadyBakey requests for the correct customer index.
     * 1a2. User enters the correct customer index.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
-  
+
       Use case resumes at step 2.
 
 **Use case: List all Customers**
