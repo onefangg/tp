@@ -345,7 +345,7 @@ In `MainWindow#executeCommand(String commandText)`, the type of `CommandResult` 
     * isPersonCommand - boolean  indicating whether the command is related to persons
     * isHelpCommand - boolean indicating whether the command is related to getting help
     * isExitCommand - boolean indicating whether the command is to exit the application
-    
+
 The following activity diagram summarizes what happens when a user executes the different types of commands:
 ![DataTogglingActivityDiagram](images/DataTogglingActivityDiagram.png)
 
@@ -353,13 +353,13 @@ The following activity diagram summarizes what happens when a user executes the 
 #### Implementation
 Users are able to find specific orders based on the attributes of the orders. For example, users can find orders that are made by a Person with name "Alex".
 
-Currently, only `name` and `phone` are supported for finding under the `findo` command. 
+Currently, only `name` and `phone` are supported for finding under the `findo` command.
 
 #### Design considerations:
 
 The parsing of searchable attributes and as well as the keywords (to find for) is currently done with `ArgumentTokenizer.tokenize()` method. This is for congruency with parsing methods in `AddOrderCommandParser`, `EditOrderCommandParser` etc.
 
-The method will return a `HashMap<String, String>`. As `HashMap` is an unordered structure, filtering on multiple attributes in a single command potentially results in undeterministic results. 
+The method will return a `HashMap<String, String>`. As `HashMap` is an unordered structure, filtering on multiple attributes in a single command potentially results in undeterministic results.
 
 * **Alternative 1 (current choice):** `findo` will only support filter for one attribute in a single command 
   * Filtering for multiple attributes in a single command will result in an error eg `findo n/Alex p/98742313`.
@@ -532,7 +532,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty. 
+* 2a. The list is empty.
 
   Use case ends.
 
@@ -599,7 +599,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. ReadyBakey informs that the order has already been marked incomplete
 
       Use case resumes at step 2.
-    
+
 **Use case: Clears all saved customers**
 
 **MSS**
@@ -718,7 +718,7 @@ Use case ends.
     * 1a1. ReadyBakey requests for the correct customer index.
     * 1a2. User enters the correct customer index.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
-  
+
       Use case resumes at step 2.
 
 **Use case: List all Customers**
