@@ -2,10 +2,14 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+
+import java.util.stream.Collectors;
 
 /**
  * An UI component that displays information of a {@code Order}.
@@ -37,7 +41,7 @@ public class OrderCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private Label details;
+    private FlowPane details;
     @FXML
     private Label deliveryDateTime;
     @FXML
@@ -55,11 +59,14 @@ public class OrderCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
-        details.setText(order.getDetails().value);
         complete.setText(order.getComplete().toString());
         remark.setText(order.getRemark().value);
         deliveryDateTime.setText(order.getDeliveryDateTime().toString());
         collectionType.setText(order.getCollectionType().getValue());
+
+        order.getDetails().stream().
+                map(Details::toString).
+                forEach(detail -> details.getChildren().add(new Label(detail)));
     }
 
     /**
@@ -73,10 +80,13 @@ public class OrderCard extends UiPart<Region> {
         phone.setText("Null");
         address.setText("Null");
         remark.setText(order.getRemark().value);
-        details.setText(order.getDetails().value);
+//        details.setText(order.getDetails().stream().map(Details::toString).collect(Collectors.joining()));
         deliveryDateTime.setText(order.getDeliveryDateTime().toString());
         collectionType.setText(order.getCollectionType().getValue());
         complete.setText(order.getComplete().toString());
+        order.getDetails().stream().
+                map(Details::toString).
+                forEach(detail -> details.getChildren().add(new Label(detail)));
     }
 
 

@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import seedu.address.commons.core.Messages;
@@ -77,7 +78,7 @@ public class EditOrderCommand extends Command {
     private static Order createEditedOrder(Order orderToEdit, EditOrderDescriptor editOrderDescriptor) {
         assert orderToEdit != null;
 
-        Details updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
+        Set<Details> updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
         Complete complete = orderToEdit.getComplete();
         UUID uuid = orderToEdit.getUuid();
         Remark updatedRemarks = editOrderDescriptor.getRemark().orElse(orderToEdit.getRemark());
@@ -113,7 +114,7 @@ public class EditOrderCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditOrderDescriptor {
-        private Details details;
+        private Set<Details> details;
         private Remark remark;
         private DeliveryDateTime deliveryDateTime;
         private CollectionType collectionType;
@@ -138,11 +139,11 @@ public class EditOrderCommand extends Command {
             return CollectionUtil.isAnyNonNull(details, remark, deliveryDateTime, collectionType);
         }
 
-        public void setDetails(Details details) {
+        public void setDetails(Set<Details> details) {
             this.details = details;
         }
 
-        public Optional<Details> getDetails() {
+        public Optional<Set<Details>> getDetails() {
             return Optional.ofNullable(details);
         }
 

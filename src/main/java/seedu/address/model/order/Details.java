@@ -1,5 +1,8 @@
 package seedu.address.model.order;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -8,16 +11,23 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidDetails(String)}
  */
 public class Details {
-
-    public static final String MESSAGE_CONSTRAINTS = "Details can take any values, and it should not be blank";
-
     /*
-     * The first character of the details must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Details passed in should follow convention eg. "1 : chocolate cake with sprinkles".
+     * Characters preceding the colon should only be numerical. This is parsed as the quantity.
+     * Characters following the colon should be either alphabets or whitespace. This is parsed as the order item.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    private static final String ORDER_QUANTITY_REGEX_KEYWORD = "orderQuantity";
+    private static final String ORDER_ITEM_REGEX_KEYWORD = "orderItem";
+    private static final String VALIDATION_REGEX = String.format("^(?<%s>\\d+)\\s*:\\s*(?<%s>[a-zA-Z ]+)$",
+        ORDER_QUANTITY_REGEX_KEYWORD, ORDER_ITEM_REGEX_KEYWORD);
+    public static final Pattern DETAIL_PATTERN = Pattern.compile(VALIDATION_REGEX);
+
+    public static final String MESSAGE_CONSTRAINTS = "Details consists of a number (quantity), " +
+            "followed by a colon (:) and by alphabetical or whitespace characters. \n EXAMPLE: d/1: vanilla cake";
 
     public final String value;
+    public final String item;
+    public final int quantity;
 
     /**
      * Constructs an {@code Details}.
@@ -28,6 +38,8 @@ public class Details {
         requireNonNull(details);
         checkArgument(isValidDetails(details), MESSAGE_CONSTRAINTS);
         value = details;
+        quantity = parseValidatedQuantity();
+        item = parseValidatedItem();
     }
 
     /**
@@ -35,6 +47,30 @@ public class Details {
      */
     public static boolean isValidDetails(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    private int parseValidatedQuantity() {
+        String quantityParsed = parseDetails(ORDER_QUANTITY_REGEX_KEYWORD);
+        assert quantityParsed != null;
+        return Integer.parseInt(quantityParsed);
+    }
+
+    private String parseValidatedItem() {
+        String itemParsed = parseDetails(ORDER_ITEM_REGEX_KEYWORD);
+        assert itemParsed != null;
+        return itemParsed;
+    }
+
+    private String parseDetails(String regexKeyword) {
+        assert regexKeyword.equals(ORDER_QUANTITY_REGEX_KEYWORD) || regexKeyword.equals(ORDER_ITEM_REGEX_KEYWORD);
+        assert isValidDetails(value);
+
+        final Matcher matcher = DETAIL_PATTERN.matcher(value);
+
+        if (!matcher.matches()) {
+            return null;
+        }
+        return matcher.group(regexKeyword);
     }
 
     @Override

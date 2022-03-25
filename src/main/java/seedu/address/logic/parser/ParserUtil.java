@@ -121,9 +121,18 @@ public class ParserUtil {
      * @throws ParseException if the given {@code address} is invalid.
      *
      */
-    public static Details parseDetails(String details) throws ParseException {
+    public static Set<Details> parseDetails(Collection<String> details) throws ParseException {
         requireNonNull(details);
-        String trimmedDetails = details.trim();
+        final Set<Details> detailsSet = new HashSet<>();
+        for (String tagName : details) {
+            detailsSet.add(parseDetail(tagName));
+        }
+        return detailsSet;
+    }
+
+    public static Details parseDetail(String detail) throws ParseException {
+        requireNonNull(detail);
+        String trimmedDetails = detail.trim();
         if (!Details.isValidDetails(trimmedDetails)) {
             throw new ParseException(Details.MESSAGE_CONSTRAINTS);
         }

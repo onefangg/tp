@@ -1,6 +1,11 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,24 +28,27 @@ class JsonAdaptedOrder {
 
 
     private final String remark;
-    private final String details;
     private final String deliveryDateTime;
     private final String collectionType;
     private final String complete;
     private final String uuid;
+
+    private final List<JsonAdaptedDetails> details = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedOrder} with the given order details.
      */
     @JsonCreator
     public JsonAdaptedOrder(@JsonProperty("remark") String remark,
-                            @JsonProperty("details") String details,
+                            @JsonProperty("details") List<JsonAdaptedDetails> details,
                             @JsonProperty("deliveryDateTime") String deliveryDateTime,
                             @JsonProperty("collectionType") String collectionType,
                             @JsonProperty("complete") String complete,
                             @JsonProperty("uuid") String uuid) {
         this.remark = remark;
-        this.details = details;
+        if (details != null) {
+            this.details.addAll(details);
+        }
         this.deliveryDateTime = deliveryDateTime;
         this.collectionType = collectionType;
         this.complete = complete;
@@ -51,14 +59,14 @@ class JsonAdaptedOrder {
      * Converts a given {@code Order} into this class for Jackson use.
      */
     public JsonAdaptedOrder(Order source) {
-
         remark = source.getRemark().value;
-        details = source.getDetails().value;
         deliveryDateTime = source.getDeliveryDateTime().toJsonSavedString();
         collectionType = source.getCollectionType().value;
         complete = source.getComplete().value.toString();
         uuid = source.getUuid().toString();
-
+        details.addAll(source.getDetails().stream()
+                .map(JsonAdaptedDetails::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -67,16 +75,14 @@ class JsonAdaptedOrder {
      * @throws IllegalValueException if there were any data constraints violated in the adapted order.
      */
     public Order toModelType() throws IllegalValueException {
+        final List<Details> orderDetails = new ArrayList<>();
+        for (JsonAdaptedDetails detail: details) {
+            orderDetails.add(detail.toModelType());
+        }
 
         final Remark modelRemark = new Remark(remark);
 
-        if (details == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Details.class.getSimpleName()));
-        }
-        if (!Details.isValidDetails(details)) {
-            throw new IllegalValueException(Details.MESSAGE_CONSTRAINTS);
-        }
-        final Details modelDetails = new Details(details);
+        final Set<Details> modelDetails = new HashSet<>(orderDetails);
 
         if (deliveryDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

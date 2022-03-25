@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import seedu.address.commons.core.Messages;
@@ -57,7 +58,7 @@ public class MarkOrderCommand extends Command {
 
 
         Remark updatedRemark = orderToMark.getRemark();
-        Details updatedDetails = orderToMark.getDetails();
+        Set<Details> updatedDetails = orderToMark.getDetails();
         DeliveryDateTime updatedDeliveryDateTime = orderToMark.getDeliveryDateTime();
         CollectionType updatedCollectionType = orderToMark.getCollectionType();
         Complete updatedComplete = new Complete(true);

@@ -2,7 +2,10 @@ package seedu.address.model.order;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 import seedu.address.model.person.Remark;
@@ -20,20 +23,19 @@ public class Order {
     // Data fields
 
     private final Remark remark;
-    private final Details details;
+    private final Set<Details> details = new HashSet<>();
     private final DeliveryDateTime deliveryDateTime;
     private final Complete complete;
     private final CollectionType collectionType;
-
     /**
      * Every field must be present and not null.
      */
-    public Order(Remark remark, Details details,
+    public Order(Remark remark, Set<Details> details,
                  DeliveryDateTime deliveryDateTime, CollectionType collectionType, UUID uuid) {
         requireAllNonNull(remark, details, deliveryDateTime, collectionType, uuid);
 
         this.remark = remark;
-        this.details = details;
+        this.details.addAll(details);
         this.complete = new Complete(false);
         this.deliveryDateTime = deliveryDateTime;
         this.collectionType = collectionType;
@@ -43,20 +45,20 @@ public class Order {
     /**
      * Every field must be present and not null.
      */
-    public Order(Remark remark, Details details,
+    public Order(Remark remark, Set<Details> details,
                  DeliveryDateTime deliveryDateTime, CollectionType collectionType, Complete complete, UUID uuid) {
         requireAllNonNull(remark, details, deliveryDateTime, collectionType, complete, uuid);
 
         this.remark = remark;
-        this.details = details;
+        this.details.addAll(details);
         this.deliveryDateTime = deliveryDateTime;
         this.collectionType = collectionType;
         this.complete = complete;
         this.uuid = uuid;
     }
 
-    public Details getDetails() {
-        return details;
+    public Set<Details> getDetails() {
+        return Collections.unmodifiableSet(details);
     }
 
 
