@@ -38,7 +38,7 @@ public class DetailsTest {
 
         // valid details
         assertTrue(Details.isValidDetails("1: chocolatecake")); // expected format
-        assertTrue(Details.isValidDetails("   1 : chocolate cake   "));  // whitespaces in-front of quantity
+        assertTrue(Details.isValidDetails("   1 : chocolate cake   ")); // whitespaces in-front of quantity
         assertTrue(Details.isValidDetails("1      :      chocolate cake")); // white spaces between quantity and item
         assertTrue(Details.isValidDetails("1:chocolatecake")); // no whitespaces in-between
         assertTrue(Details.isValidDetails("1: chOcOlateCake")); // uppercase characters

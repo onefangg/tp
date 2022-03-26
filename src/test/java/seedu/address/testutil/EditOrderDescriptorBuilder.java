@@ -1,17 +1,15 @@
 package seedu.address.testutil;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.EditOrderCommand.EditOrderDescriptor;
 import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Remark;
-
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 
 /**
  * A utility class to help with building EditOrderDescriptor objects.

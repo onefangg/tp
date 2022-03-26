@@ -16,19 +16,19 @@ import seedu.address.model.person.Remark;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Order {
+    // Limits for list-type fields
+    public static final int MAX_DETAIL_SIZE = 5;
 
     // Identity fields
     private final UUID uuid;
 
     // Data fields
-
     private final Remark remark;
     private final List<Details> details = new ArrayList<>();
     private final DeliveryDateTime deliveryDateTime;
     private final Complete complete;
     private final CollectionType collectionType;
 
-    public static final int MAX_DETAIL_SIZE = 5;
     /**
      * Every field must be present and not null.
      */

@@ -120,11 +120,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     *
+     * Parses {@code Collection<String> detail} into a {@code List<Detail>}.
      */
     public static List<Details> parseDetails(Collection<String> details) throws ParseException {
         requireNonNull(details);
@@ -139,6 +135,11 @@ public class ParserUtil {
         return detailsList;
     }
 
+    /**
+     * Parses a {@code String detail} into a {@code Details}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code detail} is invalid.
+     */
     public static Details parseDetail(String detail) throws ParseException {
         requireNonNull(detail);
         String trimmedDetails = detail.trim();

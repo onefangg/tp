@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.util.SampleDataUtil.getDetailsList;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -10,9 +12,6 @@ import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Remark;
-import seedu.address.model.util.SampleDataUtil;
-
-import static seedu.address.model.util.SampleDataUtil.getDetailsList;
 
 public class OrderBuilder {
 

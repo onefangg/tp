@@ -21,7 +21,6 @@ import seedu.address.model.ModelStub;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.DeliveryDateTime;
-import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;

@@ -78,7 +78,8 @@ public class AddOrderCommandParserTest {
         assertParseSuccess(parser, PHONE_DESC_AMY + DETAILS_DESC_BOB + DETAILS_DESC_AMY + REMARK_DESC_AMY
                 + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY,
                 new AddOrderCommand(new Phone(VALID_PHONE_AMY), new Remark(VALID_REMARK_AMY),
-                        getDetailsList(VALID_DETAILS_BOB, VALID_DETAILS_AMY), new DeliveryDateTime(VALID_DELIVERYDATETIME_AMY),
+                        getDetailsList(VALID_DETAILS_BOB, VALID_DETAILS_AMY),
+                        new DeliveryDateTime(VALID_DELIVERYDATETIME_AMY),
                         CollectionType.DELIVERY));
 
         // multiple deliveryDateTime - last deliveryDateTime accepted
@@ -174,8 +175,8 @@ public class AddOrderCommandParserTest {
 
         // invalid number of details passed in (>5)
         assertParseFailure(parser, PHONE_DESC_AMY
-                        + DETAILS_DESC_AMY + DETAILS_DESC_AMY + DETAILS_DESC_AMY + DETAILS_DESC_AMY + DETAILS_DESC_AMY + DETAILS_DESC_AMY
-                        + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY,
+                        + DETAILS_DESC_AMY + DETAILS_DESC_AMY + DETAILS_DESC_AMY + DETAILS_DESC_AMY + DETAILS_DESC_AMY
+                        + DETAILS_DESC_AMY + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY,
                 String.format(MESSAGE_MAX_LIMIT, PREFIX_DETAILS, Order.MAX_DETAIL_SIZE));
     }
 }
