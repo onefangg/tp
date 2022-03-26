@@ -2,10 +2,10 @@ package seedu.address.model.order;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 import seedu.address.model.person.Remark;
@@ -23,14 +23,16 @@ public class Order {
     // Data fields
 
     private final Remark remark;
-    private final Set<Details> details = new HashSet<>();
+    private final List<Details> details = new ArrayList<>();
     private final DeliveryDateTime deliveryDateTime;
     private final Complete complete;
     private final CollectionType collectionType;
+
+    public static final int MAX_DETAIL_SIZE = 5;
     /**
      * Every field must be present and not null.
      */
-    public Order(Remark remark, Set<Details> details,
+    public Order(Remark remark, List<Details> details,
                  DeliveryDateTime deliveryDateTime, CollectionType collectionType, UUID uuid) {
         requireAllNonNull(remark, details, deliveryDateTime, collectionType, uuid);
 
@@ -45,7 +47,7 @@ public class Order {
     /**
      * Every field must be present and not null.
      */
-    public Order(Remark remark, Set<Details> details,
+    public Order(Remark remark, List<Details> details,
                  DeliveryDateTime deliveryDateTime, CollectionType collectionType, Complete complete, UUID uuid) {
         requireAllNonNull(remark, details, deliveryDateTime, collectionType, complete, uuid);
 
@@ -57,8 +59,8 @@ public class Order {
         this.uuid = uuid;
     }
 
-    public Set<Details> getDetails() {
-        return Collections.unmodifiableSet(details);
+    public List<Details> getDetails() {
+        return Collections.unmodifiableList(details);
     }
 
 

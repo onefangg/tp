@@ -1,9 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_MAX_LIMIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -12,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -121,13 +126,17 @@ public class ParserUtil {
      * @throws ParseException if the given {@code address} is invalid.
      *
      */
-    public static Set<Details> parseDetails(Collection<String> details) throws ParseException {
+    public static List<Details> parseDetails(Collection<String> details) throws ParseException {
         requireNonNull(details);
-        final Set<Details> detailsSet = new HashSet<>();
-        for (String tagName : details) {
-            detailsSet.add(parseDetail(tagName));
+        if (details.size() > Order.MAX_DETAIL_SIZE) {
+            throw new ParseException(String.format(MESSAGE_MAX_LIMIT, PREFIX_DETAILS, Order.MAX_DETAIL_SIZE));
         }
-        return detailsSet;
+
+        final List<Details> detailsList = new ArrayList<>();
+        for (String detailInput : details) {
+            detailsList.add(parseDetail(detailInput));
+        }
+        return detailsList;
     }
 
     public static Details parseDetail(String detail) throws ParseException {

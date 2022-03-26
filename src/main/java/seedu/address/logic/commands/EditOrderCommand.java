@@ -78,7 +78,7 @@ public class EditOrderCommand extends Command {
     private static Order createEditedOrder(Order orderToEdit, EditOrderDescriptor editOrderDescriptor) {
         assert orderToEdit != null;
 
-        Set<Details> updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
+        List<Details> updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
         Complete complete = orderToEdit.getComplete();
         UUID uuid = orderToEdit.getUuid();
         Remark updatedRemarks = editOrderDescriptor.getRemark().orElse(orderToEdit.getRemark());
@@ -114,7 +114,7 @@ public class EditOrderCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditOrderDescriptor {
-        private Set<Details> details;
+        private List<Details> details;
         private Remark remark;
         private DeliveryDateTime deliveryDateTime;
         private CollectionType collectionType;
@@ -139,11 +139,11 @@ public class EditOrderCommand extends Command {
             return CollectionUtil.isAnyNonNull(details, remark, deliveryDateTime, collectionType);
         }
 
-        public void setDetails(Set<Details> details) {
+        public void setDetails(List<Details> details) {
             this.details = details;
         }
 
-        public Optional<Set<Details>> getDetails() {
+        public Optional<List<Details>> getDetails() {
             return Optional.ofNullable(details);
         }
 

@@ -82,7 +82,7 @@ class JsonAdaptedOrder {
 
         final Remark modelRemark = new Remark(remark);
 
-        final Set<Details> modelDetails = new HashSet<>(orderDetails);
+        final List<Details> modelDetails = new ArrayList<>(orderDetails);
 
         if (deliveryDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

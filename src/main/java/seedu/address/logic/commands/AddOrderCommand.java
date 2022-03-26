@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 import javafx.collections.transformation.FilteredList;
@@ -52,7 +52,7 @@ public class AddOrderCommand extends Command {
     public static final String MESSAGE_NO_PERSON_FOUND = "No person found with the same phone number, "
             + "please enter a valid phone number.";
 
-    private final Set<Details> details;
+    private final List<Details> details;
     private final Phone phone;
     private final CollectionType collectionType;
     private final DeliveryDateTime deliveryDateTime;
@@ -61,7 +61,7 @@ public class AddOrderCommand extends Command {
     /**
      * Creates an AddOrderCommand to add the specified {@code Order}
      */
-    public AddOrderCommand(Phone phone, Remark remark, Set<Details> details, DeliveryDateTime deliveryDateTime,
+    public AddOrderCommand(Phone phone, Remark remark, List<Details> details, DeliveryDateTime deliveryDateTime,
                            CollectionType collectionType) {
         requireAllNonNull(phone, remark, details, deliveryDateTime, collectionType);
         this.phone = phone;

@@ -7,6 +7,7 @@ import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Remark;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -43,8 +44,8 @@ public class EditOrderDescriptorBuilder {
      * Sets the {@code Details} of the {@code EditOrderDescriptor} that we are building.
      */
     public EditOrderDescriptorBuilder withDetails(String... details) {
-        Set<Details> detailsSet = Stream.of(details).map(Details::new).collect(Collectors.toSet());
-        descriptor.setDetails(detailsSet);
+        List<Details> detailsList = Stream.of(details).map(Details::new).collect(Collectors.toList());
+        descriptor.setDetails(detailsList);
         return this;
     }
 

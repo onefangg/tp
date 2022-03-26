@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -40,7 +41,7 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
 
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
-        Set<Details> details = ParserUtil.parseDetails(argMultimap.getAllValues(PREFIX_DETAILS));
+        List<Details> details = ParserUtil.parseDetails(argMultimap.getAllValues(PREFIX_DETAILS));
         DeliveryDateTime deliveryDateTime = ParserUtil.parseDeliveryDateTime(argMultimap
                 .getValue(PREFIX_DELIVERYDATETIME).get());
         CollectionType collectionType = ParserUtil.parseCollectionType(

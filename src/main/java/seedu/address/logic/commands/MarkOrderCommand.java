@@ -58,7 +58,7 @@ public class MarkOrderCommand extends Command {
 
 
         Remark updatedRemark = orderToMark.getRemark();
-        Set<Details> updatedDetails = orderToMark.getDetails();
+        List<Details> updatedDetails = orderToMark.getDetails();
         DeliveryDateTime updatedDeliveryDateTime = orderToMark.getDeliveryDateTime();
         CollectionType updatedCollectionType = orderToMark.getCollectionType();
         Complete updatedComplete = new Complete(true);
