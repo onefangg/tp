@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.util.SampleDataUtil.getDetailsList;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class AddOrderCommandTest {
         Order validOrder = new OrderBuilder().build();
 
         CommandResult commandResult = new AddOrderCommand(new Phone(OrderBuilder.DEFAULT_PHONE),
-                new Remark(OrderBuilder.DEFAULT_REMARK), new Details(OrderBuilder.DEFAULT_DETAILS),
+                new Remark(OrderBuilder.DEFAULT_REMARK), getDetailsList(OrderBuilder.DEFAULT_DETAILS),
                 new DeliveryDateTime(OrderBuilder.DEFAULT_DELIVERYDATETIME), CollectionType.DELIVERY)
                 .execute(modelStub);
 
@@ -55,7 +56,7 @@ public class AddOrderCommandTest {
     public void execute_duplicateOrder_throwsCommandException() {
         Order validOrder = new OrderBuilder().withUuid(PersonBuilder.DEFAULT_UUID).build();
         AddOrderCommand addOrderCommand = new AddOrderCommand((new Phone(OrderBuilder.DEFAULT_PHONE)),
-                new Remark(OrderBuilder.DEFAULT_REMARK), new Details(OrderBuilder.DEFAULT_DETAILS),
+                new Remark(OrderBuilder.DEFAULT_REMARK), getDetailsList(OrderBuilder.DEFAULT_DETAILS),
                 new DeliveryDateTime(OrderBuilder.DEFAULT_DELIVERYDATETIME), CollectionType.DELIVERY);
 
         ModelStub modelStub = new AddOrderCommandTest.ModelStubWithOrder(validOrder);
@@ -67,10 +68,10 @@ public class AddOrderCommandTest {
     @Test
     public void equals() {
         AddOrderCommand addAliceOrderCommand = new AddOrderCommand((new Phone(OrderBuilder.DEFAULT_PHONE)),
-                new Remark(OrderBuilder.DEFAULT_REMARK), new Details(OrderBuilder.DEFAULT_DETAILS),
+                new Remark(OrderBuilder.DEFAULT_REMARK), getDetailsList(OrderBuilder.DEFAULT_DETAILS),
                 new DeliveryDateTime(OrderBuilder.DEFAULT_DELIVERYDATETIME), CollectionType.DELIVERY);
         AddOrderCommand addBobOrderCommand = new AddOrderCommand((new Phone("12345")),
-                new Remark(OrderBuilder.DEFAULT_REMARK), new Details(OrderBuilder.DEFAULT_DETAILS),
+                new Remark(OrderBuilder.DEFAULT_REMARK), getDetailsList(OrderBuilder.DEFAULT_DETAILS),
                 new DeliveryDateTime(OrderBuilder.DEFAULT_DELIVERYDATETIME), CollectionType.DELIVERY);
 
         // same object -> returns true
@@ -78,7 +79,7 @@ public class AddOrderCommandTest {
 
         // same values -> returns true
         AddOrderCommand addAliceOrderCommandCopy = new AddOrderCommand((new Phone(OrderBuilder.DEFAULT_PHONE)),
-                new Remark(OrderBuilder.DEFAULT_REMARK), new Details(OrderBuilder.DEFAULT_DETAILS),
+                new Remark(OrderBuilder.DEFAULT_REMARK), getDetailsList(OrderBuilder.DEFAULT_DETAILS),
                 new DeliveryDateTime(OrderBuilder.DEFAULT_DELIVERYDATETIME), CollectionType.DELIVERY);
         assertTrue(addAliceOrderCommand.equals(addAliceOrderCommandCopy));
 

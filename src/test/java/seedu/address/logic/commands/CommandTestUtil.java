@@ -45,8 +45,8 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_AMY = "Add more chocolate";
     public static final String VALID_REMARK_BOB = "Enjoys a joke or two";
     public static final String VALID_REMARK_EMPTY = "";
-    public static final String VALID_DETAILS_AMY = "1xchocolatemuffin";
-    public static final String VALID_DETAILS_BOB = "1xraspberrycake";
+    public static final String VALID_DETAILS_AMY = "1:chocolatemuffin";
+    public static final String VALID_DETAILS_BOB = "1:raspberrycake";
     public static final String VALID_UUID_AMY = "c03d9523-9748-4fdd-938e-5666b9564af6";
     public static final String VALID_UUID_BOB = "2609b29d-9532-4efb-8d9a-f7ab63d6d612";
     public static final String VALID_DELIVERYDATETIME_AMY = "11-11-2022 15:30";
@@ -87,6 +87,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_DETAILS_DESC = " " + PREFIX_DETAILS + "1: ch0co!ate cake";  // non-alphabet or whitespace characters allowed
     public static final String INVALID_DELIVERYDATETIME_DESC = " " + PREFIX_DELIVERYDATETIME
             + "20/01/2022 23:32"; // format is wrong
     public static final String INVALID_COLLECTIONTYPE_DESC = " " + PREFIX_COLLECTION_TYPE

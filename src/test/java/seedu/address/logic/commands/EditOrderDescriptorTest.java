@@ -4,6 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY_ORDER;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB_ORDER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COLLECTIONTYPE_BOB_STRING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COLLECTIONTYPE_BOB_TYPE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPLETE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERYDATETIME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_BOB;
 
 import org.junit.jupiter.api.Test;
@@ -31,8 +36,24 @@ public class EditOrderDescriptorTest {
         // different values -> returns false
         assertFalse(DESC_AMY_ORDER.equals(DESC_BOB_ORDER));
 
+        // different deliverydatetime -> returns false
+        EditOrderDescriptor editedAmy = new EditOrderDescriptorBuilder(DESC_AMY_ORDER)
+                .withDeliveryDateTime(VALID_DELIVERYDATETIME_BOB)
+                .build();
+        assertFalse(DESC_AMY_ORDER.equals(editedAmy));
+
+        // different collectiontype -> returns false
+        editedAmy = new EditOrderDescriptorBuilder(DESC_AMY_ORDER)
+                .withCollectionType(VALID_COLLECTIONTYPE_BOB_TYPE)
+                .build();
+        assertFalse(DESC_AMY_ORDER.equals(editedAmy));
+
         // different details -> returns false
-        EditOrderDescriptor editedAmy = new EditOrderDescriptorBuilder(DESC_AMY_ORDER).withDetails(VALID_DETAILS_BOB)
+        editedAmy = new EditOrderDescriptorBuilder(DESC_AMY_ORDER).withDetails(VALID_DETAILS_BOB)
+                .build();
+        assertFalse(DESC_AMY_ORDER.equals(editedAmy));
+
+        editedAmy = new EditOrderDescriptorBuilder(DESC_AMY_ORDER).withDetails(VALID_DETAILS_AMY, VALID_DETAILS_BOB)
                 .build();
         assertFalse(DESC_AMY_ORDER.equals(editedAmy));
 
