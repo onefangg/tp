@@ -16,7 +16,6 @@ import seedu.address.model.order.NaturalDateParser.Dates;
 public class DateChecker {
     private static String dateFormat;
     private static String dateToCheck;
-    private static int daysAfter = 0;
 
     private static int NUM_DAYS_IN_WEEK = 7;
 
@@ -36,11 +35,12 @@ public class DateChecker {
         int nextTuesday = (Calendar.SATURDAY - today + 3) % NUM_DAYS_IN_WEEK;
         int nextWednesday = (Calendar.SATURDAY - today + 4) % NUM_DAYS_IN_WEEK;
         int nextThursday = (Calendar.SATURDAY - today + 5) % NUM_DAYS_IN_WEEK;
-        int nextFriday = (Calendar.SATURDAY - today + 2) % NUM_DAYS_IN_WEEK;
+        int nextFriday = (Calendar.SATURDAY - today + 6) % NUM_DAYS_IN_WEEK;
         int nextSaturday = (Calendar.SATURDAY - today) % NUM_DAYS_IN_WEEK;
         int nextSunday = (Calendar.SATURDAY - today + 1) % NUM_DAYS_IN_WEEK;
 
         boolean isValidDate = true;
+        int daysAfter = 0;
 
         switch (inputtedDay) {
         case MONDAY:
@@ -84,7 +84,7 @@ public class DateChecker {
             break;
         }
         if (isValidDate) {
-            dateFormat = formatDate(now);
+            dateFormat = formatDate(now, daysAfter);
         }
     }
 
@@ -114,8 +114,8 @@ public class DateChecker {
      * @param now Calendar class object meant to format the date.
      * @return Date in String format.
      */
-    private static String formatDate(Calendar now) {
-        now.add(Calendar.DAY_OF_YEAR, daysAfter);
+    private static String formatDate(Calendar now, int daysAfterToday) {
+        now.add(Calendar.DAY_OF_YEAR, daysAfterToday);
         Date date = now.getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         dateFormat.setLenient(false);
