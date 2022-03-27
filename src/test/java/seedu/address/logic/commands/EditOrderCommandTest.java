@@ -35,7 +35,7 @@ public class EditOrderCommandTest {
     private Model model = new ModelManager(getTypicalAddressBookOrders(), new UserPrefs());
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Order editedOrder = new OrderBuilder(model.getFilteredOrderList().get(0))
+        Order editedOrder = new OrderBuilder(model.getOrderList().get(0))
                 .withDetails("1xChocCake").build(); // Creates the order in orderbuilder
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(editedOrder).build();
         EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_FIRST_ORDER, descriptor);
@@ -43,15 +43,15 @@ public class EditOrderCommandTest {
         String expectedMessage = String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS, editedOrder);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setOrder(model.getFilteredOrderList().get(0), editedOrder);
+        expectedModel.setOrder(model.getOrderList().get(0), editedOrder);
 
         assertOrderCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastOrder = Index.fromOneBased(model.getFilteredOrderList().size());
-        Order lastOrder = model.getFilteredOrderList().get(indexLastOrder.getZeroBased());
+        Index indexLastOrder = Index.fromOneBased(model.getOrderList().size());
+        Order lastOrder = model.getOrderList().get(indexLastOrder.getZeroBased());
 
         OrderBuilder orderInList = new OrderBuilder(lastOrder);
 
@@ -79,7 +79,7 @@ public class EditOrderCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_FIRST_ORDER, new EditOrderDescriptor());
-        Order editedOrder = model.getFilteredOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
+        Order editedOrder = model.getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
 
         String expectedMessage = String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS, editedOrder);
 
@@ -92,7 +92,7 @@ public class EditOrderCommandTest {
     public void execute_filteredList_success() {
         showOrderAtIndex(model, INDEX_FIRST_ORDER);
 
-        Order orderInFilteredList = model.getFilteredOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
+        Order orderInFilteredList = model.getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
         Order editedOrder = new OrderBuilder(orderInFilteredList).build();
         EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_FIRST_ORDER,
                 new EditOrderDescriptorBuilder().build());
@@ -100,14 +100,14 @@ public class EditOrderCommandTest {
         String expectedMessage = String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS, editedOrder);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setOrder(model.getFilteredOrderList().get(0), editedOrder);
+        expectedModel.setOrder(model.getOrderList().get(0), editedOrder);
 
         assertOrderCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidOrderIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getOrderList().size() + 1);
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder().build();
         EditOrderCommand editOrderCommand = new EditOrderCommand(outOfBoundIndex, descriptor);
 

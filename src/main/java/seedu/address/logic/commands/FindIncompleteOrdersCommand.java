@@ -30,9 +30,9 @@ public class FindIncompleteOrdersCommand extends FindOrderCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredOrderList(predicate);
+        model.updatedSortedFilteredOrderList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_ORDERS_LISTED_OVERVIEW, model.getFilteredOrderList().size()),
+                String.format(Messages.MESSAGE_ORDERS_LISTED_OVERVIEW, model.getOrderList().size()),
                 true, false);
     }
 

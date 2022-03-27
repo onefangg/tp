@@ -30,8 +30,8 @@ public class MarkOrderCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Index indexLastOrder = Index.fromOneBased(model.getFilteredOrderList().size());
-        Order lastOrder = model.getFilteredOrderList().get(indexLastOrder.getZeroBased());
+        Index indexLastOrder = Index.fromOneBased(model.getOrderList().size());
+        Order lastOrder = model.getOrderList().get(indexLastOrder.getZeroBased());
 
         OrderBuilder orderInList = new OrderBuilder(lastOrder);
         Order editedMarkedOrder = orderInList.withComplete(true).build(); //Setting complete as true
@@ -48,7 +48,7 @@ public class MarkOrderCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getOrderList().size() + 1);
         MarkOrderCommand markOrderCommand = new MarkOrderCommand(outOfBoundIndex);
 
         assertCommandFailure(markOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
@@ -58,14 +58,14 @@ public class MarkOrderCommandTest {
     public void execute_validIndexFilteredList_success() {
         showOrderAtIndex(model, INDEX_FIRST_ORDER);
 
-        Order orderInFilteredList = model.getFilteredOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
+        Order orderInFilteredList = model.getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
         Order editedMarkedOrder = new OrderBuilder(orderInFilteredList).withComplete(true).build();
         MarkOrderCommand markOrderCommand = new MarkOrderCommand(INDEX_FIRST_ORDER);
 
         String expectedMessage = String.format(MarkOrderCommand.MESSAGE_MARK_ORDER_SUCCESS, editedMarkedOrder);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setOrder(model.getFilteredOrderList().get(0), editedMarkedOrder);
+        expectedModel.setOrder(model.getOrderList().get(0), editedMarkedOrder);
 
         assertPersonCommandSuccess(markOrderCommand, model, expectedMessage, expectedModel);
     }

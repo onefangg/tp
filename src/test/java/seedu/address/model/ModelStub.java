@@ -95,7 +95,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public ObservableList<Order> getFilteredOrderList() {
+    public ObservableList<Order> getOrderList() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -108,4 +108,15 @@ public class ModelStub implements Model {
     public void updateFilteredOrderList(Predicate<Order> predicate) {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public void updatedSortedOrderList(ObservableList<Order> orderList) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updatedSortedFilteredOrderList(Predicate<Order> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
 }
