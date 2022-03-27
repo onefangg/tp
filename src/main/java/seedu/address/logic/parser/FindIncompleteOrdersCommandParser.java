@@ -15,8 +15,8 @@ import seedu.address.model.order.OrderIncompleteBeforeDeliveryDateTimePredicate;
 public class FindIncompleteOrdersCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the MarkCommand
-     * and returns a MarkCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindIncompleteOrdersCommand
+     * and returns a FindIncompleteOrdersCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindIncompleteOrdersCommand parse(String args) throws ParseException {

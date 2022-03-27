@@ -2,6 +2,10 @@ package seedu.address.model.order;
 
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Order}'s {@code DeliveryDateTime} is before the given date and its
+ * {@code Complete} status is incomplete.
+ */
 public class OrderIncompleteBeforeDeliveryDateTimePredicate implements Predicate<Order> {
     private final DeliveryDateTime deliveryDateTime;
 

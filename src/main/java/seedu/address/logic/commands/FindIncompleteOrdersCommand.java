@@ -8,7 +8,10 @@ import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.order.Order;
 
-public class FindIncompleteOrdersCommand extends Command {
+/**
+ *  Finds and lists all orders in ReadyBakey who is incomplete as of the given date
+ */
+public class FindIncompleteOrdersCommand extends FindOrderCommand {
 
     public static final String COMMAND_WORD = "incompleteo";
 
