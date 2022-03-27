@@ -143,7 +143,6 @@ public class ParserUtil {
         requireNonNull(deliveryDateTime);
         String trimmedDeliveryDateTime = deliveryDateTime.trim();
         String parsedDeliveryDateTime = DateChecker.parsePotentialNaturalDate(trimmedDeliveryDateTime);
-        System.out.println(parsedDeliveryDateTime);
         if (!DeliveryDateTime.isValidDeliveryDateTime(parsedDeliveryDateTime)) {
             throw new ParseException(DeliveryDateTime.MESSAGE_CONSTRAINTS);
         }

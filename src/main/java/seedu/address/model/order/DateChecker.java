@@ -18,6 +18,8 @@ public class DateChecker {
     private static String dateToCheck;
     private static int daysAfter = 0;
 
+    private static int NUM_DAYS_IN_WEEK = 7;
+
     /**
      * Method meant to detect what type of date user inputs.
      * Format inputs that are not valid date types, but are natural dates.
@@ -30,43 +32,59 @@ public class DateChecker {
         Calendar now = Calendar.getInstance();
         int today = now.get(Calendar.DAY_OF_WEEK);
 
-        int nextMonday = (Calendar.SATURDAY - today + 2) % 7;
-        int nextTuesday = (Calendar.SATURDAY - today + 3) % 7;
-        int nextWednesday = (Calendar.SATURDAY - today + 4) % 7;
-        int nextThursday = (Calendar.SATURDAY - today + 5) % 7;
-        int nextFriday = (Calendar.SATURDAY - today + 2) % 7;
-        int nextSaturday = (Calendar.SATURDAY - today) % 7;
-        int nextSunday = (Calendar.SATURDAY - today + 1) % 7;
+        int nextMonday = (Calendar.SATURDAY - today + 2) % NUM_DAYS_IN_WEEK;
+        int nextTuesday = (Calendar.SATURDAY - today + 3) % NUM_DAYS_IN_WEEK;
+        int nextWednesday = (Calendar.SATURDAY - today + 4) % NUM_DAYS_IN_WEEK;
+        int nextThursday = (Calendar.SATURDAY - today + 5) % NUM_DAYS_IN_WEEK;
+        int nextFriday = (Calendar.SATURDAY - today + 2) % NUM_DAYS_IN_WEEK;
+        int nextSaturday = (Calendar.SATURDAY - today) % NUM_DAYS_IN_WEEK;
+        int nextSunday = (Calendar.SATURDAY - today + 1) % NUM_DAYS_IN_WEEK;
+
+        boolean isValidDate = true;
 
         switch (inputtedDay) {
         case MONDAY:
-        case TUESDAY:
-        case WEDNESDAY:
-        case THURSDAY:
-        case FRIDAY:
-        case SATURDAY:
-        case SUNDAY:
             if (today != Calendar.MONDAY) {
                 daysAfter = nextMonday;
-            } else if (today != Calendar.TUESDAY) {
+            }
+            break;
+        case TUESDAY:
+            if (today != Calendar.TUESDAY) {
                 daysAfter = nextTuesday;
-            } else if (today != Calendar.WEDNESDAY) {
+            }
+            break;
+        case WEDNESDAY:
+            if (today != Calendar.WEDNESDAY) {
                 daysAfter = nextWednesday;
-            } else if (today != Calendar.THURSDAY) {
+            }
+            break;
+        case THURSDAY:
+            if (today != Calendar.THURSDAY) {
                 daysAfter = nextThursday;
-            } else if (today != Calendar.FRIDAY) {
+            }
+            break;
+        case FRIDAY:
+            if (today != Calendar.FRIDAY) {
                 daysAfter = nextFriday;
-            } else if (today != Calendar.SATURDAY) {
+            }
+            break;
+        case SATURDAY:
+            if (today != Calendar.SATURDAY) {
                 daysAfter = nextSaturday;
-            } else if (today != Calendar.SUNDAY) {
+            }
+            break;
+        case SUNDAY:
+            if (today != Calendar.SUNDAY) {
                 daysAfter = nextSunday;
             }
-            dateFormat = formatDate(now);
             break;
-        case NODAYS:
         default:
             dateFormat = dateToCheck;
+            isValidDate = false;
             break;
+        }
+        if (isValidDate) {
+            dateFormat = formatDate(now);
         }
     }
 
