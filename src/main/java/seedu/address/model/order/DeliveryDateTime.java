@@ -14,6 +14,7 @@ import java.time.format.DateTimeParseException;
 public class DeliveryDateTime {
 
     public static final String MESSAGE_CONSTRAINTS = "DeliveryDateTime should be in the format dd/MM/yyyy HH:mm "
+            + "or a natural date (e.g. Mon 22:30, Wednesday 10:20 "
             + "and should be a valid date and time before today's date!";
 
     /*
@@ -33,6 +34,9 @@ public class DeliveryDateTime {
      */
     public DeliveryDateTime(String deliveryDateTime) {
         requireNonNull(deliveryDateTime);
+        // Check here if it's a natural date
+
+        // Check here if it's not a natural date, then parse it to be a proper date format
         checkArgument(isValidDeliveryDateTime(deliveryDateTime), MESSAGE_CONSTRAINTS);
         value = LocalDateTime.parse(deliveryDateTime, PARSER_FORMATTER);
     }
