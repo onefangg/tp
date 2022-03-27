@@ -84,4 +84,8 @@ public class DeliveryDateTime {
         return value.hashCode();
     }
 
+    public LocalDateTime getValue() {
+        return this.value;
+    }
+
 }

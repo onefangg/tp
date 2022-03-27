@@ -2,6 +2,7 @@ package seedu.address.model.order;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -68,8 +69,16 @@ public class Order {
         return deliveryDateTime;
     }
 
+    public LocalDateTime getDeliveryDateTimeValue() {
+        return deliveryDateTime.getValue();
+    }
+
     public Complete getComplete() {
         return complete;
+    }
+
+    public boolean isComplete() {
+        return complete.isComplete();
     }
 
     public UUID getUuid() {

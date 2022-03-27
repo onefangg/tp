@@ -58,4 +58,8 @@ public class Complete {
         return value.hashCode();
     }
 
+    public boolean isComplete() {
+        return this.value;
+    }
+
 }
