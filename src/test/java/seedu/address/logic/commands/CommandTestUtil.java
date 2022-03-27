@@ -90,7 +90,8 @@ public class CommandTestUtil {
     public static final String INVALID_DETAILS_DESC = " " + PREFIX_DETAILS
             + "1: ch0co!ate cake"; // non-alphabet or whitespace characters allowed
     public static final String INVALID_DETAILS_QUANTITY_DESC = " " + PREFIX_DETAILS + "0:chocolatecake";
-    public static final String INVALID_DETAILS_ITEM_DESC = " " + PREFIX_DETAILS + "1:chocolatecakewithexcessivenumberofthings";
+    public static final String INVALID_DETAILS_ITEM_DESC = " " + PREFIX_DETAILS
+            + "1:chocolatecakewithexcessivenumberofthings";
     public static final String INVALID_DELIVERYDATETIME_DESC = " " + PREFIX_DELIVERYDATETIME
             + "20/01/2022 23:32"; // format is wrong
     public static final String INVALID_COLLECTIONTYPE_DESC = " " + PREFIX_COLLECTION_TYPE

@@ -1,11 +1,8 @@
 package seedu.address.model.order;
 
-import seedu.address.logic.parser.exceptions.ParseException;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_MAX_INPUT_LIMIT;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
