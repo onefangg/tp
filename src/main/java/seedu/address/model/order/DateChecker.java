@@ -73,8 +73,8 @@ public class DateChecker {
     /**
      * Formats the natural date input with a time as a proper datetime.
      *
-     * @param input
-     * @return
+     * @param input Input is the date string provided by the user.
+     * @return returns a properly formatted date string with the time
      */
     public static String parsePotentialNaturalDate(String input) {
         try {
