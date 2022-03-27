@@ -1,8 +1,14 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_MAX_LIMIT;
+import static seedu.address.commons.core.Messages.MESSAGE_MAX_INPUT_LIMIT;
+import static seedu.address.commons.core.Messages.MESSAGE_MAX_SIZE_LIMIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.model.order.Details.ITEM_MESSAGE_LIMIT;
+import static seedu.address.model.order.Details.ITEM_SIZE_LIMIT;
+import static seedu.address.model.order.Details.QUANTITY_MESSAGE_LIMIT;
+import static seedu.address.model.order.Details.QUANTITY_SIZE_MAX_LIMIT;
+import static seedu.address.model.order.Details.QUANTITY_SIZE_MIN_LIMIT;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -125,7 +131,7 @@ public class ParserUtil {
     public static List<Details> parseDetails(Collection<String> details) throws ParseException {
         requireNonNull(details);
         if (details.size() > Order.MAX_DETAIL_SIZE) {
-            throw new ParseException(String.format(MESSAGE_MAX_LIMIT, PREFIX_DETAILS, Order.MAX_DETAIL_SIZE));
+            throw new ParseException(String.format(MESSAGE_MAX_SIZE_LIMIT, PREFIX_DETAILS, Order.MAX_DETAIL_SIZE));
         }
 
         final List<Details> detailsList = new ArrayList<>();
@@ -146,7 +152,22 @@ public class ParserUtil {
         if (!Details.isValidDetails(trimmedDetails)) {
             throw new ParseException(Details.MESSAGE_CONSTRAINTS);
         }
-        return new Details(trimmedDetails);
+
+        // parse and validate input quantity
+        String parseInputQuantity = Details.parseValidatedQuantity(trimmedDetails);
+        int inputQuantity = Integer.parseInt(parseInputQuantity);
+        assert inputQuantity >= 0; // negative numbers must be rejected in regex case
+        if (inputQuantity < QUANTITY_SIZE_MIN_LIMIT || inputQuantity > QUANTITY_SIZE_MAX_LIMIT) {
+            throw new ParseException(String.format(MESSAGE_MAX_INPUT_LIMIT, PREFIX_DETAILS,
+                    QUANTITY_MESSAGE_LIMIT));
+        }
+
+        String parseInputItem = Details.parseValidatedItem(trimmedDetails);
+        if (parseInputItem.length() > ITEM_SIZE_LIMIT) {
+            throw new ParseException(String.format(MESSAGE_MAX_INPUT_LIMIT, PREFIX_DETAILS,
+                    ITEM_MESSAGE_LIMIT));
+        }
+        return new Details(trimmedDetails, parseInputItem, inputQuantity);
     }
 
     /**

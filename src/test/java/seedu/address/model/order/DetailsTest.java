@@ -35,14 +35,12 @@ public class DetailsTest {
                 "1: chocolate cake ?? 1 of each *")); // non-alphabet and numeric characters present in order item
         assertFalse(Details.isValidDetails("1: choco 2: cake")); // passing in multiple details at the same time
 
-
         // valid details
         assertTrue(Details.isValidDetails("1: chocolatecake")); // expected format
         assertTrue(Details.isValidDetails("   1 : chocolate cake   ")); // whitespaces in-front of quantity
         assertTrue(Details.isValidDetails("1      :      chocolate cake")); // white spaces between quantity and item
         assertTrue(Details.isValidDetails("1:chocolatecake")); // no whitespaces in-between
         assertTrue(Details.isValidDetails("1: chOcOlateCake")); // uppercase characters
-
     }
 
 }

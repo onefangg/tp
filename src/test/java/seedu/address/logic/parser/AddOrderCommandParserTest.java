@@ -1,7 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_MAX_LIMIT;
+import static seedu.address.commons.core.Messages.MESSAGE_MAX_INPUT_LIMIT;
+import static seedu.address.commons.core.Messages.MESSAGE_MAX_SIZE_LIMIT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COLLECTION_TYPE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COLLECTION_TYPE_DESC_BOB;
@@ -12,6 +13,8 @@ import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COLLECTIONTYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERYDATETIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DETAILS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DETAILS_ITEM_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DETAILS_QUANTITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -30,6 +33,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.model.order.Details.ITEM_MESSAGE_LIMIT;
+import static seedu.address.model.order.Details.QUANTITY_MESSAGE_LIMIT;
 import static seedu.address.model.util.SampleDataUtil.getDetailsList;
 import static seedu.address.testutil.TypicalOrders.AMY;
 
@@ -155,6 +160,18 @@ public class AddOrderCommandParserTest {
                 + DETAILS_DESC_AMY + INVALID_DETAILS_DESC + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_AMY
                 + COLLECTION_TYPE_DESC_AMY, Details.MESSAGE_CONSTRAINTS);
 
+        // invalid quantity passed
+        assertParseFailure(parser, PHONE_DESC_AMY
+                + INVALID_DETAILS_QUANTITY_DESC + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_AMY
+                + COLLECTION_TYPE_DESC_AMY,
+                String.format(MESSAGE_MAX_INPUT_LIMIT, PREFIX_DETAILS, QUANTITY_MESSAGE_LIMIT));
+
+        // invalid number of characters in order item > 30
+        assertParseFailure(parser, PHONE_DESC_AMY
+                + INVALID_DETAILS_ITEM_DESC + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_AMY
+                + COLLECTION_TYPE_DESC_AMY,
+                String.format(MESSAGE_MAX_INPUT_LIMIT, PREFIX_DETAILS, ITEM_MESSAGE_LIMIT));
+
         // invalid deliveryDateTime
         assertParseFailure(parser, PHONE_DESC_AMY
                 + DETAILS_DESC_AMY + REMARK_DESC_AMY + INVALID_DELIVERYDATETIME_DESC
@@ -177,6 +194,6 @@ public class AddOrderCommandParserTest {
         assertParseFailure(parser, PHONE_DESC_AMY
                         + DETAILS_DESC_AMY + DETAILS_DESC_AMY + DETAILS_DESC_AMY + DETAILS_DESC_AMY + DETAILS_DESC_AMY
                         + DETAILS_DESC_AMY + REMARK_DESC_AMY + DELIVERYDATETIME_DESC_AMY + COLLECTION_TYPE_DESC_AMY,
-                String.format(MESSAGE_MAX_LIMIT, PREFIX_DETAILS, Order.MAX_DETAIL_SIZE));
+                String.format(MESSAGE_MAX_SIZE_LIMIT, PREFIX_DETAILS, Order.MAX_DETAIL_SIZE));
     }
 }
