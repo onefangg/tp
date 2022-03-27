@@ -26,7 +26,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * To be added
-  
+
 * **Community**:
   * To be added
 
