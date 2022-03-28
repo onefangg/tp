@@ -49,13 +49,13 @@ public class SampleDataUtil {
 
     public static Order[] getSampleOrders() {
         return new Order[]{
-            new Order(new Remark("No Peanuts"), new Details("3:Strawberry Cupcakes"),
+            new Order(new Remark("No Peanuts"), getDetailsList("3:Strawberry Cupcakes"),
                     new DeliveryDateTime("25-12-2022 15:30"), CollectionType.DELIVERY,
                     UUID.fromString("6ea390c0-242c-4643-a547-21cc85773f88")),
-            new Order(new Remark("Please make delivery by 4pm latest"), new Details("1:Chocolate Cake"),
+            new Order(new Remark("Please make delivery by 4pm latest"), getDetailsList("1:Chocolate Cake"),
                     new DeliveryDateTime("22-12-2022 16:00"), CollectionType.DELIVERY,
                     UUID.fromString("6ea390c0-242c-4643-a547-21cc85773f88")),
-            new Order(new Remark("No candles needed"), new Details("1:Cake"),
+            new Order(new Remark("No candles needed"), getDetailsList("1:Cake"),
                     new DeliveryDateTime("12-12-2022 12:30"), CollectionType.PICKUP,
                     UUID.fromString("0d13afaa-db95-4a2a-b64d-5270e39d243d"))
         };
