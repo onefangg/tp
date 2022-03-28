@@ -43,7 +43,6 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
         CollectionType collectionType = ParserUtil.parseCollectionType(
                 argMultimap.getValue(PREFIX_COLLECTION_TYPE).get());
 
-
         return new AddOrderCommand(phone, remark, details, deliveryDateTime, collectionType);
     }
 

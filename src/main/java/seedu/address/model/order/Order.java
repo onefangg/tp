@@ -59,7 +59,6 @@ public class Order {
         return details;
     }
 
-
     public Remark getRemark() {
         return remark;
     }
