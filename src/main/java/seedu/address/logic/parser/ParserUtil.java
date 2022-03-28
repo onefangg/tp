@@ -1,9 +1,19 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_MAX_INPUT_LIMIT;
+import static seedu.address.commons.core.Messages.MESSAGE_MAX_SIZE_LIMIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.model.order.Details.ITEM_MESSAGE_LIMIT;
+import static seedu.address.model.order.Details.ITEM_SIZE_LIMIT;
+import static seedu.address.model.order.Details.QUANTITY_MESSAGE_LIMIT;
+import static seedu.address.model.order.Details.QUANTITY_SIZE_MAX_LIMIT;
+import static seedu.address.model.order.Details.QUANTITY_SIZE_MIN_LIMIT;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -12,6 +22,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.CollectionType;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -115,19 +126,48 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     *
+     * Parses {@code Collection<String> detail} into a {@code List<Detail>}.
      */
-    public static Details parseDetails(String details) throws ParseException {
+    public static List<Details> parseDetails(Collection<String> details) throws ParseException {
         requireNonNull(details);
-        String trimmedDetails = details.trim();
+        if (details.size() > Order.MAX_DETAIL_SIZE) {
+            throw new ParseException(String.format(MESSAGE_MAX_SIZE_LIMIT, PREFIX_DETAILS, Order.MAX_DETAIL_SIZE));
+        }
+
+        final List<Details> detailsList = new ArrayList<>();
+        for (String detailInput : details) {
+            detailsList.add(parseDetail(detailInput));
+        }
+        return detailsList;
+    }
+
+    /**
+     * Parses a {@code String detail} into a {@code Details}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code detail} is invalid.
+     */
+    public static Details parseDetail(String detail) throws ParseException {
+        requireNonNull(detail);
+        String trimmedDetails = detail.trim();
         if (!Details.isValidDetails(trimmedDetails)) {
             throw new ParseException(Details.MESSAGE_CONSTRAINTS);
         }
-        return new Details(trimmedDetails);
+
+        // parse and validate input quantity
+        String parseInputQuantity = Details.parseValidatedQuantity(trimmedDetails);
+        int inputQuantity = Integer.parseInt(parseInputQuantity);
+        assert inputQuantity >= 0; // negative numbers must be rejected in regex case
+        if (inputQuantity < QUANTITY_SIZE_MIN_LIMIT || inputQuantity > QUANTITY_SIZE_MAX_LIMIT) {
+            throw new ParseException(String.format(MESSAGE_MAX_INPUT_LIMIT, PREFIX_DETAILS,
+                    QUANTITY_MESSAGE_LIMIT));
+        }
+
+        String parseInputItem = Details.parseValidatedItem(trimmedDetails);
+        if (parseInputItem.length() > ITEM_SIZE_LIMIT) {
+            throw new ParseException(String.format(MESSAGE_MAX_INPUT_LIMIT, PREFIX_DETAILS,
+                    ITEM_MESSAGE_LIMIT));
+        }
+        return new Details(trimmedDetails, parseInputItem, inputQuantity);
     }
 
     /**
