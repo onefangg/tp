@@ -2,10 +2,15 @@ package seedu.address.model.util;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.order.CollectionType;
+import seedu.address.model.order.DeliveryDateTime;
+import seedu.address.model.order.Details;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -22,10 +27,10 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new Remark("Allergic to Peanuts"),
-                getTagSet("friends")),
+                getTagSet("friends"), UUID.fromString("6ea390c0-242c-4643-a547-21cc85773f88")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Remark("Allergic to Chicken"),
-                getTagSet("colleagues", "friends")),
+                getTagSet("colleagues", "friends"), UUID.fromString("0d13afaa-db95-4a2a-b64d-5270e39d243d")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Remark("Enjoys a pun or two"),
                 getTagSet("neighbours")),
@@ -41,10 +46,27 @@ public class SampleDataUtil {
         };
     }
 
+    public static Order[] getSampleOrders() {
+        return new Order[]{
+            new Order(new Remark("No Peanuts"), new Details("3:Strawberry Cupcakes"),
+                    new DeliveryDateTime("25-12-2022 15:30"), CollectionType.DELIVERY,
+                    UUID.fromString("6ea390c0-242c-4643-a547-21cc85773f88")),
+            new Order(new Remark("Please make delivery by 4pm latest"), new Details("1:Chocolate Cake"),
+                    new DeliveryDateTime("22-12-2022 16:00"), CollectionType.DELIVERY,
+                    UUID.fromString("6ea390c0-242c-4643-a547-21cc85773f88")),
+            new Order(new Remark("No candles needed"), new Details("1:Cake"),
+                    new DeliveryDateTime("12-12-2022 12:30"), CollectionType.PICKUP,
+                    UUID.fromString("0d13afaa-db95-4a2a-b64d-5270e39d243d"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Order sampleOrder : getSampleOrders()) {
+            sampleAb.addOrder(sampleOrder);
         }
         return sampleAb;
     }
