@@ -79,17 +79,20 @@ Format: `help`
 
 Adds a customer to ReadyBakey’s contact list
 
-Format: `addp n/NAME p/PHONE_NUM a/ADDRESS`
+Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]`
 
 Examples:
 * `addp n/John Doe p/87654321 a/21 Kent Ridge Drive`
+* `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`
 
 ### Delete a customer: `deletep`
 Removes a customer from ReadyBakey’s contact list
+
 Format: `deletep INDEX`
-* Deletes the person at the specified INDEX
-* The index refers to the index number shown in the displayed person list.
+* Deletes the customer at the specified INDEX.
+* The index refers to the index number shown in the displayed customer list.
 * The index must be a positive integer 1, 2, 3, …​
+* Only customers with no orders can be deleted.
 
 Examples:
 * `deletep 2`
@@ -97,6 +100,7 @@ Examples:
 
 ### Listing all customers: `listp`
 Shows a list of all customers in ReadyBakey’s contact list
+
 Format: `listp`
 
 Examples:
@@ -107,7 +111,7 @@ Examples:
 
 Edits an existing customer in ReadyBakey's contact list.
 
-Format: `editp INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] `
+Format: `editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]`
 
 * Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -122,17 +126,14 @@ Examples:
 
 Edits an existing customer in ReadyBakey's contact list.
 
-Format: `edito INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [d/DETAILS]`
+Format: `edito INDEX d/DETAILS`
 
 * Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edito 1 p/83456789 d/1 x blackforestcake` Edits the phone number and email address of the 1st order to be
-   `83456789` and `1xblackforestcake` respectively.
-*  `edito 2 n/Declan` Edits the customer's name of the 2nd order to be `Declan`.
-
+*  `edito 1 d/1x Jerry Favourite Cheese Cake` Edits the details of the 1st order to be
+   `1x Jerry Favourite Cheese Cake`.
 
 ### Locating customers by name: `findp`
 
@@ -144,7 +145,7 @@ Format: `findp KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Gerald Tan` will match `Tan Gerald`
 * Only the name is searched.
 * Only full words will be matched e.g. `Gerald` will not match `Geralds`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Customers matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Gerald Tan` will return `Gerald Lim`, `Gerald Lee`
 
 Examples:
@@ -162,13 +163,14 @@ Examples:
 
 ### Adding an order : `addo`
 
-Adds an order to ReadyBakey’s order list.
-The specified phone number links an order to a person. A person with this phone number must exist in ReadyBakey.
+Adds an order to ReadyBakey’s order list. 
 
 Format: `addo p/PHONE r/REMARK d/DETAILS c/DELIVERYDATETIME g/COLLECTION_TYPE`
+* The specified phone number links an order to a customer. A customer with this phone number must exist in ReadyBakey.
 
 Examples:
 * `addo p/98765432 r/Add Cheese d/1x Jerry Favourite Cheese Cake c/25-12-2022 15:30 g/Delivery`
+* `addo p/98765432 r/Add Cheese d/1x Jerry Favourite Cheese Cake c/Sunday 15:30 g/Delivery`
 
 ### Delete an order: `deleteo`
 
@@ -191,6 +193,16 @@ Format: `listo`
 
 Examples:
 * `listo`
+
+### Listing all orders: `incompleteo`
+
+Shows a list of all incomplete orders in ReadyBakey before and during a given date and time
+
+Format: `incompleteo DELIVERYDATETIME`
+
+Examples:
+* `incompleteo 25-12-2022 15:30`
+* `incompleteo Monday 15:30`
 
 ### Mark orders as Complete: `marko`
 
@@ -243,7 +255,7 @@ ReadyBakey data are saved in the hard disk automatically after any command that 
 
 ### Editing the data file
 
-ReadyBakey data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ReadyBakey data are saved as a JSON file `[JAR file location]/data/readybakey.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ReadyBakey will discard all data and start with an empty data file at the next run.
