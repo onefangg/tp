@@ -24,7 +24,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.Remark;
 
-
 /**
  * Changes the remark of an existing person in ReadyBakey.
  */

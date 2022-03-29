@@ -64,7 +64,6 @@ public class Order {
         return Collections.unmodifiableList(details);
     }
 
-
     public Remark getRemark() {
         return remark;
     }
@@ -110,10 +109,8 @@ public class Order {
         Order otherOrder = (Order) other;
 
         return otherOrder.getUuid().equals(getUuid())
-                && otherOrder.getRemark().equals(getRemark())
                 && otherOrder.getDetails().equals(getDetails())
-                && otherOrder.getDeliveryDateTime().equals(getDeliveryDateTime())
-                && otherOrder.getCollectionType().equals(getCollectionType());
+                && otherOrder.getDeliveryDateTime().equals(getDeliveryDateTime());
     }
 
     @Override
