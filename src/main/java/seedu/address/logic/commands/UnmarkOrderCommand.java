@@ -63,7 +63,7 @@ public class UnmarkOrderCommand extends Command {
 
 
         Remark updatedRemark = orderToUnmark.getRemark();
-        Details updatedDetails = orderToUnmark.getDetails();
+        List<Details> updatedDetails = orderToUnmark.getDetails();
         DeliveryDateTime updatedDeliveryDateTime = orderToUnmark.getDeliveryDateTime();
         CollectionType updatedCollectionType = orderToUnmark.getCollectionType();
         Complete updatedComplete = new Complete(false);

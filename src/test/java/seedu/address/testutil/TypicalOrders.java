@@ -18,7 +18,7 @@ import seedu.address.model.order.Order;
 public class TypicalOrders {
     public static final Order EMILY = new OrderBuilder()
             .withUuid("237e9877-e79b-12d4-a765-321741963000")
-            .withDetails("1xvanillacake")
+            .withDetails("1:vanilla cake")
             .withRemark("Allergic to Nuts")
             .withDeliveryDateTime("10-12-2022 09:30")
             .withCollectionType(CollectionType.DELIVERY)
@@ -26,7 +26,7 @@ public class TypicalOrders {
 
     public static final Order SIMON = new OrderBuilder()
             .withUuid("ea3cb232-f297-451c-80d8-c1800fef118f")
-            .withDetails("1xchocolatecake")
+            .withDetails("1:chocolate cake")
             .withRemark("Add Chocolate")
             .withDeliveryDateTime("11-12-2022 19:30")
             .withCollectionType(CollectionType.PICKUP)
@@ -34,7 +34,7 @@ public class TypicalOrders {
 
     public static final Order JERRY = new OrderBuilder()
             .withUuid("15580af3-4d85-4948-ba35-628962989444")
-            .withDetails("1xjerryfavouritecheesecake")
+            .withDetails("1:jerryfavouritecheesecake")
             .withRemark("Allergic to Cheese")
             .withDeliveryDateTime("15-12-2022 20:30")
             .withCollectionType(CollectionType.DELIVERY)
