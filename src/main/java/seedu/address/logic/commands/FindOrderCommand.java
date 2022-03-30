@@ -7,10 +7,10 @@ package seedu.address.logic.commands;
 public abstract class FindOrderCommand extends Command {
     public static final String COMMAND_WORD = "findo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all orders based on attributes (name/phone) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all orders based on attributes (name/phone/details/collectionType) "
             + "whose attributes contain any of the specified keywords (case-insensitive)"
             + " and displays them as a list with index numbers.\n"
-            + "The command does not allow multiple attributes to be filtered at the same time.\n"
-            + "Parameters: (n|p)/ KEYWORD [MORE_KEYWORDS]...\n"
+            + "Parameters: KEYWORD (n|p|d|m)/ [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " n/ alice bob charlie";
 }
