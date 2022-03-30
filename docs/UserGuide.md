@@ -134,7 +134,6 @@ Examples:
    `83456789` and `1xblackforestcake` respectively.
 *  `edito 2 n/Declan` Edits the customer's name of the 2nd order to be `Declan`.
 
-
 ### Locating customers by name: `findp`
 
 Finds customer(s) whose name(s) contain any of the given keywords.
@@ -152,6 +151,32 @@ Examples:
 * `findp John` returns `john` and `John Doe`
 * `findp alex david` returns `Alex Yeoh`, `David Li`<br>
 
+### Locating customers by name: `findo`
+
+Finds order(s) whose specific attribute contain any of the given keywords.
+
+Format: `findo [ATTRIBUTE] [KEYWORDS]`
+
+* The supported attributes are `n/`, `p/`, `d/`, `m/`, `r/` 
+* The search is case-insensitive. e.g `cake` will match `Cake`
+* The order of the keywords does not matter. e.g. `banana cake` will match `cake banana`
+* Only the attribute specified is searched.
+  * For findo d/[keyword], the keyword should only be the description of the detail and not the quantity
+    * Valid Example: findo d/Cake 
+    * Invalid Example: findo d/1:Cake
+* Only full words will be matched e.g. `Cake` will not match `Cakes`
+* Multiple [KEYWORDS] provided will be split up by ` ` and searched individually
+  * `findo n/Declan Bob` will search for both `Declan` and `Bob`
+* Orders matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Banana Cake` will return `Banana Leaf`, `Strawberry Cake`
+
+Examples:
+* `findo n/Declan` returns `declan` and `Declan Lee`
+* `findo p/90029382` returns `90029382`
+* `findo d/cake` returns `Cake` and `Banana Cake`
+* `findo m/delivery` returns `Delivery`
+* `findo r/birthday` returns `Birthday` <br>
+
 ### Clearing all Customers: `clearp`
 
 Removes all customers stored in ReadyBakey
@@ -166,10 +191,10 @@ Examples:
 Adds an order to ReadyBakey’s order list.
 The specified phone number links an order to a person. A person with this phone number must exist in ReadyBakey.
 
-Format: `addo p/PHONE r/REMARK d/DETAILS c/DELIVERYDATETIME g/COLLECTION_TYPE`
+Format: `addo p/PHONE r/REMARK d/DETAILS c/DELIVERYDATETIME m/COLLECTION_TYPE`
 
 Examples:
-* `addo p/98765432 r/Add Cheese d/1x Jerry Favourite Cheese Cake c/25-12-2022 15:30 g/Delivery`
+* `addo p/98765432 r/Add Cheese d/1x Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery`
 
 ### Delete an order: `deleteo`
 
@@ -279,3 +304,4 @@ _Details coming soon ..._
 | **unmarko** | `unmarko INDEX`                                                            | `unmarko 1`                                                  |
 | **exit**    | `exit`                                                                     | `exit`                                                       |
 | **edito**   | `edito INDEX n/NAME p/PHONE\_NUM a/ADDRESS d/DETAILS`                      | `edito 1 p/12345678 n/John Doey a/NUS d/1 x Cheesecake`      |
+| **findo**   | `findo [ATTRIBUTE_PREFIX][KEYWORD]`                                        | `findo n/Bob`                                               |
