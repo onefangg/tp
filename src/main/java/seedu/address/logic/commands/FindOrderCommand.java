@@ -11,6 +11,6 @@ public abstract class FindOrderCommand extends Command {
             + ": Finds all orders based on attributes (name/phone/details/collectionType) "
             + "whose attributes contain any of the specified keywords (case-insensitive)"
             + " and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD (n|p|d|m)/ [MORE_KEYWORDS]...\n"
+            + "Parameters: (n|p|d|m)/ KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " n/ alice bob charlie";
 }

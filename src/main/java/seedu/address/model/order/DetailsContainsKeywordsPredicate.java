@@ -20,6 +20,10 @@ public class DetailsContainsKeywordsPredicate implements Predicate<Order> {
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(details.item, keyword));
     }
 
+    public String getKeywordsString() {
+        return keywords.toString();
+    }
+
     @Override
     public boolean test(Order order) {
         return order.getDetails().stream()

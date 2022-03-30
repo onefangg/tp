@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_ORDERS_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.MESSAGE_FIND_ORDERS_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertOrderCommandSuccess;
 import static seedu.address.testutil.TypicalOrders.EMILY;
 import static seedu.address.testutil.TypicalOrders.SIMON;
@@ -58,7 +58,8 @@ public class FindOrderNameCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleOrdersFound() {
-        String expectedMessage = String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_FIND_ORDERS_OVERVIEW, 2,
+                "name", Arrays.asList("emily Simon".split(" ")));
         NameContainsKeywordsPredicate predicate = preparePredicate("emily Simon");
         FindOrderCommand command = new FindOrderNameCommand(predicate);
 

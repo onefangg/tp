@@ -1,11 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ *  Finds and lists all persons in ReadyBakey whose predicate (name) contains any of the argument keywords.
+ *  Keyword matching is case insensitive.
+ */
 public class FindPersonNameCommand extends FindPersonCommand {
     private NameContainsKeywordsPredicate predicate;
     private final String attributeName = "name";

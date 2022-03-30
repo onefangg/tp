@@ -15,6 +15,10 @@ public class RemarkContainsKeywordsPredicate implements Predicate<Order> {
         this.keywords = keywords;
     }
 
+    public String getKeywordsString() {
+        return keywords.toString();
+    }
+
     @Override
     public boolean test(Order order) {
         return keywords.stream()
