@@ -123,16 +123,34 @@ Examples:
 
 Edits an existing customer in ReadyBakey's contact list.
 
-Format: `edito INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [d/DETAILS]`
+Format: `edito INDEX [d/DETAILS] [c/DELIVERYDATETIME] [g/COLLECTION_TYPE] [r/REMARKS]`
 
-* Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list. 
+  * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edito 1 p/83456789 d/1 x blackforestcake` Edits the phone number and email address of the 1st order to be
-   `83456789` and `1xblackforestcake` respectively.
-*  `edito 2 n/Declan` Edits the customer's name of the 2nd order to be `Declan`.
+* `edito 1 d/1: black forest cake` 
+  * Edits the details of the 1st order to be `1: black forest cake`.
+* `edito 1 d/1: black forest cake d/2: Chocolate Cake` 
+  * Edits the details of the 1st order to be `1: black forest 
+    cake` and `2: Chocolate Cake`.
+    * In this case, to add two details to the order, each `d/` is for one detail.
+* `edito 2 r/Two candles` 
+  * Edits the 2nd order's remarks to be `Two candles`.
+* `edito 2 g/Delivery` 
+  * Edits the 2nd order's collection type to be `Delivery`.
+* `edito 3 c/Monday 10:30` 
+  * Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
+* `edito 3 c/04-04-2022 10:30` 
+  * Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
+* `edito 1 d/1: black forest cake d/1: Cheese cake c/04-04-2022 10:30 g/Delivery r/Two candles` 
+  * Edits the first order to have order details with `1: black forest cake` and `1: Cheese cake`. 
+  * The order delivery date is also now edited to be `Monday, 04 Apr 2022, 10:30`. 
+  * Collection type is changed to `Delivery`.
+  * Detail remarks is also changed to `Two candles`
+
 
 ### Locating customers by name: `findp`
 
@@ -289,19 +307,19 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary <a name="command-summary"></a>
-| Action      | Format                                                                     | Example                                                      |
-|-------------|----------------------------------------------------------------------------|--------------------------------------------------------------|
-| **addp**    | `addp n/NAME p/PHONE\_NUM a/ADDRESS`                                       | `addp n/John Doe p/87654321 a/21 Kent Ridge Drive`           |
-| **deletep** | `deletep INDEX`                                                            | `deletep 2`                                                  |
-| **listp**   | `listp`                                                                    | `listp`                                                      |
-| **editp**   | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                                | `editp 1 p/12345678 n/John Doey a/NUS`                       |
-| **findp**   | `findp KEYWORD`                                                            | `findp John`                                                 |
-| **clearp**  | `clearp`                                                                   | `clearp`                                                     |
-| **addo**    | `addo d/DATE\_ORDERED s/DATE\_TO\_SEND c/CUST\_PHONE\_NUM i/ITEM\_ORDERED` | `addo d/10-10-2022 s/20-10-2022 c/87654321 i/Chocolate Cake` |
-| **deleteo** | `deleteo INDEX`                                                            | `deleteo 2`                                                  |
-| **listo**   | `listo`                                                                    | `listo`                                                      |
-| **marko**   | `marko INDEX`                                                              | `marko 1`                                                    |
-| **unmarko** | `unmarko INDEX`                                                            | `unmarko 1`                                                  |
-| **exit**    | `exit`                                                                     | `exit`                                                       |
-| **edito**   | `edito INDEX n/NAME p/PHONE\_NUM a/ADDRESS d/DETAILS`                      | `edito 1 p/12345678 n/John Doey a/NUS d/1 x Cheesecake`      |
-| **findo**   | `findo [ATTRIBUTE_PREFIX][KEYWORD]`                                        | `findo n/Bob`                                               |
+| Action      | Format                                                                          | Example                                                                                        |
+|-------------|---------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| **addp**    | `addp [n/NAME] [p/PHONE\_NUM] [a/ADDRESS] [t/TAG]…​`                         | `addp n/John Doe p/87654321 a/21 Kent Ridge Drive t/colleague t/owesMoney`                     |
+| **deletep** | `deletep INDEX`                                                                 | `deletep 2`                                                                                    |
+| **listp**   | `listp`                                                                         | `listp`                                                                                        |
+| **editp**   | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                                     | `editp 1 p/12345678 n/John Doey a/NUS`                                                         |
+| **findp**   | `findp KEYWORD`                                                                 | `findp John`                                                                                   |
+| **clearp**  | `clearp`                                                                        | `clearp`                                                                                       |
+| **addo**    | `addo d/DATE\_ORDERED s/DATE\_TO\_SEND c/CUST\_PHONE\_NUM i/ITEM\_ORDERED`      | `addo d/10-10-2022 s/20-10-2022 c/87654321 i/Chocolate Cake`                                   |
+| **deleteo** | `deleteo INDEX`                                                                 | `deleteo 2`                                                                                    |
+| **listo**   | `listo`                                                                         | `listo`                                                                                        |
+| **marko**   | `marko INDEX`                                                                   | `marko 1`                                                                                      |
+| **unmarko** | `unmarko INDEX`                                                                 | `unmarko 1`                                                                                    |
+| **exit**    | `exit`                                                                          | `exit`                                                                                         |
+| **edito**   | `edito INDEX c/DELIVERYDATETIME g/COLLECTION\_TYPE r/REMARKS d/DETAILS…​`    | `edito 1  c/04-04-2022 10:30 g/Delivery r/Two candles d/1: black forest cake d/1: Cheese cake` |
+
