@@ -122,17 +122,22 @@ Examples:
 
 Edits an existing customer in ReadyBakey's contact list.
 
-Format: `edito INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [d/DETAILS]`
+Format: `edito INDEX [d/DETAILS] [c/DELIVERYDATETIME] [g/COLLECTION_TYPE] [r/REMARKS]`
 
-* Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list. 
+  * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edito 1 p/83456789 d/1 x blackforestcake` Edits the phone number and email address of the 1st order to be
-   `83456789` and `1xblackforestcake` respectively.
-*  `edito 2 n/Declan` Edits the customer's name of the 2nd order to be `Declan`.
-
+* `edito 1 d/1: black forest cake` Edits the details of the 1st order to be `1: black forest cake`.
+* `edito 1 d/1: black forest cake d/2: Chocolate Cake` Edits the details of the 1st order to be `1: black forest 
+  cake` and `2: Chocolate Cake`.
+  * In this case, to add two details to the order, each `d/` is for one detail.
+* `edito 2 r/Two candles` Edits the 2nd order's remarks to be `Two candles`.
+* `edito 2 g/Delivery` Edits the 2nd order's collection type to be `Delivery`.
+* `edito 3 c/Monday 10:30` Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
+* `edito 3 c/04-04-2022 10:30` Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
 
 ### Locating customers by name: `findp`
 
