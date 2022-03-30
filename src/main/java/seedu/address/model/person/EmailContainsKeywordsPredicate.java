@@ -15,11 +15,15 @@ public class EmailContainsKeywordsPredicate implements Predicate<Person> {
         this.keywords = keywords;
     }
 
+    public String getKeywordsString() {
+        return keywords.toString();
+    }
+
     @Override
     public boolean test(Person person) {
         // containsWordIgnoreCase method splits sentence into words and checks if equals (case-insensitive)
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsMatchIgnoreCase(person.getEmail().value, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getEmail().value, keyword));
     }
 
     @Override
