@@ -88,7 +88,7 @@ public class DeliveryDateTime {
         return ((year % 400 == 0)
                 || ((year % 4 == 0) && (year % 100 != 0)));
         //@@author
-        }
+    }
 
     /**
      * Returns true if a given string is a valid datetime.

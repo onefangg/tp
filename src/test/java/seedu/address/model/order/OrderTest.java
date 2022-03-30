@@ -47,17 +47,18 @@ public class OrderTest {
         editedEmily = new OrderBuilder(EMILY).withDetails(VALID_DETAILS_BOB).build();
         assertFalse(EMILY.equals(editedEmily));
 
-        // different remarks -> returns false
+        // different remarks -> returns true
         editedEmily = new OrderBuilder(EMILY).withRemark(VALID_REMARK_BOB).build();
-        assertFalse(EMILY.equals(editedEmily));
+        assertTrue(EMILY.equals(editedEmily));
 
         // different deliveryDateTime -> returns false
         editedEmily = new OrderBuilder(EMILY).withDeliveryDateTime(VALID_DELIVERYDATETIME_BOB).build();
         assertFalse(EMILY.equals(editedEmily));
 
-        // different collectionType -> returns false
+        // different collectionType -> returns true
         editedEmily = new OrderBuilder(EMILY).withCollectionType(CollectionType.PICKUP).build();
-        assertFalse(EMILY.equals(editedEmily));
+        assertTrue(EMILY.equals(editedEmily));
+
 
     }
 }
