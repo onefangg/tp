@@ -29,14 +29,15 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withRemark("Loves Ice Cream")
-            .withTags("friends").build();
+            .withTags("friends").withUuid("237e9877-e79b-12d4-a765-321741963000").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withRemark("Allergic to Peanuts")
             .withRemark("Loves Pistachio")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends").withUuid("ea3cb232-f297-451c-80d8-c1800fef118f").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").withRemark("").build();
+            .withEmail("heinz@example.com").withAddress("wall street").withRemark("")
+            .withUuid("15580af3-4d85-4948-ba35-628962989444").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withRemark("").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
@@ -68,7 +69,7 @@ public class TypicalPersons {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
+    public static AddressBook getTypicalAddressBookPersons() {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
