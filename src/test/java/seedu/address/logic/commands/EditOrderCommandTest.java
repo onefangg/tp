@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB_ORDER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COLLECTIONTYPE_BOB_TYPE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERYDATETIME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertOrderCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showOrderAtIndex;
@@ -34,7 +35,7 @@ public class EditOrderCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBookOrders(), new UserPrefs());
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    public void execute_detailsFieldSpecifiedUnfilteredList_success() {
         Order editedOrder = new OrderBuilder(model.getFilteredOrderList().get(0))
                 .withDetails("1: Choc Cake").build(); // Creates the order in orderbuilder
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(editedOrder).build();
@@ -65,6 +66,35 @@ public class EditOrderCommandTest {
                 .withCollectionType(VALID_COLLECTIONTYPE_BOB_TYPE).build();
 
 
+
+        EditOrderCommand editOrderCommand = new EditOrderCommand(indexLastOrder, descriptor);
+
+        String expectedMessage = String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS, editedOrder);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setOrder(lastOrder, editedOrder);
+
+        assertOrderCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        Index indexLastOrder = Index.fromOneBased(model.getFilteredOrderList().size());
+        Order lastOrder = model.getFilteredOrderList().get(indexLastOrder.getZeroBased());
+
+        OrderBuilder orderInList = new OrderBuilder(lastOrder);
+
+        Order editedOrder = orderInList
+                .withDetails(VALID_DETAILS_BOB)
+                .withDeliveryDateTime(VALID_DELIVERYDATETIME_BOB)
+                .withRemark(VALID_REMARK_BOB)
+                .withCollectionType(VALID_COLLECTIONTYPE_BOB_TYPE).build();
+
+        EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder()
+                .withDetails(VALID_DETAILS_BOB)
+                .withDeliveryDateTime(VALID_DELIVERYDATETIME_BOB)
+                .withRemark(VALID_REMARK_BOB)
+                .withCollectionType(VALID_COLLECTIONTYPE_BOB_TYPE).build();
 
         EditOrderCommand editOrderCommand = new EditOrderCommand(indexLastOrder, descriptor);
 
