@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -109,7 +110,7 @@ public class Order {
         Order otherOrder = (Order) other;
 
         return otherOrder.getUuid().equals(getUuid())
-                && otherOrder.getDetails().equals(getDetails())
+                && new HashSet<>(otherOrder.getDetails()).equals(new HashSet<>(getDetails()))
                 && otherOrder.getDeliveryDateTime().equals(getDeliveryDateTime());
     }
 
