@@ -2,17 +2,27 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLANK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COLLECTION_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import seedu.address.logic.commands.FindOrderCollectionTypeCommand;
 import seedu.address.logic.commands.FindOrderCommand;
+import seedu.address.logic.commands.FindOrderDetailsCommand;
 import seedu.address.logic.commands.FindOrderNameCommand;
 import seedu.address.logic.commands.FindOrderPhoneCommand;
+import seedu.address.logic.commands.FindOrderRemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.CollectionTypeContainsKeywordsPredicate;
+import seedu.address.model.order.DetailsContainsKeywordsPredicate;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.RemarkContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
@@ -33,10 +43,12 @@ public class FindOrderCommandParser implements Parser<FindOrderCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindOrderCommand.MESSAGE_USAGE));
         }
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_NAME,
+                        PREFIX_REMARK, PREFIX_DETAILS, PREFIX_COLLECTION_TYPE);
 
         Prefix findOrderPrefix;
         Predicate<Person> findPersonPredicate;
+        Predicate<Order> findOrderPredicate;
         if (isOnlyOnePrefixPresent(argMultimap, PREFIX_NAME)) {
             findOrderPrefix = PREFIX_NAME;
             String[] nameKeywords = argMultimap.getValue(findOrderPrefix).get().trim().split("\\s+");
@@ -47,6 +59,21 @@ public class FindOrderCommandParser implements Parser<FindOrderCommand> {
             String[] phoneKeywords = argMultimap.getValue(findOrderPrefix).get().trim().split("\\s+");
             findPersonPredicate = new PhoneContainsKeywordsPredicate(Arrays.asList(phoneKeywords));
             return new FindOrderPhoneCommand(findPersonPredicate);
+        } else if (isOnlyOnePrefixPresent(argMultimap, PREFIX_REMARK)) {
+            findOrderPrefix = PREFIX_REMARK;
+            String[] remarkKeywords = argMultimap.getValue(findOrderPrefix).get().trim().split("\\s+");
+            findOrderPredicate = new RemarkContainsKeywordsPredicate(Arrays.asList(remarkKeywords));
+            return new FindOrderRemarkCommand(findOrderPredicate);
+        } else if (isOnlyOnePrefixPresent(argMultimap, PREFIX_DETAILS)) {
+            findOrderPrefix = PREFIX_DETAILS;
+            String[] detailsKeywords = argMultimap.getValue(findOrderPrefix).get().trim().split("\\s+");
+            findOrderPredicate = new DetailsContainsKeywordsPredicate(Arrays.asList(detailsKeywords));
+            return new FindOrderDetailsCommand(findOrderPredicate);
+        } else if (isOnlyOnePrefixPresent(argMultimap, PREFIX_COLLECTION_TYPE)) {
+            findOrderPrefix = PREFIX_COLLECTION_TYPE;
+            String collectionTypeKeyword = argMultimap.getValue(findOrderPrefix).get().trim();
+            findOrderPredicate = new CollectionTypeContainsKeywordsPredicate(collectionTypeKeyword);
+            return new FindOrderCollectionTypeCommand(findOrderPredicate);
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindOrderCommand.MESSAGE_USAGE));
