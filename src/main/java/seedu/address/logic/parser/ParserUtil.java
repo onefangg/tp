@@ -20,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.CollectionType;
+import seedu.address.model.order.DateChecker;
 import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.order.Details;
 import seedu.address.model.order.Order;
@@ -29,6 +30,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -180,12 +182,13 @@ public class ParserUtil {
     public static DeliveryDateTime parseDeliveryDateTime(String deliveryDateTime) throws ParseException {
         requireNonNull(deliveryDateTime);
         String trimmedDeliveryDateTime = deliveryDateTime.trim();
-        if (!DeliveryDateTime.isValidDeliveryDateTime(trimmedDeliveryDateTime)) {
+        String parsedDeliveryDateTime = DateChecker.parsePotentialNaturalDate(trimmedDeliveryDateTime);
+        if (!DeliveryDateTime.isValidDeliveryDateTime(parsedDeliveryDateTime)) {
             throw new ParseException(DeliveryDateTime.MESSAGE_CONSTRAINTS);
         } else if (!DeliveryDateTime.isValidLeapYearDeliveryDateTimeValue(trimmedDeliveryDateTime)) {
             throw new ParseException(DeliveryDateTime.MESSAGE_CONSTRAINTS_LEAP_YEAR);
         }
-        return new DeliveryDateTime(trimmedDeliveryDateTime);
+        return new DeliveryDateTime(parsedDeliveryDateTime);
     }
 
     /**
