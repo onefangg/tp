@@ -82,7 +82,6 @@ Adds a customer to ReadyBakey’s contact list
 Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]`
 
 Examples:
-* `addp n/John Doe p/87654321 a/21 Kent Ridge Drive`
 * `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`
 
 ### Delete a customer: `deletep`
@@ -199,6 +198,7 @@ Examples:
 Shows a list of all incomplete orders in ReadyBakey before and during a given date and time
 
 Format: `incompleteo DELIVERYDATETIME`
+* Orders that are incomplete before and during `DELIVERYDATETIME` will be displayed
 
 Examples:
 * `incompleteo 25-12-2022 15:30`
@@ -210,9 +210,9 @@ Marks an order as complete in ReadyBakey
 
 Format: `marko INDEX`
 
-* Marks the order at the specified INDEX
-* The index refers to the index number shown in the displayed orders list.
-* The index must be a positive integer 1, 2, 3, ...
+* Marks the order at the specified `INDEX`
+* The`INDEX` refers to the index number shown in the displayed orders list.
+* The`INDEX` must be a positive integer 1, 2, 3, ...
 
 Examples:
 * `marko 1`
@@ -221,11 +221,11 @@ Examples:
 
 Unmarks an order as incomplete in ReadyBakey
 
-* Unmarks the order at the specified INDEX
-* The index refers to the index number shown in the displayed orders list.
-* The index must be a positive integer 1, 2, 3, ….
-
 Format: `unmarko INDEX`
+
+* Unmarks the order at the specified `INDEX`
+* The `INDEX` refers to the index number shown in the displayed orders list.
+* The `INDEX` must be a positive integer 1, 2, 3, ….
 
 Examples:
 * `unmarko 1`
