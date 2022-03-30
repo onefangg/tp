@@ -35,8 +35,8 @@ public class EditOrderCommandTest {
     private Model model = new ModelManager(getTypicalAddressBookOrders(), new UserPrefs());
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Order editedOrder = new OrderBuilder(model.getOrderList().get(0))
-                .withDetails("1xChocCake").build(); // Creates the order in orderbuilder
+        Order editedOrder = new OrderBuilder(model.getFilteredOrderList().get(0))
+                .withDetails("1: Choc Cake").build(); // Creates the order in orderbuilder
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(editedOrder).build();
         EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_FIRST_ORDER, descriptor);
 
