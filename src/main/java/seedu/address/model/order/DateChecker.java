@@ -17,7 +17,7 @@ public class DateChecker {
     private static String dateFormat;
     private static String dateToCheck;
 
-    private static int NUM_DAYS_IN_WEEK = 7;
+    private static final int NUM_DAYS_IN_WEEK = 7;
 
     /**
      * Method meant to detect what type of date user inputs.
