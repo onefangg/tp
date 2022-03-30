@@ -3,7 +3,7 @@ package seedu.address.model.order;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Order}'s {@code CollectionType} matches any of the keywords given.
  */
 public class CollectionTypeContainsKeywordsPredicate implements Predicate<Order> {
     private final String keyword;
