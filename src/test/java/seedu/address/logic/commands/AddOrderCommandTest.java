@@ -110,7 +110,7 @@ public class AddOrderCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Person> getPersonList() {
             ObservableList<Person> list = FXCollections.observableArrayList();
             list.add(new PersonBuilder().build());
             FilteredList<Person> filteredPersons = new FilteredList<Person>(list);
@@ -142,7 +142,7 @@ public class AddOrderCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Person> getPersonList() {
             ObservableList<Person> list = FXCollections.observableArrayList();
             list.add(new PersonBuilder().build());
             FilteredList<Person> filteredPersons = new FilteredList<Person>(list);
