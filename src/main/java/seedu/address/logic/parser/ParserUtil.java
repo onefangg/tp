@@ -182,6 +182,8 @@ public class ParserUtil {
         String trimmedDeliveryDateTime = deliveryDateTime.trim();
         if (!DeliveryDateTime.isValidDeliveryDateTime(trimmedDeliveryDateTime)) {
             throw new ParseException(DeliveryDateTime.MESSAGE_CONSTRAINTS);
+        } else if (!DeliveryDateTime.isValidLeapYearDeliveryDateTimeValue(trimmedDeliveryDateTime)) {
+            throw new ParseException(DeliveryDateTime.MESSAGE_CONSTRAINTS_LEAP_YEAR);
         }
         return new DeliveryDateTime(trimmedDeliveryDateTime);
     }
