@@ -15,7 +15,7 @@ public class DetailsContainsKeywordsPredicate implements Predicate<Order> {
         this.keywords = keywords;
     }
 
-    private boolean testKeywordInDetails(Details details){
+    private boolean testKeywordInDetails(Details details) {
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(details.item, keyword));
     }

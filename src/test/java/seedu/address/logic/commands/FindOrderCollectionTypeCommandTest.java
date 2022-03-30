@@ -7,22 +7,16 @@ import static seedu.address.commons.core.Messages.MESSAGE_ORDERS_LISTED_OVERVIEW
 import static seedu.address.logic.commands.CommandTestUtil.assertOrderCommandSuccess;
 import static seedu.address.testutil.TypicalOrders.EMILY;
 import static seedu.address.testutil.TypicalOrders.JERRY;
-import static seedu.address.testutil.TypicalOrders.SIMON;
 import static seedu.address.testutil.TypicalOrders.getTypicalAddressBookOrders;
 
-
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.order.OrderUuidContainsKeywordsPredicate;
 import seedu.address.model.order.CollectionTypeContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindOrderCollectionTypeCommand}.
@@ -72,7 +66,7 @@ public class FindOrderCollectionTypeCommandTest {
      * Parses {@code userInput} into a {@code CollectionTypeContainsKeywordsPredicate}.
      */
     private CollectionTypeContainsKeywordsPredicate preparePredicate(String userInput) {
-        String CollectionTypeKeyword = userInput.trim();
-        return new CollectionTypeContainsKeywordsPredicate(CollectionTypeKeyword);
+        String collectionTypeKeyword = userInput.trim();
+        return new CollectionTypeContainsKeywordsPredicate(collectionTypeKeyword);
     }
 }

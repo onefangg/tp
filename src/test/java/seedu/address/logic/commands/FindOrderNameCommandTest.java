@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalOrders.EMILY;
 import static seedu.address.testutil.TypicalOrders.SIMON;
 import static seedu.address.testutil.TypicalOrders.getTypicalAddressBookOrders;
 
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

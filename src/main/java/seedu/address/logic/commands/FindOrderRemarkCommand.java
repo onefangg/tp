@@ -8,16 +8,15 @@ import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.order.Order;
 
-
 /**
- *  Finds and lists all orders in ReadyBakey whose predicate (Details) contains any of the argument keywords.
+ *  Finds and lists all orders in ReadyBakey whose predicate (Remark) contains any of the argument keywords.
  *  Keyword matching is case insensitive.
  */
-public class FindOrderDetailsCommand extends FindOrderCommand {
+public class FindOrderRemarkCommand extends FindOrderCommand {
 
     private final Predicate<Order> predicate;
 
-    public FindOrderDetailsCommand(Predicate<Order> predicate) {
+    public FindOrderRemarkCommand(Predicate<Order> predicate) {
         this.predicate = predicate;
     }
 
@@ -33,7 +32,7 @@ public class FindOrderDetailsCommand extends FindOrderCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindOrderDetailsCommand // instanceof handles nulls
-                && predicate.equals(((FindOrderDetailsCommand) other).predicate)); // state check
+                || (other instanceof FindOrderRemarkCommand // instanceof handles nulls
+                && predicate.equals(((FindOrderRemarkCommand) other).predicate)); // state check
     }
 }

@@ -3,15 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COLLECTION_TYPE;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderUuidContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 
 /**
  *  Finds and lists all orders in ReadyBakey whose predicate (Collection Type) contains any of the argument keywords.
@@ -19,7 +15,8 @@ import seedu.address.model.person.Person;
  */
 public class FindOrderCollectionTypeCommand extends FindOrderCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_COLLECTION_TYPE + "[Keyword]: Finds all orders based on CollectionType attribute \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_COLLECTION_TYPE
+            + "[Keyword]: Finds all orders based on CollectionType attribute \n"
             + "[Keyword] can only be delivery or pickup (case-insensitive)"
             + "Example: " + COMMAND_WORD + PREFIX_COLLECTION_TYPE + "delivery";
 

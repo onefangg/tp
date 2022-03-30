@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalOrders.EMILY;
 import static seedu.address.testutil.TypicalOrders.SIMON;
 import static seedu.address.testutil.TypicalOrders.getTypicalAddressBookOrders;
 
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -20,8 +19,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.order.OrderUuidContainsKeywordsPredicate;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindOrderPhoneCommand}.
@@ -75,7 +74,7 @@ public class FindOrderPhoneCommandTest {
      * Parses {@code userInput} into a {@code PhoneContainsKeywordsPredicate}.
      */
     private PhoneContainsKeywordsPredicate preparePredicate(String userInput) {
-        String[] PhoneKeywords = userInput.trim().split("\\s+");
-        return new PhoneContainsKeywordsPredicate(Arrays.asList(PhoneKeywords));
+        String[] phoneKeywords = userInput.trim().split("\\s+");
+        return new PhoneContainsKeywordsPredicate(Arrays.asList(phoneKeywords));
     }
 }

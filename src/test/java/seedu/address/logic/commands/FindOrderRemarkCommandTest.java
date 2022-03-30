@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_ORDERS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertOrderCommandSuccess;
 import static seedu.address.testutil.TypicalOrders.EMILY;
-import static seedu.address.testutil.TypicalOrders.SIMON;
+import static seedu.address.testutil.TypicalOrders.JERRY;
 import static seedu.address.testutil.TypicalOrders.getTypicalAddressBookOrders;
 
 import java.util.Arrays;
@@ -17,30 +17,31 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.order.DetailsContainsKeywordsPredicate;
+import seedu.address.model.order.RemarkContainsKeywordsPredicate;
+
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindOrderDetailsCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindOrderRemarkCommand}.
  */
-public class FindOrderDetailsCommandTest {
+public class FindOrderRemarkCommandTest {
     private Model model = new ModelManager(getTypicalAddressBookOrders(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBookOrders(), new UserPrefs());
 
     @Test
     public void equals() {
-        DetailsContainsKeywordsPredicate firstPredicate =
-                new DetailsContainsKeywordsPredicate(Collections.singletonList("first"));
-        DetailsContainsKeywordsPredicate secondPredicate =
-                new DetailsContainsKeywordsPredicate(Collections.singletonList("second"));
+        RemarkContainsKeywordsPredicate firstPredicate =
+                new RemarkContainsKeywordsPredicate(Collections.singletonList("first"));
+        RemarkContainsKeywordsPredicate secondPredicate =
+                new RemarkContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindOrderCommand findFirstCommand = new FindOrderDetailsCommand(firstPredicate);
-        FindOrderCommand findSecondCommand = new FindOrderDetailsCommand(secondPredicate);
+        FindOrderCommand findFirstCommand = new FindOrderRemarkCommand(firstPredicate);
+        FindOrderCommand findSecondCommand = new FindOrderRemarkCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindOrderCommand findFirstCommandCopy = new FindOrderDetailsCommand(firstPredicate);
+        FindOrderCommand findFirstCommandCopy = new FindOrderRemarkCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -56,18 +57,18 @@ public class FindOrderDetailsCommandTest {
     @Test
     public void execute_multipleKeywords_multipleOrdersFound() {
         String expectedMessage = String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 2);
-        DetailsContainsKeywordsPredicate predicate = preparePredicate("chocolate vanilla");
-        FindOrderCommand command = new FindOrderDetailsCommand(predicate);
+        RemarkContainsKeywordsPredicate predicate = preparePredicate("Allergic");
+        FindOrderCommand command = new FindOrderRemarkCommand(predicate);
         expectedModel.updateFilteredOrderList(predicate);
         assertOrderCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(EMILY, SIMON), model.getFilteredOrderList());
+        assertEquals(Arrays.asList(EMILY, JERRY), model.getFilteredOrderList());
     }
 
     /**
-     * Parses {@code userInput} into a {@code DetailsContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code RemarkContainsKeywordsPredicate}.
      */
-    private DetailsContainsKeywordsPredicate preparePredicate(String userInput) {
-        String[] detailsKeywords = userInput.trim().split("\\s+");
-        return new DetailsContainsKeywordsPredicate(Arrays.asList(detailsKeywords));
+    private RemarkContainsKeywordsPredicate preparePredicate(String userInput) {
+        String[] remarkKeywords = userInput.trim().split("\\s+");
+        return new RemarkContainsKeywordsPredicate(Arrays.asList(remarkKeywords));
     }
 }
