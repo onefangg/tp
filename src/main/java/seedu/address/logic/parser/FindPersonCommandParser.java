@@ -29,5 +29,4 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
         return new FindPersonCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
-
 }

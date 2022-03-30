@@ -64,7 +64,6 @@ public class Order {
         return Collections.unmodifiableList(details);
     }
 
-
     public Remark getRemark() {
         return remark;
     }
