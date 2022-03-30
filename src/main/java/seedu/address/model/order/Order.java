@@ -3,6 +3,9 @@ package seedu.address.model.order;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -14,14 +17,15 @@ import seedu.address.model.person.Remark;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Order {
+    // Limits for list-type fields
+    public static final int MAX_DETAIL_SIZE = 5;
 
     // Identity fields
     private final UUID uuid;
 
     // Data fields
-
     private final Remark remark;
-    private final Details details;
+    private final List<Details> details = new ArrayList<>();
     private final DeliveryDateTime deliveryDateTime;
     private final Complete complete;
     private final CollectionType collectionType;
@@ -29,12 +33,12 @@ public class Order {
     /**
      * Every field must be present and not null.
      */
-    public Order(Remark remark, Details details,
+    public Order(Remark remark, List<Details> details,
                  DeliveryDateTime deliveryDateTime, CollectionType collectionType, UUID uuid) {
         requireAllNonNull(remark, details, deliveryDateTime, collectionType, uuid);
 
         this.remark = remark;
-        this.details = details;
+        this.details.addAll(details);
         this.complete = new Complete(false);
         this.deliveryDateTime = deliveryDateTime;
         this.collectionType = collectionType;
@@ -44,20 +48,20 @@ public class Order {
     /**
      * Every field must be present and not null.
      */
-    public Order(Remark remark, Details details,
+    public Order(Remark remark, List<Details> details,
                  DeliveryDateTime deliveryDateTime, CollectionType collectionType, Complete complete, UUID uuid) {
         requireAllNonNull(remark, details, deliveryDateTime, collectionType, complete, uuid);
 
         this.remark = remark;
-        this.details = details;
+        this.details.addAll(details);
         this.deliveryDateTime = deliveryDateTime;
         this.collectionType = collectionType;
         this.complete = complete;
         this.uuid = uuid;
     }
 
-    public Details getDetails() {
-        return details;
+    public List<Details> getDetails() {
+        return Collections.unmodifiableList(details);
     }
 
 

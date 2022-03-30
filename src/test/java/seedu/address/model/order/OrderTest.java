@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERYDATETIM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_BOB;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalOrders.EMILY;
 import static seedu.address.testutil.TypicalOrders.SIMON;
 
@@ -14,6 +15,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.OrderBuilder;
 
 public class OrderTest {
+    @Test
+    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
+        Order order = new OrderBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> order.getDetails().remove(0));
+    }
 
     @Test
     public void equals() {
@@ -33,7 +39,6 @@ public class OrderTest {
         // different order -> returns false
         assertFalse(EMILY.equals(SIMON));
 
-
         // different uuid -> returns false
         Order editedEmily = new OrderBuilder(EMILY).withUuid(VALID_UUID_BOB).build();
         assertFalse(EMILY.equals(editedEmily));
@@ -47,7 +52,7 @@ public class OrderTest {
         assertFalse(EMILY.equals(editedEmily));
 
         // different deliveryDateTime -> returns false
-        editedEmily = new OrderBuilder(EMILY).withDetails(VALID_DELIVERYDATETIME_BOB).build();
+        editedEmily = new OrderBuilder(EMILY).withDeliveryDateTime(VALID_DELIVERYDATETIME_BOB).build();
         assertFalse(EMILY.equals(editedEmily));
 
         // different collectionType -> returns false

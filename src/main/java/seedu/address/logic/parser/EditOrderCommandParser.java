@@ -41,7 +41,7 @@ public class EditOrderCommandParser implements Parser<EditOrderCommand> {
         EditOrderDescriptor editOrderDescriptor = new EditOrderDescriptor();
 
         if (argMultimap.getValue(PREFIX_DETAILS).isPresent()) {
-            editOrderDescriptor.setDetails(ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS).get()));
+            editOrderDescriptor.setDetails(ParserUtil.parseDetails(argMultimap.getAllValues(PREFIX_DETAILS)));
         }
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             editOrderDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
