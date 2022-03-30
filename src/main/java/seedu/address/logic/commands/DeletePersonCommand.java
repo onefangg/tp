@@ -48,7 +48,7 @@ public class DeletePersonCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         List<String> uuidList = Arrays.asList(new String[]{personToDelete.getUuid().toString()});
-        FilteredList<Order> orderList = model.getOrderList()
+        FilteredList<Order> orderList = model.getFilteredOrderList()
                 .filtered(new OrderUuidContainsKeywordsPredicate(uuidList));
 
         if (!orderList.isEmpty()) {

@@ -95,7 +95,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public ObservableList<Order> getOrderList() {
+    public ObservableList<Order> getFilteredOrderList() {
         throw new AssertionError("This method should not be called.");
     }
 

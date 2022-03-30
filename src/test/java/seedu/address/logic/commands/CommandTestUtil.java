@@ -196,13 +196,13 @@ public class CommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showOrderAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getOrderList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredOrderList().size());
 
-        Order order = model.getOrderList().get(targetIndex.getZeroBased());
+        Order order = model.getFilteredOrderList().get(targetIndex.getZeroBased());
         final String[] splitName = order.getUuid().toString().split("\\s+");
         model.updateFilteredOrderList(new OrderUuidContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getOrderList().size());
+        assertEquals(1, model.getFilteredOrderList().size());
     }
 
 }

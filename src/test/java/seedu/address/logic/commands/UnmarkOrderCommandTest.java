@@ -32,8 +32,8 @@ public class UnmarkOrderCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Index indexLastOrder = Index.fromOneBased(model.getOrderList().size());
-        Order unmarkedOrder = model.getOrderList().get(indexLastOrder.getZeroBased());
+        Index indexLastOrder = Index.fromOneBased(model.getFilteredOrderList().size());
+        Order unmarkedOrder = model.getFilteredOrderList().get(indexLastOrder.getZeroBased());
 
         assertFalse(unmarkedOrder.isComplete());
 
@@ -42,7 +42,7 @@ public class UnmarkOrderCommandTest {
 
         model.setOrder(unmarkedOrder, editedMarkedOrder);
 
-        assertTrue(model.getOrderList().get(indexLastOrder.getZeroBased()).isComplete());
+        assertTrue(model.getFilteredOrderList().get(indexLastOrder.getZeroBased()).isComplete());
 
         UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(indexLastOrder);
 
@@ -55,7 +55,7 @@ public class UnmarkOrderCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getOrderList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
         UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(outOfBoundIndex);
 
         assertCommandFailure(unmarkOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
@@ -65,7 +65,7 @@ public class UnmarkOrderCommandTest {
     public void execute_validIndexFilteredList_success() {
         showOrderAtIndex(model, INDEX_FIRST_ORDER);
 
-        Order unmarkedOrderInFilteredList = model.getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
+        Order unmarkedOrderInFilteredList = model.getFilteredOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
 
         assertFalse(unmarkedOrderInFilteredList.isComplete());
 
@@ -73,7 +73,7 @@ public class UnmarkOrderCommandTest {
 
         model.setOrder(unmarkedOrderInFilteredList, editedMarkedOrder);
 
-        assertTrue(model.getOrderList().get(INDEX_FIRST_ORDER.getZeroBased()).isComplete());
+        assertTrue(model.getFilteredOrderList().get(INDEX_FIRST_ORDER.getZeroBased()).isComplete());
 
         UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_FIRST_ORDER);
 

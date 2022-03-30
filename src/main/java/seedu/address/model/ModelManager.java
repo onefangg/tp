@@ -171,7 +171,7 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Order> getOrderList() {
+    public ObservableList<Order> getFilteredOrderList() {
         return orders;
     }
 

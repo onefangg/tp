@@ -28,7 +28,7 @@ public class DeleteOrderCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Order orderToDelete = model.getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
+        Order orderToDelete = model.getFilteredOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
         DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(INDEX_FIRST_ORDER);
 
         String expectedMessage = String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS, orderToDelete);
@@ -41,7 +41,7 @@ public class DeleteOrderCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getOrderList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
         DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
@@ -51,7 +51,7 @@ public class DeleteOrderCommandTest {
     public void execute_validIndexFilteredList_success() {
         showOrderAtIndex(model, INDEX_FIRST_ORDER);
 
-        Order orderToDelete = model.getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
+        Order orderToDelete = model.getFilteredOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
         DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(INDEX_FIRST_ORDER);
 
         String expectedMessage = String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS, orderToDelete);
@@ -104,6 +104,6 @@ public class DeleteOrderCommandTest {
     private void showNoOrder(Model model) {
         model.updateFilteredOrderList(p -> false);
 
-        assertTrue(model.getOrderList().isEmpty());
+        assertTrue(model.getFilteredOrderList().isEmpty());
     }
 }

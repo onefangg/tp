@@ -108,7 +108,7 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered order list */
-    ObservableList<Order> getOrderList();
+    ObservableList<Order> getFilteredOrderList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
