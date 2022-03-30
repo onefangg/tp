@@ -20,7 +20,7 @@ import seedu.address.logic.commands.FindPersonNameCommand;
 import seedu.address.logic.commands.FindPersonPhoneCommand;
 import seedu.address.logic.commands.FindPersonRemarkCommand;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
-import seedu.address.model.person.EmailEqualsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.RemarkContainsKeywordsPredicate;
@@ -53,7 +53,7 @@ public class FindPersonCommandParserTest {
         // find based on emails
         expectedFindPersonCommand =
                 new FindPersonEmailCommand(
-                        new EmailEqualsKeywordsPredicate(Arrays.asList("alex@abc.com", "ben@xyz.com")));
+                        new EmailContainsKeywordsPredicate(Arrays.asList("alex@abc.com", "ben@xyz.com")));
         assertParseSuccess(parser, " " + PREFIX_EMAIL + "alex@abc.com ben@xyz.com", expectedFindPersonCommand);
 
         // find based on remarks

@@ -18,7 +18,7 @@ import seedu.address.logic.commands.FindPersonPhoneCommand;
 import seedu.address.logic.commands.FindPersonRemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
-import seedu.address.model.person.EmailEqualsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.RemarkContainsKeywordsPredicate;
@@ -52,7 +52,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
             return new FindPersonPhoneCommand(new PhoneContainsKeywordsPredicate(Arrays.asList(phoneKeywords)));
         } else if (isOnlyOnePrefixPresent(argMultimap, PREFIX_EMAIL)) {
             String[] emailKeywords = getKeywords(argMultimap, PREFIX_EMAIL);
-            return new FindPersonEmailCommand(new EmailEqualsKeywordsPredicate(Arrays.asList(emailKeywords)));
+            return new FindPersonEmailCommand(new EmailContainsKeywordsPredicate(Arrays.asList(emailKeywords)));
         } else if (isOnlyOnePrefixPresent(argMultimap, PREFIX_REMARK)) {
             String[] remarkKeywords = getKeywords(argMultimap, PREFIX_REMARK);
             return new FindPersonRemarkCommand(new RemarkContainsKeywordsPredicate(Arrays.asList(remarkKeywords)));

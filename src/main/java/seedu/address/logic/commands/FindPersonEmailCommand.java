@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.person.EmailEqualsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
 
 public class FindPersonEmailCommand extends FindPersonCommand {
-    public FindPersonEmailCommand(EmailEqualsKeywordsPredicate predicate) {
+    public FindPersonEmailCommand(EmailContainsKeywordsPredicate predicate) {
         super(predicate);
     }
 }
