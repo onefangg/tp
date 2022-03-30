@@ -13,10 +13,11 @@ import java.time.format.DateTimeParseException;
  */
 public class DeliveryDateTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "DeliveryDateTime should be in the format dd/MM/yyyy HH:mm "
-            + "and should be a valid date and time before today's date!";
+    public static final String MESSAGE_CONSTRAINTS = "DeliveryDateTime should be in the format dd-MM-yyyy HH:mm "
+            + "or a natural date (e.g. Mon 22:30, Wednesday 10:20) "
+            + "and should be a valid date and time after today's date!";
 
-    /*
+    /**
      * The first character of the deliveryDateTime must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
