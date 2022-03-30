@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Remark {
 
-    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values (up to 70 characters), and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values (up to 70 characters)";
 
     /*
      * The first character of the remark must not be a whitespace,
