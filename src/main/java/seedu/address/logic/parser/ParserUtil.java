@@ -185,7 +185,7 @@ public class ParserUtil {
         String parsedDeliveryDateTime = DateChecker.parsePotentialNaturalDate(trimmedDeliveryDateTime);
         if (!DeliveryDateTime.isValidDeliveryDateTime(parsedDeliveryDateTime)) {
             throw new ParseException(DeliveryDateTime.MESSAGE_CONSTRAINTS);
-        } else if (!DeliveryDateTime.isValidLeapYearDeliveryDateTimeValue(trimmedDeliveryDateTime)) {
+        } else if (!DeliveryDateTime.isValidLeapYearDeliveryDateTimeValue(parsedDeliveryDateTime)) {
             throw new ParseException(DeliveryDateTime.MESSAGE_CONSTRAINTS_LEAP_YEAR);
         }
         return new DeliveryDateTime(parsedDeliveryDateTime);
