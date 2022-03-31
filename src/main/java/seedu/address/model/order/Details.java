@@ -118,7 +118,7 @@ public class Details {
 
     @Override
     public String toString() {
-        return value;
+        return String.valueOf(quantity) + ": " + item;
     }
 
     @Override
