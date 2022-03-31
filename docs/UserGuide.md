@@ -79,7 +79,7 @@ Format: `help`
 
 Adds a customer to ReadyBakey’s contact list
 
-Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]`
+Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
 
 Examples:
 * `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/friends t/owesMoney`
@@ -108,7 +108,7 @@ Examples:
 
 Edits an existing customer in ReadyBakey's contact list.
 
-Format: `editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]`
+Format: `editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…`
 
 * Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -123,7 +123,7 @@ Examples:
 
 Edits an existing customer in ReadyBakey's contact list.
 
-Format: `edito INDEX [d/DETAILS] [c/DELIVERYDATETIME] [m/COLLECTION_TYPE] [r/REMARKS]`
+Format: `edito INDEX [d/DETAILS]… [c/DELIVERYDATETIME] [m/COLLECTION_TYPE] [r/REMARKS]`
 
 * Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list. 
   * The index **must be a positive integer** 1, 2, 3, …​
@@ -219,10 +219,10 @@ Examples:
 
 Adds an order to ReadyBakey’s order list. 
 
-Format: `addo p/PHONE r/REMARK d/DETAILS c/DELIVERYDATETIME m/COLLECTION_TYPE`
+Format: `addo p/PHONE d/DETAILS c/DELIVERYDATETIME m/COLLECTION_TYPE [r/REMARK]…`
 
 Examples:
-* `addo p/98765432 r/Add Cheese d/1:Chocolate Cake c/25-12-2022 15:30 m/Delivery`
+* `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery r/Add Cheese `
 * `p/PHONE` must be a phone number that is already stored in ReadyBakey's person list
 * `c/DELIVERYDATETIME` accepts dates in the past for record keeping purposes
   * It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
@@ -348,19 +348,19 @@ _Details coming soon ..._
 
 ## Command summary <a name="command-summary"></a>
 
-| Action      | Format                                                                       | Example                                                                                        |
-|-------------|------------------------------------------------------------------------------|--------------------------|
-| **addp**    | `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]`                   | `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/owesMoney`|
-| **deletep** | `deletep INDEX`                                                              | `deletep 2`                                                                                    |
-| **listp**   | `listp`                                                                      | `listp`                                                                                        |
-| **editp**   | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                                  | `editp 1 p/12345678 n/John Doey a/NUS`                                                         |
-| **findp**   | `findp [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]`                           | `findp n/Gerald`                                                                               |
-| **clear**   | `clear`                                                                      | `clearp`                                                                                       |
+| Action      | Format                                                                   | Example                                                                                        |
+|-------------|--------------------------------------------------------------------------|--------------------------|
+| **addp**    | `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`               | `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/owesMoney`|
+| **deletep** | `deletep INDEX`                                                          | `deletep 2`                                                                                    |
+| **listp**   | `listp`                                                                  | `listp`                                                                                        |
+| **editp**   | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                              | `editp 1 p/12345678 n/John Doey a/NUS`                                                         |
+| **findp**   | `findp [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]`                       | `findp n/Gerald`                                                                               |
+| **clear**   | `clear`                                                                  | `clearp`                                                                                       |
 | **addo**    | `addo p/PHONE\_NUM r/REMARK d/DETAILS c/DELIVERYDATETIME m/COLLECTION\_TYPE` | `addo p/87654321 r/no candles d/1:Chocolate Cake c/27-12-2022 12:30 m/Delivery`                |
-| **deleteo** | `deleteo INDEX`                                                              | `deleteo 2`                                                                                    |
-| **listo**   | `listo`                                                                      | `listo`                                                                                        |
-| **marko**   | `marko INDEX`                                                                | `marko 1`                                                                                      |
-| **unmarko** | `unmarko INDEX`                                                              | `unmarko 1`                                                                                    |
-| **exit**    | `exit`                                                                       | `exit`                                                                                         |
-| **edito**   | `edito INDEX c/DELIVERYDATETIME g/COLLECTION\_TYPE r/REMARKS d/DETAILS…​`    | `edito 1  c/04-04-2022 10:30 g/Delivery r/Two candles d/1: black forest cake d/1: Cheese cake` |
-| **findo**   | `findo [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]`                           | `findo n/Gerald Declan`                                                                        |
+| **deleteo** | `deleteo INDEX`                                                          | `deleteo 2`                                                                                    |
+| **listo**   | `listo`                                                                  | `listo`                                                                                        |
+| **marko**   | `marko INDEX`                                                            | `marko 1`                                                                                      |
+| **unmarko** | `unmarko INDEX`                                                          | `unmarko 1`                                                                                    |
+| **exit**    | `exit`                                                                   | `exit`                                                                                         |
+| **edito**   | ``editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…`` | `edito 1 r/Add Cheese d/1: Jerry Favourite Cheese Cake d/2: Chocolate Cake c/25-12-2022 15:30 m/Delivery` |
+| **findo**   | `findo [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]`                       | `findo n/Gerald Declan`                                                                        |
