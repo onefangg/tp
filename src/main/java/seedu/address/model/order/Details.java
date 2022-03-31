@@ -23,6 +23,8 @@ public class Details {
     public static final String MESSAGE_CONSTRAINTS = "Details consists of a number (quantity), "
             + "followed by a colon (:) and by alphabetical or whitespace characters (order item). "
             + "\n EXAMPLE: d/1: vanilla cake";
+    public static final String FIND_ITEM_MESSAGE_CONSTRAINTS = "findo only supports finding items and not quantities\n"
+            + "EXAMPLE: findo d/Cake";
     /*
      * Details passed in should follow convention eg. "1 : chocolate cake with sprinkles".
      * Characters preceding the colon should only be numerical. This is parsed as the quantity.
@@ -33,6 +35,7 @@ public class Details {
     private static final String VALIDATION_REGEX = String.format(
             "^(\\s+)?(?<%s>\\d+)\\s*:{1}\\s*(?<%s>((\\w|\\w )+))(\\s+)?$",
             ORDER_QUANTITY_REGEX_KEYWORD, ORDER_ITEM_REGEX_KEYWORD);
+    private static final String VALIDATION_REGEX_QUANTITY = "^([0-9]+:).*";
     private static final Pattern DETAIL_PATTERN = Pattern.compile(VALIDATION_REGEX);
 
     public final String value;
@@ -91,6 +94,13 @@ public class Details {
     }
 
     /**
+     * Returns true if a given string is a valid detail item.
+     */
+    public static boolean isValidFindDetailsItem(String test) {
+        return !test.matches(VALIDATION_REGEX_QUANTITY);
+    }
+
+    /**
      * Returns matching string based on {@code regexKeyword} specified in {@code DETAIL_PATTERN}.
      */
     public static String parseDetails(String regexInput, String regexKeyword) {
@@ -108,7 +118,7 @@ public class Details {
 
     @Override
     public String toString() {
-        return value;
+        return String.valueOf(quantity) + ": " + item;
     }
 
     @Override
