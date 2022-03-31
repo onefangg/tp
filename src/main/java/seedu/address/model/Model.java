@@ -123,6 +123,16 @@ public interface Model {
     void updateFilteredOrderList(Predicate<Order> predicate);
 
     /**
+     * Returns an unmodifiable view of the filtered person list
+     */
+    ObservableList<Person> getPersonList();
+
+    /**
+     * Returns an unmodifiable view of the filtered order list
+     */
+    ObservableList<Order> getOrderList();
+
+    /**
      * Updates the filter of the filtered orders list to filter by the given {@code predicate}
      * and sorts it by DeliveryDateTime
      * @throws NullPointerException if {@code predicate} is null.

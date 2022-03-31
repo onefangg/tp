@@ -125,7 +125,7 @@ public class Order {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
 
-        builder.append("; Remark: ")
+        builder.append("Remark: ")
                 .append(getRemark())
                 .append("; Details: ")
                 .append(getDetails())

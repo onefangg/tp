@@ -31,6 +31,7 @@ public class DeletePersonCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
+
     private final Index targetIndex;
 
     public DeletePersonCommand(Index targetIndex) {
@@ -48,7 +49,9 @@ public class DeletePersonCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         List<String> uuidList = Arrays.asList(new String[]{personToDelete.getUuid().toString()});
-        FilteredList<Order> orderList = model.getFilteredOrderList()
+
+        FilteredList<Order> orderList = model.getOrderList()
+
                 .filtered(new OrderUuidContainsKeywordsPredicate(uuidList));
 
         if (!orderList.isEmpty()) {

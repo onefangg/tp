@@ -42,7 +42,7 @@ public class AddOrderCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_REMARK + "Add Cheese "
-            + PREFIX_DETAILS + "1x Jerry Favourite Cheese Cake "
+            + PREFIX_DETAILS + "1: Jerry Favourite Cheese Cake "
             + PREFIX_DELIVERYDATETIME + "25-12-2022 15:30 "
             + PREFIX_COLLECTION_TYPE + "Delivery";
 
@@ -87,7 +87,7 @@ public class AddOrderCommand extends Command {
     private Order buildOrder(Model model) throws CommandException {
         ArrayList<String> phoneKeywords = new ArrayList<String>();
         phoneKeywords.add(phone.value);
-        FilteredList<Person> filteredPersons = model.getFilteredPersonList()
+        FilteredList<Person> filteredPersons = model.getPersonList()
                 .filtered(new PhoneContainsKeywordsPredicate(phoneKeywords));
         if (filteredPersons.isEmpty()) {
             throw new CommandException(MESSAGE_NO_PERSON_FOUND);

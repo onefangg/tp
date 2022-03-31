@@ -158,6 +158,14 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns the full list of {@code Person} in the AddressBook
+     */
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return addressBook.getPersonList();
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
@@ -174,6 +182,15 @@ public class ModelManager implements Model {
     public ObservableList<Order> getFilteredOrderList() {
         return orders;
     }
+
+    /**
+     * Returns the full list of {@code Order} in the AddressBook
+     */
+    @Override
+    public ObservableList<Order> getOrderList() {
+        return addressBook.getOrderList();
+    }
+
 
     @Override
     public void updateFilteredOrderList(Predicate<Order> predicate) {
