@@ -80,6 +80,8 @@ Format: `help`
 Adds a customer to ReadyBakey’s contact list
 
 Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
+* The length of the `PHONE` must be 3 to 15 characters long
+* The length of the `EMAIL` must be between 6 to 50 characters long
 
 Examples:
 * `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/friends t/owesMoney`
@@ -113,6 +115,8 @@ Format: `editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [
 * Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* The length of the `PHONE` must be 3 to 15 characters long
+* The length of the `EMAIL` must be between 6 to 50 characters long
 
 Examples:
 *  `editp 1 p/83456789 e/declan@example.com` Edits the phone number and email address of the 1st customer to be `83456789` and `declan@example.com` respectively.
