@@ -40,7 +40,8 @@ public class EditOrderCommand extends Command {
             + PREFIX_COLLECTION_TYPE + "COLLECTION_TYPE \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_REMARK + "Add Cheese "
-            + PREFIX_DETAILS + "1: Jerry Favourite Cheese Cake, 2: Chocolate Cake "
+            + PREFIX_DETAILS + "1: Jerry Favourite Cheese Cake "
+            + PREFIX_DETAILS + "2: Chocolate Cake "
             + PREFIX_DELIVERYDATETIME + "25-12-2022 15:30 "
             + PREFIX_COLLECTION_TYPE + "Delivery";
 
