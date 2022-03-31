@@ -247,7 +247,7 @@ Examples:
   * [quantity] is an integer that belongs to a range between 1 to 99.
   * [description] cannot exceed the maximum length of 30 characters.
   * `addo p/98765432 r/Add Cheese d/1:Chocolate Cake d/5:Banana Cake c/25-12-2022 15:30 m/Delivery`
-* `m/COLLECTION_TYPE` only accepts [delivery|pickup] (case-insensitive)
+* `m/COLLECTION_TYPE` only accepts [delivery OR pickup] (case-insensitive)
 
 ### Delete an order: `deleteo`
 
