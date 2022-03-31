@@ -34,16 +34,16 @@ public class AddOrderCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an order to ReadyBakey. "
             + "Parameters: "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_REMARK + "REMARK "
             + PREFIX_DETAILS + "DETAILS "
             + PREFIX_DELIVERYDATETIME + "DELIVERYDATETIME "
-            + PREFIX_COLLECTION_TYPE + "COLLECTION_TYPE \n"
+            + PREFIX_COLLECTION_TYPE + "COLLECTION_TYPE "
+            + "[" + PREFIX_REMARK + "REMARK]... \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_REMARK + "Add Cheese "
             + PREFIX_DETAILS + "1: Jerry Favourite Cheese Cake "
             + PREFIX_DELIVERYDATETIME + "25-12-2022 15:30 "
-            + PREFIX_COLLECTION_TYPE + "Delivery";
+            + PREFIX_COLLECTION_TYPE + "Delivery "
+            + PREFIX_REMARK + "Add Cheese ";
 
 
     public static final String MESSAGE_ORDER_SUCCESS = "New order added: %1$s";
