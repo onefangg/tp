@@ -7,9 +7,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Address {
+public class Address<MESSAGE_MAX_INPUT_LIMIT> {
 
+    public static final int ADDRESS_SIZE_MIN_LIMIT = 6;
+    public static final int ADDRESS_SIZE_MAX_LIMIT = 100;
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_ADDRESS_LIMIT = "An address cannot be shorter than " + ADDRESS_SIZE_MIN_LIMIT
+            + " characters and cannot be longer than " + ADDRESS_SIZE_MAX_LIMIT + ". ";
 
     /*
      * The first character of the address must not be a whitespace,

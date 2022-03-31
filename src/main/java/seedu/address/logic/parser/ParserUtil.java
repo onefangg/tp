@@ -3,13 +3,13 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_MAX_INPUT_LIMIT;
 import static seedu.address.commons.core.Messages.MESSAGE_MAX_SIZE_LIMIT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BLANK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.order.Details.ITEM_MESSAGE_LIMIT;
 import static seedu.address.model.order.Details.ITEM_SIZE_LIMIT;
 import static seedu.address.model.order.Details.QUANTITY_MESSAGE_LIMIT;
 import static seedu.address.model.order.Details.QUANTITY_SIZE_MAX_LIMIT;
 import static seedu.address.model.order.Details.QUANTITY_SIZE_MIN_LIMIT;
+import static seedu.address.model.person.Address.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -92,8 +92,11 @@ public class ParserUtil {
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
+        int trimmedAddressLength = trimmedAddress.length();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        } else if (trimmedAddressLength < ADDRESS_SIZE_MIN_LIMIT || trimmedAddressLength > ADDRESS_SIZE_MAX_LIMIT) {
+            throw new ParseException(String.format(MESSAGE_ADDRESS_LIMIT, PREFIX_ADDRESS));
         }
         return new Address(trimmedAddress);
     }
