@@ -79,10 +79,10 @@ Format: `help`
 
 Adds a customer to ReadyBakey’s contact list
 
-Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]`
+Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]`
 
 Examples:
-* `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`
+* `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/friends t/owesMoney`
 
 ### Delete a customer: `deletep`
 Removes a customer from ReadyBakey’s contact list
@@ -96,7 +96,6 @@ Format: `deletep INDEX`
 Examples:
 * `deletep 2`
 
-
 ### Listing all customers: `listp`
 Shows a list of all customers in ReadyBakey’s contact list
 
@@ -104,7 +103,6 @@ Format: `listp`
 
 Examples:
 * `listp`
-
 
 ### Editing a customer's information : `editp`
 
@@ -184,14 +182,14 @@ Finds order(s) whose specific attribute contain any of the given keywords.
 
 Format: `findo [ATTRIBUTE] KEYWORD [MORE_KEYWORDS]`
 
-* The supported attributes are `n/`, `p/`, `d/`, `m/`, `r/` 
-* The search is case-insensitive. e.g `cake` will match `Cake`
-* The order of the keywords does not matter. e.g. `banana cake` will match `cake banana`
+* The supported attributes are `n/`, `p/`, `d/`, `m/`, `r/`
 * Only the attribute specified is searched.
   * Multiple attributes searching at the same time is not allowed. e.g. `findo n/Gerald d/Cake`
   * For findo d/[keyword], the keyword should only be the description of the detail and not the quantity
     * Valid Example: `findo d/Cake`
     * Invalid Example: `findo d/1:Cake`
+* The search is case-insensitive. e.g `cake` will match `Cake`
+* The order of the keywords does not matter. e.g. `banana cake` will match `cake banana`
 * Only full words will be matched e.g. `Cake` will not match `Cakes`
 * Multiple [KEYWORDS] provided will be split up by ` ` and searched individually
   * `findo n/Declan Bob` will search for both `Declan` and `Bob`
@@ -221,7 +219,12 @@ Adds an order to ReadyBakey’s order list.
 Format: `addo p/PHONE r/REMARK d/DETAILS c/DELIVERYDATETIME m/COLLECTION_TYPE`
 
 Examples:
-* `addo p/98765432 r/Add Cheese d/1: Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery`
+* `addo p/98765432 r/Add Cheese d/1:Chocolate Cake c/25-12-2022 15:30 m/Delivery`
+* `p/PHONE` must be a phone number that is already stored in ReadyBakey's person list
+* `c/DELIVERYDATETIME` accepts dates in the past for record keeping purposes
+* `d/DETAILS` accept values in the form [quantity]:[description]. It can also take in multiple details
+  * `addo p/98765432 r/Add Cheese d/1:Chocolate Cake d/5:Banana Cake c/25-12-2022 15:30 m/Delivery`
+* `m/COLLECTION_TYPE` only accepts [delivery|pickup] (case-insensitive)
 
 ### Delete an order: `deleteo`
 
