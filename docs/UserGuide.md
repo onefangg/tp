@@ -29,7 +29,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
    * **`listo`** : Lists all orders.
 
-   * **`addp`**`n/John Doe p/87654321 a/21 Kent Ridge Drive` : Adds a customer named `John Doe` to ReadyBakey’s contact list.
+   * **`addp`**`n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25` : Adds a customer named `John Doe` to ReadyBakey’s contact list.
 
    * **`deletep`**`3` : Deletes the 3rd customer from ReadyBakey’s contact list.
 
@@ -349,8 +349,8 @@ _Details coming soon ..._
 ## Command summary <a name="command-summary"></a>
 
 | Action      | Format                                                                       | Example                                                                                        |
-|-------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| **addp**    | `addp [n/NAME] [p/PHONE\_NUM] [a/ADDRESS] [t/TAG]…​`                         | `addp n/John Doe p/87654321 a/21 Kent Ridge Drive t/colleague t/owesMoney`                     |
+|-------------|------------------------------------------------------------------------------|--------------------------|
+| **addp**    | `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]`                   | `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/owesMoney`|
 | **deletep** | `deletep INDEX`                                                              | `deletep 2`                                                                                    |
 | **listp**   | `listp`                                                                      | `listp`                                                                                        |
 | **editp**   | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                                  | `editp 1 p/12345678 n/John Doey a/NUS`                                                         |
