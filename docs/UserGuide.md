@@ -53,8 +53,8 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…`​ after them can be used multiple times excluding zero times.<br>
+  e.g. `t/TAG…​` can be used as `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -219,7 +219,7 @@ Examples:
 
 Adds an order to ReadyBakey’s order list. 
 
-Format: `addo p/PHONE d/DETAILS c/DELIVERYDATETIME m/COLLECTION_TYPE [r/REMARK]…`
+Format: `addo p/PHONE d/DETAILS… c/DELIVERYDATETIME m/COLLECTION_TYPE [r/REMARK]…`
 
 Examples:
 * `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery r/Add Cheese `
