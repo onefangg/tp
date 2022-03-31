@@ -1,10 +1,9 @@
-
 ---
 layout: page
 title: User Guide
 ---
 
-ReadyBakey is a **desktop app that manages orders and customer contact information, optimized for use via a Command Line Interface**(CLI) while still having the benefits of a Graphical User Interface (GUI). It assists small bakeries by consolidating all the necessary requirements and information for successful order management.
+ReadyBakey is a **desktop app that manages orders and customer contact information, optimized for use via a Command Line Interface **(CLI) while still having the benefits of a Graphical User Interface (GUI). It assists small bakeries by consolidating all the necessary requirements and information for successful order management.
 
 # Table of Contents
 1. [Quick Start](#quick-start)
@@ -34,7 +33,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
    * **`deletep`**`3` : Deletes the 3rd customer from ReadyBakey’s contact list.
 
-   * **`clearp`** : Clears all customers.
+   * **`clear`** : Clears all data in ReadyBakey.
 
    * **`exit`** : Exits the app.
 
@@ -63,7 +62,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `listo`, `exit` and `clearo`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `listo`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -126,7 +125,7 @@ Examples:
 
 Edits an existing customer in ReadyBakey's contact list.
 
-Format: `edito INDEX [d/DETAILS] [c/DELIVERYDATETIME] [g/COLLECTION_TYPE] [r/REMARKS]`
+Format: `edito INDEX [d/DETAILS] [c/DELIVERYDATETIME] [m/COLLECTION_TYPE] [r/REMARKS]`
 
 * Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list. 
   * The index **must be a positive integer** 1, 2, 3, …​
@@ -148,42 +147,51 @@ Examples:
   * Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
 * `edito 3 c/04-04-2022 10:30` 
   * Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
-* `edito 1 d/1: black forest cake d/1: Cheese cake c/04-04-2022 10:30 g/Delivery r/Two candles` 
+* `edito 1 d/1: black forest cake d/1: Cheese cake c/04-04-2022 10:30 m/Delivery r/Two candles` 
   * Edits the first order to have order details with `1: black forest cake` and `1: Cheese cake`. 
   * The order delivery date is also now edited to be `Monday, 04 Apr 2022, 10:30`. 
   * Collection type is changed to `Delivery`.
   * Detail remarks is also changed to `Two candles`
 
-### Locating customers by name: `findp`
+### Locating customers by specific attribute: `findp`
 
 Finds customer(s) whose name(s) contain any of the given keywords.
 
-Format: `findp KEYWORD [MORE_KEYWORDS]`
+Format: `findp [ATTRIBUTE] KEYWORD [MORE_KEYWORDS]`
 
+* The supported attributes are `n/`, `p/`, `e/`, `a/`, `r/`
 * The search is case-insensitive. e.g `gerald` will match `Gerald`
 * The order of the keywords does not matter. e.g. `Gerald Tan` will match `Tan Gerald`
-* Only the name is searched.
+* Only the attribute specified is searched.
+    * Multiple attributes searching at the same time is not allowed. e.g. `findp n/Gerald r/Allergic`
+* Multiple [KEYWORDS] provided will be split up by ` ` and searched individually
+  * `findp n/Declan Gerald` will search for both `Declan` and `Gerald`
 * Only full words will be matched e.g. `Gerald` will not match `Geralds`
 * Customers matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Gerald Tan` will return `Gerald Lim`, `Gerald Lee`
 
 Examples:
-* `findp John` returns `john` and `John Doe`
-* `findp alex david` returns `Alex Yeoh`, `David Li`<br>
+* `findp n/Gerald` returns `gerald` and `Gerald Tan`
+* `findp n/alex david` returns `Alex Yeoh`, `David Li`
+* `findp p/90029382` returns `90029382`
+* `findp e/alex@abc.com` returns `alex@abc.com`
+* `findp a/serangoon` returns `Blk 1 Serangoon Street 5`
+* `findp r/Allergic` returns `Allergic to Tomatoes`<br>
 
-### Locating customers by name: `findo`
+### Locating orders by specific attribute: `findo`
 
 Finds order(s) whose specific attribute contain any of the given keywords.
 
-Format: `findo [ATTRIBUTE] [KEYWORDS]`
+Format: `findo [ATTRIBUTE] KEYWORD [MORE_KEYWORDS]`
 
 * The supported attributes are `n/`, `p/`, `d/`, `m/`, `r/` 
 * The search is case-insensitive. e.g `cake` will match `Cake`
 * The order of the keywords does not matter. e.g. `banana cake` will match `cake banana`
 * Only the attribute specified is searched.
+  * Multiple attributes searching at the same time is not allowed. e.g. `findo n/Gerald d/Cake`
   * For findo d/[keyword], the keyword should only be the description of the detail and not the quantity
-    * Valid Example: findo d/Cake 
-    * Invalid Example: findo d/1:Cake
+    * Valid Example: `findo d/Cake`
+    * Invalid Example: `findo d/1:Cake`
 * Only full words will be matched e.g. `Cake` will not match `Cakes`
 * Multiple [KEYWORDS] provided will be split up by ` ` and searched individually
   * `findo n/Declan Bob` will search for both `Declan` and `Bob`
@@ -197,7 +205,7 @@ Examples:
 * `findo m/delivery` returns `Delivery`
 * `findo r/birthday` returns `Birthday` <br>
 
-### Clearing all Customers: `clearp`
+### Clearing all Customers and Orders: `clear`
 
 Removes all customers and orders stored in ReadyBakey
 
@@ -213,7 +221,7 @@ Adds an order to ReadyBakey’s order list.
 Format: `addo p/PHONE r/REMARK d/DETAILS c/DELIVERYDATETIME m/COLLECTION_TYPE`
 
 Examples:
-* `addo p/98765432 r/Add Cheese d/1x Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery`
+* `addo p/98765432 r/Add Cheese d/1: Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery`
 
 ### Delete an order: `deleteo`
 
@@ -310,19 +318,21 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary <a name="command-summary"></a>
-| Action       | Format                                                                           | Example                                                                                        |
-|--------------|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| **addp**     | `addp [n/NAME] [p/PHONE\_NUM] [a/ADDRESS] [t/TAG]…​`                             | `addp n/John Doe p/87654321 a/21 Kent Ridge Drive t/colleague t/owesMoney`                     |
-| **deletep**  | `deletep INDEX`                                                                  | `deletep 2`                                                                                    |
-| **listp**    | `listp`                                                                          | `listp`                                                                                        |
-| **editp**    | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                                      | `editp 1 p/12345678 n/John Doey a/NUS`                                                         |
-| **findp**    | `findp KEYWORD`                                                                  | `findp John`                                                                                   |
-| **clear**    | `clear`                                                                          | `clearp`                                                                                       |
-| **addo**     | `addo d/DATE\_ORDERED s/DATE\_TO\_SEND c/CUST\_PHONE\_NUM i/ITEM\_ORDERED`       | `addo d/10-10-2022 s/20-10-2022 c/87654321 i/Chocolate Cake`                                   |
-| **deleteo**  | `deleteo INDEX`                                                                  | `deleteo 2`                                                                                    |
-| **listo**    | `listo`                                                                          | `listo`                                                                                        |
-| **marko**    | `marko INDEX`                                                                    | `marko 1`                                                                                      |
-| **unmarko**  | `unmarko INDEX`                                                                  | `unmarko 1`                                                                                    |
-| **exit**     | `exit`                                                                           | `exit`                                                                                         |
-| **edito**    | `edito INDEX c/DELIVERYDATETIME g/COLLECTION\_TYPE r/REMARKS d/DETAILS…​`        | `edito 1  c/04-04-2022 10:30 g/Delivery r/Two candles d/1: black forest cake d/1: Cheese cake` |
+
+| Action      | Format                                                                   | Example                                                                                        |
+|-------------|--------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| **addp**    | `addp [n/NAME] [p/PHONE\_NUM] [a/ADDRESS] [t/TAG]…​`                     | `addp n/John Doe p/87654321 a/21 Kent Ridge Drive t/colleague t/owesMoney`                     |
+| **deletep** | `deletep INDEX`                                                          | `deletep 2`                                                                                    |
+| **listp**   | `listp`                                                                  | `listp`                                                                                        |
+| **editp**   | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                              | `editp 1 p/12345678 n/John Doey a/NUS`                                                         |
+| **findp**   | `findp [ATTRIBUTE] KEYWORD [MORE_KEYWORDS]`                              | `findp n/Gerald`                                                                               |
+| **findo**   | `findo [ATTRIBUTE] KEYWORD [MORE_KEYWORDS]`                              | `findo n/Gerald Declan`                                                                        |
+| **clear**   | `clear`                                                                  | `clearp`                                                                                       |
+| **addo**    | `addo d/DATE\_ORDERED s/DATE\_TO\_SEND c/CUST\_PHONE\_NUM i/ITEM\_ORDERED` | `addo d/10-10-2022 s/20-10-2022 c/87654321 i/Chocolate Cake`                                   |
+| **deleteo** | `deleteo INDEX`                                                          | `deleteo 2`                                                                                    |
+| **listo**   | `listo`                                                                  | `listo`                                                                                        |
+| **marko**   | `marko INDEX`                                                            | `marko 1`                                                                                      |
+| **unmarko** | `unmarko INDEX`                                                          | `unmarko 1`                                                                                    |
+| **exit**    | `exit`                                                                   | `exit`                                                                                         |
+| **edito**   | `edito INDEX c/DELIVERYDATETIME g/COLLECTION\_TYPE r/REMARKS d/DETAILS…​` | `edito 1  c/04-04-2022 10:30 g/Delivery r/Two candles d/1: black forest cake d/1: Cheese cake` |
 
