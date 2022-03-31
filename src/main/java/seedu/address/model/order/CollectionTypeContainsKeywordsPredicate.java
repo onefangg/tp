@@ -12,6 +12,10 @@ public class CollectionTypeContainsKeywordsPredicate implements Predicate<Order>
         this.keyword = keyword;
     }
 
+    public String getKeywordsString() {
+        return keyword;
+    }
+
     @Override
     public boolean test(Order order) {
         return order.getCollectionType().getValue().equalsIgnoreCase(keyword);

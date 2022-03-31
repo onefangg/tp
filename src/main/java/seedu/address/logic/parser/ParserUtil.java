@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_MAX_INPUT_LIMIT;
 import static seedu.address.commons.core.Messages.MESSAGE_MAX_SIZE_LIMIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BLANK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.model.order.Details.ITEM_MESSAGE_LIMIT;
 import static seedu.address.model.order.Details.ITEM_SIZE_LIMIT;
@@ -240,4 +241,19 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Returns true if only {@code searchPrefix} is the only prefix in {@code ArgumentMultimap}.
+     * Checks ignore all other prefixes not passed in initial {@code tokenize()}  method.
+     */
+    public static boolean isOnlyOnePrefixPresent(ArgumentMultimap argumentMultimap, Prefix searchPrefix) {
+        ArrayList<Prefix> argPrefixes = argumentMultimap.getAllPrefixes();
+        // check that prefix exists
+        boolean isSearchPrefixExists = argPrefixes.stream().filter(prefix -> prefix.equals(searchPrefix)).count() == 1;
+
+        // check no other prefix exists except for blank prefix as by-product of tokenizing
+        boolean noOtherPrefixExists = argPrefixes.stream()
+                .filter(prefix -> !prefix.equals(searchPrefix) || prefix.equals(PREFIX_BLANK))
+                .count() == 1;
+        return isSearchPrefixExists && noOtherPrefixExists;
+    }
 }

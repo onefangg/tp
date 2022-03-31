@@ -2,21 +2,19 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.function.Predicate;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.order.Order;
+import seedu.address.model.order.RemarkContainsKeywordsPredicate;
 
 /**
- *  Finds and lists all orders in ReadyBakey whose predicate (Remark) contains any of the argument keywords.
+ *  Finds and lists all orders in ReadyBakey whose predicate (remark) contains any of the argument keywords.
  *  Keyword matching is case insensitive.
  */
 public class FindOrderRemarkCommand extends FindOrderCommand {
+    private final String attributeName = "remark";
+    private final RemarkContainsKeywordsPredicate predicate;
 
-    private final Predicate<Order> predicate;
-
-    public FindOrderRemarkCommand(Predicate<Order> predicate) {
+    public FindOrderRemarkCommand(RemarkContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -25,7 +23,8 @@ public class FindOrderRemarkCommand extends FindOrderCommand {
         requireNonNull(model);
         model.updateFilteredOrderList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_ORDERS_LISTED_OVERVIEW, model.getFilteredOrderList().size()),
+                String.format(Messages.MESSAGE_FIND_ORDERS_OVERVIEW, model.getFilteredOrderList().size(),
+                        attributeName, predicate.getKeywordsString()),
                 true, false);
     }
 
