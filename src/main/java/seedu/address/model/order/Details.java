@@ -115,7 +115,7 @@ public class Details {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Details // instanceof handles nulls
-                && value.equals(((Details) other).value)); // state check
+                && value.equalsIgnoreCase(((Details) other).value)); // state check
     }
 
     @Override
