@@ -29,7 +29,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
    * **`listo`** : Lists all orders.
 
-   * **`addp`**`n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25` : Adds a customer named `John Doe` to ReadyBakey’s contact list.
+   * **`addp`**`n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25` : Adds a customer named `John Doe` to ReadyBakey’s contact list together with the necessary phone number, email and address.
 
    * **`deletep`**`3` : Deletes the 3rd customer from ReadyBakey’s contact list.
 
