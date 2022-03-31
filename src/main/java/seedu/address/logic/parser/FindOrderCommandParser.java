@@ -18,6 +18,7 @@ import seedu.address.logic.commands.FindOrderPhoneCommand;
 import seedu.address.logic.commands.FindOrderRemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.CollectionTypeContainsKeywordsPredicate;
+import seedu.address.model.order.Details;
 import seedu.address.model.order.DetailsContainsKeywordsPredicate;
 import seedu.address.model.order.RemarkContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -31,6 +32,7 @@ public class FindOrderCommandParser implements Parser<FindOrderCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindOrderCommand
      * and returns a FindOrderCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindOrderCommand parse(String args) throws ParseException {
@@ -52,6 +54,7 @@ public class FindOrderCommandParser implements Parser<FindOrderCommand> {
             String[] remarkKeywords = getKeywords(argMultimap, PREFIX_REMARK);
             return new FindOrderRemarkCommand(new RemarkContainsKeywordsPredicate(Arrays.asList(remarkKeywords)));
         } else if (isOnlyOnePrefixPresent(argMultimap, PREFIX_DETAILS)) {
+            checkDetailsItemKeyword(argMultimap, PREFIX_DETAILS);
             String[] detailsKeywords = getKeywords(argMultimap, PREFIX_DETAILS);
             return new FindOrderDetailsCommand(new DetailsContainsKeywordsPredicate(Arrays.asList(detailsKeywords)));
         } else if (isOnlyOnePrefixPresent(argMultimap, PREFIX_COLLECTION_TYPE)) {
@@ -72,4 +75,12 @@ public class FindOrderCommandParser implements Parser<FindOrderCommand> {
         }
         return keywordString.split("\\s+");
     }
+
+    private static void checkDetailsItemKeyword(ArgumentMultimap argMultiMap, Prefix findPrefix) throws ParseException {
+        if (!Details.isValidFindDetailsItem(argMultiMap.getValue(findPrefix).get().trim())) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, Details.FIND_ITEM_MESSAGE_CONSTRAINTS));
+        }
+    }
 }
+
