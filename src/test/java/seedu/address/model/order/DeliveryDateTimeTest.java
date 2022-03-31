@@ -29,10 +29,10 @@ public class DeliveryDateTimeTest {
         assertFalse(DeliveryDateTime.isValidDeliveryDateTime(" ")); // spaces only
         assertFalse(DeliveryDateTime.isValidDeliveryDateTime("15/12/13 13:43")); // wrong date format
         assertFalse(DeliveryDateTime.isValidDeliveryDateTime("15-12-2022 1340")); // wrong time format
-        assertFalse(DeliveryDateTime.isValidDeliveryDateTime("15-01-2022 13:40")); // Before current datetime
 
         // valid datetime
         assertTrue(DeliveryDateTime.isValidDeliveryDateTime("25-06-2022 18:30"));
+        assertTrue(DeliveryDateTime.isValidDeliveryDateTime("15-01-2022 13:40")); // Before current datetime
 
         // valid datetime leapyear
         assertTrue(DeliveryDateTime.isValidDeliveryDateTime("29-02-2024 18:30"));
