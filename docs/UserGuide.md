@@ -310,19 +310,19 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary <a name="command-summary"></a>
-| Action       | Format                                                                           | Example                                                                                        |
-|--------------|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| **addp**     | `addp [n/NAME] [p/PHONE\_NUM] [a/ADDRESS] [t/TAG]…​`                             | `addp n/John Doe p/87654321 a/21 Kent Ridge Drive t/colleague t/owesMoney`                     |
-| **deletep**  | `deletep INDEX`                                                                  | `deletep 2`                                                                                    |
-| **listp**    | `listp`                                                                          | `listp`                                                                                        |
-| **editp**    | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                                      | `editp 1 p/12345678 n/John Doey a/NUS`                                                         |
-| **findp**    | `findp KEYWORD`                                                                  | `findp John`                                                                                   |
-| **clear**    | `clear`                                                                          | `clearp`                                                                                       |
-| **addo**     | `addo d/DATE\_ORDERED s/DATE\_TO\_SEND c/CUST\_PHONE\_NUM i/ITEM\_ORDERED`       | `addo d/10-10-2022 s/20-10-2022 c/87654321 i/Chocolate Cake`                                   |
-| **deleteo**  | `deleteo INDEX`                                                                  | `deleteo 2`                                                                                    |
-| **listo**    | `listo`                                                                          | `listo`                                                                                        |
-| **marko**    | `marko INDEX`                                                                    | `marko 1`                                                                                      |
-| **unmarko**  | `unmarko INDEX`                                                                  | `unmarko 1`                                                                                    |
-| **exit**     | `exit`                                                                           | `exit`                                                                                         |
-| **edito**    | `edito INDEX c/DELIVERYDATETIME g/COLLECTION\_TYPE r/REMARKS d/DETAILS…​`        | `edito 1  c/04-04-2022 10:30 g/Delivery r/Two candles d/1: black forest cake d/1: Cheese cake` |
-
+| Action       | Format                                                                       | Example                                                                                        |
+|--------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| **addp**     | `addp [n/NAME] [p/PHONE\_NUM] [a/ADDRESS] [t/TAG]…​`                         | `addp n/John Doe p/87654321 a/21 Kent Ridge Drive t/colleague t/owesMoney`                     |
+| **deletep**  | `deletep INDEX`                                                              | `deletep 2`                                                                                    |
+| **listp**    | `listp`                                                                      | `listp`                                                                                        |
+| **editp**    | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                                  | `editp 1 p/12345678 n/John Doey a/NUS`                                                         |
+| **findp**    | `findp KEYWORD`                                                              | `findp John`                                                                                   |
+| **clear**    | `clear`                                                                      | `clearp`                                                                                       |
+| **addo**     | `addo d/DATE\_ORDERED s/DATE\_TO\_SEND c/CUST\_PHONE\_NUM i/ITEM\_ORDERED`   | `addo d/10-10-2022 s/20-10-2022 c/87654321 i/Chocolate Cake`                                   |
+| **deleteo**  | `deleteo INDEX`                                                              | `deleteo 2`                                                                                    |
+| **listo**    | `listo`                                                                      | `listo`                                                                                        |
+| **marko**    | `marko INDEX`                                                                | `marko 1`                                                                                      |
+| **unmarko**  | `unmarko INDEX`                                                              | `unmarko 1`                                                                                    |
+| **exit**     | `exit`                                                                       | `exit`                                                                                         |
+| **edito**    | `edito INDEX c/DELIVERYDATETIME g/COLLECTION\_TYPE r/REMARKS d/DETAILS…​`    | `edito 1  c/04-04-2022 10:30 g/Delivery r/Two candles d/1: black forest cake d/1: Cheese cake` |
+| **findo**   | `findo [ATTRIBUTE_PREFIX][KEYWORD]`                                          | `findo n/Bob`                                                                                  |
