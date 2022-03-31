@@ -14,8 +14,7 @@ import java.time.format.DateTimeParseException;
 public class DeliveryDateTime {
 
     public static final String MESSAGE_CONSTRAINTS = "DeliveryDateTime should be in the format dd-MM-yyyy HH:mm "
-            + "or a natural date (e.g. Mon 22:30, Wednesday 10:20) "
-            + "and should be a valid date and time after today's date!";
+            + "or a natural date (e.g. Mon 22:30, Wednesday 10:20) ";
 
     public static final String MESSAGE_CONSTRAINTS_LEAP_YEAR = "Your current input represents a leap day but the "
             + "year is not a leap year! Please check the date again!";
@@ -53,9 +52,6 @@ public class DeliveryDateTime {
         try {
             LocalDateTime.parse(test, PARSER_FORMATTER);
         } catch (DateTimeParseException e) {
-            return false;
-        }
-        if (LocalDateTime.parse(test, PARSER_FORMATTER).isBefore(LocalDateTime.now())) {
             return false;
         }
         return true;
