@@ -82,6 +82,7 @@ Adds a customer to ReadyBakey’s contact list
 Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
 * Names must be between 2 and 50 characters long and must only contain alphanumeric characters and spaces.
 * The length of the `PHONE` must be between 3 and 15 numbers.
+  * It does not allow for spaces or dashes as well.
 * The length of the `EMAIL` must be between 6 and 50 characters.
   * It should be in the format `local-part@domain` and adhere to the following constraints:
     1. The local-part should only contain alphanumeric characters and these special characters, excluding
