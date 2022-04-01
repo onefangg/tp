@@ -132,7 +132,7 @@ Format: `editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [
 * Names must be between 2 and 50 characters long and must only contain alphanumeric characters and spaces.
 * The length of the `PHONE` must be 3 to 15 numbers
 * The length of the `EMAIL` must be between 6 and 50 characters
-* The length of the `ADDRESS` must be between 6 and 100 characters
+* The length of the `ADDRESS` must be between 6 and 70 characters
 * The length of the `REMARK` must be less than or equal to 70 characters
 
 Examples:
