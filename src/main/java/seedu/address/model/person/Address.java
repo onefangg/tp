@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Address<MESSAGE_MAX_INPUT_LIMIT> {
+public class Address {
 
     public static final int ADDRESS_SIZE_MIN_LIMIT = 6;
     public static final int ADDRESS_SIZE_MAX_LIMIT = 100;
