@@ -93,7 +93,7 @@ Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
       - end with a domain label at least 2 characters long
       - have each domain label start and end with alphanumeric characters
       - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-* The length of the `ADDRESS` must be between 6 and 100 characters.
+* The length of the `ADDRESS` must be between 6 and 70 characters.
 * The length of the `REMARK` must be less than or equal to 70 characters.
 
 Examples:
@@ -131,7 +131,16 @@ Format: `editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [
 * Existing values will be updated to the input values.
 * Names must be between 2 and 50 characters long and must only contain alphanumeric characters and spaces.
 * The length of the `PHONE` must be 3 to 15 numbers
-* The length of the `EMAIL` must be between 6 and 50 characters
+* The length of the `EMAIL` must be between 6 and 50 characters.
+  * It should be in the format `local-part@domain` and adhere to the following constraints:
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding
+       the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    1. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by
+       periods.
+    2. The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 * The length of the `ADDRESS` must be between 6 and 70 characters
 * The length of the `REMARK` must be less than or equal to 70 characters
 
