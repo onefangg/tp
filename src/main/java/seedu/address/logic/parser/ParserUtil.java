@@ -3,13 +3,29 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_MAX_INPUT_LIMIT;
 import static seedu.address.commons.core.Messages.MESSAGE_MAX_SIZE_LIMIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLANK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.order.Details.ITEM_MESSAGE_LIMIT;
 import static seedu.address.model.order.Details.ITEM_SIZE_LIMIT;
 import static seedu.address.model.order.Details.QUANTITY_MESSAGE_LIMIT;
 import static seedu.address.model.order.Details.QUANTITY_SIZE_MAX_LIMIT;
 import static seedu.address.model.order.Details.QUANTITY_SIZE_MIN_LIMIT;
+import static seedu.address.model.person.Address.ADDRESS_SIZE_MAX_LIMIT;
+import static seedu.address.model.person.Address.ADDRESS_SIZE_MIN_LIMIT;
+import static seedu.address.model.person.Address.MESSAGE_ADDRESS_LIMIT;
+import static seedu.address.model.person.Email.EMAIL_SIZE_MAX_LIMIT;
+import static seedu.address.model.person.Email.EMAIL_SIZE_MIN_LIMIT;
+import static seedu.address.model.person.Email.MESSAGE_EMAIL_LIMIT;
+import static seedu.address.model.person.Name.MESSAGE_NAME_LIMIT;
+import static seedu.address.model.person.Name.NAME_SIZE_MAX_LIMIT;
+import static seedu.address.model.person.Name.NAME_SIZE_MIN_LIMIT;
+import static seedu.address.model.person.Phone.MESSAGE_PHONE_LIMIT;
+import static seedu.address.model.person.Phone.PHONE_SIZE_MAX_LIMIT;
+import static seedu.address.model.person.Phone.PHONE_SIZE_MIN_LIMIT;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,8 +78,11 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        int trimmedNameLength = trimmedName.length();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        } else if (trimmedNameLength < NAME_SIZE_MIN_LIMIT || trimmedNameLength > NAME_SIZE_MAX_LIMIT) {
+            throw new ParseException(String.format(MESSAGE_NAME_LIMIT, PREFIX_NAME));
         }
         return new Name(trimmedName);
     }
@@ -77,8 +96,11 @@ public class ParserUtil {
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
+        int trimmedPhoneLength = trimmedPhone.length();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        } else if (trimmedPhoneLength < PHONE_SIZE_MIN_LIMIT || trimmedPhoneLength > PHONE_SIZE_MAX_LIMIT) {
+            throw new ParseException(String.format(MESSAGE_PHONE_LIMIT, PREFIX_PHONE));
         }
         return new Phone(trimmedPhone);
     }
@@ -92,8 +114,11 @@ public class ParserUtil {
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
+        int trimmedAddressLength = trimmedAddress.length();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        } else if (trimmedAddressLength < ADDRESS_SIZE_MIN_LIMIT || trimmedAddressLength > ADDRESS_SIZE_MAX_LIMIT) {
+            throw new ParseException(String.format(MESSAGE_ADDRESS_LIMIT, PREFIX_ADDRESS));
         }
         return new Address(trimmedAddress);
     }
@@ -122,8 +147,11 @@ public class ParserUtil {
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
+        int trimmedEmailLength = trimmedEmail.length();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        } else if (trimmedEmailLength < EMAIL_SIZE_MIN_LIMIT || trimmedEmailLength > EMAIL_SIZE_MAX_LIMIT) {
+            throw new ParseException(String.format(MESSAGE_EMAIL_LIMIT, PREFIX_EMAIL));
         }
         return new Email(trimmedEmail);
     }
