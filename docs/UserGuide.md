@@ -27,15 +27,15 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`listo`** : Lists all orders.
+  * **`listo`** : Lists all orders.
 
-   * **`addp`**`n/John Doe p/87654321 a/21 Kent Ridge Drive` : Adds a customer named `John Doe` to ReadyBakey’s contact list.
+  * **`addp`**`n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25` : Adds a customer named `John Doe` to ReadyBakey’s contact list together with the necessary phone number, email and address.
 
-   * **`deletep`**`3` : Deletes the 3rd customer from ReadyBakey’s contact list.
+  * **`deletep`**`3` : Deletes the 3rd customer from ReadyBakey’s contact list.
 
-   * **`clear`** : Clears all data in ReadyBakey.
+  * **`clear`** : Clears all data in ReadyBakey.
 
-   * **`exit`** : Exits the app.
+  * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -79,7 +79,22 @@ Format: `help`
 
 Adds a customer to ReadyBakey’s contact list
 
-Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]`
+Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
+* Names must be between 2 and 50 characters long and must only contain alphanumeric characters and spaces.
+* The length of the `PHONE` must be between 3 and 15 numbers.
+  * It does not allow for spaces or dashes as well.
+* The length of the `EMAIL` must be between 6 and 50 characters.
+  * It should be in the format `local-part@domain` and adhere to the following constraints:
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding
+       the parentheses, (+_.-). The local-part may not start or end with any special characters.
+      1. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by
+         periods.
+    2. The domain name must:
+      - end with a domain label at least 2 characters long
+      - have each domain label start and end with alphanumeric characters
+      - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* The length of the `ADDRESS` must be between 6 and 70 characters.
+* The length of the `REMARK` must be less than or equal to 70 characters.
 
 Examples:
 * `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/friends t/owesMoney`
@@ -108,11 +123,26 @@ Examples:
 
 Edits an existing customer in ReadyBakey's contact list.
 
-Format: `editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]`
+Format: `editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…`
 
-* Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list. 
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Names must be between 2 and 50 characters long and must only contain alphanumeric characters and spaces.
+* The length of the `PHONE` must be 3 to 15 numbers
+* The length of the `EMAIL` must be between 6 and 50 characters.
+  * It should be in the format `local-part@domain` and adhere to the following constraints:
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding
+       the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    1. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by
+       periods.
+    2. The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* The length of the `ADDRESS` must be between 6 and 70 characters
+* The length of the `REMARK` must be less than or equal to 70 characters
 
 Examples:
 *  `editp 1 p/83456789 e/declan@example.com` Edits the phone number and email address of the 1st customer to be `83456789` and `declan@example.com` respectively.
@@ -123,9 +153,9 @@ Examples:
 
 Edits an existing customer in ReadyBakey's contact list.
 
-Format: `edito INDEX [d/DETAILS] [c/DELIVERYDATETIME] [m/COLLECTION_TYPE] [r/REMARKS]`
+Format: `edito INDEX [c/DELIVERYDATETIME] [g/COLLECTION\_TYPE] [r/REMARKS] [d/DETAILS]…`
 
-* Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list. 
+* Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list.
   * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -134,23 +164,23 @@ Format: `edito INDEX [d/DETAILS] [c/DELIVERYDATETIME] [m/COLLECTION_TYPE] [r/REM
   case-sensitive.
 
 Examples:
-* `edito 1 d/1: black forest cake` 
+* `edito 1 d/1: black forest cake`
   * Edits the details of the 1st order to be `1: black forest cake`.
-* `edito 1 d/1: black forest cake d/2: Chocolate Cake` 
-  * Edits the details of the 1st order to be `1: black forest 
+* `edito 1 d/1: black forest cake d/2: Chocolate Cake`
+  * Edits the details of the 1st order to be `1: black forest
     cake` and `2: Chocolate Cake`.
     * In this case, to add two details to the order, each `d/` is for one detail.
-* `edito 2 r/Two candles` 
+* `edito 2 r/Two candles`
   * Edits the 2nd order's remarks to be `Two candles`.
-* `edito 2 g/Delivery` 
+* `edito 2 g/Delivery`
   * Edits the 2nd order's collection type to be `Delivery`.
-* `edito 3 c/Monday 10:30` 
+* `edito 3 c/Monday 10:30`
   * Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
-* `edito 3 c/04-04-2022 10:30` 
+* `edito 3 c/04-04-2022 10:30`
   * Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
-* `edito 1 d/1: black forest cake d/1: Cheese cake c/04-04-2022 10:30 m/Delivery r/Two candles` 
-  * Edits the first order to have order details with `1: black forest cake` and `1: Cheese cake`. 
-  * The order delivery date is also now edited to be `Monday, 04 Apr 2022, 10:30`. 
+* `edito 1 d/1: black forest cake d/1: Cheese cake c/04-04-2022 10:30 m/Delivery r/Two candles`
+  * Edits the first order to have order details with `1: black forest cake` and `1: Cheese cake`.
+  * The order delivery date is also now edited to be `Monday, 04 Apr 2022, 10:30`.
   * Collection type is changed to `Delivery`.
   * Detail remarks is also changed to `Two candles`
 
@@ -164,7 +194,7 @@ Format: `findp [ATTRIBUTE] KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `gerald` will match `Gerald`
 * The order of the keywords does not matter. e.g. `Gerald Tan` will match `Tan Gerald`
 * Only the attribute specified is searched.
-    * Multiple attributes searching at the same time is not allowed. e.g. `findp n/Gerald r/Allergic`
+  * Multiple attributes searching at the same time is not allowed. e.g. `findp n/Gerald r/Allergic`
 * Multiple `[KEYWORDS]` provided will be split up by whitespace and searched individually
   * `findp n/Declan Gerald` will search for both `Declan` and `Gerald`
 * Only full words will be matched e.g. `Gerald` will not match `Geralds`
@@ -217,16 +247,16 @@ Examples:
 
 ### Adding an order : `addo`
 
-Adds an order to ReadyBakey’s order list. 
+Adds an order to ReadyBakey’s order list.
 
-Format: `addo p/PHONE r/REMARK d/DETAILS c/DELIVERYDATETIME m/COLLECTION_TYPE`
+Format: `addo p/PHONE d/DETAILS c/DELIVERYDATETIME m/COLLECTION_TYPE [r/REMARK]…`
 
 Examples:
-* `addo p/98765432 r/Add Cheese d/1:Chocolate Cake c/25-12-2022 15:30 m/Delivery`
+* `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery r/Add Cheese `
 * `p/PHONE` must be a phone number that is already stored in ReadyBakey's person list
 * `c/DELIVERYDATETIME` accepts dates in the past for record keeping purposes
   * It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
-  * It can also accept natural dates with time. e.g. `Monday 10:30` or `Mon 10:30`. Natural dates are not 
+  * It can also accept natural dates with time. e.g. `Monday 10:30` or `Mon 10:30`. Natural dates are not
     case-sensitive.
   * All potential natural dates that can be used:
     * `Mon HH:mm`
@@ -247,7 +277,7 @@ Examples:
   * [quantity] is an integer that belongs to a range between 1 to 99.
   * [description] cannot exceed the maximum length of 30 characters.
   * `addo p/98765432 r/Add Cheese d/1:Chocolate Cake d/5:Banana Cake c/25-12-2022 15:30 m/Delivery`
-* `m/COLLECTION_TYPE` only accepts [delivery|pickup] (case-insensitive)
+* `m/COLLECTION_TYPE` only accepts [delivery OR pickup] (case-insensitive)
 
 ### Delete an order: `deleteo`
 
@@ -276,7 +306,7 @@ Examples:
 Shows a list of all incomplete orders in ReadyBakey before and during a given date and time
 
 Format: `incompleteo DELIVERYDATETIME`
-* Orders that are incomplete before and during `DELIVERYDATETIME` will be displayed 
+* Orders that are incomplete before and during `DELIVERYDATETIME` will be displayed
 * It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
 * It can also accept natural dates with time. e.g. `Monday 10:30` or `Mon 10:30`. Natural dates are not
   case-sensitive.
@@ -348,19 +378,19 @@ _Details coming soon ..._
 
 ## Command summary <a name="command-summary"></a>
 
-| Action      | Format                                                                       | Example                                                                                        |
-|-------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| **addp**    | `addp [n/NAME] [p/PHONE\_NUM] [a/ADDRESS] [t/TAG]…​`                         | `addp n/John Doe p/87654321 a/21 Kent Ridge Drive t/colleague t/owesMoney`                     |
-| **deletep** | `deletep INDEX`                                                              | `deletep 2`                                                                                    |
-| **listp**   | `listp`                                                                      | `listp`                                                                                        |
-| **editp**   | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                                  | `editp 1 p/12345678 n/John Doey a/NUS`                                                         |
-| **findp**   | `findp [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]`                           | `findp n/Gerald`                                                                               |
-| **clear**   | `clear`                                                                      | `clearp`                                                                                       |
-| **addo**    | `addo p/PHONE\_NUM r/REMARK d/DETAILS c/DELIVERYDATETIME m/COLLECTION\_TYPE` | `addo p/87654321 r/no candles d/1:Chocolate Cake c/27-12-2022 12:30 m/Delivery`                |
-| **deleteo** | `deleteo INDEX`                                                              | `deleteo 2`                                                                                    |
-| **listo**   | `listo`                                                                      | `listo`                                                                                        |
-| **marko**   | `marko INDEX`                                                                | `marko 1`                                                                                      |
-| **unmarko** | `unmarko INDEX`                                                              | `unmarko 1`                                                                                    |
-| **exit**    | `exit`                                                                       | `exit`                                                                                         |
-| **edito**   | `edito INDEX c/DELIVERYDATETIME g/COLLECTION\_TYPE r/REMARKS d/DETAILS…​`    | `edito 1  c/04-04-2022 10:30 g/Delivery r/Two candles d/1: black forest cake d/1: Cheese cake` |
-| **findo**   | `findo [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]`                           | `findo n/Gerald Declan`                                                                        |
+| Action      | Format                                                                              | Example                                                                                                          |
+|-------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| **addp**    | `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`                         | `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/owesMoney` |
+| **deletep** | `deletep INDEX`                                                                     | `deletep 2`                                                                                                      |
+| **listp**   | `listp`                                                                             | `listp`                                                                                                          |
+| **editp**   | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                                         | `editp 1 p/12345678 n/John Doey a/NUS`                                                                           |
+| **findp**   | `findp [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]`                                  | `findp n/Gerald`                                                                                                 |
+| **clear**   | `clear`                                                                             | `clearp`                                                                                                         |
+| **addo**    | `addo p/PHONE\_NUM r/REMARK d/DETAILS c/DELIVERYDATETIME m/COLLECTION\_TYPE`        | `addo p/87654321 r/no candles d/1:Chocolate Cake c/27-12-2022 12:30 m/Delivery`                                  |
+| **deleteo** | `deleteo INDEX`                                                                     | `deleteo 2`                                                                                                      |
+| **listo**   | `listo`                                                                             | `listo`                                                                                                          |
+| **marko**   | `marko INDEX`                                                                       | `marko 1`                                                                                                        |
+| **unmarko** | `unmarko INDEX`                                                                     | `unmarko 1`                                                                                                      |
+| **exit**    | `exit`                                                                              | `exit`                                                                                                           |
+| **edito**   | `edito INDEX [c/DELIVERYDATETIME] [g/COLLECTION\_TYPE] [r/REMARKS] [d/DETAILS]…​`   | `edito 1 r/Add Cheese d/1: Jerry Favourite Cheese Cake d/2: Chocolate Cake c/25-12-2022 15:30 m/Delivery`        |
+| **findo**   | `findo [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]`                                  | `findo n/Gerald Declan`                                                                                          |

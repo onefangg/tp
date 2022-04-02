@@ -8,7 +8,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Remark {
 
-    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values (up to 70 characters)";
+    public static final int REMARK_SIZE_MAX_LIMIT = 70;
+    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values, but only up to "
+            + REMARK_SIZE_MAX_LIMIT + " characters";
 
     /*
      * The first character of the remark must not be a whitespace,
