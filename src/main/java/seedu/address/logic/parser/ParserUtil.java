@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.order.Details.ITEM_MESSAGE_LIMIT;
 import static seedu.address.model.order.Details.ITEM_SIZE_LIMIT;
 import static seedu.address.model.order.Details.QUANTITY_MESSAGE_LIMIT;
@@ -26,6 +27,8 @@ import static seedu.address.model.person.Name.NAME_SIZE_MIN_LIMIT;
 import static seedu.address.model.person.Phone.MESSAGE_PHONE_LIMIT;
 import static seedu.address.model.person.Phone.PHONE_SIZE_MAX_LIMIT;
 import static seedu.address.model.person.Phone.PHONE_SIZE_MIN_LIMIT;
+import static seedu.address.model.tag.Tag.MESSAGE_TAG_LIMIT;
+import static seedu.address.model.tag.Tag.TAG_SIZE_MAX_LIMIT;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -255,6 +258,8 @@ public class ParserUtil {
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        } else if (trimmedTag.length() > TAG_SIZE_MAX_LIMIT) {
+            throw new ParseException(String.format(MESSAGE_TAG_LIMIT, PREFIX_TAG));
         }
         return new Tag(trimmedTag);
     }
