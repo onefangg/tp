@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import seedu.address.model.order.NaturalDateParser.Dates;
-
 
 /**
  * DateChecker is used to help convert Strings into the proper date time formats.
@@ -16,6 +14,8 @@ import seedu.address.model.order.NaturalDateParser.Dates;
 public class DateChecker {
     private static String dateFormat;
     private static String dateToCheck;
+    private static String timeToCheck;
+    private static boolean isTimeBeforeCurrentTime;
 
     private static final int NUM_DAYS_IN_WEEK = 7;
 
@@ -27,59 +27,45 @@ public class DateChecker {
     private static void naturalDateCheck() {
         // add case to check for time provided
         NaturalDateParser dateChecked = new NaturalDateParser(dateToCheck);
-        Dates inputtedDay = dateChecked.getDate(); // This gives the enum date which is like "MONDAY"
+        NaturalDateParser.Dates inputtedDay = dateChecked.getDate(); // This gives the enum date which is like "MONDAY"
 
         // Solution to get current day of week and next required natural date adapted from:
         // https://coderanch.com/t/385117/java/date-Monday
         Calendar now = Calendar.getInstance();
-        int today = now.get(Calendar.DAY_OF_WEEK);
+        int dayToday = now.get(java.util.Calendar.DAY_OF_WEEK);
 
-        int nextMonday = (Calendar.SATURDAY - today + 2) % NUM_DAYS_IN_WEEK;
-        int nextTuesday = (Calendar.SATURDAY - today + 3) % NUM_DAYS_IN_WEEK;
-        int nextWednesday = (Calendar.SATURDAY - today + 4) % NUM_DAYS_IN_WEEK;
-        int nextThursday = (Calendar.SATURDAY - today + 5) % NUM_DAYS_IN_WEEK;
-        int nextFriday = (Calendar.SATURDAY - today + 6) % NUM_DAYS_IN_WEEK;
-        int nextSaturday = (Calendar.SATURDAY - today) % NUM_DAYS_IN_WEEK;
-        int nextSunday = (Calendar.SATURDAY - today + 1) % NUM_DAYS_IN_WEEK;
+        int nextMonday = (java.util.Calendar.SATURDAY - dayToday + 2) % NUM_DAYS_IN_WEEK;
+        int nextTuesday = (java.util.Calendar.SATURDAY - dayToday + 3) % NUM_DAYS_IN_WEEK;
+        int nextWednesday = (java.util.Calendar.SATURDAY - dayToday + 4) % NUM_DAYS_IN_WEEK;
+        int nextThursday = (java.util.Calendar.SATURDAY - dayToday + 5) % NUM_DAYS_IN_WEEK;
+        int nextFriday = (java.util.Calendar.SATURDAY - dayToday + 6) % NUM_DAYS_IN_WEEK;
+        int nextSaturday = (java.util.Calendar.SATURDAY - dayToday) % NUM_DAYS_IN_WEEK;
+        int nextSunday = (java.util.Calendar.SATURDAY - dayToday + 1) % NUM_DAYS_IN_WEEK;
 
         boolean isValidDate = true;
         int daysAfter = 0;
 
         switch (inputtedDay) {
         case MONDAY:
-            if (today != Calendar.MONDAY) {
-                daysAfter = nextMonday;
-            }
+            daysAfter = getNumDaysAfter(dayToday, Calendar.MONDAY, nextMonday);
             break;
         case TUESDAY:
-            if (today != Calendar.TUESDAY) {
-                daysAfter = nextTuesday;
-            }
+            daysAfter = getNumDaysAfter(dayToday, Calendar.TUESDAY, nextTuesday);
             break;
         case WEDNESDAY:
-            if (today != Calendar.WEDNESDAY) {
-                daysAfter = nextWednesday;
-            }
+            daysAfter = getNumDaysAfter(dayToday, Calendar.WEDNESDAY, nextWednesday);
             break;
         case THURSDAY:
-            if (today != Calendar.THURSDAY) {
-                daysAfter = nextThursday;
-            }
+            daysAfter = getNumDaysAfter(dayToday, Calendar.THURSDAY, nextThursday);
             break;
         case FRIDAY:
-            if (today != Calendar.FRIDAY) {
-                daysAfter = nextFriday;
-            }
+            daysAfter = getNumDaysAfter(dayToday, Calendar.FRIDAY, nextFriday);
             break;
         case SATURDAY:
-            if (today != Calendar.SATURDAY) {
-                daysAfter = nextSaturday;
-            }
+            daysAfter = getNumDaysAfter(dayToday, Calendar.SATURDAY, nextSaturday);
             break;
         case SUNDAY:
-            if (today != Calendar.SUNDAY) {
-                daysAfter = nextSunday;
-            }
+            daysAfter = getNumDaysAfter(dayToday, Calendar.SUNDAY, nextSunday);
             break;
         default:
             dateFormat = dateToCheck;
@@ -90,7 +76,7 @@ public class DateChecker {
             dateFormat = formatDate(now, daysAfter);
         }
     }
-
+    
     /**
      * Formats the natural date input with a time as a proper datetime.
      *
@@ -103,11 +89,45 @@ public class DateChecker {
             String date = inputSplit[0];
             String time = inputSplit[1];
             dateToCheck = date;
+            timeToCheck = time;
+            isTimeBeforeCurrentTime = inputTimeBeforeCurrentTimeChecker();
             naturalDateCheck();
             return dateFormat + " " + time;
         } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
             dateToCheck = input;
             return input;
+        }
+    }
+
+    private static int getNumDaysAfter(int dayToday, int testingDay, int nextNaturalDayAfterToday) {
+        if (dayToday == testingDay && isTimeBeforeCurrentTime) {
+            return NUM_DAYS_IN_WEEK;
+        } else {
+            return nextNaturalDayAfterToday;
+        }
+    }
+
+    /**
+     * Checks if the current time is already past the specified time.
+     * Mainly used to handle natural dates that match with today's day.
+     * @return boolean which says if the input date is before the current time (true) or after (false).
+     */
+    // @@K.D punnyhuimin-reused
+    // Reused from https://stackoverflow.com/questions/18186680/java-check-time-is-greater-time
+    // Minor modifications made to fit implementation needs.
+    private static boolean inputTimeBeforeCurrentTimeChecker() {
+        Date timeNow = new Date();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        timeFormat.format(timeNow);
+        try {
+            if (timeFormat.parse(timeFormat.format(timeNow)).after(timeFormat.parse(timeToCheck))) {
+                return true;
+            } else {
+                return false;
+            }
+            // @@K.D
+        } catch (java.text.ParseException e) {
+            return false;
         }
     }
 
