@@ -32,15 +32,15 @@ public class DateChecker {
         // Solution to get current day of week and next required natural date adapted from:
         // https://coderanch.com/t/385117/java/date-Monday
         Calendar now = Calendar.getInstance();
-        int dayToday = now.get(java.util.Calendar.DAY_OF_WEEK);
+        int dayToday = now.get(Calendar.DAY_OF_WEEK);
 
-        int nextMonday = (java.util.Calendar.SATURDAY - dayToday + 2) % NUM_DAYS_IN_WEEK;
-        int nextTuesday = (java.util.Calendar.SATURDAY - dayToday + 3) % NUM_DAYS_IN_WEEK;
-        int nextWednesday = (java.util.Calendar.SATURDAY - dayToday + 4) % NUM_DAYS_IN_WEEK;
-        int nextThursday = (java.util.Calendar.SATURDAY - dayToday + 5) % NUM_DAYS_IN_WEEK;
-        int nextFriday = (java.util.Calendar.SATURDAY - dayToday + 6) % NUM_DAYS_IN_WEEK;
-        int nextSaturday = (java.util.Calendar.SATURDAY - dayToday) % NUM_DAYS_IN_WEEK;
-        int nextSunday = (java.util.Calendar.SATURDAY - dayToday + 1) % NUM_DAYS_IN_WEEK;
+        int nextMonday = (Calendar.SATURDAY - dayToday + 2) % NUM_DAYS_IN_WEEK;
+        int nextTuesday = (Calendar.SATURDAY - dayToday + 3) % NUM_DAYS_IN_WEEK;
+        int nextWednesday = (Calendar.SATURDAY - dayToday + 4) % NUM_DAYS_IN_WEEK;
+        int nextThursday = (Calendar.SATURDAY - dayToday + 5) % NUM_DAYS_IN_WEEK;
+        int nextFriday = (Calendar.SATURDAY - dayToday + 6) % NUM_DAYS_IN_WEEK;
+        int nextSaturday = (Calendar.SATURDAY - dayToday) % NUM_DAYS_IN_WEEK;
+        int nextSunday = (Calendar.SATURDAY - dayToday + 1) % NUM_DAYS_IN_WEEK;
 
         boolean isValidDate = true;
         int daysAfter = 0;
@@ -76,7 +76,7 @@ public class DateChecker {
             dateFormat = formatDate(now, daysAfter);
         }
     }
-    
+
     /**
      * Formats the natural date input with a time as a proper datetime.
      *
@@ -99,6 +99,17 @@ public class DateChecker {
         }
     }
 
+    /**
+     * Gets the number of days after today that corresponds with the inputted natural date.
+     * @param dayToday This is an integer that ranges from 1-7. It is based on Calendar and 1 is the start of the
+     *                 week, which is Sunday. 7 is the end of the week, which is Saturday.
+     * @param testingDay This is an integer provided by Calendar as well. It is the Calendar.xday, which returns the
+     *                   day that the system should use to check if today is xday.
+     * @param nextNaturalDayAfterToday This is the calculated field e.g. nextMonday, nextTuesday. Since this method
+     *                                 is being used in the switch case, this input provides flexibility for usage in
+     *                                 the switch cases.
+     * @return the number of days after today that corresponds with the inputted natural date.
+     */
     private static int getNumDaysAfter(int dayToday, int testingDay, int nextNaturalDayAfterToday) {
         if (dayToday == testingDay && isTimeBeforeCurrentTime) {
             return NUM_DAYS_IN_WEEK;
@@ -110,7 +121,8 @@ public class DateChecker {
     /**
      * Checks if the current time is already past the specified time.
      * Mainly used to handle natural dates that match with today's day.
-     * @return boolean which says if the input date is before the current time (true) or after (false).
+     * @return boolean which says if the input date is before the current time (true) or after or if the time
+     * provided is invalid (false).
      */
     // @@K.D punnyhuimin-reused
     // Reused from https://stackoverflow.com/questions/18186680/java-check-time-is-greater-time
