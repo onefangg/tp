@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import seedu.address.model.order.NaturalDateParser.Dates;
 
 /**
  * DateChecker is used to help convert Strings into the proper date time formats.
@@ -27,7 +28,7 @@ public class DateChecker {
     private static void naturalDateCheck() {
         // add case to check for time provided
         NaturalDateParser dateChecked = new NaturalDateParser(dateToCheck);
-        NaturalDateParser.Dates inputtedDay = dateChecked.getDate(); // This gives the enum date which is like "MONDAY"
+        Dates inputtedDay = dateChecked.getDate(); // This gives the enum date which is like "MONDAY"
 
         // Solution to get current day of week and next required natural date adapted from:
         // https://coderanch.com/t/385117/java/date-Monday
