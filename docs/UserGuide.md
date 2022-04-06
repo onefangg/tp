@@ -379,6 +379,20 @@ If your changes to the data file makes its format invalid, ReadyBakey will disca
 
 _Details coming soon ..._
 
+### Using Natural Dates
+
+In order to provide a quicker method of referring to near dates, ReadyBakey allows users to use natural dates to refer to the directly upcoming days of the week.
+The closest upcoming date that corresponds to the natural date's day input will be used. 
+
+This can be used in any command where dates are required, such as `incompleteo` and `addo`. 
+
+Format: `Day HH:MM`
+
+Example:
+* `Monday 10:30` or `Mon 10:30`
+* `Sunday 09:30` or `Sun 10:30`
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ <a name="faq"></a>
