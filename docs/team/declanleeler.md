@@ -55,4 +55,5 @@ Given below are my contributions to the project.
 1. Participation in [PE-D](https://github.com/declanleeler/ped/issues) to help [HackNet](https://github.com/AY2122S2-CS2103T-W13-3/tp) spot bugs in V1.3
 2. Helped classmate who had issues launching jar application [(Forum issue here)](https://github.com/nus-cs2103-AY2122S2/forum/issues/156#issuecomment-1040412152)
 3. Helped classmate who had issues with Gradle Checkstyles [(Forum issue here)](https://github.com/nus-cs2103-AY2122S2/forum/issues/95#issuecomment-1029092057)
+
    
