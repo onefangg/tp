@@ -16,6 +16,8 @@ public class DateChecker {
     private static String dateFormat;
     private static String dateToCheck;
     private static String timeToCheck;
+    // boolean which says if the input date is before the current time (true) or after or if the time provided is
+    // invalid (false).
     private static boolean isTimeBeforeCurrentTime;
 
     private static final int NUM_DAYS_IN_WEEK = 7;
@@ -80,24 +82,31 @@ public class DateChecker {
 
     /**
      * Formats the natural date input with a time as a proper datetime.
-     *
      * @param input Input is the date string provided by the user.
      * @return returns a properly formatted date string with the time
      */
     public static String parsePotentialNaturalDate(String input) {
         try {
-            String[] inputSplit = input.split("\\s+", 2);
-            String date = inputSplit[0];
-            String time = inputSplit[1];
-            dateToCheck = date;
-            timeToCheck = time;
-            isTimeBeforeCurrentTime = inputTimeBeforeCurrentTimeChecker();
+            processInput(input);
+            inputTimeBeforeCurrentTimeChecker();
             naturalDateCheck();
-            return dateFormat + " " + time;
+            return dateFormat + " " + timeToCheck;
         } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
             dateToCheck = input;
             return input;
         }
+    }
+
+    /**
+     * Takes in the input and splits it into two strings, date and time.
+     * @param input Inputted date time from the user.
+     */
+    private static void processInput(String input) {
+        String[] inputSplit = input.split("\\s+", 2);
+        String date = inputSplit[0];
+        String time = inputSplit[1];
+        dateToCheck = date;
+        timeToCheck = time;
     }
 
     /**
@@ -122,25 +131,23 @@ public class DateChecker {
     /**
      * Checks if the current time is already past the specified time.
      * Mainly used to handle natural dates that match with today's day.
-     * @return boolean which says if the input date is before the current time (true) or after or if the time
-     * provided is invalid (false).
      */
     // @@K.D punnyhuimin-reused
     // Reused from https://stackoverflow.com/questions/18186680/java-check-time-is-greater-time
     // Minor modifications made to fit implementation needs.
-    private static boolean inputTimeBeforeCurrentTimeChecker() {
+    private static void inputTimeBeforeCurrentTimeChecker() {
         Date timeNow = new Date();
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         timeFormat.format(timeNow);
         try {
             if (timeFormat.parse(timeFormat.format(timeNow)).after(timeFormat.parse(timeToCheck))) {
-                return true;
+                isTimeBeforeCurrentTime = true;
             } else {
-                return false;
+                isTimeBeforeCurrentTime = false;
             }
             // @@K.D
         } catch (java.text.ParseException e) {
-            return false;
+            isTimeBeforeCurrentTime = false;
         }
     }
 
