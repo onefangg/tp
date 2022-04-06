@@ -269,7 +269,7 @@ Adds an order to ReadyBakey’s order list.
 Format: `addo p/PHONE d/DETAILS c/DELIVERYDATETIME m/COLLECTION_TYPE [r/REMARK]…`
 
 Examples:
-* `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery r/Add Cheese `
+* `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery r/Add Cheese`
 * `p/PHONE` must be a phone number that is already stored in ReadyBakey's person list
 * `c/DELIVERYDATETIME` accepts dates in the past for record keeping purposes
   * It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
@@ -393,10 +393,13 @@ This can be used in any command where dates are required, such as `incompleteo` 
 
 Format: `Day HH:mm`
 
-Example:
+Example of natural date:
 * `Monday 10:30` or `Mon 10:30` will create a datetime in the form of `dd-mm-yyyy HH:mm` that falls on the closest Monday, where `HH:mm` is `10:30`
 * `Sunday 09:30` or `Sun 09:30`will create a datetime in the form of `dd-mm-yyyy HH:mm` that falls on the closest Sunday, where `HH:mm` is `09:30`
 
+Example of natural date in action:
+* `incompleteo Monday 15:30`
+* `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/Tuesday 15:30 m/Delivery r/Add Cheese`
 
 --------------------------------------------------------------------------------------------------------------------
 
