@@ -69,6 +69,8 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `listo`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* All commands are case-sensitive, and must be in lower-case. 
+
 </div>
 
 ### Viewing help : `help`
