@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ReadyBakey is a **desktop app that manages orders and customer contact information, optimized for use via a Command Line Interface **(CLI) while still having the benefits of a Graphical User Interface (GUI). It assists small bakeries by consolidating all the necessary requirements and information for successful order management.
+ReadyBakey is a **desktop app that manages orders and customer contact information, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It assists small bakeries by consolidating all the necessary requirements and information for successful order management.
 
 # Table of Contents
 1. [Quick Start](#quick-start)
@@ -47,6 +47,12 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
 **:information_source: Notes about the command format:**<br>
 
+* Command keywords i.e. `addo` `editp`, has to be in lowercase.
+  e.g. `addo ...` is an acceptable keyword, but `ADDO..` is not acceptable.
+
+* Prefixes used in command input has to be in lowercase.
+  e.g. `add n/NAME...`, uses `n/` but `N/` is not acceptable.
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
@@ -85,22 +91,23 @@ Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
   * It does not allow for spaces or dashes as well.
 * The length of the `EMAIL` must be between 6 and 50 characters.
   * It should be in the format `local-part@domain` and adhere to the following constraints:
-    1. The local-part should only contain alphanumeric characters and these special characters, excluding
-       the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    1. The local-part should only contain alphanumeric characters and these special characters (+_.-), excluding
+       the parentheses. The local-part may not start or end with any special characters.
       1. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by
          periods.
     2. The domain name must:
       - end with a domain label at least 2 characters long
       - have each domain label start and end with alphanumeric characters
       - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-* The length of the `ADDRESS` must be between 6 and 70 characters.
+* The length of the `ADDRESS` must be between 6 (inclusive) and 70 (inclusive) characters.
+  * E.g. Keying in `a/short1` is acceptable but not `a/short`.
 * The length of the `REMARK` must be less than or equal to 70 characters.
 
 Examples:
 * `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/friends t/owesMoney`
 
 ### Delete a customer: `deletep`
-Removes a customer from ReadyBakey’s contact list
+Removes a customer from ReadyBakey’s contact list 
 
 Format: `deletep INDEX`
 * Deletes the customer at the specified INDEX.
@@ -153,7 +160,7 @@ Examples:
 
 Edits an existing customer in ReadyBakey's contact list.
 
-Format: `edito INDEX [c/DELIVERYDATETIME] [g/COLLECTION\_TYPE] [r/REMARKS] [d/DETAILS]…`
+Format: `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION\_TYPE] [r/REMARKS] [d/DETAILS]…`
 
 * Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list.
   * The index **must be a positive integer** 1, 2, 3, …​
@@ -172,7 +179,7 @@ Examples:
     * In this case, to add two details to the order, each `d/` is for one detail.
 * `edito 2 r/Two candles`
   * Edits the 2nd order's remarks to be `Two candles`.
-* `edito 2 g/Delivery`
+* `edito 2 m/Delivery`
   * Edits the 2nd order's collection type to be `Delivery`.
 * `edito 3 c/Monday 10:30`
   * Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
@@ -301,7 +308,7 @@ Format: `listo`
 Examples:
 * `listo`
 
-### Listing all orders: `incompleteo`
+### Listing all incomplete orders: `incompleteo`
 
 Shows a list of all incomplete orders in ReadyBakey before and during a given date and time
 
@@ -384,7 +391,7 @@ _Details coming soon ..._
 | **deletep** | `deletep INDEX`                                                                   | `deletep 2`                                                                                                      |
 | **listp**   | `listp`                                                                           | `listp`                                                                                                          |
 | **editp**   | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                                       | `editp 1 p/12345678 n/John Doey a/NUS`                                                                           |
-| **findp**   | `findp [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]`                                | `findp n/Gerald`                                                                                                 |
+| **findp**   | `findp [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]...`                             | `findp n/Gerald`                                                                                                 |
 | **clear**   | `clear`                                                                           | `clear`                                                                                                          |
 | **addo**    | `addo p/PHONE\_NUM r/REMARK d/DETAILS c/DELIVERYDATETIME m/COLLECTION\_TYPE`      | `addo p/87654321 r/no candles d/1:Chocolate Cake c/27-12-2022 12:30 m/Delivery`                                  |
 | **deleteo** | `deleteo INDEX`                                                                   | `deleteo 2`                                                                                                      |
@@ -392,5 +399,5 @@ _Details coming soon ..._
 | **marko**   | `marko INDEX`                                                                     | `marko 1`                                                                                                        |
 | **unmarko** | `unmarko INDEX`                                                                   | `unmarko 1`                                                                                                      |
 | **exit**    | `exit`                                                                            | `exit`                                                                                                           |
-| **edito**   | `edito INDEX [c/DELIVERYDATETIME] [g/COLLECTION\_TYPE] [r/REMARKS] [d/DETAILS]…​` | `edito 1 r/Add Cheese d/1: Jerry Favourite Cheese Cake d/2: Chocolate Cake c/25-12-2022 15:30 m/Delivery`        |
-| **findo**   | `findo [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]`                                | `findo n/Gerald Declan`                                                                                          |
+| **edito**   | `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION\_TYPE] [r/REMARKS] [d/DETAILS]…​` | `edito 1 r/Add Cheese d/1: Jerry Favourite Cheese Cake d/2: Chocolate Cake c/25-12-2022 15:30 m/Delivery`        |
+| **findo**   | `findo [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]...`                             | `findo n/Gerald Declan`                                                                                          |
