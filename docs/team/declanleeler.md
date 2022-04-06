@@ -16,18 +16,26 @@ Given below are my contributions to the project.
 
 ### Enhancements Implemented
 1. Data toggling of order / person data
-   1. Declutters the UI by only showing one list that is relevant to the user's executed command
-   2. Challenging to figure out how to show 2 separate lists of data based on the commands executed. It required understanding how the data was being displayed initially together with JavaFX knowledge to
-      comprehend how the MainWindow worked and displayed persons. Next, a solution was then required to tweak this setup to include another
-      set of data, orders, plus the toggling between the 2 sets of data, orders and persons.
+   1. What it does: Displays only one list of data (order or person) at a time and toggles between lists based on the user's command.
+   2. Justification: Declutters the UI by only showing one list that is relevant to the user's interests. Immediate toggling to show relevant data is also important without a specific command to do so - any command related to orders will show order data, and any command related to persons will show person data.
+   3. Highlights: This feature affects all CommandResults as they now need to be assigned a type to indicate which data list to display to the user. 
+      It was challenging as it required understanding how the different components worked together to display the initial Persons list, before coming up with a solution to tweak this setup to include another list of data,
+      and the functionality to toggle between them.
+   
+
 2. Sorted list functionality in Model
-   3. Allows for the sorting of persons or orders through a comparator wherever required, not just in FindIncompleteOrders
-   4. Added comparator for orders based on their delivery date
-   5. Challenging to implement as it introduced SortedList as a return type when previously the application only worked with FilteredList.
+   1. What it does: Allows for the sorting of persons or orders through a comparator wherever required.
+   2. Justification: There are various features, exiting and potential, that could leverage on a sorting function to enhance their results. Specifically, this was required in the FindIncompleteOrders command. 
+   3. Highlights: Challenging to implement as it introduced SortedList as a return type when previously the application only worked with FilteredList.
       This meant relying on polymorphism to use the parent interface, ObservableList, in place of where previously FilteredList was expected.
+
+   
 3. Find and sort by date incomplete orders before a given date
-   1. Useful to highlight incomplete orders
-   2. Challenging to implement as it requires both FilteredLists and SortedLists
+   1. What it does: Highlights and sorts by date incomplete orders before a given date.
+   2. Justification: The user can use this simple command to get important information that pertains to punctual order delivery.
+   3. Highlights: Challenging to implement as it required using both FilteredLists and SortedLists.
+   
+
 4. CSS changes to enhance the application's theme
 
 ### UG Contributions
