@@ -43,8 +43,13 @@ Given below are my contributions to the project.
 1. Renamed product to Readybakey to better suit the new target user profile
 2. Maintained issue tracker
 3. Release management for V1.1
-4. Informal demo of V1.2
-5. Update UG for V1.3
+4. Informal demo of V1.2 [(Google doc link)](https://docs.google.com/document/d/1XVM0yKcbUT28I7p_NQd5p5lgvAUocCPFuJ3BB7s63lk/edit#heading=h.4y8l5hhmuf6g)
+   1. Added screenshots of features
+   2. Added explanations of features
+5. Informal demo of V1.3 [(Google doc link)](https://docs.google.com/document/d/1tTXY-lm5M15URXhf_RbOpxJCVG8-GQD86Q2zDqTp1tM/edit)
+   1. Updated guide for some features based on the changes made in V1.3
+6. Update UG for V1.3
+   1. Went through features to update their user guide based on the changes made in V1.3
 
 ### Review/mentoring contributions
 1. [Caught violation of SLAP](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/234)
