@@ -17,14 +17,18 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `readybakey.jar` from [here](https://github.com/AY2122S2-CS2103-F09-4/tp/releases).
+2. Download the latest `readybakey.jar` from [here](https://github.com/AY2122S2-CS2103-F09-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ReadyBakey.
+3. Copy the file to the folder you want to use as the _home folder_ for your ReadyBakey.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command window in that folder
+
+5. Run the command `java -jar readybakey.jar`  (i.e., run the command in the same folder as the jar file) 
+
+6. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
   * **`listo`** : Lists all orders.
