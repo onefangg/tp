@@ -43,7 +43,8 @@ Given below are my contributions to the project.
 1. Renamed product to Readybakey to better suit the new target user profile
 2. Maintained issue tracker
 3. Release management for V1.1
-4. Informal demo of v1.2
+4. Informal demo of V1.2
+5. Update UG for V1.3
 
 ### Review/mentoring contributions
 1. [Caught violation of SLAP](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/234)
