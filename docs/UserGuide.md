@@ -221,7 +221,13 @@ Finds order(s) whose specific attribute contain any of the given keywords.
 
 Format: `findo [ATTRIBUTE] KEYWORD [MORE_KEYWORDS]`
 
-* The supported attributes are `n/`, `p/`, `d/`, `m/`, `r/`
+* The supported attributes are 
+  * Order's customer's name: `n/`
+  * Order's customer's phone number:`p/`
+  * Order's details: `d/`
+  * Order's collection type: `m/`
+  * Order's remarks: `r/`
+  * Finding orders based on `c/DELIVERYDATETIME` is not supported in this command because the command `incompleteo` serves this purpose 
 * Only the attribute specified is searched.
   * Multiple attributes searching at the same time is not allowed. e.g. `findo n/Gerald d/Cake`
   * For findo `d/[keyword]`, the keyword should only be the description of the detail and not the quantity
