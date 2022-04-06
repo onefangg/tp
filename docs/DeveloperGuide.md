@@ -224,13 +224,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -276,23 +276,23 @@ The following sequence diagram illustrates how the `AddOrderCommand` works:
 #### Design Considerations
 
 1) Phone Number stores any number longer than 3 digits long
-    * This format was chosen to be more flexible to accept different length of numbers
+   * This format was chosen to be more flexible to accept different length of numbers
 2) Delivery Date and Time takes in user input in the format dd-MM-yyyy HH:mm.
-    * This user input format was chosen to be user-friendly
-    * This Date and Time is represented to the user in the format such as "Thursday, 30 Jun 2022, 03:30PM"
-        * This was chosen to be a very readible date and time format
+   * This user input format was chosen to be user-friendly
+   * This Date and Time is represented to the user in the format such as "Thursday, 30 Jun 2022, 03:30PM"
+     * This was chosen to be a very readible date and time format
 3) Collection Type is an enum with types `DELIVERY` or `PICKUP`
-    * Enum was chosen to keep this representation more flexible and easily readible.
-    * Alternative:
-        * Using a Boolean value to represent delivery vs pickup
-            * This was not chosen to increase the flexibility and extensibility of the code
+   * Enum was chosen to keep this representation more flexible and easily readible.
+   * Alternative:
+     * Using a Boolean value to represent delivery vs pickup
+       * This was not chosen to increase the flexibility and extensibility of the code
 4) Remark and Detail was left to be of open format to give the user flexibility in describing the orders
 
 #### Future Works
 
 1) Delivery Date and Time does not allow dates before the current date. This strictness of this condition
-   should be lowered to allow users to key in orders before the current date (for book keeping purposes) and instead give
-   users a warning.
+should be lowered to allow users to key in orders before the current date (for book keeping purposes) and instead give
+users a warning.
 
 ### Mark/Unmark Feature
 
@@ -319,17 +319,17 @@ The following sequence diagram illustrates how the `MarkCommand` works:
 #### Design consideration
 
 1) `Complete` stores a boolean value.
-    * Boolean value was chosen to keep the implementation simple.
-    * Alternative: Store an Enum containing possible values of `Complete`
-        * Pros: More easily readable.
-        * Cons: Larger implementation.
-    * Boolean chosen due to simple implementation.
-    * Consideration also given to possible extensions, Completion status of an order can only
-      ever take 2 values, thus there is no need for an Enum class.
+   * Boolean value was chosen to keep the implementation simple.
+   * Alternative: Store an Enum containing possible values of `Complete`
+     * Pros: More easily readable.
+     * Cons: Larger implementation.
+   * Boolean chosen due to simple implementation.
+   * Consideration also given to possible extensions, Completion status of an order can only
+ever take 2 values, thus there is no need for an Enum class.
 
 2) Order is still immutable
-    * Creating a marked order will duplicate the current order, while changing the `Complete` attribute
-    * Then, the current order will be replaced with the new order in order to maintain immutability.
+   * Creating a marked order will duplicate the current order, while changing the `Complete` attribute
+   * Then, the current order will be replaced with the new order in order to maintain immutability.
 
 ### Dynamic Toggling Between Application's Data
 #### Implementation
@@ -361,16 +361,16 @@ The parsing of searchable attributes and as well as the keywords (to find for) i
 
 The method will return a `HashMap<String, String>`. As `HashMap` is an unordered structure, filtering on multiple attributes in a single command potentially results in undeterministic results.
 
-* **Alternative 1 (current choice):** `findo` will only support filter for one attribute in a single command
-    * Filtering for multiple attributes in a single command will result in an error eg `findo n/Alex p/98742313`.
-    * Adding an attribute to search for, that is not supported, will simply be ignored. For example, adding `details` to search for `findo n/Alex d/chococake` will only return search results that is the same as `findo n/Alex`.
+* **Alternative 1 (current choice):** `findo` will only support filter for one attribute in a single command 
+  * Filtering for multiple attributes in a single command will result in an error eg `findo n/Alex p/98742313`.
+  * Adding an attribute to search for, that is not supported, will simply be ignored. For example, adding `details` to search for `findo n/Alex d/chococake` will only return search results that is the same as `findo n/Alex`.
 * **Alternative 2:** Implement an alternative form of tokenization to return `LinkedHashMap<String, String>`, which is based on insertion order of attributes and keywords.
-    * Filtering for multiple attributes will be possible. For example
-    * However, this will require more manhours and testing to ensure consistent results, and hence is deprioritised.
+  * Filtering for multiple attributes will be possible. For example
+  * However, this will require more manhours and testing to ensure consistent results, and hence is deprioritised. 
 
 1. Create `Predicate` for findable attribute.
-    * Find (filter) is based on whether the attribute for Order contains the given keyword (case-insensitive)
-2. `FindOrder<Attribute>Command` is then instantiated, which would then find for `Order` that matches the `Predicate`.
+   * Find (filter) is based on whether the attribute for Order contains the given keyword (case-insensitive)
+2. `FindOrder<Attribute>Command` is then instantiated, which would then find for `Order` that matches the `Predicate`. 
 
 The following sequence diagram shows how the `findo` operation works:
 
@@ -457,8 +457,8 @@ The following sequence diagram illustrates how the `EditOrderCommand` will work:
 **Value proposition**:
 
 Handling multiple orders and inventory leads to a time sink. Having a central system management process allows bakers to
-focus on what's important -- _baking_.
-* The application organises cake orders for its fulfilment.
+focus on what's important -- _baking_. 
+* The application organises cake orders for its fulfilment. 
 * It also acts as a centralised and structured schedule manager, tracking an individuals' baking inventory needs.
 
 
@@ -515,8 +515,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a2. User inputs new data.
 
     * Steps 3a1-3a2 are repeated until data entered is correct.
-
-  Use case resumes from step 4.
+    
+    Use case resumes from step 4.
 
 
 **Use case: Delete a customer**
@@ -641,11 +641,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. ReadyBakey detects no customers that match the user's request.
-    * 1a1. ReadyBakey returns no results and queries user if the correct customer name has been entered.
-    * 1a2. User enters the correct customer name.
-    * Steps 1a1-1a2 are repeated until the data entered are correct.
+  * 1a1. ReadyBakey returns no results and queries user if the correct customer name has been entered.
+  * 1a2. User enters the correct customer name.
+  * Steps 1a1-1a2 are repeated until the data entered are correct.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 **Use case: Editing customer's address**
 
@@ -701,7 +701,7 @@ Use case ends.
     * 1a2. User enters the correct customer index.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
 
-      Use case resumes at step 2.
+       Use case resumes at step 2.
 
 **Use case: Editing customer's phone number**
 
@@ -727,7 +727,7 @@ Use case ends.
 1. User requests to list all customers
 2. ReadyBakey shows a list of customers
 
-   Use case ends
+    Use case ends
 
 **Use case: List all Orders**
 
@@ -735,7 +735,7 @@ Use case ends.
 1. User requests to list all orders
 2. ReadyBakey shows a list of orders
 
-   Use case ends
+    Use case ends
 
 **Use case: Add an Order**
 
@@ -820,15 +820,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -837,16 +837,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -854,6 +854,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
