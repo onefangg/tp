@@ -135,18 +135,18 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both ReadyBakey data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,13 +224,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -276,23 +276,23 @@ The following sequence diagram illustrates how the `AddOrderCommand` works:
 #### Design Considerations
 
 1) Phone Number stores any number longer than 3 digits long
-   * This format was chosen to be more flexible to accept different length of numbers
+    * This format was chosen to be more flexible to accept different length of numbers
 2) Delivery Date and Time takes in user input in the format dd-MM-yyyy HH:mm.
-   * This user input format was chosen to be user-friendly
-   * This Date and Time is represented to the user in the format such as "Thursday, 30 Jun 2022, 03:30PM"
-     * This was chosen to be a very readible date and time format
+    * This user input format was chosen to be user-friendly
+    * This Date and Time is represented to the user in the format such as "Thursday, 30 Jun 2022, 03:30PM"
+        * This was chosen to be a very readible date and time format
 3) Collection Type is an enum with types `DELIVERY` or `PICKUP`
-   * Enum was chosen to keep this representation more flexible and easily readible.
-   * Alternative:
-     * Using a Boolean value to represent delivery vs pickup
-       * This was not chosen to increase the flexibility and extensibility of the code
+    * Enum was chosen to keep this representation more flexible and easily readible.
+    * Alternative:
+        * Using a Boolean value to represent delivery vs pickup
+            * This was not chosen to increase the flexibility and extensibility of the code
 4) Remark and Detail was left to be of open format to give the user flexibility in describing the orders
 
 #### Future Works
 
 1) Delivery Date and Time does not allow dates before the current date. This strictness of this condition
-should be lowered to allow users to key in orders before the current date (for book keeping purposes) and instead give
-users a warning.
+   should be lowered to allow users to key in orders before the current date (for book keeping purposes) and instead give
+   users a warning.
 
 ### Mark/Unmark Feature
 
@@ -319,17 +319,62 @@ The following sequence diagram illustrates how the `MarkCommand` works:
 #### Design consideration
 
 1) `Complete` stores a boolean value.
-   * Boolean value was chosen to keep the implementation simple.
-   * Alternative: Store an Enum containing possible values of `Complete`
-       * Pros: More easily readable.
-       * Cons: Larger implementation.
-   * Boolean chosen due to simple implementation.
-   * Consideration also given to possible extensions, Completion status of an order can only ever take 2 values, thus
-     there is no need for an Enum class.
+    * Boolean value was chosen to keep the implementation simple.
+    * Alternative: Store an Enum containing possible values of `Complete`
+        * Pros: More easily readable.
+        * Cons: Larger implementation.
+    * Boolean chosen due to simple implementation.
+    * Consideration also given to possible extensions, Completion status of an order can only
+      ever take 2 values, thus there is no need for an Enum class.
 
 2) Order is still immutable
     * Creating a marked order will duplicate the current order, while changing the `Complete` attribute
     * Then, the current order will be replaced with the new order in order to maintain immutability.
+
+### Dynamic Toggling Between Application's Data
+#### Implementation
+Users must be able to view the specific data that they need, without excess data, just by working with the command line. For example, if the user is requesting Order information, they should not be distracted by Person information as well - only Order information can be shown.
+
+The ability to toggle through the application's data  is facilitated by `MainWindow` and `CommandResult`.
+
+In `MainWindow#executeCommand(String commandText)`, the type of `CommandResult` of the executed command is checked and the `MainWindow` then displays the appropriate information for the user.
+
+#### Design considerations:
+1. `CommandResult` requires boolean attributes that indicate what kind of command has been executed.
+    * isOrderCommand - boolean  indicating whether the command is related to orders
+    * isPersonCommand - boolean  indicating whether the command is related to persons
+    * isHelpCommand - boolean indicating whether the command is related to getting help
+    * isExitCommand - boolean indicating whether the command is to exit the application
+
+The following activity diagram summarizes what happens when a user executes the different types of commands:
+![DataTogglingActivityDiagram](images/DataTogglingActivityDiagram.png)
+
+### Finding Orders Through Selected Attribute
+#### Implementation
+Users are able to find specific orders based on the attributes of the orders. For example, users can find orders that are made by a Person with name "Alex".
+
+Currently, only `name` and `phone` are supported for finding under the `findo` command.
+
+#### Design considerations:
+
+The parsing of searchable attributes and as well as the keywords (to find for) is currently done with `ArgumentTokenizer.tokenize()` method. This is for congruency with parsing methods in `AddOrderCommandParser`, `EditOrderCommandParser` etc.
+
+The method will return a `HashMap<String, String>`. As `HashMap` is an unordered structure, filtering on multiple attributes in a single command potentially results in undeterministic results.
+
+* **Alternative 1 (current choice):** `findo` will only support filter for one attribute in a single command
+    * Filtering for multiple attributes in a single command will result in an error eg `findo n/Alex p/98742313`.
+    * Adding an attribute to search for, that is not supported, will simply be ignored. For example, adding `details` to search for `findo n/Alex d/chococake` will only return search results that is the same as `findo n/Alex`.
+* **Alternative 2:** Implement an alternative form of tokenization to return `LinkedHashMap<String, String>`, which is based on insertion order of attributes and keywords.
+    * Filtering for multiple attributes will be possible. For example
+    * However, this will require more manhours and testing to ensure consistent results, and hence is deprioritised.
+
+1. Create `Predicate` for findable attribute.
+    * Find (filter) is based on whether the attribute for Order contains the given keyword (case-insensitive)
+2. `FindOrder<Attribute>Command` is then instantiated, which would then find for `Order` that matches the `Predicate`.
+
+The following sequence diagram shows how the `findo` operation works:
+
+![FindOrderSequenceDiagram](images/FindOrderSequenceDiagram.png)
 
 ### \[In Progress\] Edit Order Feature
 
@@ -367,7 +412,7 @@ There are two parts to the input that will be checked for validity:
 
 1) When an invalid index is provided, a `CommandException` is thrown and the user will be told that the order index they
    have provided is invalid.
-2) When there are no prefixes provided, a `ParseException` is thrown and the user is shown a message to provide at 
+2) When there are no prefixes provided, a `ParseException` is thrown and the user is shown a message to provide at
    least one field to edit.
 3) When an invalid input is parsed, a `ParseException` is thrown and the user is shown a message on the proper usage of
    the edit order command.
@@ -376,60 +421,14 @@ The following sequence diagram illustrates how the `EditOrderCommand` will work:
 ![EditOrderSequence](images/EditOrderSequenceDiagram.png)
 
 #### Design considerations
-1) Delivery date and time being parsed in should allow the usage of natural dates such as `Thursday 3pm` or `Monday 
-   4pm` and ReadyBakey will know the date being parsed is the next nearest Thursday at 3pm. This is alongside the 
+1) Delivery date and time being parsed in should allow the usage of natural dates such as `Thursday 3pm` or `Monday
+   4pm` and ReadyBakey will know the date being parsed is the next nearest Thursday at 3pm. This is alongside the
    parsing of date and time in the format `dd-MM-yyyy HH:mm`.
-    - This provides bakers with better ability to key in dates without having to stick to only keying in the full 
+    - This provides bakers with better ability to key in dates without having to stick to only keying in the full
       date and time format.
-2) Editing should not be allowed for the completion of the order. It should be done with the use of mark or unmark 
+2) Editing should not be allowed for the completion of the order. It should be done with the use of mark or unmark
    orders instead.
 3) The person's details cannot be edited through this command.
-
-### Dynamic Toggling Between Application's Data
-#### Implementation
-Users must be able to view the specific data that they need, without excess data, just by working with the command line. For example, if the user is requesting Order information, they should not be distracted by Person information as well - only Order information can be shown.
-
-The ability to toggle through the application's data  is facilitated by `MainWindow` and `CommandResult`.
-
-In `MainWindow#executeCommand(String commandText)`, the type of `CommandResult` of the executed command is checked and the `MainWindow` then displays the appropriate information for the user.
-
-#### Design considerations:
-1. `CommandResult` requires boolean attributes that indicate what kind of command has been executed.
-    * isOrderCommand - boolean  indicating whether the command is related to orders
-    * isPersonCommand - boolean  indicating whether the command is related to persons
-    * isHelpCommand - boolean indicating whether the command is related to getting help
-    * isExitCommand - boolean indicating whether the command is to exit the application
-    
-The following activity diagram summarizes what happens when a user executes the different types of commands:
-![DataTogglingActivityDiagram](images/DataTogglingActivityDiagram.png)
-
-### Finding Orders Through Selected Attribute
-#### Implementation
-Users are able to find specific orders based on the attributes of the orders. For example, users can find orders that are made by a Person with name "Alex".
-
-Currently, only `name` and `phone` are supported for finding under the `findo` command. 
-
-#### Design considerations:
-
-The parsing of searchable attributes and as well as the keywords (to find for) is currently done with `ArgumentTokenizer.tokenize()` method. This is for congruency with parsing methods in `AddOrderCommandParser`, `EditOrderCommandParser` etc.
-
-The method will return a `HashMap<String, String>`. As `HashMap` is an unordered structure, filtering on multiple attributes in a single command potentially results in undeterministic results. 
-
-* **Alternative 1 (current choice):** `findo` will only support filter for one attribute in a single command 
-  * Filtering for multiple attributes in a single command will result in an error eg `findo n/Alex p/98742313`.
-  * Adding an attribute to search for, that is not supported, will simply be ignored. For example, adding `details` to search for `findo n/Alex d/chococake` will only return search results that is the same as `findo n/Alex`.
-* **Alternative 2:** Implement an alternative form of tokenization to return `LinkedHashMap<String, String>`, which is based on insertion order of attributes and keywords.
-  * Filtering for multiple attributes will be possible. For example
-  * However, this will require more manhours and testing to ensure consistent results, and hence is deprioritised. 
-
-1. Create `Predicate` for findable attribute.
-   * Find (filter) is based on whether the attribute for Order contains the given keyword (case-insensitive)
-2. `FindOrder<Attribute>Command` is then instantiated, which would then find for `Order` that matches the `Predicate`. 
-
-The following sequence diagram shows how the `findo` operation works:
-
-![FindOrderSequenceDiagram](images/FindOrderSequenceDiagram.png)
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -458,15 +457,14 @@ The following sequence diagram shows how the `findo` operation works:
 **Value proposition**:
 
 Handling multiple orders and inventory leads to a time sink. Having a central system management process allows bakers to
-focus on what's important -- _baking_. 
-* The application organises cake orders for its fulfilment. 
+focus on what's important -- _baking_.
+* The application organises cake orders for its fulfilment.
 * It also acts as a centralised and structured schedule manager, tracking an individuals' baking inventory needs.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
 
 | Priority | As a …​                                     | I want to …​                                                                            | So that I can…​                                                                         |
 |----------|---------------------------------------------|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
@@ -478,7 +476,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                        | exit the application                                                                    | use my laptop without the program running in the background                             |
 | `* * *`  | user with multiple orders                   | add orders with custom details such as order details, delivery date and collection type | keep track of all of my orders                                                          |
 | `* * *`  | user                                        | delete orders                                                                           | remove orders in case a customer cancels their order                                    |
-| `* *`    | user                                        | hide private contact details                                                            | reduces chance of someone else seeing them by accident                                  |
+| `* *`    | user                                        | hide private contact details                                                            | minimize chance of someone else seeing them by accident                                 |
 | `*`      | user with many customer in the address book | sort customer by name                                                                   | locate a <br/><br/>person easily                                                        |
 | `* * *`  | home baker that has multiple customers      | clear all my customers                                                                  | quickly remove demo info or restart my bakery data                                      |
 | `* *`    | home baker that has multiple orders         | clear all my orders                                                                     | quickly remove demo info or restart my bakery data                                      |
@@ -489,7 +487,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | home baker that has multiple orders         | mark the orders as complete or incomplete                                               | know which orders I have fulfilled or not                                               |
 | `* *`    | home baker that has multiple orders         | get a view of unfinished orders for current day                                         | see urgent orders at a glance                                                           |
 | `* *`    | home baker that has multiple orders         | generate a weekly report                                                                | track the progress of my business                                                       |
-| `*`      | home baker that has multiple orders         | get a calendar view of the upcoming deadlines                                           | have a visual plan for the orders in the upcoming period                                |
+| `*`      | home baker that has multiple orders         | get a calender view of the upcoming deadlines                                           | have a visual plan for the orders in the upcoming period                                |
+
 *{More to be added}*
 
 ### Use cases
@@ -516,8 +515,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a2. User inputs new data.
 
     * Steps 3a1-3a2 are repeated until data entered is correct.
-    
-    Use case resumes from step 4.
+
+  Use case resumes from step 4.
 
 
 **Use case: Delete a customer**
@@ -533,7 +532,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty. 
+* 2a. The list is empty.
 
   Use case ends.
 
@@ -600,7 +599,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. ReadyBakey informs that the order has already been marked incomplete
 
       Use case resumes at step 2.
-    
+
 **Use case: Clears all saved customers**
 
 **MSS**
@@ -642,11 +641,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. ReadyBakey detects no customers that match the user's request.
-  * 1a1. ReadyBakey returns no results and queries user if the correct customer name has been entered.
-  * 1a2. User enters the correct customer name.
-  * Steps 1a1-1a2 are repeated until the data entered are correct.
+    * 1a1. ReadyBakey returns no results and queries user if the correct customer name has been entered.
+    * 1a2. User enters the correct customer name.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 **Use case: Editing customer's address**
 
@@ -702,7 +701,7 @@ Use case ends.
     * 1a2. User enters the correct customer index.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
 
-       Use case resumes at step 2.
+      Use case resumes at step 2.
 
 **Use case: Editing customer's phone number**
 
@@ -719,7 +718,7 @@ Use case ends.
     * 1a1. ReadyBakey requests for the correct customer index.
     * 1a2. User enters the correct customer index.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
-  
+
       Use case resumes at step 2.
 
 **Use case: List all Customers**
@@ -728,7 +727,7 @@ Use case ends.
 1. User requests to list all customers
 2. ReadyBakey shows a list of customers
 
-    Use case ends
+   Use case ends
 
 **Use case: List all Orders**
 
@@ -736,7 +735,7 @@ Use case ends.
 1. User requests to list all orders
 2. ReadyBakey shows a list of orders
 
-    Use case ends
+   Use case ends
 
 **Use case: Add an Order**
 
@@ -821,15 +820,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -838,16 +837,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -855,6 +854,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
