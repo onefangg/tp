@@ -5,9 +5,9 @@ start
 if () then ([Order])
     :Relevant Order data is manipulated;
     :Relevant Order data is displayed;
-else if () then ([Help])
+([else]) else if () then ([Help])
     :Help window is displayed;
-else if () then ([is Exit Command])
+([else]) else if () then ([is Exit Command])
     :Exit information is displayed;
     :Application exits;
 else ([Person])
