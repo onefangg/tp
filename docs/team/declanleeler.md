@@ -22,16 +22,16 @@ Given below are my contributions to the project.
       set of data, orders, plus the toggling between the 2 sets of data, orders and persons.
 2. Sorted list functionality in Model
    3. Allows for the sorting of persons or orders through a comparator wherever required, not just in FindIncompleteOrders
-   4. Added comparator for orders based on their delivery date 
+   4. Added comparator for orders based on their delivery date
    5. Challenging to implement as it introduced SortedList as a return type when previously the application only worked with FilteredList.
       This meant relying on polymorphism to use the parent interface, ObservableList, in place of where previously FilteredList was expected.
 3. Find and sort by date incomplete orders before a given date
    1. Useful to highlight incomplete orders
    2. Challenging to implement as it requires both FilteredLists and SortedLists
-4. CSS changes to enhance the application's theme  
+4. CSS changes to enhance the application's theme
 
 ### UG Contributions
-1. Added feature guides for`addo`, `listo`, `deleteo`, `incompleteo`, and natural dates  
+1. Added feature guides for`addo`, `listo`, `deleteo`, `incompleteo`, and natural dates
 2. Resolved bugs related to Quick Start, `findo`, and command case-sensitivity requirement
 3. Update User Guide's naming, formatting, and organisation of features
 
@@ -55,5 +55,3 @@ Given below are my contributions to the project.
 1. Participation in [PE-D](https://github.com/declanleeler/ped/issues) to help [HackNet](https://github.com/AY2122S2-CS2103T-W13-3/tp) spot bugs in V1.3
 2. Helped classmate who had issues launching jar application [(Forum issue here)](https://github.com/nus-cs2103-AY2122S2/forum/issues/156#issuecomment-1040412152)
 3. Helped classmate who had issues with Gradle Checkstyles [(Forum issue here)](https://github.com/nus-cs2103-AY2122S2/forum/issues/95#issuecomment-1029092057)
-
-   
