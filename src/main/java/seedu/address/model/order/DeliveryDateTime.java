@@ -13,10 +13,13 @@ import java.time.format.DateTimeParseException;
  */
 public class DeliveryDateTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "DeliveryDateTime should be in the format dd/MM/yyyy HH:mm "
-            + "and should be a valid date and time before today's date!";
+    public static final String MESSAGE_CONSTRAINTS = "DeliveryDateTime should be in the format dd-MM-yyyy HH:mm "
+            + "or a natural date (e.g. Mon 22:30, Wednesday 10:20) ";
 
-    /*
+    public static final String MESSAGE_CONSTRAINTS_LEAP_YEAR = "Your current input represents a leap day but the "
+            + "year is not a leap year! Please check the date again!";
+
+    /**
      * The first character of the deliveryDateTime must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
@@ -34,6 +37,7 @@ public class DeliveryDateTime {
     public DeliveryDateTime(String deliveryDateTime) {
         requireNonNull(deliveryDateTime);
         checkArgument(isValidDeliveryDateTime(deliveryDateTime), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLeapYearDeliveryDateTimeValue(deliveryDateTime), MESSAGE_CONSTRAINTS_LEAP_YEAR);
         value = LocalDateTime.parse(deliveryDateTime, PARSER_FORMATTER);
     }
 
@@ -50,10 +54,37 @@ public class DeliveryDateTime {
         } catch (DateTimeParseException e) {
             return false;
         }
-        if (LocalDateTime.parse(test, PARSER_FORMATTER).isBefore(LocalDateTime.now())) {
-            return false;
+        return true;
+    }
+
+    /**
+     * Returns true if a given string is a valid email.
+     */
+    public static boolean isValidLeapYearDeliveryDateTimeValue(String test) {
+        String[] date = test.split(" ");
+        String[] dateSplit = date[0].split("-");
+        int day = Integer.parseInt(dateSplit[0]);
+        int month = Integer.parseInt(dateSplit[1]);
+        int year = Integer.parseInt(dateSplit[2]);
+        boolean onLeapDay = (month == 2) && (day == 29);
+        if (onLeapDay) {
+            if (isLeapYear(year)) {
+                return true;
+            } else {
+                return false;
+            }
         }
         return true;
+    }
+
+    /**
+     * Returns true if a given string is a valid email.
+     */
+    public static boolean isLeapYear(int year) {
+        //@@author {https://www.geeksforgeeks.org/java-program-to-find-if-a-given-year-is-a-leap-year/} - reused
+        return ((year % 400 == 0)
+                || ((year % 4 == 0) && (year % 100 != 0)));
+        //@@author
     }
 
     /**
@@ -82,6 +113,10 @@ public class DeliveryDateTime {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public LocalDateTime getValue() {
+        return this.value;
     }
 
 }

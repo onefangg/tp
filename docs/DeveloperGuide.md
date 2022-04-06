@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletep 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,`OrderListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,7 +82,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Order` objects residing in the `Model`.
 
 ### Logic component
 
@@ -100,7 +100,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deletep 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -111,7 +111,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPersonCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPersonCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddPersonCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* All `XYZCommandParser` classes (e.g., `AddPersonCommandParser`, `DeletePersonCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -251,8 +251,8 @@ The AddOrder feature takes in 4 required parameter and 1 optional parameter.
 |--------|------------------------|-----------------------|---------------------------------------------------------------|------------|
 | /p     | Phone Number           | /p 90124322           | Must be a number longer than 3 digits                         | Yes        |
 | /c     | Delivery Date and Time | /c 30-06-2022 15:30   | Must follow the format dd-MM-yyyy HH:mm                       | Yes        |
-| /g     | Collection Type        | /g delivery           | Must be either `delivery` or `pickup` with any capitalisation | Yes        |
-| /d     | Details of Order       | /d 1xChocolate Cake   | Can take in any detail of the order                           | Yes        |
+| /m     | Collection Type        | /g delivery           | Must be either `delivery` or `pickup` with any capitalisation | Yes        |
+| /d     | Details of Order       | /d 1:Chocolate Cake   | Can take in any detail of the order                           | Yes        |
 | /r     | Remark                 | /r Put more Chocolate | Can take in any remark of the order                           | No         |
 
 When the add order command is executed by calling `AddOrderCommand#execute`, the order is built with the
@@ -262,9 +262,10 @@ performed in the function `AddOrderCommand#buildOrder`.
 All inputs by users go through an `AddOrderCommandParser` which extracts out the relevant details for each prefix in the
 method `AddOrderCommandParser#parse`. This method handles the checking of whether the input by the user is valid.
 
-There are 2 main forms of invalid input by the user that is checked for:
+There are 3 main forms of invalid input by the user that is checked for:
 1. When any of the compulsory fields are not specified in the creation of an order
 2. Any field does not fulfil the provided format
+3. The length of a field is not within the allowed range
 
 When an invalid input is parsed, a `ParseException` is thrown and the user will be shown a message on the proper
 usage of the add order command.
@@ -275,24 +276,24 @@ The following sequence diagram illustrates how the `AddOrderCommand` works:
 
 #### Design Considerations
 
-1) Phone Number stores any number longer than 3 digits long
+1) Phone Number stores any number longer than 3 digits long and less than 15 digits long
    * This format was chosen to be more flexible to accept different length of numbers
-2) Delivery Date and Time takes in user input in the format dd-MM-yyyy HH:mm.
+   * Phone number needs to already exist in a `Person` so that there is a linkage made
+2) Delivery Date and Time takes in user input in the format dd-MM-yyyy HH:mm, as well as natural date formats E.g. `Mon 12:59`
    * This user input format was chosen to be user-friendly
    * This Date and Time is represented to the user in the format such as "Thursday, 30 Jun 2022, 03:30PM"
      * This was chosen to be a very readible date and time format
 3) Collection Type is an enum with types `DELIVERY` or `PICKUP`
-   * Enum was chosen to keep this representation more flexible and easily readible.
+   * Enum was chosen to keep this representation more flexible and easily readable
    * Alternative:
      * Using a Boolean value to represent delivery vs pickup
        * This was not chosen to increase the flexibility and extensibility of the code
-4) Remark and Detail was left to be of open format to give the user flexibility in describing the orders
-
-#### Future Works
-
-1) Delivery Date and Time does not allow dates before the current date. This strictness of this condition
-should be lowered to allow users to key in orders before the current date (for book keeping purposes) and instead give
-users a warning.
+4) Remark was left to be of open format to give the user flexibility in describing the orders
+   * There is a maximum character limit imposed of 70 due to UI considerations
+5) Details has to be given in the format `NumberOfItems:NameofItem` E.g. `1:ChocolateCake`
+   * There is a maximum character limit imposed of 30 for the name of the item  due to UI considerations
+   * The number of items has to be in the range of 1 - 99
+   
 
 ### Mark/Unmark Feature
 

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javafx.collections.transformation.FilteredList;
@@ -23,7 +24,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.Remark;
 
-
 /**
  * Changes the remark of an existing person in ReadyBakey.
  */
@@ -34,16 +34,16 @@ public class AddOrderCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an order to ReadyBakey. "
             + "Parameters: "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_REMARK + "REMARK "
             + PREFIX_DETAILS + "DETAILS "
             + PREFIX_DELIVERYDATETIME + "DELIVERYDATETIME "
-            + PREFIX_COLLECTION_TYPE + "COLLECTION_TYPE \n"
+            + PREFIX_COLLECTION_TYPE + "COLLECTION_TYPE "
+            + "[" + PREFIX_REMARK + "REMARK]... \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_REMARK + "Add Cheese "
-            + PREFIX_DETAILS + "1x Jerry Favourite Cheese Cake "
+            + PREFIX_DETAILS + "1: Jerry Favourite Cheese Cake "
             + PREFIX_DELIVERYDATETIME + "25-12-2022 15:30 "
-            + PREFIX_COLLECTION_TYPE + "Delivery";
+            + PREFIX_COLLECTION_TYPE + "Delivery "
+            + PREFIX_REMARK + "Add Cheese ";
 
 
     public static final String MESSAGE_ORDER_SUCCESS = "New order added: %1$s";
@@ -51,7 +51,7 @@ public class AddOrderCommand extends Command {
     public static final String MESSAGE_NO_PERSON_FOUND = "No person found with the same phone number, "
             + "please enter a valid phone number.";
 
-    private final Details details;
+    private final List<Details> details;
     private final Phone phone;
     private final CollectionType collectionType;
     private final DeliveryDateTime deliveryDateTime;
@@ -60,7 +60,7 @@ public class AddOrderCommand extends Command {
     /**
      * Creates an AddOrderCommand to add the specified {@code Order}
      */
-    public AddOrderCommand(Phone phone, Remark remark, Details details, DeliveryDateTime deliveryDateTime,
+    public AddOrderCommand(Phone phone, Remark remark, List<Details> details, DeliveryDateTime deliveryDateTime,
                            CollectionType collectionType) {
         requireAllNonNull(phone, remark, details, deliveryDateTime, collectionType);
         this.phone = phone;
@@ -86,7 +86,7 @@ public class AddOrderCommand extends Command {
     private Order buildOrder(Model model) throws CommandException {
         ArrayList<String> phoneKeywords = new ArrayList<String>();
         phoneKeywords.add(phone.value);
-        FilteredList<Person> filteredPersons = model.getFilteredPersonList()
+        FilteredList<Person> filteredPersons = model.getPersonList()
                 .filtered(new PhoneContainsKeywordsPredicate(phoneKeywords));
         if (filteredPersons.isEmpty()) {
             throw new CommandException(MESSAGE_NO_PERSON_FOUND);

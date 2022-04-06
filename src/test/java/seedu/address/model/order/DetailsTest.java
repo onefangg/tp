@@ -27,15 +27,20 @@ public class DetailsTest {
         // invalid details
         assertFalse(Details.isValidDetails("")); // empty string
         assertFalse(Details.isValidDetails(" ")); // only whitespace
-        assertFalse(Details.isValidDetails("   order")); // whitespace followed by alphanumeric
+        assertFalse(Details.isValidDetails(":")); // only colon
+        assertFalse(Details.isValidDetails("1:   ")); // only passing whitespace
+        assertFalse(Details.isValidDetails("chocolatecake: 1")); // quantity and item in wrong order
+        assertFalse(Details.isValidDetails("1twothree : chocolate cake")); // alphanumeric characters in quantity
+        assertFalse(Details.isValidDetails(
+                "1: chocolate cake ?? 1 of each *")); // non-alphabet and numeric characters present in order item
+        assertFalse(Details.isValidDetails("1: choco 2: cake")); // passing in multiple details at the same time
 
         // valid details
-        assertTrue(Details.isValidDetails("customOrder")); // alphabets only
-        assertTrue(Details.isValidDetails("12345")); // numbers only
-        assertTrue(Details.isValidDetails("1xchocolatecake")); // alphanumeric characters
-        assertTrue(Details.isValidDetails("1xChocolateCake")); // with capital letters
-        assertTrue(Details.isValidDetails(
-                "chocolate cake with spinkles on top")); // long word with whitespaces in-between
+        assertTrue(Details.isValidDetails("1: chocolatecake")); // expected format
+        assertTrue(Details.isValidDetails("   1 : chocolate cake   ")); // whitespaces in-front of quantity
+        assertTrue(Details.isValidDetails("1      :      chocolate cake")); // white spaces between quantity and item
+        assertTrue(Details.isValidDetails("1:chocolatecake")); // no whitespaces in-between
+        assertTrue(Details.isValidDetails("1: chOcOlateCake")); // uppercase characters
     }
 
 }

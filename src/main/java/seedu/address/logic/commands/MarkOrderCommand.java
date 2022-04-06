@@ -56,7 +56,7 @@ public class MarkOrderCommand extends Command {
         assert orderToMark != null;
 
         Remark updatedRemark = orderToMark.getRemark();
-        Details updatedDetails = orderToMark.getDetails();
+        List<Details> updatedDetails = orderToMark.getDetails();
         DeliveryDateTime updatedDeliveryDateTime = orderToMark.getDeliveryDateTime();
         CollectionType updatedCollectionType = orderToMark.getCollectionType();
         Complete updatedComplete = new Complete(true);
