@@ -75,8 +75,6 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `listo`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* All commands are case-sensitive, and must be in lower-case. 
-
 </div>
 
 ### Viewing help : `help`
@@ -389,15 +387,15 @@ _Details coming soon ..._
 ### Using Natural Dates
 
 In order to provide a quicker method of referring to near dates, ReadyBakey allows users to use natural dates to refer to the directly upcoming days of the week.
-The closest upcoming date that corresponds to the natural date's day input will be used. 
+The closest upcoming date that corresponds to the natural date's day input will be used. The time in HH:MM must still be provided by the user, along with the natural date.
 
 This can be used in any command where dates are required, such as `incompleteo` and `addo`. 
 
-Format: `Day HH:MM`
+Format: `Day HH:mm`
 
 Example:
-* `Monday 10:30` or `Mon 10:30`
-* `Sunday 09:30` or `Sun 10:30`
+* `Monday 10:30` or `Mon 10:30` will create a datetime in the form of `dd-mm-yyyy HH:mm` that falls on the closest Monday, where `HH:mm` is `10:30`
+* `Sunday 09:30` or `Sun 09:30`will create a datetime in the form of `dd-mm-yyyy HH:mm` that falls on the closest Sunday, where `HH:mm` is `09:30`
 
 
 --------------------------------------------------------------------------------------------------------------------
