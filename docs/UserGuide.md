@@ -154,7 +154,7 @@ Format: `editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [
 * The length of the `REMARK` must be less than or equal to 70 characters
 * The length of a tag must be less than or equal to 70 characters.
   * If the tag prefix is left empty E.g. `t/`, it will remove all tags that are currently associated to the person
-  * If tags are is provided, any existing tags will be removed and replaced by the tags provided
+  * If any tags are provided, existing tags will be removed and replaced by the tags provided
 
 Examples:
 *  `editp 1 p/83456789 e/declan@example.com` Edits the phone number and email address of the 1st customer to be `83456789` and `declan@example.com` respectively.
