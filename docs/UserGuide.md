@@ -169,7 +169,7 @@ Format: `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION\_TYPE] [r/REMARKS] [d/DE
 * It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
 * It can also accept natural dates with time. e.g. `Monday 10:30` or `Mon 10:30`. Natural dates are not
   case-sensitive.
-* Accept dates in the past for record keeping purposes
+* It accepts dates in the past for record keeping purposes
 
 Examples:
 * `edito 1 d/1: black forest cake`
