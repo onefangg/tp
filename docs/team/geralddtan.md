@@ -29,26 +29,26 @@ Given below are my contributions to the project.
 4. Implementation of components for Person Class
    1. Implemented and performed test for the Remark attribute in the Person Class
    2. Refactor Add Command to Add Person Command
-   
 
 * **Contributions to the UG**:
-1. Added feature guides for listo, addp, marko, unmarko, 
+1. Added feature guides for listo, addp, marko, unmarko, findo
 2. Added Table of Contents & FAQ
+3. Fix formatting errors and minor mistakes
 
 * **Contributions to the DG**:
 1. Added in non functional requirements 
 2. Add user story and use case for Marko, unmarko, clear
 3. Add in AddOrderCommandSequenceDiagram and its design considerations
+4. Edit ModelComponentClassDiagram
 
 * **Contributions to team-based tasks**:
-1. Renamed product to Readybakey to better suit the new target user profile
+1. Contributed in team discussion for overall product direction
 2. Maintained Issue Tracker
 3. Informal Demo of V1.3 [V1.3 Demo Link](https://docs.google.com/document/d/1tTXY-lm5M15URXhf_RbOpxJCVG8-GQD86Q2zDqTp1tM/edit)
 4. Release Management for V1.3
+   1. Took Screenshots
 
 * **Review/mentoring contributions**:
 1. Helped with edit order command test when teammate had some issues [Link Here](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/107)
-2. Reviewed PRs and spotted mistakes whenever possible
-
-* **Contributions beyond the project team**:
+2. Reviewed PRs of peers
 
