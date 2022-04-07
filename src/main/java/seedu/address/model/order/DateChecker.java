@@ -28,6 +28,9 @@ public class DateChecker {
         // add case to check for time provided
         NaturalDateParser dateChecked = new NaturalDateParser(dateToCheck);
         Dates inputtedDay = dateChecked.getDate(); // This gives the enum date which is like "MONDAY"
+
+        // Solution to get current day of week and next required natural date adapted from:
+        // https://coderanch.com/t/385117/java/date-Monday
         Calendar now = Calendar.getInstance();
         int today = now.get(Calendar.DAY_OF_WEEK);
 
