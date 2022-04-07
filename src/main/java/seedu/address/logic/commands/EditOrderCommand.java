@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COLLECTION_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERYDATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
 
 import java.util.List;
@@ -32,8 +35,15 @@ public class EditOrderCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DETAILS + "DETAILS "
+            + PREFIX_REMARK + "REMARK "
+            + PREFIX_DELIVERYDATETIME + "DELIVERYDATETIME "
+            + PREFIX_COLLECTION_TYPE + "COLLECTION_TYPE \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DETAILS + "1x Jerry Favourite Cheese Cake";
+            + PREFIX_REMARK + "Add Cheese "
+            + PREFIX_DETAILS + "1: Jerry Favourite Cheese Cake "
+            + PREFIX_DETAILS + "2: Chocolate Cake "
+            + PREFIX_DELIVERYDATETIME + "25-12-2022 15:30 "
+            + PREFIX_COLLECTION_TYPE + "Delivery";
 
     public static final String MESSAGE_EDIT_ORDER_SUCCESS = "Edited Order: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -77,7 +87,7 @@ public class EditOrderCommand extends Command {
     private static Order createEditedOrder(Order orderToEdit, EditOrderDescriptor editOrderDescriptor) {
         assert orderToEdit != null;
 
-        Details updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
+        List<Details> updatedDetails = editOrderDescriptor.getDetails().orElse(orderToEdit.getDetails());
         Complete complete = orderToEdit.getComplete();
         UUID uuid = orderToEdit.getUuid();
         Remark updatedRemarks = editOrderDescriptor.getRemark().orElse(orderToEdit.getRemark());
@@ -113,7 +123,7 @@ public class EditOrderCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditOrderDescriptor {
-        private Details details;
+        private List<Details> details;
         private Remark remark;
         private DeliveryDateTime deliveryDateTime;
         private CollectionType collectionType;
@@ -138,11 +148,11 @@ public class EditOrderCommand extends Command {
             return CollectionUtil.isAnyNonNull(details, remark, deliveryDateTime, collectionType);
         }
 
-        public void setDetails(Details details) {
+        public void setDetails(List<Details> details) {
             this.details = details;
         }
 
-        public Optional<Details> getDetails() {
+        public Optional<List<Details>> getDetails() {
             return Optional.ofNullable(details);
         }
 

@@ -272,6 +272,11 @@
     -fx-text-fill: white;
 }
 
+/* @@JKostikiadis punnyhuimin-reused
+Reused from: https://stackoverflow.com/questions/48048943/javafx-8-scroll-bar-css
+Creates a scroll bar that looks like a typical UI on Mac/ Windows. A more visually appealing scrollbar compared to the
+previous default.
+*/
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
     -fx-background-color :transparent;
@@ -321,6 +326,7 @@
     -fx-background-insets : 2.0, 0.0, 0.0;
     -fx-background-radius : 2.0em;
 }
+/* @@JKostikiadis */
 
 #cardPane {
     -fx-background-color: transparent;
@@ -357,9 +363,18 @@
      -fx-background-color: #F5EDDA;
 }
 
-#tags {
+#details, #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
+}
+
+#details .label{
+    -fx-text-fill: white;
+    -fx-background-color: #c27227;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
 }
 
 #tags .label {

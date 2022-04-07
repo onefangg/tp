@@ -1,5 +1,9 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.util.SampleDataUtil.getDetailsList;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import seedu.address.model.order.CollectionType;
@@ -11,7 +15,7 @@ import seedu.address.model.person.Remark;
 
 public class OrderBuilder {
 
-    public static final String DEFAULT_DETAILS = "1xchocolatemuffin";
+    public static final String DEFAULT_DETAILS = "1 : chocolatemuffin";
 
     public static final String DEFAULT_COMPLETE = "false";
     public static final String DEFAULT_UUID = "c6a8669e-ee95-4c42-9ef6-4a9b61380164";
@@ -22,7 +26,7 @@ public class OrderBuilder {
 
 
     private Remark remark;
-    private Details details;
+    private List<Details> details;
     private DeliveryDateTime deliveryDateTime;
     private CollectionType collectionType;
     private Complete complete;
@@ -34,7 +38,7 @@ public class OrderBuilder {
     public OrderBuilder() {
 
         remark = new Remark(DEFAULT_REMARK);
-        details = new Details(DEFAULT_DETAILS);
+        details = getDetailsList(DEFAULT_DETAILS);
         deliveryDateTime = new DeliveryDateTime(DEFAULT_DELIVERYDATETIME);
         collectionType = DEFAULT_COLLECTIONTYPE;
         complete = new Complete(DEFAULT_COMPLETE);
@@ -42,12 +46,12 @@ public class OrderBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the OrderBuilder with the data of {@code personToCopy}.
      */
     public OrderBuilder(Order orderToCopy) {
         uuid = orderToCopy.getUuid();
         remark = orderToCopy.getRemark();
-        details = orderToCopy.getDetails();
+        details = new ArrayList<>(orderToCopy.getDetails());
         deliveryDateTime = orderToCopy.getDeliveryDateTime();
         collectionType = orderToCopy.getCollectionType();
         complete = orderToCopy.getComplete();
@@ -73,8 +77,8 @@ public class OrderBuilder {
     /**
      * Sets the {@code Details} of the {@code Order} that we are building.
      */
-    public OrderBuilder withDetails(String details) {
-        this.details = new Details(details);
+    public OrderBuilder withDetails(String... details) {
+        this.details = getDetailsList(details);
         return this;
     }
 

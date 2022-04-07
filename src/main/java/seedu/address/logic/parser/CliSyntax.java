@@ -14,7 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_DETAILS = new Prefix("d/");
     public static final Prefix PREFIX_DELIVERYDATETIME = new Prefix("c/");
-    public static final Prefix PREFIX_COLLECTION_TYPE = new Prefix("g/");
+    public static final Prefix PREFIX_COLLECTION_TYPE = new Prefix("m/");
     public static final Prefix PREFIX_BLANK = new Prefix("");
 
 }
