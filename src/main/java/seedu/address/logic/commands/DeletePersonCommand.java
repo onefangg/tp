@@ -26,7 +26,7 @@ public class DeletePersonCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_FAILED_ORDER_FOUND = "This person cannot be deleted"
+    public static final String MESSAGE_DELETE_PERSON_FAILED_ORDER_FOUND = "This person cannot be deleted "
             + "as they have orders linked to them, please delete the orders first before deleting this person";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";

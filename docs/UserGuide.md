@@ -171,6 +171,7 @@ Format: `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION\_TYPE] [r/REMARKS] [d/DE
 * It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
 * It can also accept natural dates with time. e.g. `Monday 10:30` or `Mon 10:30`. Natural dates are not
   case-sensitive.
+* It accepts dates in the past for record keeping purposes
 
 Examples:
 * `edito 1 d/1: black forest cake`
@@ -333,6 +334,7 @@ Format: `marko INDEX`
 * Marks the order at the specified `INDEX`
 * The`INDEX` refers to the index number shown in the displayed orders list.
 * The`INDEX` must be a positive integer 1, 2, 3, ...
+* If a complete order is marked again, it will remain as marked and no error will be thrown.
 
 Examples:
 * `marko 1`
@@ -346,6 +348,7 @@ Format: `unmarko INDEX`
 * Unmarks the order at the specified `INDEX`
 * The `INDEX` refers to the index number shown in the displayed orders list.
 * The `INDEX` must be a positive integer 1, 2, 3, ….
+* If an incomplete order is unmarked again, it will remain as unmarked and no error will be thrown.
 
 Examples:
 * `unmarko 1`
@@ -394,12 +397,12 @@ _Details coming soon ..._
 | **listp**   | `listp`                                                                           | `listp`                                                                                                          |
 | **editp**   | `editp INDEX n/NAME p/PHONE\_NUM a/ADDRESS`                                       | `editp 1 p/12345678 n/John Doey a/NUS`                                                                           |
 | **findp**   | `findp [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]...`                             | `findp n/Gerald`                                                                                                 |
-| **clear**   | `clear`                                                                           | `clear`                                                                                                          |
 | **addo**    | `addo p/PHONE\_NUM r/REMARK d/DETAILS c/DELIVERYDATETIME m/COLLECTION\_TYPE`      | `addo p/87654321 r/no candles d/1:Chocolate Cake c/27-12-2022 12:30 m/Delivery`                                  |
 | **deleteo** | `deleteo INDEX`                                                                   | `deleteo 2`                                                                                                      |
 | **listo**   | `listo`                                                                           | `listo`                                                                                                          |
 | **marko**   | `marko INDEX`                                                                     | `marko 1`                                                                                                        |
 | **unmarko** | `unmarko INDEX`                                                                   | `unmarko 1`                                                                                                      |
-| **exit**    | `exit`                                                                            | `exit`                                                                                                           |
 | **edito**   | `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION\_TYPE] [r/REMARKS] [d/DETAILS]…​` | `edito 1 r/Add Cheese d/1: Jerry Favourite Cheese Cake d/2: Chocolate Cake c/25-12-2022 15:30 m/Delivery`        |
 | **findo**   | `findo [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]...`                             | `findo n/Gerald Declan`                                                                                          |
+| **clear**   | `clear`                                                                           | `clear`                                                                                                          |
+| **exit**    | `exit`                                                                            | `exit`                                                                                                           |
