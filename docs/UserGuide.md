@@ -332,6 +332,7 @@ Format: `marko INDEX`
 * Marks the order at the specified `INDEX`
 * The`INDEX` refers to the index number shown in the displayed orders list.
 * The`INDEX` must be a positive integer 1, 2, 3, ...
+* If a complete order is marked again, it will remark as marked and no error will be thrown.
 
 Examples:
 * `marko 1`
