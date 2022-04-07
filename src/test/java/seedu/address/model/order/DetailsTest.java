@@ -30,10 +30,12 @@ public class DetailsTest {
         assertFalse(Details.isValidDetails(":")); // only colon
         assertFalse(Details.isValidDetails("1:   ")); // only passing whitespace
         assertFalse(Details.isValidDetails("chocolatecake: 1")); // quantity and item in wrong order
+        assertFalse(Details.isValidDetails("one: chocolatecake")); // quantity not in numbers
         assertFalse(Details.isValidDetails("1twothree : chocolate cake")); // alphanumeric characters in quantity
         assertFalse(Details.isValidDetails(
                 "1: chocolate cake ?? 1 of each *")); // non-alphabet and numeric characters present in order item
         assertFalse(Details.isValidDetails("1: choco 2: cake")); // passing in multiple details at the same time
+        assertFalse(Details.isValidDetails("1:     ")); // all blank spaces
 
         // valid details
         assertTrue(Details.isValidDetails("1: chocolatecake")); // expected format
@@ -41,6 +43,7 @@ public class DetailsTest {
         assertTrue(Details.isValidDetails("1      :      chocolate cake")); // white spaces between quantity and item
         assertTrue(Details.isValidDetails("1:chocolatecake")); // no whitespaces in-between
         assertTrue(Details.isValidDetails("1: chOcOlateCake")); // uppercase characters
+        assertTrue(Details.isValidDetails("1: a  very    big  cake")); // irregular amount of whitespaces in-between
     }
 
 }
