@@ -17,14 +17,18 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `readybakey.jar` from [here](https://github.com/AY2122S2-CS2103-F09-4/tp/releases).
+2. Download the latest `readybakey.jar` from [here](https://github.com/AY2122S2-CS2103-F09-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ReadyBakey.
+3. Copy the file to the folder you want to use as the _home folder_ for your ReadyBakey.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command window in that folder
+
+5. Run the command `java -jar readybakey.jar`  (i.e., run the command in the same folder as the jar file) 
+
+6. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
   * **`listo`** : Lists all orders.
@@ -228,7 +232,13 @@ Finds order(s) whose specific attribute contain any of the given keywords.
 
 Format: `findo [ATTRIBUTE] KEYWORD [MORE_KEYWORDS]`
 
-* The supported attributes are `n/`, `p/`, `d/`, `m/`, `r/`
+* The supported attributes are 
+  * Order's customer's name: `n/`
+  * Order's customer's phone number:`p/`
+  * Order's details: `d/`
+  * Order's collection type: `m/`
+  * Order's remarks: `r/`
+  * Finding orders based on `c/DELIVERYDATETIME` is not supported in this command because the command `incompleteo` serves this purpose 
 * Only the attribute specified is searched.
   * Multiple attributes searching at the same time is not allowed. e.g. `findo n/Gerald d/Cake`
   * For findo `d/[keyword]`, the keyword should only be the description of the detail and not the quantity
@@ -265,7 +275,7 @@ Adds an order to ReadyBakey’s order list.
 Format: `addo p/PHONE d/DETAILS c/DELIVERYDATETIME m/COLLECTION_TYPE [r/REMARK]…`
 
 Examples:
-* `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery r/Add Cheese `
+* `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery r/Add Cheese`
 * `p/PHONE` must be a phone number that is already stored in ReadyBakey's person list
 * `c/DELIVERYDATETIME` accepts dates in the past for record keeping purposes
   * It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
@@ -381,6 +391,23 @@ If your changes to the data file makes its format invalid, ReadyBakey will disca
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+### Using Natural Dates
+
+In order to provide a quicker method of referring to near dates, ReadyBakey allows users to use natural dates to refer to the directly upcoming days of the week.
+The closest upcoming date that corresponds to the natural date's day input will be used. The time in HH:MM must still be provided by the user, along with the natural date.
+
+This can be used in any command where dates are required, such as `incompleteo` and `addo`. 
+
+Format: `Day HH:mm`
+
+Example of natural date:
+* `Monday 10:30` or `Mon 10:30` will create a datetime in the form of `dd-mm-yyyy HH:mm` that falls on the closest Monday, where `HH:mm` is `10:30`
+* `Sunday 09:30` or `Sun 09:30`will create a datetime in the form of `dd-mm-yyyy HH:mm` that falls on the closest Sunday, where `HH:mm` is `09:30`
+
+Example of natural date in action:
+* `incompleteo Monday 15:30`
+* `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/Tuesday 15:30 m/Delivery r/Add Cheese`
 
 --------------------------------------------------------------------------------------------------------------------
 
