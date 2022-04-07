@@ -133,9 +133,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given order {@code target} in the list with {@code editedOrder}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The person identity of {@code editedOrder} must not be the same as another existing order in the address book.
      */
     public void setOrder(Order targetOrder, Order editedOrder) {
         requireNonNull(editedOrder);
