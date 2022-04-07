@@ -403,16 +403,19 @@ All potential natural dates that can be used:
 * `Thursday HH:mm`
 * `Fri HH:mm`
 * `Friday HH:mm`
+* `Sat HH:mm`
+* `Saturday HH:mm`
+* `Sun HH:mm`
+* `Sunday HH:mm`
 
 Example of natural date:
 * `Monday 10:30` or `Mon 10:30` will create a datetime in the form of `dd-mm-yyyy HH:mm` that falls on the closest Monday, where `HH:mm` is `10:30`
 * `Sunday 09:30` or `Sun 09:30`will create a datetime in the form of `dd-mm-yyyy HH:mm` that falls on the closest Sunday, where `HH:mm` is `09:30`
-* If the current time is `7th April 2022 09:30`, inputting `Thurs 08:30` will return `14th April 2022` as the 
-  closest Thursday. 
+* If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 08:30` will return `14th April 
+  2022` as the closest Thursday. 
   * Reason: `08:30` has already passed the current time, hence ReadyBakey will look for a future date that is a 
     Thursday instead. 
-* If the current time is `7th April 2022 09:30`, inputting `Thurs 10:30` will return `7th April 2022` as the
-  closest Thursday.
+* If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 10:30` will return `7th April 2022` as the closest Thursday.
   * Reason: `10:30` has not passed the current time, hence ReadyBakey will look at the current day as the closest 
     Thursday.
 
@@ -420,9 +423,9 @@ Example of natural dates in action:
 * `incompleteo Monday 15:30`
 * `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/Tuesday 15:30 m/Delivery r/Add Cheese`
 
-:exclamation: Note: You cannot specify which Natural Date you want. The natural date that is chosen by ReadyBakey 
-based on your natural date input will be shown in the Response Box. (i.e. You cannot specify which Monday or Tuesday 
-you want)
+:exclamation: Note: You cannot specify which Natural Date you want. ReadyBakey automatically assigns the closest 
+Natural Date and it will be shown in the Response Box after the command is executed. (i.e. You cannot specify that 
+you want the date to be the Monday or any natural date 10 weeks from now)
 
 --------------------------------------------------------------------------------------------------------------------
 
