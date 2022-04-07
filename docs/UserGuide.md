@@ -88,6 +88,8 @@ Format: `help`
 ### Adding a customer: `addp`
 
 Adds a customer to ReadyBakey’s contact list
+* A customer's name and phone number must not have appeared in ReadyBakey's customer list. If it is not unique, you 
+  will not be allowed to add the customer.
 
 Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
 * Names must be between 2 and 50 characters long and must only contain alphanumeric characters and spaces.
