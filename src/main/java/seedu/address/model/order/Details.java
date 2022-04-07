@@ -33,7 +33,7 @@ public class Details {
     private static final String ORDER_QUANTITY_REGEX_KEYWORD = "orderQuantity";
     private static final String ORDER_ITEM_REGEX_KEYWORD = "orderItem";
     private static final String VALIDATION_REGEX = String.format(
-            "^(\\s+)?(?<%s>\\d+)\\s*:{1}\\s*(?<%s>((\\w|\\w )+))(\\s+)?$",
+            "^(\\s+)?(?<%s>\\d+)\\s*:{1}\\s*(?<%s>((\\w|\\w +)+))(\\s+)?$",
             ORDER_QUANTITY_REGEX_KEYWORD, ORDER_ITEM_REGEX_KEYWORD);
     private static final String VALIDATION_REGEX_QUANTITY = "^([0-9]+:).*";
     private static final Pattern DETAIL_PATTERN = Pattern.compile(VALIDATION_REGEX);
