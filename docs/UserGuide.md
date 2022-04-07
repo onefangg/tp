@@ -95,7 +95,7 @@ Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
       - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 * The length of the `ADDRESS` must be between 6 and 70 characters.
 * The length of the `REMARK` must be less than or equal to 70 characters.
-* The length of a tag must be less than 70 characters.
+* The length of a tag must be less than or equal to 70 characters.
 
 Examples:
 * `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/friends t/owesMoney`
