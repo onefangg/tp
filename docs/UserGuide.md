@@ -102,6 +102,7 @@ Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
 * The length of the `ADDRESS` must be between 6 (inclusive) and 70 (inclusive) characters.
   * E.g. Keying in `a/short1` is acceptable but not `a/short`.
 * The length of the `REMARK` must be less than or equal to 70 characters.
+* The length of a tag must be less than or equal to 70 characters.
 
 Examples:
 * `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/friends t/owesMoney`
@@ -150,6 +151,7 @@ Format: `editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [
     - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 * The length of the `ADDRESS` must be between 6 and 70 characters
 * The length of the `REMARK` must be less than or equal to 70 characters
+* The length of a tag must be less than 70 characters.
 
 Examples:
 *  `editp 1 p/83456789 e/declan@example.com` Edits the phone number and email address of the 1st customer to be `83456789` and `declan@example.com` respectively.
