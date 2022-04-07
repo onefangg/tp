@@ -418,6 +418,10 @@ Example of natural dates in action:
 * `incompleteo Monday 15:30`
 * `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/Tuesday 15:30 m/Delivery r/Add Cheese`
 
+:exclamation: Note: You cannot specify which Natural Date you want. The natural date that is chosen by ReadyBakey 
+based on your natural date input will be shown in the Response Box. (i.e. You cannot specify which Monday or Tuesday 
+you want)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ <a name="faq"></a>
