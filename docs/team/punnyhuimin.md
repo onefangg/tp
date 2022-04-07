@@ -14,13 +14,6 @@ Given below are my contributions to the project.
   * _What it does_: allows the user to that edits an order's details, remarks, delivery date time, and collection type.
   * _Justification_: This feature improves the product significantly because a user can rectify any changes made by 
     their customer without deleting and adding a new order. 
-  * _Highlights_: The implementation was challenging as there were a lot of moving parts with how an order was to be 
-    built. It required constant revamping in both the tests and the EditOrderCommand code to catch up with the new 
-    changes.
-  * _Credits_: EditPersonCommand code was heavily used in the implementation of EditOrderCommand. Some tweaks were 
-    made to ensure orders are not as unique as how a Person is, so repeats are allowed if the order details are not 
-    the same. The tests were also similar to the EditPersonCommandTest, but tweaks were made to better fit the 
-    Orders implementation.
   
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=punnyhuimin&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=punnyhuimin&tabRepo=AY2122S2-CS2103-F09-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
@@ -37,14 +30,7 @@ Given below are my contributions to the project.
        AddOrder and EditOrder commands. This is built alongside the DeliveryDateTime capability, which only takes in
        dates in the form of `dd-MM-yyyy`.
      * _Justification_: This feature improves the product significantly by speeding up the users' ability to type in the
-       date without having to look at their calendar to find the day and month that the order is to be completed. Just
-       knowing which day of the week it needs to be delivered by and what time allows ReadyBakey to quickly provide the
-       completion date for the order.
-       * Increases the speed at which the user is taking down orders.
-     * _Highlights_: This enhancement affects existing commands and required in-depth analysis of how the current
-       datetime is implemented. Natural Dates Checker was to be built such that it does not override any existing
-       datetime implementations. NaturalDates was built to ensure that its implementation will not affect any other
-       existing work done by other teammates while still ensuring the code is efficient.
+       date without having to look at their calendar to find the day and month that the order is to be completed.
      * _Credits_: Used a formula from https://coderanch.com/t/385117/java/date-Monday that gets the next date based 
        on specified NaturalDate input.
   3. Update ExitCommand [\#96](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/96)
@@ -53,16 +39,9 @@ Given below are my contributions to the project.
        was also a message in the response box that cannot be read by the user once the exit command is passed. 
   4. Wrote additional tests for dates, increasing the code coverage by 0.04% [\#141](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/141)
   5. Added character limits for person prefix inputs [\#179](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/179)
-     * _What it does_: It sets various character limits for each prefix based on how much the UI can take.
-     * _Justification_: If a character flows beyond what the GUI can take, the inputs will become cut off. This is a 
-       bug and should be addressed in order to ensure that the user can access all information they input.
-     * _Highlight_: While building this, a choice was to be made between implementing it in the parser or in the 
-       prefix classes themselves. Some checks were already being done in the prefix classes, but it made more sense 
-       to keep the character limit checks in a unified class instead.
 
 * **Contributions to team based tasks**:
-  * Set up Github team repository and team organisation.
-  * Set up Gradle for repository.
+  * Set up Github team repository, team organisation, and Gradle for repository.
   * Added a new logo for ReadyBakey.[\#110](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/110) 
   * [UI draft](https://www.figma.com/file/g10mAn5vFDXQXABQPh9U9M/ReadyBakey-UI-mockup?node-id=0%3A1) image made with 
     Figma to plan out how the final product will look like.
