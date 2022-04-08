@@ -244,8 +244,7 @@ Similar concept applies for `UnmarkOrderCommand`.
      * Pros: More easily readable.
      * Cons: Larger implementation.
    * Boolean chosen due to simple implementation.
-   * Consideration also given to possible extensions, Completion status of an order can only
-ever take 2 values, thus there is no need for an Enum class.
+   * Completion status of an order can only take 2 values, an order can be complete or incomplete, thus there is no need for an Enum class.
 
 2) Order is still immutable
    * Creating a marked order will duplicate the current order, while changing the `Complete` attribute
