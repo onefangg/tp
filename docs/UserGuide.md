@@ -88,6 +88,8 @@ Format: `help`
 ### Adding a customer: `addp`
 
 Adds a customer to ReadyBakey’s contact list
+* A customer's name and phone number must not have appeared in ReadyBakey's customer list. If it is not unique, you 
+  will not be allowed to add the customer.
 
 Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
 * Names must be between 2 and 50 characters long and must only contain alphanumeric characters and spaces.
@@ -281,20 +283,6 @@ Examples:
   * It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
   * It can also accept natural dates with time. e.g. `Monday 10:30` or `Mon 10:30`. Natural dates are not
     case-sensitive.
-  * All potential natural dates that can be used:
-    * `Mon HH:mm`
-    * `Monday HH:mm`
-    * `Tues HH:mm`
-    * `Tue HH:mm`
-    * `Tuesday HH:mm`
-    * `Weds HH:mm`
-    * `Wed HH:mm`
-    * `Wednesday HH:mm`
-    * `Thurs HH:mm`
-    * `Thur HH:mm`
-    * `Thursday HH:mm`
-    * `Fri HH:mm`
-    * `Friday HH:mm`
 * `d/DETAILS` accept values in the form [quantity]:[description]. It can also take in multiple details
   * A single Order accepts a single detail and up to 5 maximum details.
   * [quantity] is an integer that belongs to a range between 1 to 99.
@@ -401,13 +389,43 @@ This can be used in any command where dates are required, such as `incompleteo` 
 
 Format: `Day HH:mm`
 
+All potential natural dates that can be used:
+* `Mon HH:mm`
+* `Monday HH:mm`
+* `Tues HH:mm`
+* `Tue HH:mm`
+* `Tuesday HH:mm`
+* `Weds HH:mm`
+* `Wed HH:mm`
+* `Wednesday HH:mm`
+* `Thurs HH:mm`
+* `Thur HH:mm`
+* `Thursday HH:mm`
+* `Fri HH:mm`
+* `Friday HH:mm`
+* `Sat HH:mm`
+* `Saturday HH:mm`
+* `Sun HH:mm`
+* `Sunday HH:mm`
+
 Example of natural date:
 * `Monday 10:30` or `Mon 10:30` will create a datetime in the form of `dd-mm-yyyy HH:mm` that falls on the closest Monday, where `HH:mm` is `10:30`
 * `Sunday 09:30` or `Sun 09:30`will create a datetime in the form of `dd-mm-yyyy HH:mm` that falls on the closest Sunday, where `HH:mm` is `09:30`
+* If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 08:30` will return `14th April 
+  2022` as the closest Thursday. 
+  * Reason: `08:30` has already passed the current time, hence ReadyBakey will look for a future date that is a 
+    Thursday instead. 
+* If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 10:30` will return `7th April 2022` as the closest Thursday.
+  * Reason: `10:30` has not passed the current time, hence ReadyBakey will look at the current day as the closest 
+    Thursday.
 
-Example of natural date in action:
+Example of natural dates in action:
 * `incompleteo Monday 15:30`
 * `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/Tuesday 15:30 m/Delivery r/Add Cheese`
+
+:exclamation: Note: You cannot specify which Natural Date you want. ReadyBakey automatically assigns the closest 
+Natural Date and it will be shown in the Response Box after the command is executed. (i.e. You cannot specify that 
+you want the date to be the Monday or any natural date 10 weeks from now)
 
 --------------------------------------------------------------------------------------------------------------------
 
