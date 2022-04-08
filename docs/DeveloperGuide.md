@@ -174,7 +174,7 @@ The AddOrder feature takes in 4 required parameter and 1 optional parameter.
 |--------|------------------------|-----------------------|---------------------------------------------------------------|------------|
 | /p     | Phone Number           | /p 90124322           | Must be a number longer than 3 digits                         | Yes        |
 | /c     | Delivery Date and Time | /c 30-06-2022 15:30   | Must follow the format dd-MM-yyyy HH:mm                       | Yes        |
-| /m     | Collection Type        | /g delivery           | Must be either `delivery` or `pickup` with any capitalisation | Yes        |
+| /m     | Collection Type        | /m delivery           | Must be either `delivery` or `pickup` with any capitalisation | Yes        |
 | /d     | Details of Order       | /d 1:Chocolate Cake   | Can take in any detail of the order                           | Yes        |
 | /r     | Remark                 | /r Put more Chocolate | Can take in any remark of the order                           | No         |
 
@@ -202,6 +202,7 @@ The following sequence diagram illustrates how the `AddOrderCommand` works:
 1) Phone Number stores any number longer than 3 digits long and less than 15 digits long
    * This format was chosen to be more flexible to accept different length of numbers
    * Phone number needs to already exist in a `Person` so that there is a linkage made
+     * Phone number was chosen to create a link as we expect our users to copy over the data from another source. E.g. Received orders on Whatsapp -> Input into ReadyBakey. This would make it easier for our users to add data in as compared to having to find the index of the user in the app.
 2) Delivery Date and Time takes in user input in the format dd-MM-yyyy HH:mm, as well as natural date formats E.g. `Mon 12:59`
    * This user input format was chosen to be user-friendly
    * This Date and Time is represented to the user in the format such as "Thursday, 30 Jun 2022, 03:30PM"
@@ -306,7 +307,7 @@ The following sequence diagram shows how the `findo` operation works:
 
 ![FindOrderSequenceDiagram](images/FindOrderSequenceDiagram.png)
 
-### \[In Progress\] Edit Order Feature
+### Edit Order Feature
 
 This feature allows users to edit the details, collection/ delivery time, whether an order is for delivery or pickup,
 and remarks of the order that already exists in ReadyBakey. Currently, it can only edit the details of the order.
@@ -323,7 +324,7 @@ These are the inputs that the edit order command will accept:
 | Prefix | Meaning                              | Example            | Format                                                                   | Compulsory |
 |--------|--------------------------------------|--------------------|--------------------------------------------------------------------------|------------|
 | c/     | Collection/ delivery time            | c/30-06-2022 15:30 | Must follow the format dd-MM-yyyy HH:mm                                  | No         |
-| g/     | Collection type (Pickup or Delivery) | g/delivery         | Must be either `delivery` or `pickup` with any capitalisation            | No         |
+| m/     | Collection type (Pickup or Delivery) | m/delivery         | Must be either `delivery` or `pickup` with any capitalisation            | No         |
 | d/     | Order Details                        | d/1x Cheesecake    | \[To be implemented\] Must be in the form [NUM_ORDERS\] x \[ANY_STRING\] | No         |
 | r/     | Order Remarks                        | r/Give me candles  | Can take in any remark for the order                                     | No         |
 
