@@ -81,7 +81,8 @@ public class DeliveryDateTime {
      * Returns true if a given string is a valid email.
      */
     public static boolean isLeapYear(int year) {
-        //@@author {https://www.geeksforgeeks.org/java-program-to-find-if-a-given-year-is-a-leap-year/} - reused
+        //@@author {Geralddtan} - reused
+        //Reused from https://www.geeksforgeeks.org/java-program-to-find-if-a-given-year-is-a-leap-year/
         return ((year % 400 == 0)
                 || ((year % 4 == 0) && (year % 100 != 0)));
         //@@author

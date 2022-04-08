@@ -2,24 +2,30 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+# Table of Contents
+1. [Acknowledgements](#acknowledgements)
+2. [Setting Up](#setting-up)
+3. [Design](#design)
+4. [Implementation](#implementation)
+5. [Documentation, logging, testing, configuration, dev-ops](#additional-information)
+6. [Appendix: Requirements](#requirements)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## **Acknowledgements** <a name="acknowledgements"></a>
 
+* Geralddtan - Reused Leap Year Checker (DeliveryDateTime#isLeapYear) from https://www.geeksforgeeks.org/java-program-to-find-if-a-given-year-is-a-leap-year/
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, getting started** <a name="setting-up"></a>
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## **Design** <a name="design"></a>
 
 <div markdown="span" class="alert alert-primary">
 
@@ -151,7 +157,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Implementation** <a name="implementation"></a>
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -394,7 +400,7 @@ The following sequence diagram shows how the `deleteo` operation works:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, logging, testing, configuration, dev-ops** <a name="additional-information"></a>
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -404,7 +410,7 @@ The following sequence diagram shows how the `deleteo` operation works:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix: Requirements** <a name="requirements"></a>
 
 ### Product scope
 
@@ -449,8 +455,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | home baker that has multiple orders         | get a view of unfinished orders for current day                                         | see urgent orders at a glance                                                           |
 | `* *`    | home baker that has multiple orders         | generate a weekly report                                                                | track the progress of my business                                                       |
 | `*`      | home baker that has multiple orders         | get a calender view of the upcoming deadlines                                           | have a visual plan for the orders in the upcoming period                                |
-
-*{More to be added}*
 
 ### Use cases
 
@@ -528,7 +532,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The specified order is already marked as complete
 
-    * 3b1. ReadyBakey informs that the order has already been marked complete
+    * 3b1. The order remains marked as complete
 
       Use case resumes at step 2.
 
@@ -557,7 +561,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The specified order is already marked as incomplete
 
-    * 3b1. ReadyBakey informs that the order has already been marked incomplete
+    * 3b1. The order remains marked as incomplete
 
       Use case resumes at step 2.
 
@@ -565,17 +569,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list all orders
-2. ReadyBakey shows a list of orders
-3. User requests to list all customers
-4. ReadyBakey shows a list of customers
-5. ReadyBakey clears data from the application.
+1. User requests to clear both order and customer data from the application
+2. ReadyBakey clears both order and customer data from the application.
 
    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
 
 **Use case: Exits the ReadyBakey program**
 
