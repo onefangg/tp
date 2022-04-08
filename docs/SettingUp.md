@@ -4,19 +4,20 @@ title: Setting up and getting started
 ---
 
 * Table of Contents
-{:toc}
+1. [Setting up the project in your computer](#setting-up)
+2. [Before writing code](#writing-code)
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Setting up the project in your computer
+## Setting up the project in your computer <a name="setting-up"></a>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
 Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
 </div>
 
-First, **fork** this repo, and **clone** the fork into your computer.
+First, **fork** [this](https://github.com/AY2122S2-CS2103-F09-4/tp) repo, and **clone** the fork into your computer.
 
 If you plan to use Intellij IDEA (highly recommended):
 1. **Configure the JDK**: Follow the guide [_[se-edu/guides] IDEA: Configuring the JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to to ensure Intellij is configured to use **JDK 11**.
@@ -28,7 +29,7 @@ If you plan to use Intellij IDEA (highly recommended):
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Before writing code
+## Before writing code <a name="writing-code"></a>
 
 1. **Configure the coding style**
 
