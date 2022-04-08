@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 public class Complete {
     public static final String MESSAGE_CONSTRAINTS = "Complete can take only boolean values";
 
-    public final Boolean value;
+    public final Boolean isCompleted;
 
     /**
      * Constructs a {@code Complete}.
@@ -15,7 +15,7 @@ public class Complete {
     public Complete(Boolean value) {
         requireNonNull(value);
 
-        this.value = value;
+        this.isCompleted = value;
     }
 
     /**
@@ -26,9 +26,9 @@ public class Complete {
     public Complete(String value) {
         requireNonNull(value);
         if (value.equals(Boolean.TRUE.toString())) {
-            this.value = true;
+            this.isCompleted = true;
         } else {
-            this.value = false;
+            this.isCompleted = false;
         }
     }
 
@@ -40,26 +40,27 @@ public class Complete {
                 || details.equals(Boolean.TRUE.toString());
     }
 
+    public boolean isComplete() {
+        return this.isCompleted;
+    }
 
     @Override
     public String toString() {
-        return (value) ? "Complete" : "Incomplete";
+        return (isCompleted) ? "Complete" : "Incomplete";
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Complete // instanceof handles nulls
-                && value.equals(((Complete) other).value)); // state check
+                && isCompleted.equals(((Complete) other).isCompleted)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return isCompleted.hashCode();
     }
 
-    public boolean isComplete() {
-        return this.value;
-    }
+
 
 }

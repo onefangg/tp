@@ -23,6 +23,7 @@ import seedu.address.model.person.Remark;
 class JsonAdaptedOrder {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Order's %s field is missing!";
+    public static final String UUID_MESSAGE_CONSTRAINTS = "UUID needs to be a valid UUID from Java's UUID package";
 
 
     private final String remark;
@@ -60,7 +61,7 @@ class JsonAdaptedOrder {
         remark = source.getRemark().value;
         deliveryDateTime = source.getDeliveryDateTime().toJsonSavedString();
         collectionType = source.getCollectionType().value;
-        complete = source.getComplete().value.toString();
+        complete = source.getComplete().isCompleted.toString();
         uuid = source.getUuid().toString();
         details.addAll(source.getDetails().stream()
                 .map(JsonAdaptedDetails::new)
@@ -122,7 +123,7 @@ class JsonAdaptedOrder {
         try {
             modelUuid = UUID.fromString(uuid);
         } catch (IllegalArgumentException e) {
-            throw new IllegalValueException(Complete.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(UUID_MESSAGE_CONSTRAINTS);
         }
 
         return new Order(modelRemark, modelDetails, modelDeliveryDateTime,
