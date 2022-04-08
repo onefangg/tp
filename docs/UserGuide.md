@@ -166,43 +166,6 @@ Examples:
 *  `editp 1 p/83456789 e/declan@example.com` Edits the phone number and email address of the 1st customer to be `83456789` and `declan@example.com` respectively.
 *  `editp 2 n/Declan` Edits the name of the 2nd customer to be `Declan`.
 
-
-### Editing an order's information : `edito`
-
-Edits an existing customer in ReadyBakey's contact list.
-
-Format: `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION\_TYPE] [r/REMARKS] [d/DETAILS]…`
-
-* Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list.
-  * The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
-* It can also accept natural dates with time. e.g. `Monday 10:30` or `Mon 10:30`. Natural dates are not
-  case-sensitive.
-* It accepts dates in the past for record keeping purposes
-
-Examples:
-* `edito 1 d/1: black forest cake`
-  * Edits the details of the 1st order to be `1: black forest cake`.
-* `edito 1 d/1: black forest cake d/2: Chocolate Cake`
-  * Edits the details of the 1st order to be `1: black forest
-    cake` and `2: Chocolate Cake`.
-    * In this case, to add two details to the order, each `d/` is for one detail.
-* `edito 2 r/Two candles`
-  * Edits the 2nd order's remarks to be `Two candles`.
-* `edito 2 m/Delivery`
-  * Edits the 2nd order's collection type to be `Delivery`.
-* `edito 3 c/Monday 10:30`
-  * Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
-* `edito 3 c/04-04-2022 10:30`
-  * Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
-* `edito 1 d/1: black forest cake d/1: Cheese cake c/04-04-2022 10:30 m/Delivery r/Two candles`
-  * Edits the first order to have order details with `1: black forest cake` and `1: Cheese cake`.
-  * The order delivery date is also now edited to be `Monday, 04 Apr 2022, 10:30`.
-  * Collection type is changed to `Delivery`.
-  * Detail remarks is also changed to `Two candles`
-
 ### Locating customers by specific attribute: `findp`
 
 Finds customer(s) whose name(s) contain any of the given keywords.
@@ -227,48 +190,6 @@ Examples:
 * `findp e/alex@abc.com` returns `alex@abc.com`
 * `findp a/serangoon` returns `Blk 1 Serangoon Street 5`
 * `findp r/Allergic` returns `Allergic to Tomatoes`<br>
-
-### Locating orders by specific attribute: `findo`
-
-Finds order(s) whose specific attribute contain any of the given keywords.
-
-Format: `findo [ATTRIBUTE] KEYWORD [MORE_KEYWORDS]`
-
-* The supported attributes are 
-  * Order's customer's name: `n/`
-  * Order's customer's phone number:`p/`
-  * Order's details: `d/`
-  * Order's collection type: `m/`
-  * Order's remarks: `r/`
-  * Finding orders based on `c/DELIVERYDATETIME` is not supported in this command because the command `incompleteo` serves this purpose 
-* Only the attribute specified is searched.
-  * Multiple attributes searching at the same time is not allowed. e.g. `findo n/Gerald d/Cake`
-  * For findo `d/[keyword]`, the keyword should only be the description of the detail and not the quantity
-    * Valid Example: `findo d/Cake`
-    * Invalid Example: `findo d/1:Cake`
-* The search is case-insensitive. e.g `cake` will match `Cake`
-* The order of the keywords does not matter. e.g. `banana cake` will match `cake banana`
-* Only full words will be matched e.g. `Cake` will not match `Cakes`
-* Multiple `[KEYWORDS]` provided will be split up by whitespace and searched individually
-  * `findo n/Declan Bob` will search for both `Declan` and `Bob`
-* Orders matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Banana Cake` will return `Banana Leaf`, `Strawberry Cake`
-
-Examples:
-* `findo n/Declan` returns `declan` and `Declan Lee`
-* `findo p/90029382` returns `90029382`
-* `findo d/cake` returns `Cake` and `Banana Cake`
-* `findo m/delivery` returns `Delivery`
-* `findo r/birthday` returns `Birthday` <br>
-
-### Clearing all Customers and Orders: `clear`
-
-Removes all customers and orders stored in ReadyBakey
-
-Format: `clear`
-
-Examples:
-* `clear`
 
 ### Adding an order : `addo`
 
@@ -312,19 +233,74 @@ Format: `listo`
 Examples:
 * `listo`
 
-### Listing all incomplete orders: `incompleteo`
+### Editing an order's information : `edito`
 
-Shows a list of all incomplete orders in ReadyBakey before and during a given date and time
+Edits an existing customer in ReadyBakey's contact list.
 
-Format: `incompleteo DELIVERYDATETIME`
-* Orders that are incomplete before and during `DELIVERYDATETIME` will be displayed
+Format: `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION\_TYPE] [r/REMARKS] [d/DETAILS]…`
+
+* Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list.
+  * The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
 * It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
 * It can also accept natural dates with time. e.g. `Monday 10:30` or `Mon 10:30`. Natural dates are not
   case-sensitive.
+* It accepts dates in the past for record keeping purposes
 
 Examples:
-* `incompleteo 25-12-2022 15:30`
-* `incompleteo Monday 15:30`
+* `edito 1 d/1: black forest cake`
+  * Edits the details of the 1st order to be `1: black forest cake`.
+* `edito 1 d/1: black forest cake d/2: Chocolate Cake`
+  * Edits the details of the 1st order to be `1: black forest
+    cake` and `2: Chocolate Cake`.
+    * In this case, to add two details to the order, each `d/` is for one detail.
+* `edito 2 r/Two candles`
+  * Edits the 2nd order's remarks to be `Two candles`.
+* `edito 2 m/Delivery`
+  * Edits the 2nd order's collection type to be `Delivery`.
+* `edito 3 c/Monday 10:30`
+  * Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
+* `edito 3 c/04-04-2022 10:30`
+  * Edits the 3rd order's collection time to be `Monday, 04 Apr 2022, 10:30`.
+* `edito 1 d/1: black forest cake d/1: Cheese cake c/04-04-2022 10:30 m/Delivery r/Two candles`
+  * Edits the first order to have order details with `1: black forest cake` and `1: Cheese cake`.
+  * The order delivery date is also now edited to be `Monday, 04 Apr 2022, 10:30`.
+  * Collection type is changed to `Delivery`.
+  * Detail remarks is also changed to `Two candles`
+
+### Locating orders by specific attribute: `findo`
+
+Finds order(s) whose specific attribute contain any of the given keywords.
+
+Format: `findo [ATTRIBUTE] KEYWORD [MORE_KEYWORDS]`
+
+* The supported attributes are 
+  * Order's customer's name: `n/`
+  * Order's customer's phone number:`p/`
+  * Order's details: `d/`
+  * Order's collection type: `m/`
+  * Order's remarks: `r/`
+  * Finding orders based on `c/DELIVERYDATETIME` is not supported in this command because the command `incompleteo` serves this purpose 
+* Only the attribute specified is searched.
+  * Multiple attributes searching at the same time is not allowed. e.g. `findo n/Gerald d/Cake`
+  * For findo `d/[keyword]`, the keyword should only be the description of the detail and not the quantity
+    * Valid Example: `findo d/Cake`
+    * Invalid Example: `findo d/1:Cake`
+* The search is case-insensitive. e.g `cake` will match `Cake`
+* The order of the keywords does not matter. e.g. `banana cake` will match `cake banana`
+* Only full words will be matched e.g. `Cake` will not match `Cakes`
+* Multiple `[KEYWORDS]` provided will be split up by whitespace and searched individually
+  * `findo n/Declan Bob` will search for both `Declan` and `Bob`
+* Orders matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Banana Cake` will return `Banana Leaf`, `Strawberry Cake`
+
+Examples:
+* `findo n/Declan` returns `declan` and `Declan Lee`
+* `findo p/90029382` returns `90029382`
+* `findo d/cake` returns `Cake` and `Banana Cake`
+* `findo m/delivery` returns `Delivery`
+* `findo r/birthday` returns `Birthday` <br>
 
 ### Mark orders as Complete: `marko`
 
@@ -354,6 +330,28 @@ Format: `unmarko INDEX`
 Examples:
 * `unmarko 1`
 
+### Listing all incomplete orders: `incompleteo`
+
+Shows a list of all incomplete orders in ReadyBakey before and during a given date and time
+
+Format: `incompleteo DELIVERYDATETIME`
+* Orders that are incomplete before and during `DELIVERYDATETIME` will be displayed
+* It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
+* It can also accept natural dates with time. e.g. `Monday 10:30` or `Mon 10:30`. Natural dates are not
+  case-sensitive.
+
+Examples:
+* `incompleteo 25-12-2022 15:30`
+* `incompleteo Monday 15:30`
+
+### Clearing all Customers and Orders: `clear`
+
+Removes all customers and orders stored in ReadyBakey
+
+Format: `clear`
+
+Examples:
+* `clear`
 
 ### Exiting the program : `exit`
 
@@ -364,28 +362,12 @@ Format: `exit`
 Examples:
 * `exit`
 
-### Saving the data
-
-ReadyBakey data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-ReadyBakey data are saved as a JSON file `[JAR file location]/data/readybakey.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ReadyBakey will discard all data and start with an empty data file at the next run.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 ### Using Natural Dates
 
 In order to provide a quicker method of referring to near dates, ReadyBakey allows users to use natural dates to refer to the directly upcoming days of the week.
 The closest upcoming date that corresponds to the natural date's day input will be used. The time in HH:MM must still be provided by the user, along with the natural date.
 
-This can be used in any command where dates are required, such as `incompleteo` and `addo`. 
+This can be used in any command where dates are required, such as `incompleteo` and `addo`.
 
 Format: `Day HH:mm`
 
@@ -411,21 +393,37 @@ All potential natural dates that can be used:
 Example of natural date:
 * `Monday 10:30` or `Mon 10:30` will create a datetime in the form of `dd-mm-yyyy HH:mm` that falls on the closest Monday, where `HH:mm` is `10:30`
 * `Sunday 09:30` or `Sun 09:30`will create a datetime in the form of `dd-mm-yyyy HH:mm` that falls on the closest Sunday, where `HH:mm` is `09:30`
-* If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 08:30` will return `14th April 
-  2022` as the closest Thursday. 
-  * Reason: `08:30` has already passed the current time, hence ReadyBakey will look for a future date that is a 
-    Thursday instead. 
+* If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 08:30` will return `14th April
+  2022` as the closest Thursday.
+  * Reason: `08:30` has already passed the current time, hence ReadyBakey will look for a future date that is a
+    Thursday instead.
 * If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 10:30` will return `7th April 2022` as the closest Thursday.
-  * Reason: `10:30` has not passed the current time, hence ReadyBakey will look at the current day as the closest 
+  * Reason: `10:30` has not passed the current time, hence ReadyBakey will look at the current day as the closest
     Thursday.
 
 Example of natural dates in action:
 * `incompleteo Monday 15:30`
 * `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/Tuesday 15:30 m/Delivery r/Add Cheese`
 
-:exclamation: Note: You cannot specify which Natural Date you want. ReadyBakey automatically assigns the closest 
-Natural Date and it will be shown in the Response Box after the command is executed. (i.e. You cannot specify that 
+:exclamation: Note: You cannot specify which Natural Date you want. ReadyBakey automatically assigns the closest
+Natural Date and it will be shown in the Response Box after the command is executed. (i.e. You cannot specify that
 you want the date to be the Monday or any natural date 10 weeks from now)
+
+### Saving the data
+
+ReadyBakey data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+ReadyBakey data are saved as a JSON file `[JAR file location]/data/readybakey.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, ReadyBakey will discard all data and start with an empty data file at the next run.
+</div>
+
+### Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
