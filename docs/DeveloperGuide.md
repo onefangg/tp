@@ -269,11 +269,14 @@ In `MainWindow#executeCommand(String commandText)`, the type of `CommandResult` 
 The following activity diagram summarizes what happens when a user executes the different types of commands:
 ![DataTogglingActivityDiagram](images/DataTogglingActivityDiagram.png)
 
-### Finding Orders Through Selected Attribute
+### Finding Persons and Orders Through Selected Attribute
 #### Implementation
-Users are able to find specific orders based on the attributes of the orders. For example, users can find orders that are made by a Person with name "Alex".
+Users are able to find specific persons/orders based on their respective attributes. For example, users can find orders that are made by a Person with name "Alex".
 
-Currently, only `name` and `phone` are supported for finding under the `findo` command.
+The search is based on (case-insensitive) words matching the keyword input. Both `findo` and `findp` work similarly, only differing in the attributes supported for find.   
+
+Supported attributes for `findp`: name, phone, email, address, remark. 
+Supported attributes for `findo`: name, phone, details, collection_type, remark.
 
 #### Design considerations:
 
@@ -281,16 +284,18 @@ The parsing of searchable attributes and as well as the keywords (to find for) i
 
 The method will return a `HashMap<String, String>`. As `HashMap` is an unordered structure, filtering on multiple attributes in a single command potentially results in undeterministic results.
 
-* **Alternative 1 (current choice):** `findo` will only support filter for one attribute in a single command 
+* **Alternative 1 (current choice):** `findo` and `findp` will only support filter for one attribute in a single command 
   * Filtering for multiple attributes in a single command will result in an error eg `findo n/Alex p/98742313`.
   * Adding an attribute to search for, that is not supported, will simply be ignored. For example, adding `details` to search for `findo n/Alex d/chococake` will only return search results that is the same as `findo n/Alex`.
 * **Alternative 2:** Implement an alternative form of tokenization to return `LinkedHashMap<String, String>`, which is based on insertion order of attributes and keywords.
   * Filtering for multiple attributes will be possible. For example
-  * However, this will require more manhours and testing to ensure consistent results, and hence is deprioritised. 
+  * However, this will require more man-hours and testing to ensure consistent results, and hence is deprioritised. 
+
+For example in `findo`:
 
 1. Create `Predicate` for findable attribute.
    * Find (filter) is based on whether the attribute for Order contains the given keyword (case-insensitive)
-2. `FindOrder<Attribute>Command` is then instantiated, which would then find for `Order` that matches the `Predicate`. 
+2. `FindOrder<Attribute>Command` is then instantiated, which would then find for `Order` that matches the `Predicate`.
 
 The following sequence diagram shows how the `findo` operation works:
 
@@ -350,6 +355,18 @@ The following sequence diagram illustrates how the `EditOrderCommand` will work:
    orders instead.
 3) The person's details cannot be edited through this command.
 
+### Delete orders 
+
+This feature allows the user to delete orders from the application based on the index on the displayed list in the application.
+
+### Implementation
+
+Deleting orders from the application will not affect persons in the application. This is as an Order is linked to a Person through the same phone number, which allows the Order to retrieve the same name, phone number and address.
+
+The following sequence diagram shows how the `deleteo` operation works:
+
+![DeleteOrderSequence](images/DeleteOrderSequenceDiagram.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -398,8 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                        | delete orders                                                                           | remove orders in case a customer cancels their order                                    |
 | `* *`    | user                                        | hide private contact details                                                            | minimize chance of someone else seeing them by accident                                 |
 | `*`      | user with many customer in the address book | sort customer by name                                                                   | locate a <br/><br/>person easily                                                        |
-| `* * *`  | home baker that has multiple customers      | clear all my customers                                                                  | quickly remove demo info or restart my bakery data                                      |
-| `* *`    | home baker that has multiple orders         | clear all my orders                                                                     | quickly remove demo info or restart my bakery data                                      |
+| `* * *`  | home baker that has multiple customers      | clear all my data                                                                       | quickly remove demo info or restart my bakery data                                      |
 | `* * *`  | home baker that has multiple customers      | edit my customers                                                                       | edit their details if there are any changes to their address, phone number, email, name |
 | `* *`    | home baker that has multiple orders         | edit my orders                                                                          | edit their details if there are any changes to their order                              |
 | `* * *`  | home baker that has multiple customers      | look at all my customers                                                                | access the information for different customers                                          |
@@ -520,14 +536,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Clears all saved customers**
+**Use case: Clears all data in the application**
 
 **MSS**
 
-1. User requests to list orders
+1. User requests to list all orders
 2. ReadyBakey shows a list of orders
-3. User requests to clear all saved customers
-4. ReadyBakey clears all customers
+3. User requests to list all customers
+4. ReadyBakey shows a list of customers
+5. ReadyBakey clears data from the application.
 
    Use case ends.
 
