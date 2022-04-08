@@ -354,6 +354,31 @@ The following sequence diagram illustrates how the `EditOrderCommand` will work:
    orders instead.
 3) The person's details cannot be edited through this command.
 
+
+## Find Incomplete Orders Before A Date Feature
+
+This feature allows users to get a list of incomplete orders, sorted by datetime, for quick reference to orders that require attention.
+
+### Implementation
+The `incompleteo` command takes in a date as a required parameter.
+
+When the command is executed, all orders that are incomplete and before or during the given datetime will be filtered out 
+through the use of a predicate. This would return out a `FilteredList` of the desired incomplete orders.
+
+From here, the orders in the `FilteredList` are wrapped in a `SortedList` sorted according to their datetimes with the use of a `orderDateComparator`. This returns a `SortedList`, which is finally
+returned back to the `LogicManager`.
+
+The following sequence diagram illustrates how the `incompleteo` command will work:
+![FindIncompleteOrdersSequenceDiagram](images/FindIncompleteOrdersSequenceDiagram.png)
+
+#### Design considerations
+1. The predicate being used to filter the orders contains checks for both incomplete order status and delivery datetime being before or during the given date. 
+Alternatively, these 2 conditions could have been set up as a predicate each, which would potentially allow for easier reuse in future commands
+that might require just a incomplete order status predicate, or just a date checking predicate. However, it seemed challenging to chain 2 predicates sequentially,
+and so this idea was abandoned due to time constraints. It was far more efficient to simply create 1 predicate that checked for both conditions.
+2. The sorting functionality introduced a `SortedList` alongside `FilteredList` as a return type. This meant needing to refer to
+a common interface, `ObservableList`, wherever either were expected in the `LogicManager`.
+
 ### Delete orders 
 
 This feature allows the user to delete orders from the application based on the index on the displayed list in the application.
@@ -365,6 +390,7 @@ Deleting orders from the application will not affect persons in the application.
 The following sequence diagram shows how the `deleteo` operation works:
 
 ![DeleteOrderSequence](images/DeleteOrderSequenceDiagram.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
