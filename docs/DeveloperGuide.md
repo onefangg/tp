@@ -15,6 +15,9 @@ title: Developer Guide
 ## **Acknowledgements** <a name="acknowledgements"></a>
 
 * Geralddtan - Reused Leap Year Checker (DeliveryDateTime#isLeapYear) from https://www.geeksforgeeks.org/java-program-to-find-if-a-given-year-is-a-leap-year/
+* Punnyhuimin - Reused natural date checker formula (DateChecker#naturalDateCheck()) from https://coderanch.
+  com/t/385117/java/date-Monday
+* Punnyhuimin - Reused scroll bar CSS https://stackoverflow.com/questions/48048943/javafx-8-scroll-bar-css
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -321,12 +324,12 @@ These are the inputs that the edit order command will accept:
 1) It takes in an `Index` parameter to indicate the order that is to be edited.
 2) It also takes in other optional inputs based on the prefixes specified:
 
-| Prefix | Meaning                              | Example            | Format                                                                   | Compulsory |
-|--------|--------------------------------------|--------------------|--------------------------------------------------------------------------|------------|
-| c/     | Collection/ delivery time            | c/30-06-2022 15:30 | Must follow the format dd-MM-yyyy HH:mm                                  | No         |
-| m/     | Collection type (Pickup or Delivery) | m/delivery         | Must be either `delivery` or `pickup` with any capitalisation            | No         |
-| d/     | Order Details                        | d/1x Cheesecake    | \[To be implemented\] Must be in the form [NUM_ORDERS\] x \[ANY_STRING\] | No         |
-| r/     | Order Remarks                        | r/Give me candles  | Can take in any remark for the order                                     | No         |
+| Prefix | Meaning                              | Example            | Format                                                        | Compulsory |
+|--------|--------------------------------------|--------------------|---------------------------------------------------------------|------------|
+| c/     | Collection/ delivery time            | c/30-06-2022 15:30 | Must follow the format dd-MM-yyyy HH:mm                       | No         |
+| m/     | Collection type (Pickup or Delivery) | m/delivery         | Must be either `delivery` or `pickup` with any capitalisation | No         |
+| d/     | Order Details                        | d/1x Cheesecake    | Must be in the form [NUM_ORDERS\]: \[ANY_STRING\]             | No         |
+| r/     | Order Remarks                        | r/Give me candles  | Can take in any remark for the order                          | No         |
 
 At least one of the prefixes needs to be specified to be edited.
 
@@ -336,7 +339,7 @@ collection/ delivery time, whether an order is for delivery or pickup, and remar
 is performed by the function `EditOrderCommand#createEditedOrder()`.
 
 All inputs are parsed through an EditOrderCommandParser, which parses each prefix and extracts the relevant information
-for each prefix. This is done in the method `EditOrderCommandParser#parse()`. It also does checks on the validity of the
+for each prefix. This is done in the method `EditOrderCommandParser#parse()`. It also checks on the validity of the
 user input.
 
 There are two parts to the input that will be checked for validity:
@@ -353,14 +356,37 @@ The following sequence diagram illustrates how the `EditOrderCommand` will work:
 
 #### Design considerations
 1) Delivery date and time being parsed in should allow the usage of natural dates such as `Thursday 3pm` or `Monday
-   4pm` and ReadyBakey will know the date being parsed is the next nearest Thursday at 3pm. This is alongside the
+   4pm` and ReadyBakey will know the date being parsed is the upcoming Thursday at 3pm. This is alongside the
    parsing of date and time in the format `dd-MM-yyyy HH:mm`.
     - This provides bakers with better ability to key in dates without having to stick to only keying in the full
       date and time format.
 2) Editing should not be allowed for the completion of the order. It should be done with the use of mark or unmark
    orders instead.
-3) The person's details cannot be edited through this command.
+3) The Natural Dates is sensitive to the time that is passed to it.
+   * If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 08:30` will return `14th April
+        2022` as the closest Thursday.
+     * Reason: `08:30` has already passed the current time, hence ReadyBakey will look for a future date that is a
+       Thursday instead.
+   * If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 10:30` will return `7th April 2022` as the closest Thursday.
+     * Reason: `10:30` has not passed the current time, hence ReadyBakey will look at the current day as the closest
+       Thursday.
+4) The person's phone number, address, email, name, and tags cannot be edited through this command.
 
+## Listing all orders
+
+This feature allows users to get a list of all the orders that the user has inputted.
+
+### Implementation
+The list orders feature consists of one command, `ListOrderCommand`. It extends `Command`.
+
+When the command is executed by calling the method `Command#execute()`, all orders will be returned out 
+through the use of a predicate. This would return a `FilteredList` of all the orders.
+
+The following sequence diagram illustrates how the `listo` command will work:
+![ListOrderSequenceDiagram](images/ListOrderSequenceDiagram.png)
+
+#### Design considerations
+1. `listo` when used with other inputs after it, will still work as per usual, which is to list the orders. 
 
 ## Find Incomplete Orders Before A Date Feature
 
@@ -446,7 +472,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user with multiple orders                   | add orders with custom details such as order details, delivery date and collection type | keep track of all of my orders                                                          |
 | `* * *`  | user                                        | delete orders                                                                           | remove orders in case a customer cancels their order                                    |
 | `* *`    | user                                        | hide private contact details                                                            | minimize chance of someone else seeing them by accident                                 |
-| `*`      | user with many customer in the address book | sort customer by name                                                                   | locate a <br/><br/>person easily                                                        |
+| `*`      | user with many customer in the address book | sort customer by name                                                                   | locate a person easily                                                                  |
 | `* * *`  | home baker that has multiple customers      | clear all my data                                                                       | quickly remove demo info or restart my bakery data                                      |
 | `* * *`  | home baker that has multiple customers      | edit my customers                                                                       | edit their details if there are any changes to their address, phone number, email, name |
 | `* *`    | home baker that has multiple orders         | edit my orders                                                                          | edit their details if there are any changes to their order                              |
@@ -454,8 +480,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | home baker that has multiple orders         | look at my orders                                                                       | access the attributes for different orders and see when it is due                       |
 | `* * *`  | home baker that has multiple orders         | mark the orders as complete or incomplete                                               | know which orders I have fulfilled or not                                               |
 | `* *`    | home baker that has multiple orders         | get a view of unfinished orders for current day                                         | see urgent orders at a glance                                                           |
-| `* *`    | home baker that has multiple orders         | generate a weekly report                                                                | track the progress of my business                                                       |
-| `*`      | home baker that has multiple orders         | get a calender view of the upcoming deadlines                                           | have a visual plan for the orders in the upcoming period                                |
 
 ### Use cases
 
@@ -705,6 +729,28 @@ Use case ends.
 2.  ReadyBakey shows a list of orders
 3.  User requests to add a new order in the list
 4.  ReadyBakey adds the order
+
+    Use case ends.
+
+**Extensions**
+* 3a.  Invalid parameters are passed into input
+
+    * 3a1. ReadyBakey alerts user about invalid parameters.
+
+    * 3a2. User inputs new data.
+
+    * Steps 3a1-3a2 are repeated until data entered is correct.
+
+  Use case resumes from step 4.
+
+**Use case: Edit an Order**
+
+**MSS**
+
+1.  User requests to list orders
+2.  ReadyBakey shows a list of orders
+3.  User requests to edit a specific order in the list
+4.  ReadyBakey edits the order
 
     Use case ends.
 
