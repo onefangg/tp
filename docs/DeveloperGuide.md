@@ -326,7 +326,7 @@ These are the inputs that the edit order command will accept:
 | Prefix | Meaning                              | Example            | Format                                                                   | Compulsory |
 |--------|--------------------------------------|--------------------|--------------------------------------------------------------------------|------------|
 | c/     | Collection/ delivery time            | c/30-06-2022 15:30 | Must follow the format dd-MM-yyyy HH:mm                                  | No         |
-| g/     | Collection type (Pickup or Delivery) | g/delivery         | Must be either `delivery` or `pickup` with any capitalisation            | No         |
+| m/     | Collection type (Pickup or Delivery) | m/delivery         | Must be either `delivery` or `pickup` with any capitalisation            | No         |
 | d/     | Order Details                        | d/1x Cheesecake    | \[To be implemented\] Must be in the form [NUM_ORDERS\] x \[ANY_STRING\] | No         |
 | r/     | Order Remarks                        | r/Give me candles  | Can take in any remark for the order                                     | No         |
 
