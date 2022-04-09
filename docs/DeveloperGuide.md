@@ -743,6 +743,28 @@ Use case ends.
 
   Use case resumes from step 4.
 
+**Use case: Edit an Order**
+
+**MSS**
+
+1.  User requests to list orders
+2.  ReadyBakey shows a list of orders
+3.  User requests to edit a specific order in the list
+4.  ReadyBakey edits the order
+
+    Use case ends.
+
+**Extensions**
+* 3a.  Invalid parameters are passed into input
+
+    * 3a1. ReadyBakey alerts user about invalid parameters.
+
+    * 3a2. User inputs new data.
+
+    * Steps 3a1-3a2 are repeated until data entered is correct.
+
+  Use case resumes from step 4.
+
 
 **Use case: Delete an Order**
 
