@@ -14,20 +14,20 @@ Given below are my contributions to the project.
 
 **Enhancements implemented**
 1. Implementation and testing of order class
-   1. Implementation and testing for the overall order class containing its relevant components such as:
-      1. Order Details 
-      2. Order Deliver/Pickup Enum (Collection Type)
-      3. Order Remark 
-      4. Order Delivery Date & Time
-   2. Justification: The order class forms the basis of our application - a baker needs to key in their orders with its relevant details.
-2. Implementation and testing for order functionality
-   1. Implemented and performed test for Delete Order, List Order
-   2. Justification: It is necessary to be able to list out and delete orders 
+   * Implementation and testing for the overall order class containing its relevant components such as:
+     * Order Details 
+     * Order Deliver/Pickup Enum (Collection Type)
+     * Order Remark 
+     * Order Delivery Date & Time 
+     * Justification: The order class forms the basis of our application - a baker needs to key in their orders with its relevant details.
+2. Implementation and testing for order functionality 
+   * Implemented and performed test for Delete Order, List Order 
+   * Justification: It is necessary to be able to list out and delete orders 
 3. Implementation and testing of additional functionality for find order
-   1. Implemented and performed test for Find Order with the attributes order details, collectionType and remarks.
-   2. Justification: It is a vital component of our application for a baker to search for their orders through different attributes
+   * Implemented and performed test for Find Order with the attributes order details, collectionType and remarks. 
+   * Justification: It is a vital component of our application for a baker to search for their orders through different attributes
 4. Implementation of additional attributes for Person Class
-   1. Implemented and performed test for the Remark attribute in the Person Class, refactored Add Command to Add Person Command
+   * Implemented and performed test for the Remark attribute in the Person Class, refactored Add Command to Add Person Command
 
 **Contributions to the UG**
 1. Added feature guides for listo, addp, marko, unmarko, findo, addo
@@ -44,11 +44,11 @@ Given below are my contributions to the project.
 **Contributions to team-based tasks**
 1. Contributed in team discussion for overall product direction
 2. Maintained Issue Tracker
-3. Informal Demo of V1.3 [V1.3 Demo Link](https://docs.google.com/document/d/1tTXY-lm5M15URXhf_RbOpxJCVG8-GQD86Q2zDqTp1tM/edit)
+3. Informal Demo of [V1.3 Demo Link](https://docs.google.com/document/d/1tTXY-lm5M15URXhf_RbOpxJCVG8-GQD86Q2zDqTp1tM/edit)
 4. Release Management for V1.3
    1. Took Screenshots
 
 **Review/mentoring contributions**
-1. Helped with edit order command test when teammate had some issues [Link Here](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/107)
+1. Helped with edit order command test when teammate had some issues ([Link Here](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/107))
 2. Reviewed PRs of peers
 
