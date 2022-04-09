@@ -19,10 +19,10 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   1. CSS changes to 
-     a. Address bugs such as blue boxes populating the application. (Pull Requests: [\#130](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/130), 
+     * Address bugs such as blue boxes populating the application. (Pull Requests: [\#130](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/130), 
         [\#120](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/120))
-     b. Update scrollbar look.
-     c. Change the color of the details in orders list. [\#166](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/166)
+     * Update scrollbar look.
+     * Change the color of the details in orders list. [\#166](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/166)
         * Change the color of the HelpWindow [\#123](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/123)
   2. Added natural date capability to enhance existing datetime capability. (Pull Requests: [\#141](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/141),
      [\#234](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/234))
